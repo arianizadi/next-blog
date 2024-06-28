@@ -11,9 +11,9 @@ export default async function Home() {
   return (
     <main>
       <ModeToggle />
-      <form action={createPost}>
+      {/* <form action={createPost}>
         <Button className="m-5">Create Test Post</Button>
-      </form>
+      </form> */}
       <ul>
         {posts.map((post: BlogPost) => (
           <li key={post.id}>{post.title}</li>
