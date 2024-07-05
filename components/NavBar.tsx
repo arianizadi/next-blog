@@ -5,14 +5,12 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Icons } from "./Icons";
-import { ModeToggle } from "./ModeToggle";
 
 export function NavBar() {
   return (
-    <header className="top-0 sticky bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
+    <header className="top-0 z-10 sticky bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
       <div className="flex justify-between items-center max-w-screen-2xl h-14 container">
         <div className="flex justify-start items-center space-x-2">
-          <ModeToggle />
           <Link href="/">
             <div className={cn(buttonVariants({ variant: "ghost" }))}>
               <span>Arian Izadi</span>
