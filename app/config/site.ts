@@ -1,5 +1,4 @@
 export const siteConfig = {
-  name: "Arian's Blog",
   url: "https://ariandev.com/",
   description: "A blog where I talk about things I am currently working on.",
   author: "Arian Izadi",
