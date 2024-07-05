@@ -21,12 +21,15 @@ export default async function Home() {
             <Card>
               <CardHeader className="items-center">
               <CardTitle>{post.title}</CardTitle>
-              <CardDescription>{post.description}</CardDescription>
+                <CardDescription className="flex flex-col items-center pt-5">
+                  <p>{post.description}</p>
+                  <p>{post.date.toDateString()}</p>
+                </CardDescription>
             </CardHeader>
               <CardFooter className="justify-center items-center">
                 {post.tags.map((tag: string, index: number) => (
                   <div key={index}>
-                    <p className="px-3">#{tag}</p>
+                    <p className="px-2">#{tag}</p>
                 </div>
               ))}
             </CardFooter>
