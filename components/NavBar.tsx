@@ -17,7 +17,7 @@ export function NavBar() {
             </div>
           </Link>
         </div>
-        <div className="flex flex-1 justify-center space-x-5">
+        <div className="flex flex-1 justify-center space-x-3">
           <Link href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
             Home
           </Link>
