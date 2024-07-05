@@ -15,7 +15,7 @@ export function BasicIntro() {
         <p className="pt-2 max-w-xl">I have a passion for building and hacking things.
           This website/blog is where I will post most of my current projects and tutorials that I decide to write.
           Currently, I am a robotics software engineering intern, but I enjoy working with embedded systems,
-          reverse engineering, application security, networking, and web apps. Hopefully, I'll post something you find interesting!</p>
+          reverse engineering, application security, networking, and web apps. Hopefully, I post something you find interesting!</p>
       </div>
     </div>
   )
