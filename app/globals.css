@@ -36,7 +36,7 @@
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
 
     --card: 0 0% 3.9%;
@@ -70,9 +70,11 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   @keyframes astroFloat {
     0%,
     100% {

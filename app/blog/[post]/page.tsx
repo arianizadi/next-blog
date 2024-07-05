@@ -10,5 +10,9 @@ interface RemoteMdxPageProps {
 
 export default async function RemoteMdxPage({ params }: RemoteMdxPageProps) {
   const post: BlogPost = await getPost(params.post)
-  return <MDXRemote source={post.content} />
+  return (
+    <div className='prose-invert prose'>
+      <MDXRemote source={post.content} />
+    </div>
+  )
 }
