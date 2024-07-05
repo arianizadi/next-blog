@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
+import { NavBar } from "@/components/NavBar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -31,7 +32,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="relative flex flex-col bg-background min-h-dvh">
+            <NavBar />
+            <main className="flex-1">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -9,7 +9,7 @@ datasource db {
 
 model BlogPost {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
+  title       String   @unique
   description String
   date        DateTime @default(now())
   tags        String[]
