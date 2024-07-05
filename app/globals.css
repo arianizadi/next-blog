@@ -93,7 +93,7 @@
       rotate: 20deg;
     }
     50% {
-      transform: translateY(-100px);
+      transform: translateY(-50px);
     }
   }
 
