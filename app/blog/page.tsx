@@ -14,25 +14,27 @@ import {
 export default async function Home() {
   const posts: BlogPost[] = await getPosts()
   return (
-    <main className="mx-auto p-4 container">
-      <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
-      {posts.map((post: BlogPost) => (
+    <main className="p-4">
+      <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {posts.map((post: BlogPost) => (
         <Link key={post.id} href={"/blog/" + post.id}>
-          <Card className="w-fit">
-            <CardHeader>
+            <Card>
+              <CardHeader className="items-center">
               <CardTitle>{post.title}</CardTitle>
               <CardDescription>{post.description}</CardDescription>
             </CardHeader>
-            <CardFooter>
-              {post.tags.map((tag: string) => (
-                <div className="flex gap-1">
-                  <p key={tag}>#{tag}</p>
+              <CardFooter className="justify-center items-center">
+                {post.tags.map((tag: string, index: number) => (
+                  <div key={index}>
+                    <p className="px-3">#{tag}</p>
                 </div>
               ))}
             </CardFooter>
           </Card>
         </Link>
       ))}
+      </div>
+
 
 
     </main>

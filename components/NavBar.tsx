@@ -5,7 +5,6 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Icons } from "./Icons";
-import { Earth } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
 
 export function NavBar() {
