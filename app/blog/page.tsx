@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import { BlogPost } from "@prisma/client";
 import { getPosts } from "@/app/actions/actions";
 import Link from "next/link";
