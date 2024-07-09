@@ -1,4 +1,4 @@
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 import { BlogPost } from "@prisma/client";
 import { getPosts } from "@/app/actions/actions";
