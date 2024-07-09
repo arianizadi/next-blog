@@ -21,9 +21,9 @@ export function NavBar() {
           <Link href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
             Home
           </Link>
-          <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
+          {/* <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
             Blog
-          </Link>
+          </Link> */}
         </div>
         <div className="flex justify-end items-center space-x-2">
           <nav className="flex items-center space-x-2">
