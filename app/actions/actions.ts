@@ -1,10 +1,13 @@
 "use server"
 
-
 import prisma from "@/prisma/db"
 
 export async function getPosts() {
-  const posts = await prisma.blogPost.findMany()
+  const posts = await prisma.blogPost.findMany({
+    orderBy: {
+      date: 'desc'
+    }
+  })
   return posts
 }
 
