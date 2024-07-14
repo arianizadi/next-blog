@@ -22,7 +22,7 @@ export default async function Home() {
             <Card>
               <CardHeader className="items-center">
                 <CardTitle>{post.title}</CardTitle>
-                <CardDescription className="flex flex-col items-center pt-5">
+                <CardDescription className="flex flex-col items-center gap-2 pt-3 text-center">
                   <span>{post.description}</span>
                   <span>{post.date.toDateString()}</span>
                 </CardDescription>
