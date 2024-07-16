@@ -3,8 +3,8 @@
 import { siteConfig } from "@/app/config/site";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "./ui/button";
-import { Icons } from "./Icons";
+import { buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/components/Icons";
 import { NameThemeChanger } from "@/components/NameThemeChanger";
 
 export function NavBar() {
