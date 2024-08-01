@@ -1,16 +1,19 @@
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { BlogPost } from "@prisma/client";
 import { getPost } from "@/app/actions/actions";
+
+import rehypeCodeTitles from 'rehype-code-titles'
+import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 
-import 'highlight.js/styles/github-dark.min.css'
+import 'highlight.js/styles/tokyo-night-dark.min.css'
 
 import rehypeHighlight from 'rehype-highlight';
 
 const options = {
   mdxOptions: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeHighlight],
+    rehypePlugins: [rehypeHighlight, rehypeSlug, rehypeCodeTitles],
   }
 }
 
