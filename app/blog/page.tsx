@@ -15,7 +15,7 @@ import {
 export default async function Home() {
   const posts: BlogPost[] = await getPosts()
   return (
-    <main className="p-4">
+    <main className="px-4 pt-20 pb-4">
       <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {posts.map((post: BlogPost) => (
           <Link key={post.id} href={"/blog/" + post.id}>

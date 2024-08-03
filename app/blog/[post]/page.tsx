@@ -27,7 +27,7 @@ interface RemoteMdxPageProps {
 export default async function RemoteMdxPage({ params }: RemoteMdxPageProps) {
   const post: BlogPost = await getPost(params.post)
   return (
-    <div className='dark:prose-invert prose'>
+    <div className='dark:prose-invert prose pt-20'>
       <MDXRemote source={post.content} options={options} />
     </div>
   )
