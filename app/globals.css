@@ -96,12 +96,4 @@
       transform: translateY(-50px);
     }
   }
-
-  #astro {
-    animation: astroFloat 7s ease-in-out infinite;
-  }
-
-  #sat {
-    animation: satFloat 20s ease-in-out infinite;
-  }
 }

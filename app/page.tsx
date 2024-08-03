@@ -1,11 +1,22 @@
-import { BasicIntro } from '@/components/BasicIntro'
-import { Hero } from '@/components/Hero'
+import Hero from "@/components/Hero"
 
 export default function Home() {
   return (
-    <main className=''>
+    <main>
+      {/* HERO - Name, Image, Cool Animation */}
       <Hero />
-      <BasicIntro />
+
+      {/* ABOUT ME - Intrests, Languages */}
+
+      {/* JOBS - Internships */}
+
+      {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
+
+      {/* PROJECTS - Show some projects in a carasel */}
+
+      {/* WEB DESIGN - Club33 website */}
+
+      {/* FOOTER */}
     </main>
   )
 }
