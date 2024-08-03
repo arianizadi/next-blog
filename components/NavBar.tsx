@@ -5,16 +5,15 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/Icons";
-import { NameThemeChanger } from "@/components/NameThemeChanger";
 
 export function NavBar() {
   return (
-    <header className="top-0 z-10 sticky bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
+    <header className="top-0 z-10 absolute bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
       <div className="flex justify-between items-center max-w-screen-2xl h-14 container">
         <div className="flex justify-start items-center space-x-2">
-          <NameThemeChanger />
+          <strong>Arian Izadi</strong>
         </div>
-        <div className="flex flex-1 justify-center space-x-3">
+        <div className="flex justify-center">
           <Link href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
             Home
           </Link>
@@ -22,8 +21,8 @@ export function NavBar() {
             Blog
           </Link>
         </div>
-        <div className="flex justify-end items-center space-x-2">
-          <nav className="flex items-center space-x-2">
+        <div className="flex justify-end items-center">
+          <nav className="flex items-center">
             <Link href={siteConfig.links.github} target="_blank" rel="noreferrer">
               <div className={cn(buttonVariants({ variant: "ghost" }), "w-10 px-0")}>
                 <Icons.Github className="w-4 h-4 fill-black dark:fill-white" />
