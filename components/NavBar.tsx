@@ -8,7 +8,7 @@ import { Icons } from "@/components/Icons";
 
 export function NavBar() {
   return (
-    <header className="top-0 z-10 absolute bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
+    <header className="top-0 z-10 fixed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
       <div className="flex justify-between items-center max-w-screen-2xl h-14 container">
         <div className="flex justify-start items-center space-x-2">
           <strong>Arian Izadi</strong>
