@@ -8,7 +8,6 @@ export default function Home() {
       <Hero />
 
       {/* ABOUT ME - Intrests, Languages */}
-      <ProfileCard />
 
       {/* JOBS - Internships */}
 
