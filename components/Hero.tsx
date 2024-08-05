@@ -45,7 +45,6 @@ const Hero = () => {
           >
             <p className="pb-8 text-xl flex flex-col">
               <span className='font-light'>Computer Science Masters @ UNLV</span>
-              <span className='font-light'>Focused on Autonomous Vehicles & Cybersecurity.</span>
             </p>
           </motion.div>
         </div>
