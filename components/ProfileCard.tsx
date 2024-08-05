@@ -83,7 +83,7 @@ const AboutMeCard = () => {
       </div>
 
       <BentoCard
-        title="Layer Zero CyberSec Club"
+        title="Layer Zero CyberSecurity"
         description="Served as the president of Layer Zero, where I facilitated learning through workshops and hosted events with other clubs and companies."
         icon="🖥️"
         delay={0.6}
