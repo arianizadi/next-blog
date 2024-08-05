@@ -78,7 +78,7 @@ const AboutMeCard = () => {
           Background
         </span>
         <p className="text-center text-gray-600">
-          From a young age, I've spent a lot of time with computers, which sparked my interest in everything from hacking to creating software solutions for my everyday problems.
+          From a young age, I&apos;ve spent a lot of time with computers, which sparked my interest in everything from hacking to creating software solutions for my everyday problems.
         </p>
       </div>
 
