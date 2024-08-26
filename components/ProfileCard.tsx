@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const ProfileCard = () => {
   return (
-    <div className="py-32 relative min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-500 to-purple-600 overflow-hidden">
+    <div className="cursor-default py-32 relative min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-500 to-purple-600 overflow-hidden">
       {/* Animated Wavy top */}
       <div className="absolute top-0 left-0 w-full overflow-hidden">
         <svg className="w-full h-full 3xl:hidden" viewBox="0 0 1440 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
