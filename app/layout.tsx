@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavBar } from "@/components/NavBar";
 
+import Head from "next/head";
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {

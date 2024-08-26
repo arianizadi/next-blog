@@ -34,7 +34,7 @@ const ProfileCard = () => {
         <IntrestsTitle />
         <div className="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-12">
           <Image
-            src="/arian_fa22.jpg"
+            src="https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/arian_fa22.webp"
             alt="Arian Izadi"
             width={300}
             height={300}
