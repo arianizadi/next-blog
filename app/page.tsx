@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero"
-import ProfileCard from "@/components/ProfileCard"
-import { CourseHistory } from "@/components/Classes"
+
+import Cloud from "@/components/clouds"
 
 export default function Home() {
   return (
@@ -8,11 +8,11 @@ export default function Home() {
       {/* HERO - Name, Image, Cool Animation */}
       <Hero />
 
+      {/* SKILLS - Languages, Frameworks, Tools */}
+
       {/* ABOUT ME - Intrests, Languages */}
-      {/* <ProfileCard /> */}
 
       {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
-      {/* <CourseHistory /> */}
 
       {/* JOBS - Internships */}
 
