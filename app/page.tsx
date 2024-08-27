@@ -9,10 +9,10 @@ export default function Home() {
       <Hero />
 
       {/* ABOUT ME - Intrests, Languages */}
-      <ProfileCard />
+      {/* <ProfileCard /> */}
 
       {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
-      <CourseHistory />
+      {/* <CourseHistory /> */}
 
       {/* JOBS - Internships */}
 
