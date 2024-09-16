@@ -44,7 +44,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.8 }}
           >
             <p className="pb-8 text-xl flex flex-col">
-              <span className='font-light'>Computer Science @ UNLV</span>
+              <span className='font-light'>Masters of Computer Science @ UNLV</span>
             </p>
           </motion.div>
         </div>
