@@ -1,7 +1,5 @@
 import Hero from "@/components/Hero"
 
-import Cloud from "@/components/clouds"
-
 export default function Home() {
   return (
     <main>
