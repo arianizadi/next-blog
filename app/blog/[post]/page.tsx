@@ -21,13 +21,14 @@ const options = {
 }
 
 interface RemoteMdxPageProps {
-  params: {
+  params: Promise<{
     post: string;
-  }
+  }>
 }
 
 
-export default async function RemoteMdxPage({ params }: RemoteMdxPageProps) {
+export default async function RemoteMdxPage(props: RemoteMdxPageProps) {
+  const params = await props.params;
   const post: BlogPost = await getPost(params.post)
   return (
     <div className='dark:prose-invert prose pt-20'>

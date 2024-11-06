@@ -1,30 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "@/app/globals.css";
-
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "@/app/globals.css"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
-
 import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/theme-provider";
-import { NavBar } from "@/components/NavBar";
+import { ThemeProvider } from "@/components/theme-provider"
+import { NavBar } from "@/components/NavBar"
 
-import Head from "next/head";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: "Arian Izadi | SWE | CyberSec",
   description: "This is my blog, where I post about current projects.",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -37,14 +33,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex flex-col bg-background min-h-dvh">
-            <NavBar />
-            <main className="flex-1">{children}</main>
-            <SpeedInsights />
-            <Analytics />
-          </div>
+          <NavBar />
+          {children}
+          <SpeedInsights />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
