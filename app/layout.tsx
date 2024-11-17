@@ -9,8 +9,6 @@ import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavBar } from "@/components/NavBar";
 
-import Head from "next/head";
-
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
@@ -24,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
