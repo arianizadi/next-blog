@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
@@ -20,18 +21,32 @@ const Hero = () => {
 
       <div className="relative flex h-full items-center justify-center px-5">
         <div className="text-center text-white">
-          <div className='flex flex-col md:flex-row justify-center pb-5 md:space-x-5'>
+          <motion.div className='flex flex-col md:flex-row justify-center pb-5 md:space-x-5'
+            initial={{ rotateX: 90, opacity: 0 }}
+            animate={{ rotateX: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{ transformOrigin: "50% 50%" }}
+          >
             <DecodeEffect text='Arian' />
             <DecodeEffect text='Izadi' />
-          </div>
-          <p className="pb-6 text-3xl italic">
+          </motion.div>
+          <motion.p
+            className="pb-6 text-3xl italic"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             Engineer & Hacker
-          </p>
-          <div>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+          >
             <p className="pb-8 text-xl flex flex-col">
               <span className='font-light'>Masters of Computer Science @ UNLV</span>
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
@@ -74,12 +89,14 @@ const DecodeEffect: React.FC<DecodeEffectProps> = ({ text }) => {
   }, [displayText, text]);
 
   return (
-    <h1
+    <motion.h1
       className="text-6xl font-bold font-mono"
-
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
     >
       {displayText}
-    </h1>
+    </motion.h1>
   );
 };
 
