@@ -14,10 +14,10 @@ export function NavBar() {
           <strong className="text-center">Arian Izadi</strong>
         </div>
         <div className="flex justify-center">
-          <Link href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
+          <Link prefetch={true} href="/" className={cn(buttonVariants({ variant: "ghost" }))}>
             Home
           </Link>
-          <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
+          <Link prefetch={true} href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
             Blog
           </Link>
         </div>
