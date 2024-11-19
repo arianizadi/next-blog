@@ -21,7 +21,7 @@ export default async function Home() {
           <Link key={post.id} href={"/blog/" + post.id} prefetch={index < 3}>
             <Card>
               <CardHeader className="items-center">
-                <CardTitle>{post.title} - {index}</CardTitle>
+                <CardTitle>{post.title}</CardTitle>
                 <CardDescription className="flex flex-col items-center gap-2 pt-3 text-center">
                   <span>{post.description}</span>
                   <span>{post.date.toDateString()}</span>
