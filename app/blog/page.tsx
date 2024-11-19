@@ -18,7 +18,7 @@ export default async function Home() {
     <main className="px-4 pt-20 pb-4">
       <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {posts.map((post: BlogPost, index: number) => (
-          <Link key={post.id} href={"/blog/" + post.id} prefetch={index < 3}>
+          <Link key={post.id} href={"/blog/" + post.id}>
             <Card>
               <CardHeader className="items-center">
                 <CardTitle>{post.title}</CardTitle>
