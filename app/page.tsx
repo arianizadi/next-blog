@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero"
-import ProfileCard from "@/components/ProfileCard"
-import { CourseHistory } from "@/components/Classes"
+import AboutMe from "@/components/AboutMe"
 
 export default function Home() {
   return (
@@ -9,10 +8,9 @@ export default function Home() {
       <Hero />
 
       {/* ABOUT ME - Intrests, Languages */}
-      {/* <ProfileCard /> */}
+      <AboutMe />
 
       {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
-      {/* <CourseHistory /> */}
 
       {/* JOBS - Internships */}
 

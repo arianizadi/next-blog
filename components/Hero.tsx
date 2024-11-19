@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import ScrollIndicator from './ScrollIndicator';
 
 const Hero = () => {
   return (
@@ -49,6 +50,7 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+      <ScrollIndicator></ScrollIndicator>
     </div>
   );
 };
