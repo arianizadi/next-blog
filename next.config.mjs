@@ -1,7 +1,25 @@
 export default {
-  // Configure `pageExtensions`` to include MDX files
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'hello-there',
+            value: 'd2hhdCBhcmUgeW91IGxvb2tpbmcgZm9yIGV4YWN0bHk/',
+          },
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          }
+        ],
+      },
+    ]
+  },
+  experimental: {
+    inlineCss: true,
+  },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  // Optionally, add any other Next.js config below
   images: {
     remotePatterns: [
       {
