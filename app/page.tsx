@@ -1,5 +1,6 @@
-import Hero from "@/components/Hero"
-import AboutMe from "@/components/AboutMe"
+import Hero from "@/components/Hero";
+import AboutMe from "@/components/AboutMe";
+import CurrentTech from "@/components/CurrentTech";
 
 export default function Home() {
   return (
@@ -7,12 +8,15 @@ export default function Home() {
       {/* HERO - Name, Image, Cool Animation */}
       <Hero />
 
-      {/* ABOUT ME - Intrests, Languages */}
-      <AboutMe />
+      {/* ABOUT ME - Interests */}
+      {/* <AboutMe /> */}
+
+      {/* JOBS - Work Experience */}
+
+      {/* CURRENT TECH - Current Tech Stack */}
+      <CurrentTech />
 
       {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
-
-      {/* JOBS - Internships */}
 
       {/* PROJECTS - Show some projects in a carasel */}
 
@@ -20,5 +24,5 @@ export default function Home() {
 
       {/* FOOTER */}
     </main>
-  )
+  );
 }
