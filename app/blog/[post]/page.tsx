@@ -26,12 +26,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { post: string };
-}) {
-  const resolvedParams = await Promise.resolve(params);
+type PageProps = {
+  params: Promise<{ post: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const resolvedParams = await params;
   const postData = await getPost(resolvedParams.post);
 
   return {
@@ -48,12 +48,8 @@ export async function generateMetadata({
 
 export const revalidate = 3600;
 
-export default async function RemoteMdxPage({
-  params,
-}: {
-  params: { post: string };
-}) {
-  const resolvedParams = await Promise.resolve(params);
+export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params;
   const postData: BlogPost = await getPost(resolvedParams.post);
 
   if (!postData) {
