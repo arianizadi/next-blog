@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "@/app/globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -42,6 +43,11 @@ export default function RootLayout({
             <Analytics />
           </div>
         </ThemeProvider>
+        <Script
+          defer
+          src="https://umami.arianizadi.com/script.js"
+          data-website-id="7df9eff9-26d1-4172-9c13-49a86828c841"
+        />
       </body>
     </html>
   );
