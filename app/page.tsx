@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import AboutMe from "@/components/AboutMe";
 import CurrentTech from "@/components/CurrentTech";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
@@ -16,9 +17,10 @@ export default function Home() {
       {/* CURRENT TECH - Current Tech Stack */}
       <CurrentTech />
 
-      {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
+      {/* PROJECTS - Cool Stuff I'm Working On */}
+      <Projects />
 
-      {/* PROJECTS - Show some projects in a carasel */}
+      {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
 
       {/* WEB DESIGN - Club33 website */}
 
