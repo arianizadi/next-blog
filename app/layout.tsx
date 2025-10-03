@@ -43,11 +43,7 @@ export default function RootLayout({
             <Analytics />
           </div>
         </ThemeProvider>
-        <Script
-          defer
-          src="https://umami.arianizadi.com/script.js"
-          data-website-id="7df9eff9-26d1-4172-9c13-49a86828c841"
-        />
+        <script defer src="https://umami.arianizadi.com/script.js" data-website-id="55e8a407-c2db-4928-a81e-cc207eb1bc47"></script>
       </body>
     </html>
   );
