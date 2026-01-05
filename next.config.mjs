@@ -118,6 +118,12 @@ export default {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.downey.io",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

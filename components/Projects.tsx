@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { ExternalLink, Github, Calendar } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 
 interface Project {
   id: number;
@@ -124,7 +124,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 };
 
 const Projects = () => {
-  const [isClient, setIsClient] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -134,16 +133,23 @@ const Projects = () => {
 
   const titleInView = useInView(titleRef, { once: true, margin: "-100px" });
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   // Parallax effect for background elements
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   const projects: Project[] = [
+    {
+      id: 8,
+      title: "RustOS: Bare-metal RISC-V Kernel",
+      description: "A minimal, from-scratch operating system kernel for RISC-V, implementing bootloading, UART drivers, and memory management in Rust.",
+      longDescription: "A deep dive into systems programming and OS development. This project implements a bootloader in RISC-V assembly, custom linker scripts for precise memory layout, and a UART driver for serial communication. It's designed to run on the QEMU 'virt' machine, serving as a foundation for exploring low-level hardware-software interfaces.",
+      image: "https://images.downey.io/blog/cs140e-rust-ferris-crochet-downey-1.jpg",
+      technologies: ["Rust", "Assembly", "RISC-V", "QEMU", "Systems Programming", "Bare Metal"],
+      githubUrl: "https://github.com/arianizadi/rustos",
+      status: "In Progress",
+      year: "2025"
+    },
     {
       id: 1,
       title: "Railway Semantic Segmentation Research",
