@@ -48,12 +48,6 @@ export default {
       },
       {
         protocol: "https",
-        hostname: "docs.gethue.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
         hostname: "images.icon-icons.com",
         port: "",
         pathname: "/**",
@@ -115,6 +109,12 @@ export default {
       {
         protocol: "https",
         hostname: "code.visualstudio.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "doc.rust-lang.org",
         port: "",
         pathname: "/**",
       },

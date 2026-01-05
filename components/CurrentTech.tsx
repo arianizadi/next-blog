@@ -96,10 +96,10 @@ const CurrentTech = () => {
       category: "data"
     },
     {
-      icon: "https://docs.gethue.com/images/hue_logo.png",
-      name: "HUE",
-      description: "SQL editor",
-      category: "data"
+      icon: "https://doc.rust-lang.org/book/img/ferris/does_not_compile.svg",
+      name: "Rust",
+      description: "Systems programming",
+      category: "backend"
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anaconda/anaconda-original.svg",
