@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const TechnologyCard = ({
   icon,
@@ -193,13 +196,18 @@ const CurrentTech = () => {
             const category = categories[categoryKey as keyof typeof categories];
             return (
               <div key={categoryKey} className="space-y-4">
-                <div className="flex items-center gap-3 mb-6">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-3 mb-6"
+                >
                   <div className={`h-1 w-12 bg-gradient-to-r ${category.color} rounded-full`} />
                   <h2 className="text-2xl font-semibold text-white">
                     {category.name}
                   </h2>
                   <div className={`h-1 flex-1 bg-gradient-to-r ${category.color} opacity-20 rounded-full`} />
-                </div>
+                </motion.div>
 
                 <div className={`grid gap-4 ${
                   techs.length <= 2 ? 'grid-cols-1 md:grid-cols-2' :
@@ -207,13 +215,21 @@ const CurrentTech = () => {
                   techs.length <= 4 ? 'grid-cols-2 md:grid-cols-4' :
                   'grid-cols-2 md:grid-cols-3 lg:grid-cols-5'
                 }`}>
-                  {techs.map((tech) => (
-                    <TechnologyCard
+                  {techs.map((tech, index) => (
+                    <motion.div
                       key={tech.name}
-                      icon={tech.icon}
-                      name={tech.name}
-                      description={tech.description}
-                    />
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                    >
+                      <TechnologyCard
+                        icon={tech.icon}
+                        name={tech.name}
+                        description={tech.description}
+                      />
+                    </motion.div>
                   ))}
                 </div>
               </div>

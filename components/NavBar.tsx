@@ -8,7 +8,7 @@ import { Icons } from "@/components/Icons";
 
 export function NavBar() {
   return (
-    <header className="top-0 z-10 fixed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
+    <header className="top-0 z-50 fixed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
       <div className="flex justify-between items-center max-w-screen-2xl h-14 container">
         <div className="flex justify-start items-center space-x-2">
           <strong className="text-center">Arian Izadi</strong>
@@ -19,6 +19,12 @@ export function NavBar() {
           </Link>
           <Link prefetch={true} href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
             Blog
+          </Link>
+          <Link prefetch={true} href="/projects" className={cn(buttonVariants({ variant: "ghost" }))}>
+            Projects
+          </Link>
+          <Link prefetch={true} href="/journey" className={cn(buttonVariants({ variant: "ghost" }))}>
+            Journey
           </Link>
         </div>
         <div className="flex justify-end items-center">
