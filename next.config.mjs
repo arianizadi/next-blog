@@ -16,6 +16,7 @@ export default {
       },
     ];
   },
+  transpilePackages: ["next-mdx-remote"],
   experimental: {
     inlineCss: true,
   },
