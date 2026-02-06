@@ -6,6 +6,7 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/arianizadi/",
     github: "https://github.com/arianizadi",
     x: "https://x.com/arianizadi",
+    gitroll: "https://gitroll.io/profile/uxRzURTxojrQpVm5WoMobaqxHVpH2",
     website: "https://ariandev.com/"
   }
 }

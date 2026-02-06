@@ -29,6 +29,7 @@ export function NavBar() {
     { href: siteConfig.links.github, icon: Icons.Github, label: "Github" },
     { href: siteConfig.links.x, icon: Icons.X, label: "X (Twitter)" },
     { href: siteConfig.links.linkedin, icon: Icons.Linkedin, label: "Linkedin" },
+    { href: siteConfig.links.gitroll, icon: Icons.GitRoll, label: "GitRoll" },
   ];
 
   return (
@@ -36,7 +37,9 @@ export function NavBar() {
       <div className="flex justify-between items-center max-w-screen-2xl h-14 container">
         {/* Logo/Name */}
         <div className="flex justify-start items-center space-x-2">
-          <strong className="text-center">Arian Izadi</strong>
+          <Link href="/" prefetch={true}>
+            <strong className="text-center">Arian Izadi</strong>
+          </Link>
         </div>
 
         {/* Desktop Navigation - hidden on mobile */}
