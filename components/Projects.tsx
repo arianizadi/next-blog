@@ -174,17 +174,6 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: "Get Moving",
-      description: "Fitness tracking web app that lets users track daily steps, set hourly walking goals, visualize progress, and celebrate completions with user auth and dashboard.",
-      longDescription: "A comprehensive fitness tracking application built with Next.js, featuring user authentication, step tracking, goal setting, progress visualization with charts, and a complete dashboard for viewing history and statistics. Uses MongoDB with Prisma for data persistence and includes modern animations with Framer Motion.",
-      image: "https://images.unsplash.com/photo-1489410342162-b4b300a0bb15?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2Fsa2luZyUyMHRvJTIwd29ya3xlbnwwfHwwfHx8MA%3D%3D",
-      technologies: ["Next.js", "TypeScript", "MongoDB", "Prisma", "NextAuth.js", "Tailwind CSS", "Framer Motion"],
-      liveUrl: "https://get-moving-three.vercel.app/",
-      status: "Completed",
-      year: "2025"
-    },
-    {
-      id: 4,
       title: "LiDAR 2D Room Mapping",
       description: "C++ application using Livox Mid-360 LiDAR sensor with PCL and OpenCV to create 2D maps of indoor environments with floor plane detection.",
       longDescription: "A real-time point cloud processing system that captures LiDAR data, detects and removes floor planes using RANSAC algorithm, and generates 2D room maps with object outlines for indoor navigation.",
@@ -195,7 +184,7 @@ const Projects = () => {
       year: "2024"
     },
     {
-      id: 5,
+      id: 4,
       title: "Lazy Wordler",
       description: "Next.js app that scrapes the Wordle website to display current puzzle answers using server-side rendering to bypass CORS.",
       longDescription: "A reverse-engineered Wordle solver that fetches answers directly from the New York Times API by leveraging Next.js server-side rendering to bypass browser CORS restrictions.",
@@ -207,7 +196,7 @@ const Projects = () => {
       year: "2024"
     },
     {
-      id: 6,
+      id: 5,
       title: "Proton Pass to Chrome Converter",
       description: "Python script that converts Proton Pass password exports to Chrome-compatible CSV format for easy migration.",
       longDescription: "A simple utility that reads Proton Pass JSON exports and converts them to CSV format that can be directly imported into Google Chrome Password Manager.",
@@ -218,7 +207,7 @@ const Projects = () => {
       year: "2024"
     },
     {
-      id: 7,
+      id: 6,
       title: "Reverse Engineering Tutorials",
       description: "Collection of reverse engineering tutorials covering crackme challenges, keygen development, and binary patching techniques.",
       longDescription: "Educational repository featuring step-by-step reverse engineering tutorials including CrackMe solutions with keygen development and binary patching using tools like Ghidra, IDA Pro, and custom C++ patchers.",
