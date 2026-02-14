@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { motion, useScroll, useInView } from "framer-motion";
 import { Terminal, Wifi, Shield, ShoppingBag, Car, GraduationCap, Brain, Zap } from "lucide-react";
 
 interface TimelineItemProps {
@@ -53,23 +53,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   isLast = false 
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: itemRef,
-    offset: ["start end", "center center"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 1, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.4, 1], [0.8, 1, 1]);
-  const x = useTransform(
-    scrollYProgress, 
-    [0, 0.4], 
-    index % 2 === 0 ? [-50, 0] : [50, 0]
-  );
+  const isInView = useInView(itemRef, { once: true, amount: 0.2 });
+  const preloadOnMount = index === 0;
 
   return (
     <div ref={itemRef} className="relative flex items-center justify-center mb-16 md:mb-32">
-      <motion.div 
-        style={{ opacity, scale, x }}
+      <motion.div
+        initial={preloadOnMount ? false : { opacity: 0, scale: 0.85, x: index % 2 === 0 ? -50 : 50 }}
+        animate={(preloadOnMount || isInView) ? { opacity: 1, scale: 1, x: 0 } : {}}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className={`relative flex items-center w-full max-w-5xl ${
           index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
         }`}
@@ -112,12 +104,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
         {/* Timeline dot with pulse */}
         <div className="absolute left-8 md:relative md:left-0 transform -translate-x-1/2 md:translate-x-0 md:flex z-20 items-center justify-center w-12">
-          <motion.div 
-            style={{ scale: useTransform(scrollYProgress, [0, 0.5], [0.5, 1.2]) }}
+          <motion.div
+            initial={preloadOnMount ? { scale: 1 } : { scale: 0.5 }}
+            animate={(preloadOnMount || isInView) ? { scale: 1 } : {}}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="w-4 h-4 md:w-5 md:h-5 bg-purple-500 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.5)] border-2 md:border-4 border-black"
-          >
-            <div className="absolute inset-0 bg-purple-400 rounded-full animate-ping opacity-40" />
-          </motion.div>
+          />
         </div>
 
         {/* Empty space for desktop layout */}
