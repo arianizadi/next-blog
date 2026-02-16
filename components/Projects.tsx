@@ -140,6 +140,17 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
+      id: 9,
+      title: "Knowledge Mapper",
+      description: "AI-powered knowledge assessments with personalized quizzes. Visual progress tracking via radar charts and instant AI-driven feedback on responses.",
+      longDescription: "A platform that enables users to evaluate their understanding across various subjects through AI-generated dynamic assessments. Provides personalized quiz experiences, visual strength indicators in radar chart format, and immediate AI-driven feedback.",
+      image: "https://cdn.sanity.io/images/7m9jw85w/production/e8afb8b2b1304f867e0becfc4d5ddbbd9dd94ec1-1784x1044.png?w=1784",
+      technologies: ["Next.js", "TypeScript", "React", "AI/LLM", "Tailwind CSS"],
+      liveUrl: "https://knowledge-mapper.vercel.app",
+      status: "Completed",
+      year: "2025"
+    },
+    {
       id: 8,
       title: "RustOS: Bare-metal RISC-V Kernel",
       description: "A minimal, from-scratch operating system kernel for RISC-V, implementing bootloading, UART drivers, and memory management in Rust.",
