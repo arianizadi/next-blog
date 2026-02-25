@@ -2,7 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { FileText } from "lucide-react";
 import ScrollIndicator from "./ScrollIndicator";
+
+const RESUME_URL =
+  "https://docs.google.com/document/d/18Kb_wl6U-MstCFcTpxD6ASnPL-RcXXsl1G6HFzZ09Rs/edit?usp=sharing";
 
 const Hero = () => {
   return (
@@ -48,12 +52,26 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
           >
-            <p className="pb-8 text-xl flex flex-col">
+            <p className="pb-6 text-xl flex flex-col">
               <span className="font-light">
                 Masters of Computer Science @ UNLV
               </span>
             </p>
           </motion.div>
+          <motion.a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/50 bg-white/10 px-5 py-2.5 text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FileText className="h-5 w-5" />
+            <span>Resume</span>
+          </motion.a>
         </div>
       </div>
       <ScrollIndicator></ScrollIndicator>
