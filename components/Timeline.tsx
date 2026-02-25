@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useInView } from "framer-motion";
-import { Terminal, Wifi, Shield, ShoppingBag, Car, GraduationCap, Brain, Zap } from "lucide-react";
+import { Terminal, Wifi, Shield, ShoppingBag, Car, GraduationCap, Brain, Zap, Code } from "lucide-react";
 
 interface TimelineItemProps {
   age: number;
@@ -170,15 +170,22 @@ const Timeline = () => {
         age: 24,
         year: 2024,
         title: "Academic Milestone",
-        description: "Earned my B.S. in Computer Science and transitioned into my Master's degree. I began focusing my technical depth on semantic segmentation, training machines to perceive and understand the world through computer vision.",
+        description: "Earned my B.S. in Computer Science and transitioned into my Master's degree. Won CyberFire CTF (1st Place) and ranked Top 8% nationally in NCL CTF competitions.",
         icon: <GraduationCap size={24} />,
       },
       {
         age: 25,
         year: 2025,
         title: "The Researcher & Systems Engineer",
-        description: "Currently pursuing my M.S. at UNLV, specializing in deep learning for semantic segmentation. My work on autonomous vehicles and invaluable mentorship at Koshee.ai sparked my passion for systems programming and applying cutting edge research to real world problems.",
+        description: "Currently pursuing my M.S. at UNLV, specializing in deep learning for semantic segmentation. Serving as President of Layer Zero, UNLV's hacking/CTF club. My work on autonomous vehicles and invaluable mentorship at Koshee.ai sparked my passion for systems programming and applying cutting edge research to real world problems.",
         icon: <Brain size={24} />,
+      },
+      {
+        age: 25,
+        year: 2025,
+        title: "Open Source & Industry Impact",
+        description: "Made meaningful contributions to open source projects including Octomap (PCD file reading) and CVAT (Z-layer controls, point cloud slider). Building tools that help the broader robotics and computer vision community.",
+        icon: <Code size={24} />,
       },
   ];
 

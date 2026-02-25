@@ -9,12 +9,13 @@ import { Analytics } from "@vercel/analytics/react"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavBar } from "@/components/NavBar";
+import { CategoryProvider } from "@/contexts/CategoryContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Arian Izadi | SWE | CyberSec",
-  description: "This is my blog, where I post about current projects.",
+  title: "Arian Izadi | Systems Engineer",
+  description: "Systems engineer specializing in real-time embedded systems, robotics, and distributed data infrastructure. M.S. Computer Science @ UNLV.",
 };
 
 export default function RootLayout({
@@ -38,7 +39,11 @@ export default function RootLayout({
         >
           <div className="relative flex flex-col bg-background min-h-dvh">
             <NavBar />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+            <CategoryProvider>
+              {children}
+            </CategoryProvider>
+          </main>
             <SpeedInsights />
             <Analytics />
           </div>

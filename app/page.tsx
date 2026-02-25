@@ -1,26 +1,21 @@
 import Hero from "@/components/Hero";
-import AboutMe from "@/components/AboutMe";
+import CategoryFilter from "@/components/CategoryFilter";
+import Experience from "@/components/Experience";
+import Education from "@/components/Education";
+import OpenSource from "@/components/OpenSource";
 import CurrentTech from "@/components/CurrentTech";
+import ContactCTA from "@/components/ContactCTA";
 
 export default function Home() {
   return (
     <main>
-      {/* HERO - Name, Image, Cool Animation */}
       <Hero />
-
-      {/* ABOUT ME - Interests */}
-      {/* <AboutMe /> */}
-
-      {/* JOBS - Work Experience */}
-
-      {/* CURRENT TECH - Current Tech Stack */}
+      <CategoryFilter />
+      <Experience />
+      <Education />
+      <OpenSource />
       <CurrentTech />
-
-      {/* SCHOOL - Clubs, Competitions, and Academic Stuff */}
-
-      {/* WEB DESIGN - Club33 website */}
-
-      {/* FOOTER */}
+      <ContactCTA />
     </main>
   );
 }
