@@ -4,9 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import ScrollIndicator from "./ScrollIndicator";
-
-const RESUME_URL =
-  "https://docs.google.com/document/d/18Kb_wl6U-MstCFcTpxD6ASnPL-RcXXsl1G6HFzZ09Rs/edit?usp=sharing";
+import { siteConfig } from "@/app/config/site";
 
 const Hero = () => {
   return (
@@ -59,7 +57,7 @@ const Hero = () => {
             </p>
           </motion.div>
           <motion.a
-            href={RESUME_URL}
+            href={siteConfig.links.resume}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg border border-white/50 bg-white/10 px-5 py-2.5 text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20"

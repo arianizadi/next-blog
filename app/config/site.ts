@@ -7,7 +7,8 @@ export const siteConfig = {
     github: "https://github.com/arianizadi",
     x: "https://x.com/arianizadi",
     gitroll: "https://gitroll.io/profile/uxRzURTxojrQpVm5WoMobaqxHVpH2",
-    website: "https://ariandev.com/"
+    website: "https://ariandev.com/",
+    resume: "https://docs.google.com/document/d/18Kb_wl6U-MstCFcTpxD6ASnPL-RcXXsl1G6HFzZ09Rs/edit?usp=sharing"
   }
 }
 

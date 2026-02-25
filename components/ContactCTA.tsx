@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Terminal, ArrowUpRight, Code2 } from "lucide-react";
+import { Mail, Linkedin, Github, Terminal, ArrowUpRight, Code2, FileText } from "lucide-react";
 import { siteConfig } from "@/app/config/site";
 
 const ContactCTA = () => {
@@ -97,6 +97,21 @@ const ContactCTA = () => {
                   <div className="flex items-center gap-3">
                     <Code2 size={18} className="text-zinc-500 group-hover:text-emerald-400" />
                     <span>GitRoll</span>
+                  </div>
+                  <ArrowUpRight size={18} className="text-zinc-700 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </motion.a>
+
+                <motion.a
+                  href={siteConfig.links.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between p-4 bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-xl transition-all duration-300 hover:border-emerald-500/50 hover:text-white"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="flex items-center gap-3">
+                    <FileText size={18} className="text-zinc-500 group-hover:text-emerald-400" />
+                    <span>Resume</span>
                   </div>
                   <ArrowUpRight size={18} className="text-zinc-700 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </motion.a>
