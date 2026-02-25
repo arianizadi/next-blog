@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
 
@@ -22,7 +21,6 @@ interface Project {
 
 const ProjectCard = ({ project, index, isHighlighted, isFocused }: { project: Project; index: number; isHighlighted: boolean; isFocused: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
   const [showAllTech, setShowAllTech] = useState(false);
 
   useEffect(() => {
@@ -39,15 +37,8 @@ const ProjectCard = ({ project, index, isHighlighted, isFocused }: { project: Pr
     : "border-zinc-800/50 bg-zinc-900/40";
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.05,
-        ease: "easeOut"
-      }}
       className={`group relative rounded-xl p-6 border transition-all duration-500 ${opacityClass} ${highlightRing}`}
     >
       <div className="relative w-full h-44 mb-5 rounded-lg overflow-hidden bg-zinc-800">
@@ -114,14 +105,12 @@ const ProjectCard = ({ project, index, isHighlighted, isFocused }: { project: Pr
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-100px" });
   const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   const projects: Project[] = [
@@ -280,13 +269,7 @@ const Projects = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
 
       <div className="max-w-6xl mx-auto px-6 relative">
-        <motion.div
-          ref={titleRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={titleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
               <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
@@ -300,7 +283,7 @@ const Projects = () => {
               <span className="text-emerald-400 font-medium">{filteredProjects.length}</span> projects showing
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {filteredProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -320,14 +303,10 @@ const Projects = () => {
             })}
           </div>
         ) : (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="py-20 text-center border border-dashed border-zinc-800 rounded-2xl"
-          >
+          <div className="py-20 text-center border border-dashed border-zinc-800 rounded-2xl">
             <p className="text-zinc-500 text-lg">No projects match your current filters.</p>
             <p className="text-zinc-600 text-sm mt-2">Try adjusting your search or categories to find what you're looking for.</p>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

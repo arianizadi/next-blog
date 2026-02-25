@@ -53,15 +53,10 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   isLast = false 
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(itemRef, { once: true, amount: 0.2 });
-  const preloadOnMount = index === 0;
 
   return (
     <div ref={itemRef} className="relative flex items-center justify-center mb-16 md:mb-32">
-      <motion.div
-        initial={preloadOnMount ? false : { opacity: 0, scale: 0.85, x: index % 2 === 0 ? -50 : 50 }}
-        animate={(preloadOnMount || isInView) ? { opacity: 1, scale: 1, x: 0 } : {}}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+      <div
         className={`relative flex items-center w-full max-w-5xl ${
           index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
         }`}
@@ -104,17 +99,12 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
         {/* Timeline dot with pulse */}
         <div className="absolute left-8 md:relative md:left-0 transform -translate-x-1/2 md:translate-x-0 md:flex z-20 items-center justify-center w-12">
-          <motion.div
-            initial={preloadOnMount ? { scale: 1 } : { scale: 0.5 }}
-            animate={(preloadOnMount || isInView) ? { scale: 1 } : {}}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="w-4 h-4 md:w-5 md:h-5 bg-purple-500 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.5)] border-2 md:border-4 border-black"
-          />
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-purple-500 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.5)] border-2 md:border-4 border-black" />
         </div>
 
         {/* Empty space for desktop layout */}
         <div className="hidden md:block flex-1" />
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -196,13 +186,7 @@ const Timeline = () => {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Header */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-32 relative z-10"
-      >
+      <div className="text-center mb-32 relative z-10">
         <h2 className="text-purple-500 font-mono text-sm tracking-widest uppercase mb-4">Evolution</h2>
         <h1 className="text-5xl md:text-7xl font-extrabold pb-2 mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
           My Journey
@@ -211,7 +195,7 @@ const Timeline = () => {
           text="From a naive kid to a passionate systems engineer and researcher"
           className="text-xl text-zinc-400 max-w-2xl mx-auto px-4 font-light leading-relaxed"
         />
-      </motion.div>
+      </div>
 
       {/* Main Timeline Body */}
       <div className="relative px-4 max-w-7xl mx-auto">
@@ -234,13 +218,7 @@ const Timeline = () => {
       </div>
 
       {/* Conclusion Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="text-center mt-32 mb-20 relative z-10"
-      >
+      <div className="text-center mt-32 mb-20 relative z-10">
         <div className="inline-block relative mb-8">
           <div className="absolute inset-0 bg-purple-500/30 blur-3xl rounded-full" />
           <div className="relative p-6 bg-zinc-900/50 rounded-full border border-purple-500/30 backdrop-blur-xl">
@@ -257,7 +235,7 @@ const Timeline = () => {
           Whether it's deep learning research or systems engineering, I'm still that 
           kid who just wants to see how things work—and make them work better.
         </p>
-      </motion.div>
+      </div>
 
       {/* Bottom fade out */}
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />

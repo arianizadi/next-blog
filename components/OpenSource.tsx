@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
 import { GitPullRequest, ExternalLink, Code, CheckCircle, Circle, AlertCircle, GitFork } from "lucide-react";
 import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
 
@@ -53,7 +52,6 @@ const StatusBadge = ({ status }: { status: "merged" | "open" | "pending" | "fork
 
 const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { contribution: Contribution; index: number; isHighlighted: boolean; isFocused: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
     if (isFocused && cardRef.current) {
@@ -69,15 +67,8 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
     : "border-zinc-800/50 bg-zinc-900/40";
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
       className={`group relative rounded-xl p-6 border transition-all duration-500 ${opacityClass} ${highlightRing}`}
     >
       <div className="space-y-4">
@@ -140,7 +131,7 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -192,8 +183,6 @@ const contributions: Contribution[] = [
 
 const OpenSource = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-100px" });
   const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   // Index contributions for global fuzzy search
@@ -242,13 +231,7 @@ const OpenSource = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
 
       <div className="max-w-6xl mx-auto px-6 relative">
-        <motion.div
-          ref={titleRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={titleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
               <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
@@ -259,12 +242,12 @@ const OpenSource = () => {
               </p>
             </div>
             {(selectedCategories.length > 0 || searchQuery) && (
-              <div className="bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-zinc-500 text-sm animate-in fade-in zoom-in duration-300">
+              <div className="bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-zinc-500 text-sm">
                 <span className="text-emerald-400 font-medium">{filteredContributions.length}</span> contributions
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {contributions.map((contribution, index) => {
@@ -284,13 +267,9 @@ const OpenSource = () => {
         </div>
 
         {filteredContributions.length === 0 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="py-12 text-center border border-dashed border-zinc-800 rounded-2xl"
-          >
+          <div className="py-12 text-center border border-dashed border-zinc-800 rounded-2xl">
             <p className="text-zinc-500">No contributions match your search.</p>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

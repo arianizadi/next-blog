@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
 import { GraduationCap, Award, Trophy, Cloud, BookOpen, Calendar, ChevronRight, Star } from "lucide-react";
 import { useCategory } from "@/contexts/CategoryContext";
 
@@ -64,21 +63,8 @@ const achievements: Achievement[] = [
 ];
 
 const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
-
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
-      className="group relative bg-zinc-900/50 rounded-xl p-6 border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 hover:bg-zinc-900/70"
-    >
+    <div className="group relative bg-zinc-900/50 rounded-xl p-6 border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 hover:bg-zinc-900/70">
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div className="flex items-start gap-3">
@@ -147,77 +133,40 @@ const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const CertificationCard = ({ cert, index }: { cert: Certification; index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
-
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, x: -20 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{
-        duration: 0.4,
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
-      className="flex items-center gap-3 px-4 py-3 bg-zinc-900/50 rounded-lg border border-zinc-800/50 hover:border-amber-500/30 transition-all duration-300"
-    >
+    <div className="flex items-center gap-3 px-4 py-3 bg-zinc-900/50 rounded-lg border border-zinc-800/50 hover:border-amber-500/30 transition-all duration-300">
       <div className="p-2 bg-amber-500/10 rounded-lg border border-amber-500/20">
         <span className="text-amber-400">{cert.icon}</span>
       </div>
       <span className="text-zinc-300 text-sm font-medium">{cert.name}</span>
-    </motion.div>
+    </div>
   );
 };
 
 const AchievementBadge = ({ achievement, index }: { achievement: Achievement; index: number }) => {
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(badgeRef, { once: true, margin: "-100px" });
-
   return (
-    <motion.div
-      ref={badgeRef}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{
-        duration: 0.3,
-        delay: index * 0.1,
-        ease: "easeOut"
-      }}
-      className="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 rounded-lg border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-200"
-    >
+    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 rounded-lg border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-200">
       {achievement.icon}
       <span className="text-zinc-300 text-sm">{achievement.title}</span>
-    </motion.div>
+    </div>
   );
 };
 
 const Education = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const titleInView = useInView(titleRef, { once: true, margin: "-100px" });
-  const certTitleRef = useRef<HTMLDivElement>(null);
-  const certTitleInView = useInView(certTitleRef, { once: true, margin: "-100px" });
   const { selectedCategories, searchQuery } = useCategory();
   const isFilterActive = selectedCategories.length > 0 || searchQuery.length > 0;
 
   return (
-    <div ref={containerRef} className="py-24 bg-zinc-950 relative">
+    <div className="py-24 bg-zinc-950 relative">
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
 
       <div className="max-w-6xl mx-auto px-6 relative">
-        <motion.div
-          ref={titleRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={titleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
+        <div className="mb-16">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div>
               <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
@@ -228,12 +177,12 @@ const Education = () => {
               </p>
             </div>
             {isFilterActive && (
-              <div className="bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20 text-emerald-400 text-sm animate-in fade-in duration-500">
+              <div className="bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20 text-emerald-400 text-sm">
                 Academic profile active
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
 
         <div className="space-y-6 mb-12">
           {degrees.map((degree, index) => (
@@ -241,13 +190,7 @@ const Education = () => {
           ))}
         </div>
 
-        <motion.div
-          ref={certTitleRef}
-          initial={{ opacity: 0, y: 20 }}
-          animate={certTitleInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mt-16"
-        >
+        <div className="mt-16">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-amber-500/10 rounded-lg border border-amber-500/20">
               <Award size={20} className="text-amber-400" />
@@ -273,7 +216,7 @@ const Education = () => {
               <AchievementBadge key={achievement.title} achievement={achievement} index={index} />
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

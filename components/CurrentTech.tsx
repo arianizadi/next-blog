@@ -369,18 +369,13 @@ const CurrentTech = () => {
 
             return (
               <div key={categoryKey} className={`space-y-4 ${categoryOpacity} transition-all duration-500`}>
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-3 mb-6"
-                >
+                <div className="flex items-center gap-3 mb-6">
                   <div className={`h-1 w-12 bg-gradient-to-r ${categoryConfig.color} rounded-full`} />
                   <h2 className="text-2xl font-semibold text-white">
                     {categoryConfig.name}
                   </h2>
                   <div className={`h-1 flex-1 bg-gradient-to-r ${categoryConfig.color} opacity-20 rounded-full`} />
-                </motion.div>
+                </div>
 
                 <div className={`grid gap-4 ${
                   techs.length <= 2 ? 'grid-cols-1 md:grid-cols-2' :
@@ -396,14 +391,7 @@ const CurrentTech = () => {
                       : "";
 
                     return (
-                      <motion.div
-                        key={tech.name}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.05 }}
-                        whileHover={isHighlighted ? { scale: 1.05, y: -5 } : {}}
-                      >
+                      <div key={tech.name}>
                         <TechnologyCard
                           icon={tech.icon}
                           name={tech.name}
@@ -412,7 +400,7 @@ const CurrentTech = () => {
                           isFocused={!!isFocused}
                           highlightRing={highlightRing}
                         />
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </div>

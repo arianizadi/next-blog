@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useCategory, categoryConfig, Category } from "@/contexts/CategoryContext";
 import { Cpu, Bot, Brain, Shield, LayoutGrid, Search, X, ChevronUp, ChevronDown } from "lucide-react";
 
@@ -138,14 +138,8 @@ const CategoryFilter = () => {
                 )}
               </div>
 
-              <AnimatePresence>
-                {showSuggestions && suggestions.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full right-0 left-0 md:left-auto md:w-64 mt-2 bg-zinc-900/95 backdrop-blur-xl border border-zinc-800 rounded-lg overflow-hidden shadow-2xl z-50"
-                  >
+              {showSuggestions && suggestions.length > 0 && (
+                  <div className="absolute top-full right-0 left-0 md:left-auto md:w-64 mt-2 bg-zinc-900/95 backdrop-blur-xl border border-zinc-800 rounded-lg overflow-hidden shadow-2xl z-50">
                     {suggestions.map((suggestion, index) => (
                       <button
                         key={index}
@@ -159,9 +153,8 @@ const CategoryFilter = () => {
                         {suggestion}
                       </button>
                     ))}
-                  </motion.div>
+                  </div>
                 )}
-              </AnimatePresence>
             </div>
 
             {/* Navigation Arrows */}

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import ScrollIndicator from "./ScrollIndicator";
 import { siteConfig } from "@/app/config/site";
@@ -27,49 +26,29 @@ const Hero = () => {
 
       <div className="relative flex h-full items-center justify-center px-5">
         <div className="text-center text-white">
-          <motion.div
-            className="flex flex-col md:flex-row justify-center pb-5 md:space-x-5"
-            initial={{ rotateX: 90, opacity: 0 }}
-            animate={{ rotateX: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ transformOrigin: "50% 50%" }}
-          >
+          <div className="flex flex-col md:flex-row justify-center pb-5 md:space-x-5">
             <DecodeEffect text="Arian" />
             <DecodeEffect text="Izadi" />
-          </motion.div>
-          <motion.p
-            className="pb-6 text-3xl italic"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+          </div>
+          <p className="pb-6 text-3xl italic">
             Systems Engineer & Researcher
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
+          </p>
+          <div>
             <p className="pb-6 text-xl flex flex-col">
               <span className="font-light">
                 M.S. Computer Science @ UNLV
               </span>
             </p>
-          </motion.div>
-          <motion.a
+          </div>
+          <a
             href={siteConfig.links.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/50 bg-white/10 px-5 py-2.5 text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 rounded-lg border border-white/50 bg-white/10 px-5 py-2.5 text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20 hover:scale-105 active:scale-[0.98]"
           >
             <FileText className="h-5 w-5" />
             <span>Resume</span>
-          </motion.a>
+          </a>
         </div>
       </div>
       <ScrollIndicator></ScrollIndicator>
@@ -115,14 +94,9 @@ const DecodeEffect: React.FC<DecodeEffectProps> = ({ text }) => {
   }, [displayText, text]);
 
   return (
-    <motion.h1
-      className="text-6xl font-bold font-mono"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <h1 className="text-6xl font-bold font-mono">
       {displayText}
-    </motion.h1>
+    </h1>
   );
 };
 
