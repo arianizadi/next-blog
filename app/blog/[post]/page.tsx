@@ -21,7 +21,7 @@ const options = {
 export async function generateStaticParams() {
   const posts = await getPosts();
 
-  return posts.map((post) => ({
+  return posts.map((post: BlogPost) => ({
     post: post.id,
   }));
 }
