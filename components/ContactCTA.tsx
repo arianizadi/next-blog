@@ -33,8 +33,8 @@ const ContactCTA = () => {
                 </div>
 
                 <h2 className="text-4xl md:text-6xl font-semibold text-white tracking-tight leading-tight">
-                  Let&apos;s build the <br />
-                  <span className="text-zinc-500 italic font-light">next system</span> together.
+                  Let&apos;s build <br />
+                  <span className="text-zinc-500 italic font-light">something cool</span> together.
                 </h2>
 
                 <p className="text-zinc-400 text-lg max-w-lg leading-relaxed font-light">
