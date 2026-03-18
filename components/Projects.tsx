@@ -51,12 +51,9 @@ const ProjectCard = ({ project, index, isHighlighted, isFocused }: { project: Pr
       </div>
 
       <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-medium text-white group-hover:text-emerald-400 transition-colors">
-            {project.title}
-          </h3>
-          <span className="text-zinc-500 text-sm">{project.year}</span>
-        </div>
+        <h3 className="text-lg font-medium text-white group-hover:text-emerald-400 transition-colors">
+          {project.title}
+        </h3>
 
         <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2">
           {project.description}
@@ -115,9 +112,33 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
+      id: 1,
+      title: "Railway Semantic Segmentation Research",
+      description: "Research fork of MMSegmentation implementing semantic segmentation for railway infrastructure using RailSem19 and UNLV RTIS datasets.",
+      longDescription: "Advanced computer vision research project focusing on semantic segmentation of railway environments.",
+      image: "https://www.wilddash.cc/static/images/lab3-rs19.jpg",
+      technologies: ["Python", "PyTorch", "MMSegmentation", "Computer Vision", "Deep Learning"],
+      githubUrl: "https://github.com/arianizadi/mmsegmentation",
+      status: "In Progress",
+      year: "2025",
+      categories: ["data", "robotics"] as Category[],
+    },
+    {
+      id: 11,
+      title: "Inference Checker",
+      description: "Interactive web tool for comparing semantic segmentation model predictions on railway scenes with pixel level diff visualization and per class metrics.",
+      longDescription: "A visualization and analysis tool for comparing semantic segmentation models on the RailSem19 dataset. Features single view, side by side comparison, and pixel level diff modes with real time hover tooltips, adjustable overlay opacity, and per class IoU/accuracy metrics.",
+      image: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/inference.png",
+      technologies: ["Next.js", "TypeScript", "React", "Canvas API", "Tailwind CSS", "Framer Motion"],
+      liveUrl: "https://inference-checker.vercel.app",
+      status: "Completed",
+      year: "2025",
+      categories: ["data", "robotics"] as Category[],
+    },
+    {
       id: 8,
-      title: "RustOS: Bare-metal RISC-V Kernel",
-      description: "A minimal, from-scratch operating system kernel for RISC-V, implementing bootloading, UART drivers, and memory management in Rust.",
+      title: "RustOS: Bare Metal RISC-V Kernel",
+      description: "A minimal, from scratch operating system kernel for RISC-V, implementing bootloading, UART drivers, and memory management in Rust.",
       longDescription: "A deep dive into systems programming and OS development. This project implements a bootloader in RISC-V assembly, custom linker scripts for precise memory layout, and a UART driver for serial communication.",
       image: "https://images.downey.io/blog/cs140e-rust-ferris-crochet-downey-1.jpg",
       technologies: ["Rust", "Assembly", "RISC-V", "QEMU", "Systems Programming", "Bare Metal"],
@@ -129,7 +150,7 @@ const Projects = () => {
     {
       id: 10,
       title: "SEALCrypt",
-      description: "Thread-safe C++17 wrapper library for Microsoft SEAL homomorphic encryption engine with automated CMake/GTest CI pipeline.",
+      description: "Thread safe C++17 wrapper library for Microsoft SEAL homomorphic encryption engine with automated CMake/GTest CI pipeline.",
       longDescription: "A modern C++ wrapper library that abstracts complex encryption context initialization for Microsoft SEAL.",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYL_2VvThixV3iCXrp3qzMlb5eWt8BE-sag&s",
       technologies: ["C++17", "CMake", "Google Test", "Homomorphic Encryption", "GitHub Actions", "Thread Safety"],
@@ -142,7 +163,7 @@ const Projects = () => {
       id: 3,
       title: "LiDAR 2D Room Mapping",
       description: "C++ application using Livox Mid-360 LiDAR sensor with PCL and OpenCV to create 2D maps of indoor environments with floor plane detection.",
-      longDescription: "A real-time point cloud processing system that captures LiDAR data, detects and removes floor planes using RANSAC algorithm.",
+      longDescription: "A real time point cloud processing system that captures LiDAR data, detects and removes floor planes using RANSAC algorithm.",
       image: "https://github.com/arianizadi/PointClouds_LIVOX/raw/master/room_2d_map.png",
       technologies: ["C++", "PCL", "OpenCV", "CMake", "LiDAR"],
       githubUrl: "https://github.com/arianizadi/pointclouds_livox",
@@ -175,22 +196,10 @@ const Projects = () => {
       categories: ["security", "systems"] as Category[],
     },
     {
-      id: 1,
-      title: "Railway Semantic Segmentation Research",
-      description: "Research fork of MMSegmentation implementing semantic segmentation for railway infrastructure using RailSem19 and UNLV RTIS datasets.",
-      longDescription: "Advanced computer vision research project focusing on semantic segmentation of railway environments.",
-      image: "https://www.wilddash.cc/static/images/lab3-rs19.jpg",
-      technologies: ["Python", "PyTorch", "MMSegmentation", "Computer Vision", "Deep Learning"],
-      githubUrl: "https://github.com/arianizadi/mmsegmentation",
-      status: "In Progress",
-      year: "2025",
-      categories: ["data", "robotics"] as Category[],
-    },
-    {
       id: 9,
       title: "Knowledge Mapper",
-      description: "AI-powered knowledge assessments with personalized quizzes. Visual progress tracking via radar charts and instant AI-driven feedback.",
-      longDescription: "A platform that enables users to evaluate their understanding through AI-generated dynamic assessments.",
+      description: "AI powered knowledge assessments with personalized quizzes. Visual progress tracking via radar charts and instant AI driven feedback.",
+      longDescription: "A platform that enables users to evaluate their understanding through AI generated dynamic assessments.",
       image: "https://cdn.sanity.io/images/7m9jw85w/production/e8afb8b2b1304f867e0becfc4d5ddbbd9dd94ec1-1784x1044.png?w=1784",
       technologies: ["Next.js", "TypeScript", "React", "AI/LLM", "Tailwind CSS"],
       liveUrl: "https://knowledge-mapper.vercel.app",
@@ -202,7 +211,7 @@ const Projects = () => {
       id: 4,
       title: "Lazy Wordler",
       description: "Next.js app that scrapes the Wordle website to display current puzzle answers using server-side rendering.",
-      longDescription: "A reverse-engineered Wordle solver that fetches answers from the NYT API.",
+      longDescription: "A reverse engineered Wordle solver that fetches answers from the NYT API.",
       image: "https://1000logos.net/wp-content/uploads/2023/05/Wordle-Emblem.png",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "React"],
       githubUrl: "https://github.com/arianizadi/lazy-wordler",
@@ -265,24 +274,15 @@ const Projects = () => {
   });
 
   return (
-    <div ref={containerRef} className="py-24 bg-zinc-950 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
-
-      <div className="max-w-6xl mx-auto px-6 relative">
-        <div className="mb-16">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
-                Featured Projects
-              </h1>
-              <p className="text-zinc-400 text-lg max-w-2xl">
-                Research and development projects in systems, robotics, and security.
-              </p>
-            </div>
-            <div className="bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-zinc-500 text-sm">
-              <span className="text-emerald-400 font-medium">{filteredProjects.length}</span> projects showing
-            </div>
-          </div>
+    <div ref={containerRef} className="py-20 bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+            Featured Projects
+          </h2>
+          <p className="text-zinc-400 text-base max-w-2xl">
+            Research and development projects in systems, robotics, and security.
+          </p>
         </div>
 
         {filteredProjects.length > 0 ? (

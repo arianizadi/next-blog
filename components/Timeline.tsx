@@ -37,7 +37,7 @@ const TypewriterText: React.FC<{ text: string; className?: string }> = ({ text, 
     <p ref={ref} className={className}>
       {displayedText}
       {currentIndex < text.length && (
-        <span className="inline-block w-0.5 h-5 bg-purple-500 ml-1 animate-pulse" />
+        <span className="inline-block w-0.5 h-5 bg-emerald-500 ml-1 animate-pulse" />
       )}
     </p>
   );
@@ -65,27 +65,27 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         <div className="flex-1 w-full pl-16 md:pl-0">
           <motion.div
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            className={`relative group bg-zinc-900/40 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 shadow-2xl ${
+            className={`relative group bg-zinc-900/40 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-white/10 hover:border-emerald-500/50 transition-all duration-300 shadow-2xl ${
               index % 2 === 0 ? "md:mr-12" : "md:ml-12"
             }`}
           >
             {/* Ambient Glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-blue-500/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
             <div className="relative z-10">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
                 <div className="relative shrink-0">
-                  <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full" />
-                  <div className="relative p-3 bg-zinc-800/80 rounded-xl text-purple-400 border border-white/5 group-hover:text-purple-300 transition-colors">
+                  <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full" />
+                  <div className="relative p-3 bg-zinc-800/80 rounded-xl text-emerald-400 border border-white/5 group-hover:text-emerald-300 transition-colors">
                     {icon}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-purple-100 transition-colors">
+                  <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-100 transition-colors">
                     {title}
                   </h3>
                   <div className="flex items-center gap-2 text-sm font-medium">
-                    <span className="text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded">Age {age}</span>
+                    <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Age {age}</span>
                     {year && <span className="text-zinc-500">• {year}</span>}
                   </div>
                 </div>
@@ -99,7 +99,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
         {/* Timeline dot with pulse */}
         <div className="absolute left-8 md:relative md:left-0 transform -translate-x-1/2 md:translate-x-0 md:flex z-20 items-center justify-center w-12">
-          <div className="w-4 h-4 md:w-5 md:h-5 bg-purple-500 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.5)] border-2 md:border-4 border-black" />
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)] border-2 md:border-4 border-black" />
         </div>
 
         {/* Empty space for desktop layout */}
@@ -146,7 +146,7 @@ const Timeline = () => {
       {
         age: 19,
         title: "I Am Not a Robot",
-        description: "Capitalized on high-demand releases by building automation tools for the sneaker and streetwear world. I developed techniques to boost the human score of Gmail accounts, reducing the likelihood of encountering captchas and increasing success rates for limited edition drops.",
+        description: "Capitalized on high demand releases by building automation tools for the sneaker and streetwear world. I developed techniques to boost the human score of Gmail accounts, reducing the likelihood of encountering captchas and increasing success rates for limited edition drops.",
         icon: <ShoppingBag size={24} />,
       },
       {
@@ -174,26 +174,21 @@ const Timeline = () => {
         age: 25,
         year: 2025,
         title: "Open Source & Industry Impact",
-        description: "Made meaningful contributions to open source projects including Octomap (PCD file reading) and CVAT (Z-layer controls, point cloud slider). Building tools that help the broader robotics and computer vision community.",
+        description: "Made meaningful contributions to open source projects including Octomap (PCD file reading) and CVAT (Z layer controls, point cloud slider). Building tools that help the broader robotics and computer vision community.",
         icon: <Code size={24} />,
       },
   ];
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-black py-32 overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
-
+    <div ref={containerRef} className="relative min-h-screen bg-zinc-950 py-32 overflow-hidden">
       {/* Header */}
-      <div className="text-center mb-32 relative z-10">
-        <h2 className="text-purple-500 font-mono text-sm tracking-widest uppercase mb-4">Evolution</h2>
-        <h1 className="text-5xl md:text-7xl font-extrabold pb-2 mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
+      <div className="max-w-6xl mx-auto px-6 mb-20 relative z-10">
+        <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
           My Journey
-        </h1>
-        <TypewriterText 
+        </h2>
+        <TypewriterText
           text="From a naive kid to a passionate systems engineer and researcher"
-          className="text-xl text-zinc-400 max-w-2xl mx-auto px-4 font-light leading-relaxed"
+          className="text-base text-zinc-400 max-w-2xl font-light leading-relaxed"
         />
       </div>
 
@@ -203,7 +198,7 @@ const Timeline = () => {
         <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-zinc-800">
           <motion.div 
             style={{ scaleY: pathLength, originY: 0 }}
-            className="absolute inset-0 w-full bg-gradient-to-b from-purple-500 via-blue-500 to-transparent"
+            className="absolute inset-0 w-full bg-gradient-to-b from-emerald-500 via-emerald-500/50 to-transparent"
           />
         </div>
 
@@ -220,25 +215,25 @@ const Timeline = () => {
       {/* Conclusion Section */}
       <div className="text-center mt-32 mb-20 relative z-10">
         <div className="inline-block relative mb-8">
-          <div className="absolute inset-0 bg-purple-500/30 blur-3xl rounded-full" />
-          <div className="relative p-6 bg-zinc-900/50 rounded-full border border-purple-500/30 backdrop-blur-xl">
-            <Zap className="text-purple-400 w-10 h-10 animate-pulse" />
+          <div className="absolute inset-0 bg-emerald-500/30 blur-3xl rounded-full" />
+          <div className="relative p-6 bg-zinc-900/50 rounded-full border border-emerald-500/30 backdrop-blur-xl">
+            <Zap className="text-emerald-400 w-10 h-10 animate-pulse" />
           </div>
         </div>
         
-        <h3 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
+        <h3 className="text-3xl md:text-4xl font-semibold mb-6 text-white">
           To be continued...
         </h3>
         
         <p className="text-xl text-zinc-400 max-w-2xl mx-auto px-6 font-light leading-relaxed">
           The same naive curiosity that started with a C# book still drives me today. 
           Whether it's deep learning research or systems engineering, I'm still that 
-          kid who just wants to see how things work—and make them work better.
+          kid who just wants to see how things work, and make them work better.
         </p>
       </div>
 
       {/* Bottom fade out */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none" />
     </div>
   );
 };

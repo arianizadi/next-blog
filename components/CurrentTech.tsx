@@ -350,13 +350,13 @@ const CurrentTech = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black p-8 py-24">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+    <div className="py-20 bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
             Current Technologies
-          </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          </h2>
+          <p className="text-zinc-400 text-base max-w-2xl">
             Tools and technologies I use most frequently, organized by domain.
           </p>
         </div>

@@ -38,7 +38,7 @@ const ContactCTA = () => {
                 </h2>
 
                 <p className="text-zinc-400 text-lg max-w-lg leading-relaxed font-light">
-                  I&apos;m seeking opportunities in systems engineering, robotics perception, and high-performance development. If you need someone who speaks low level, reach out.
+                  I&apos;m seeking opportunities in systems engineering, robotics perception, and high performance development. If you need someone who speaks low level, reach out.
                 </p>
               </div>
 

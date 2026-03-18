@@ -96,9 +96,9 @@ const Experience = () => {
       company: "Koshee AI",
       role: "Embedded Systems & Robotics Intern",
       dates: "Jan 2024 – July 2025",
-      technologies: ["CMake/CTest", "Lidar", "Networking", "Embedded/Multithreaded C++", "CI/CD", "GitHub Actions"],
+      technologies: ["CMake/CTest", "Lidar", "Networking", "Embedded C++", "CI/CD", "GitHub Actions"],
       bulletPoints: [
-        "Real-Time Safety: Architected a \"dead man's switch\" using UDP heartbeats, ensuring a <2 second hard real-time shutdown latency during network partitions.",
+        "Real Time Safety: Architected a \"dead man's switch\" using UDP heartbeats, ensuring a <2 second hard real time shutdown latency during network partitions.",
         "Performance Engineering: Created a scalable LiDAR perception pipeline (C++/PCL) to process 100k+ points/frame within strict timing and unified memory constraints.",
         "Build Systems: Engineered a CMake and GitHub Actions build system with distributed caching, slashing build times by 73% (15m to 4m) to accelerate deployment cycles and developer iteration."
       ],
@@ -111,7 +111,7 @@ const Experience = () => {
       technologies: ["PHP", "MySQL", "HTML/CSS/JS", "Backend", "API Development", "Secure Programming"],
       bulletPoints: [
         "Security: Enhanced data protection for a Learning Management System (LMS) by designing security measures using PHP and MySQL, including patching over 100 SQL injection vulnerabilities.",
-        "SSO Implementation: Implemented Single Sign-on solution allowing 200+ students to access material using school accounts on Clever, enabling expansion with Nevada schools."
+        "SSO Implementation: Implemented Single Sign On solution allowing 200+ students to access material using school accounts on Clever, enabling expansion with Nevada schools."
       ],
       categories: ["security", "data"] as Category[],
     }
@@ -159,26 +159,15 @@ const Experience = () => {
   });
 
   return (
-    <div ref={containerRef} className="py-24 bg-zinc-950 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
-
-      <div className="max-w-6xl mx-auto px-6 relative">
-        <div className="mb-16">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
-                Experience
-              </h1>
-              <p className="text-zinc-400 text-lg max-w-2xl">
-                My professional journey in software engineering and systems development.
-              </p>
-            </div>
-            {(selectedCategories.length > 0 || searchQuery) && (
-              <div className="bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-zinc-500 text-sm">
-                <span className="text-emerald-400 font-medium">{filteredExperiences.length}</span> matches found
-              </div>
-            )}
-          </div>
+    <div ref={containerRef} className="py-20 bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+            Experience
+          </h2>
+          <p className="text-zinc-400 text-base max-w-2xl">
+            My professional journey in software engineering and systems development.
+          </p>
         </div>
 
         <div className="space-y-6">

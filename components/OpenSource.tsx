@@ -151,7 +151,7 @@ const contributions: Contribution[] = [
     id: 2,
     project: "CVAT",
     feature: "Z Layer Increment/Decrement",
-    description: "Implemented Z-layer increment/decrement functionality for annotation layers",
+    description: "Implemented Z layer increment/decrement functionality for annotation layers",
     githubUrl: "https://github.com/cvat-ai/cvat",
     prUrl: "https://github.com/cvat-ai/cvat/pull/9063",
     status: "merged",
@@ -227,26 +227,15 @@ const OpenSource = () => {
   });
 
   return (
-    <div ref={containerRef} className="py-24 bg-zinc-950 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
-
-      <div className="max-w-6xl mx-auto px-6 relative">
-        <div className="mb-16">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
-                Open Source Contributions
-              </h1>
-              <p className="text-zinc-400 text-lg max-w-2xl">
-                Contributions to open source projects and libraries.
-              </p>
-            </div>
-            {(selectedCategories.length > 0 || searchQuery) && (
-              <div className="bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-zinc-500 text-sm">
-                <span className="text-emerald-400 font-medium">{filteredContributions.length}</span> contributions
-              </div>
-            )}
-          </div>
+    <div ref={containerRef} className="py-20 bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+            Open Source Contributions
+          </h2>
+          <p className="text-zinc-400 text-base max-w-2xl">
+            Contributions to open source projects and libraries.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

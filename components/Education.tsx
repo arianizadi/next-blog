@@ -29,13 +29,13 @@ const degrees: Degree[] = [
   {
     university: "University of Nevada, Las Vegas",
     degree: "Master of Science, Computer Science",
-    track: "Part-Time / Professional Track",
+    track: "Part Time / Professional Track",
     gpa: "4.0",
     date: "Expected: Dec 2026",
-    coursework: ["Real-Time & Embedded Systems", "Cloud Computing", "Advanced Operating Systems", "Network Security"],
+    coursework: ["Real Time & Embedded Systems", "Cloud Computing", "Advanced Operating Systems", "Network Security"],
     research: {
       title: "Railway Track Segmentation",
-      description: "Semantic segmentation of POV train images to detect mud pumping and track-related issues, finetuning HRNET and other models. Added Railseg19 Transfer Learning to MMSEGMENTATION"
+      description: "Semantic segmentation of POV train images to detect mud pumping and track related issues, finetuning HRNET and other models. Added Railseg19 Transfer Learning to MMSEGMENTATION"
     },
   },
   {
@@ -162,26 +162,15 @@ const Education = () => {
   const isFilterActive = selectedCategories.length > 0 || searchQuery.length > 0;
 
   return (
-    <div className="py-24 bg-zinc-950 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900/50 to-zinc-950" />
-
-      <div className="max-w-6xl mx-auto px-6 relative">
-        <div className="mb-16">
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
-                Education & Certifications
-              </h1>
-              <p className="text-zinc-400 text-lg max-w-2xl">
-                Academic background and professional certifications.
-              </p>
-            </div>
-            {isFilterActive && (
-              <div className="bg-emerald-500/10 px-4 py-2 rounded-full border border-emerald-500/20 text-emerald-400 text-sm">
-                Academic profile active
-              </div>
-            )}
-          </div>
+    <div className="py-20 bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+            Education & Certifications
+          </h2>
+          <p className="text-zinc-400 text-base max-w-2xl">
+            Academic background and professional certifications.
+          </p>
         </div>
 
         <div className="space-y-6 mb-12">

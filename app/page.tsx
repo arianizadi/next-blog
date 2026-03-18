@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import CategoryFilter from "@/components/CategoryFilter";
+import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import OpenSource from "@/components/OpenSource";
@@ -11,6 +12,7 @@ export default function Home() {
     <main>
       <Hero />
       <CategoryFilter />
+      <Projects />
       <Experience />
       <Education />
       <OpenSource />
