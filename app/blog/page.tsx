@@ -1,41 +1,24 @@
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 import { BlogPost } from "@prisma/client";
 import { getPosts } from "@/app/actions/actions";
-import Link from "next/link";
+import { BlogPostGrid } from "@/components/BlogPostGrid";
+import { BlogIndexHeader } from "@/components/BlogIndexHeader";
 
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+export default async function BlogPage() {
+  const posts: BlogPost[] = await getPosts();
+  const summaries = posts.map((p) => ({
+    id: p.id,
+    title: p.title,
+    description: p.description,
+    date: p.date.toISOString(),
+    tags: p.tags,
+  }));
 
-export default async function Home() {
-  const posts: BlogPost[] = await getPosts()
   return (
-    <main className="px-4 pt-20 pb-4">
-      <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {posts.map((post: BlogPost, index: number) => (
-          <Link key={post.id} href={"/blog/" + post.id}>
-            <Card>
-              <CardHeader className="items-center">
-                <CardTitle>{post.title}</CardTitle>
-                <CardDescription className="flex flex-col items-center gap-2 pt-3 text-center">
-                  <span>{post.description}</span>
-                  <span>{post.date.toDateString()}</span>
-                </CardDescription>
-              </CardHeader>
-              <CardFooter className="justify-center items-center">
-                {post.tags.map((tag: string, index: number) => (
-                  <span key={index} className="px-2">#{tag}</span>
-                ))}
-              </CardFooter>
-            </Card>
-          </Link>
-        ))}
-      </div>
-    </main>
+    <div className="mx-auto min-h-screen max-w-6xl px-6 pb-16 pt-28">
+      <BlogIndexHeader />
+      <BlogPostGrid posts={summaries} />
+    </div>
   );
 }

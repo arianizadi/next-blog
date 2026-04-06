@@ -71,7 +71,7 @@ const AboutMe = () => {
                 <li>Working on perception and control algorithms</li>
                 <li>Implementing sensor fusion techniques</li>
                 <li>Testing autonomous navigation systems</li>
-                <li>Optimizing real-time decision making</li>
+                <li>Optimizing real time decision making</li>
               </ul>
             </div>
           </div>

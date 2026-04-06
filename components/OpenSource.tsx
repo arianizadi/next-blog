@@ -2,7 +2,13 @@
 
 import React, { useRef, useEffect } from "react";
 import { GitPullRequest, ExternalLink, Code, CheckCircle, Circle, AlertCircle, GitFork } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
+import {
+  defaultViewport,
+  revealMotionProps,
+  staggerVariants,
+} from "@/lib/motion";
 
 interface Contribution {
   id: number;
@@ -26,17 +32,17 @@ const StatusBadge = ({ status }: { status: "merged" | "open" | "pending" | "fork
     open: {
       icon: <AlertCircle size={14} />,
       text: "Open",
-      className: "text-yellow-400 bg-yellow-500/10 border-yellow-500/30",
+      className: "text-foreground/70 bg-foreground/10 border-foreground/20",
     },
     pending: {
       icon: <Circle size={14} />,
       text: "Pending",
-      className: "text-zinc-400 bg-zinc-500/10 border-zinc-500/30",
+      className: "text-muted-foreground bg-muted border-border",
     },
     forked: {
       icon: <GitFork size={14} />,
       text: "Forked",
-      className: "text-blue-400 bg-blue-500/10 border-blue-500/30",
+      className: "text-foreground/70 bg-foreground/10 border-foreground/20",
     },
   };
 
@@ -60,26 +66,24 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
   }, [isFocused]);
 
   const opacityClass = isHighlighted ? "opacity-100" : "opacity-20 grayscale pointer-events-none";
-  const highlightRing = isFocused 
-    ? "ring-2 ring-emerald-500 border-emerald-500 bg-zinc-900/90 shadow-[0_0_30px_rgba(16,185,129,0.2)] scale-[1.02]" 
-    : isHighlighted 
-    ? "ring-1 ring-emerald-500/20 border-emerald-500/30 bg-zinc-900/80 shadow-[0_0_20px_rgba(16,185,129,0.05)]" 
-    : "border-zinc-800/50 bg-zinc-900/40";
+  const highlightRing = isFocused
+    ? "ring-2 ring-foreground/30 scale-[1.02]"
+    : "";
 
   return (
     <div
       ref={cardRef}
-      className={`group relative rounded-xl p-6 border transition-all duration-500 ${opacityClass} ${highlightRing}`}
+      className={`card-surface group relative rounded-xl p-6 transition-all duration-500 ${opacityClass} ${highlightRing}`}
     >
       <div className="space-y-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <GitPullRequest size={18} className={isHighlighted ? "text-emerald-500" : "text-zinc-500"} />
-              <span className={isHighlighted ? "text-emerald-500 text-sm font-medium" : "text-zinc-500 text-sm font-medium"}>Open Source</span>
+              <GitPullRequest size={18} className="text-foreground/40" />
+              <span className="text-foreground/40 text-sm font-medium">Open Source</span>
               <StatusBadge status={contribution.status} />
             </div>
-            <h3 className="text-lg font-medium text-white">
+            <h3 className="text-lg font-medium text-foreground font-display">
               {contribution.project}
             </h3>
           </div>
@@ -89,7 +93,7 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
                 href={contribution.prUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-md transition-colors duration-200 text-sm border border-zinc-700/50 hover:border-zinc-600"
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 rounded-md transition-colors duration-200 text-sm"
               >
                 <GitPullRequest size={14} />
                 <span className="hidden sm:inline">PR</span>
@@ -100,7 +104,7 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
               href={contribution.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800/50 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-md transition-colors duration-200 text-sm border border-zinc-700/50 hover:border-zinc-600"
+              className="flex items-center gap-1.5 px-3 py-1.5 border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 rounded-md transition-colors duration-200 text-sm"
             >
               <Code size={14} />
               <span className="hidden sm:inline">Repo</span>
@@ -110,10 +114,10 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
         </div>
 
         <div className="space-y-2">
-          <p className="text-white font-medium text-sm group-hover:text-emerald-400 transition-colors">
+          <p className="text-foreground font-medium text-sm group-hover:text-foreground/80 transition-colors">
             [{contribution.feature}]
           </p>
-          <p className="text-zinc-400 text-sm leading-relaxed">
+          <p className="text-muted-foreground text-sm leading-relaxed">
             {contribution.description}
           </p>
         </div>
@@ -123,7 +127,7 @@ const ContributionCard = ({ contribution, index, isHighlighted, isFocused }: { c
             {contribution.technologies.map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 bg-zinc-800/50 text-zinc-300 text-[10px] uppercase tracking-wider font-semibold rounded border border-zinc-700/50"
+                className="px-2 py-1 bg-card text-muted-foreground text-[10px] uppercase tracking-wider font-semibold rounded border border-border"
               >
                 {tech}
               </span>
@@ -183,6 +187,10 @@ const contributions: Contribution[] = [
 
 const OpenSource = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const headerMotion = revealMotionProps(reduceMotion);
+  const { container: staggerContainer, item: staggerItem } =
+    staggerVariants(reduceMotion);
   const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   // Index contributions for global fuzzy search
@@ -196,7 +204,7 @@ const OpenSource = () => {
       type: "opensource",
       categories: con.categories
     }));
-    
+
     setSearchableItems(prev => {
       const otherTypes = prev.filter(item => item.type !== "opensource");
       return [...otherTypes, ...items];
@@ -205,19 +213,18 @@ const OpenSource = () => {
 
   const filteredContributions = contributions.filter((con) => {
     const isAllSelected = selectedCategories.includes("all");
-    const matchesCategory = 
-      isAllSelected || 
+    const matchesCategory =
+      isAllSelected ||
       selectedCategories.some(cat => con.categories.includes(cat));
-    
+
     if (!searchQuery) return matchesCategory;
 
-    // Use fuzzy results for "likeness" matching
-    const isFuzzyMatch = fuzzyResults.some(result => 
+    const isFuzzyMatch = fuzzyResults.some(result =>
       result.item.type === "opensource" && result.item.id === con.id
     );
 
     const searchLower = searchQuery.toLowerCase();
-    const matchesExact = 
+    const matchesExact =
       con.project.toLowerCase().includes(searchLower) ||
       con.feature.toLowerCase().includes(searchLower) ||
       con.description.toLowerCase().includes(searchLower) ||
@@ -227,37 +234,42 @@ const OpenSource = () => {
   });
 
   return (
-    <div ref={containerRef} className="py-20 bg-zinc-950">
+    <div ref={containerRef} className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+        <motion.div className="mb-12" {...headerMotion}>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">04 / Open Source</p>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground">
             Open Source Contributions
           </h2>
-          <p className="text-zinc-400 text-base max-w-2xl">
-            Contributions to open source projects and libraries.
-          </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid grid-cols-1 gap-6 md:grid-cols-2"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
           {contributions.map((contribution, index) => {
             const isVisible = filteredContributions.some(c => c.id === contribution.id);
             const isFocused = searchQuery && fuzzyResults[currentMatchIndex]?.item.id === contribution.id && fuzzyResults[currentMatchIndex]?.item.type === "opensource";
 
             return (
-              <ContributionCard 
-                key={contribution.id} 
-                contribution={contribution} 
-                index={index} 
-                isHighlighted={isVisible}
-                isFocused={!!isFocused}
-              />
+              <motion.div key={contribution.id} variants={staggerItem} className="min-w-0">
+                <ContributionCard
+                  contribution={contribution}
+                  index={index}
+                  isHighlighted={isVisible}
+                  isFocused={!!isFocused}
+                />
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {filteredContributions.length === 0 && (
-          <div className="py-12 text-center border border-dashed border-zinc-800 rounded-2xl">
-            <p className="text-zinc-500">No contributions match your search.</p>
+          <div className="py-12 text-center border border-dashed border-border rounded-2xl">
+            <p className="text-muted-foreground">No contributions match your search.</p>
           </div>
         )}
       </div>

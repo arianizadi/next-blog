@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { siteConfig } from "@/app/config/site";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/Icons";
 import { Menu, X } from "lucide-react";
 import {
@@ -14,9 +14,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mobileMenuReady, setMobileMenuReady] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setMobileMenuReady(true);
+  }, []);
+  const { scrollY } = useScroll();
+
+  const bgAlpha = useTransform(scrollY, [0, 100], [0.62, 0.88]);
+  const blurPx = useTransform(scrollY, [0, 100], [20, 28]);
+  const navBackground = useMotionTemplate`rgba(22, 22, 28, ${bgAlpha})`;
+  const backdropFilter = useMotionTemplate`blur(${blurPx}px)`;
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -31,98 +44,143 @@ export function NavBar() {
     { href: siteConfig.links.gitroll, icon: Icons.GitRoll, label: "GitRoll" },
   ];
 
-  return (
-    <header className="top-0 z-50 fixed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border w-full">
-      <div className="flex justify-between items-center max-w-screen-2xl h-14 container">
-        {/* Logo/Name */}
-        <div className="flex justify-start items-center space-x-2">
-          <Link href="/" prefetch={true}>
-            <strong className="text-center">Arian Izadi</strong>
-          </Link>
-        </div>
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
-        {/* Desktop Navigation - hidden on mobile */}
-        <div className="hidden md:flex justify-center">
+  return (
+    <header className="fixed left-0 right-0 top-4 z-50 flex justify-center px-4 md:top-6">
+      <motion.nav
+        style={{
+          backgroundColor: navBackground,
+          backdropFilter: backdropFilter,
+          WebkitBackdropFilter: backdropFilter,
+        }}
+        className={cn(
+          "flex items-center justify-between gap-2",
+          "w-full max-w-3xl px-4 py-2.5 md:px-6 md:py-3",
+          "rounded-[2.25rem]",
+          "border border-white/[0.12]",
+          "shadow-[0_12px_40px_-12px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.08)]",
+          "ring-1 ring-white/[0.06]"
+        )}
+      >
+        <Link
+          href="/"
+          prefetch={true}
+          className="whitespace-nowrap font-display text-base font-bold tracking-tight text-foreground transition-colors hover:text-foreground/80 md:text-lg"
+        >
+          Arian Izadi
+        </Link>
+
+        <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
-            <Link 
+            <Link
               key={link.href}
-              prefetch={true} 
-              href={link.href} 
-              className={cn(buttonVariants({ variant: "ghost" }))}
+              prefetch={true}
+              href={link.href}
+              className={cn(
+                "relative rounded-full px-4 py-2 font-sans text-sm font-semibold transition-colors duration-200",
+                isActive(link.href)
+                  ? "text-foreground"
+                  : "text-foreground/40 hover:text-foreground"
+              )}
             >
               {link.label}
+              {isActive(link.href) && (
+                <motion.span
+                  layoutId="navbar-active-pill"
+                  className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-foreground"
+                  transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                />
+              )}
             </Link>
           ))}
         </div>
 
-        {/* Desktop Social Icons & Mobile Menu */}
-        <div className="flex justify-end items-center">
-          {/* Social Icons - hidden on mobile */}
-          <nav className="hidden md:flex items-center">
+        <div className="flex items-center gap-0.5">
+          <nav className="hidden items-center gap-0.5 md:flex">
             {socialLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.href}
-                href={link.href} 
-                target="_blank" 
+                href={link.href}
+                target="_blank"
                 rel="noreferrer"
+                className="group flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 hover:bg-foreground/5"
               >
-                <div className={cn(buttonVariants({ variant: "ghost" }), "w-10 px-0")}>
-                  <link.icon className="w-4 h-4 fill-black dark:fill-white" />
-                  <span className="sr-only">{link.label}</span>
-                </div>
+                <link.icon className="h-3.5 w-3.5 fill-foreground/20 transition-colors group-hover:fill-foreground/60" />
+                <span className="sr-only">{link.label}</span>
               </Link>
             ))}
           </nav>
 
-          {/* Mobile Menu Dropdown */}
           <div className="md:hidden">
-            <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-              <DropdownMenuTrigger asChild>
-                <button
-                  className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "h-10 w-10 px-0"
-                  )}
-                  aria-label="Toggle menu"
+            {mobileMenuReady ? (
+              <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-foreground/40 transition-colors duration-200 hover:bg-foreground/5 hover:text-foreground"
+                    aria-label="Toggle menu"
+                  >
+                    {isOpen ? (
+                      <X className="h-4 w-4" />
+                    ) : (
+                      <Menu className="h-4 w-4" />
+                    )}
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="mt-3 w-52 rounded-3xl border border-white/10 bg-card/95 p-1 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
                 >
-                  {isOpen ? (
-                    <X className="h-5 w-5" />
-                  ) : (
-                    <Menu className="h-5 w-5" />
-                  )}
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                {navLinks.map((link) => (
-                  <DropdownMenuItem key={link.href} asChild>
-                    <Link 
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-                <DropdownMenuSeparator />
-                {socialLinks.map((link) => (
-                  <DropdownMenuItem key={link.href} asChild>
-                    <Link 
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2"
-                    >
-                      <link.icon className="w-4 h-4 fill-black dark:fill-white" />
-                      {link.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  {navLinks.map((link) => (
+                    <DropdownMenuItem key={link.href} asChild>
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "flex items-center gap-2 rounded-xl font-sans transition-colors",
+                          isActive(link.href) ? "text-foreground" : "text-foreground/40"
+                        )}
+                      >
+                        {isActive(link.href) && (
+                          <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+                        )}
+                        {link.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                  <DropdownMenuSeparator className="bg-border" />
+                  {socialLinks.map((link) => (
+                    <DropdownMenuItem key={link.href} asChild>
+                      <Link
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-2.5 rounded-xl text-foreground/40 transition-colors hover:text-foreground"
+                      >
+                        <link.icon className="h-3.5 w-3.5 fill-foreground/40" />
+                        {link.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <button
+                type="button"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-foreground/40 transition-colors duration-200 hover:bg-foreground/5 hover:text-foreground"
+                aria-label="Toggle menu"
+                disabled
+              >
+                <Menu className="h-4 w-4" />
+              </button>
+            )}
           </div>
         </div>
-      </div>
+      </motion.nav>
     </header>
   );
 }

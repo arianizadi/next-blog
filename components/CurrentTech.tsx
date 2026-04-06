@@ -2,8 +2,13 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
+import {
+  defaultViewport,
+  revealMotionProps,
+  staggerVariants,
+} from "@/lib/motion";
 
 interface Technology {
   icon: string;
@@ -37,12 +42,12 @@ const TechnologyCard = ({
   }, [isFocused]);
 
   const opacityClass = isHighlighted ? "opacity-100" : "opacity-50 grayscale";
-  const focusRing = isFocused ? "ring-2 ring-emerald-500 border-emerald-500 bg-zinc-800/90 shadow-[0_0_30px_rgba(16,185,129,0.2)] scale-105 z-10" : "";
-  
+  const focusRing = isFocused ? "ring-2 ring-foreground/30 scale-105 z-10" : "";
+
   return (
-    <div 
+    <div
       ref={cardRef}
-      className={`bg-zinc-900 rounded-xl text-balance p-4 flex items-center gap-3 hover:bg-zinc-800 transition-all duration-300 ${opacityClass} ${highlightRing} ${focusRing}`}
+      className={`card-surface flex items-center gap-3 rounded-lg p-4 text-balance transition-all duration-300 ${opacityClass} ${highlightRing} ${focusRing}`}
     >
       <div className="relative shrink-0 flex items-center justify-center w-10 h-10">
         <Image
@@ -54,14 +59,18 @@ const TechnologyCard = ({
         />
       </div>
       <div>
-        <h3 className="text-white font-medium mb-1">{name}</h3>
-        <p className="text-zinc-400 text-sm">{description}</p>
+        <h3 className="text-foreground font-medium mb-1">{name}</h3>
+        <p className="text-muted-foreground text-sm">{description}</p>
       </div>
     </div>
   );
 };
 
 const CurrentTech = () => {
+  const reduceMotion = useReducedMotion();
+  const headerMotion = revealMotionProps(reduceMotion);
+  const { container: staggerContainer, item: staggerItem } =
+    staggerVariants(reduceMotion);
   const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   const technologies: Technology[] = [
@@ -89,7 +98,7 @@ const CurrentTech = () => {
     {
       icon: "https://img.icons8.com/color/96/assembly.png",
       name: "Assembly",
-      description: "Low-level programming",
+      description: "Low level programming",
       category: "backend",
       filterCategories: ["systems", "security"] as Category[],
     },
@@ -228,7 +237,7 @@ const CurrentTech = () => {
     },
     {
       icon: "https://www.livoxtech.com/dps/2d9e037e6d457ef7ffec037f7d16dcf8.png",
-      name: "Livox Mid-360",
+      name: "Livox Mid 360",
       description: "LiDAR sensor",
       category: "data",
       filterCategories: ["robotics", "systems"] as Category[],
@@ -298,10 +307,10 @@ const CurrentTech = () => {
       title: tech.name,
       description: tech.description,
       subtitle: tech.category,
-      type: "opensource", // Use opensource as catch-all or update interface
+      type: "opensource",
       categories: tech.filterCategories
     }));
-    
+
     setSearchableItems(prev => {
       const filteredPrev = prev.filter(p => !items.some(item => item.id === p.id));
       return [...filteredPrev, ...items];
@@ -309,11 +318,11 @@ const CurrentTech = () => {
   }, [setSearchableItems]);
 
   const categoryDisplayOrder = {
-    backend: { name: "Systems", color: "from-green-500 to-emerald-500" },
-    security: { name: "Security", color: "from-red-500 to-rose-500" },
-    data: { name: "Data & Analytics", color: "from-purple-500 to-pink-500" },
-    tools: { name: "Tools", color: "from-orange-500 to-red-500" },
-    frontend: { name: "Frontend", color: "from-blue-500 to-cyan-500" },
+    backend: { name: "Systems" },
+    security: { name: "Security" },
+    data: { name: "Data & Analytics" },
+    tools: { name: "Tools" },
+    frontend: { name: "Frontend" },
   };
 
   const groupedTech = Object.keys(categoryDisplayOrder).reduce((acc, category) => {
@@ -323,17 +332,16 @@ const CurrentTech = () => {
 
   const getTechHighlightStatus = (tech: Technology) => {
     const isAllSelected = selectedCategories.includes("all");
-    const matchesCategory = 
-      isAllSelected || 
+    const matchesCategory =
+      isAllSelected ||
       selectedCategories.some(cat => tech.filterCategories.includes(cat));
-    
+
     if (!searchQuery) return matchesCategory;
 
-    // Use fuzzy results for "likeness" matching
     const isFuzzyMatch = fuzzyResults.some(result => result.item.id === tech.name);
 
     const searchLower = searchQuery.toLowerCase();
-    const matchesExact = 
+    const matchesExact =
       tech.name.toLowerCase().includes(searchLower) ||
       tech.description.toLowerCase().includes(searchLower);
 
@@ -343,23 +351,21 @@ const CurrentTech = () => {
   const getCategoryHighlight = (categoryKey: string): { isHighlighted: boolean } => {
     const techsInCategory = groupedTech[categoryKey] || [];
     const hasMatchingTech = techsInCategory.some(getTechHighlightStatus);
-    
+
     return {
       isHighlighted: hasMatchingTech || (selectedCategories.length === 0 && !searchQuery),
     };
   };
 
   return (
-    <div className="py-20 bg-zinc-950">
+    <div className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+        <motion.div className="mb-12" {...headerMotion}>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">06 / Stack</p>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground">
             Current Technologies
           </h2>
-          <p className="text-zinc-400 text-base max-w-2xl">
-            Tools and technologies I use most frequently, organized by domain.
-          </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-12">
           {Object.entries(categoryDisplayOrder).map(([categoryKey, categoryConfig]) => {
@@ -369,29 +375,37 @@ const CurrentTech = () => {
 
             return (
               <div key={categoryKey} className={`space-y-4 ${categoryOpacity} transition-all duration-500`}>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className={`h-1 w-12 bg-gradient-to-r ${categoryConfig.color} rounded-full`} />
-                  <h2 className="text-2xl font-semibold text-white">
+                <motion.div
+                  className="mb-6 flex items-center gap-3"
+                  {...revealMotionProps(reduceMotion)}
+                >
+                  <h2 className="text-2xl font-semibold text-foreground">
                     {categoryConfig.name}
                   </h2>
-                  <div className={`h-1 flex-1 bg-gradient-to-r ${categoryConfig.color} opacity-20 rounded-full`} />
-                </div>
+                  <div className="h-px flex-1 bg-border" />
+                </motion.div>
 
-                <div className={`grid gap-4 ${
+                <motion.div
+                  className={`grid gap-4 ${
                   techs.length <= 2 ? 'grid-cols-1 md:grid-cols-2' :
                   techs.length <= 3 ? 'grid-cols-1 md:grid-cols-3' :
                   techs.length <= 4 ? 'grid-cols-2 md:grid-cols-4' :
                   'grid-cols-2 md:grid-cols-3 lg:grid-cols-5'
-                }`}>
-                  {techs.map((tech, index) => {
+                }`}
+                  variants={staggerContainer}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={defaultViewport}
+                >
+                  {techs.map((tech) => {
                     const isHighlighted = getTechHighlightStatus(tech);
                     const isFocused = searchQuery && fuzzyResults[currentMatchIndex]?.item.id === tech.name;
                     const highlightRing = isHighlighted && (selectedCategories.length > 0 || searchQuery)
-                      ? "ring-1 ring-emerald-500/50 ring-offset-2 ring-offset-black rounded-xl bg-zinc-800/80" 
+                      ? "ring-1 ring-foreground/20"
                       : "";
 
                     return (
-                      <div key={tech.name}>
+                      <motion.div key={tech.name} variants={staggerItem} className="min-w-0">
                         <TechnologyCard
                           icon={tech.icon}
                           name={tech.name}
@@ -400,10 +414,10 @@ const CurrentTech = () => {
                           isFocused={!!isFocused}
                           highlightRing={highlightRing}
                         />
-                      </div>
+                      </motion.div>
                     );
                   })}
-                </div>
+                </motion.div>
               </div>
             );
           })}

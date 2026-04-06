@@ -9,7 +9,7 @@ import ContactCTA from "@/components/ContactCTA";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Hero />
       <CategoryFilter />
       <Projects />
@@ -18,6 +18,6 @@ export default function Home() {
       <OpenSource />
       <CurrentTech />
       <ContactCTA />
-    </main>
+    </>
   );
 }

@@ -2,7 +2,12 @@
 
 import React from "react";
 import { GraduationCap, Award, Trophy, Cloud, BookOpen, Calendar, ChevronRight, Star } from "lucide-react";
-import { useCategory } from "@/contexts/CategoryContext";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  defaultViewport,
+  revealMotionProps,
+  staggerVariants,
+} from "@/lib/motion";
 
 interface Degree {
   university: string;
@@ -56,61 +61,61 @@ const certifications: Certification[] = [
 ];
 
 const achievements: Achievement[] = [
-  { title: "CyberFire CTF First Place Winner", icon: <Trophy size={16} className="text-yellow-500" /> },
-  { title: "NCL CTF Top 8%", icon: <Award size={16} className="text-amber-500" /> },
-  { title: "Bosch Future Mobility Challenge", icon: <Star size={16} className="text-blue-400" /> },
-  { title: "President of Layer Zero", icon: <Award size={16} className="text-purple-400" /> }
+  { title: "CyberFire CTF First Place Winner", icon: <Trophy size={16} className="text-foreground/60" /> },
+  { title: "NCL CTF Top 8%", icon: <Award size={16} className="text-foreground/60" /> },
+  { title: "Bosch Future Mobility Challenge", icon: <Star size={16} className="text-foreground/60" /> },
+  { title: "President of Layer Zero", icon: <Award size={16} className="text-foreground/60" /> }
 ];
 
 const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
   return (
-    <div className="group relative bg-zinc-900/50 rounded-xl p-6 border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 hover:bg-zinc-900/70">
+    <div className="card-surface group relative rounded-xl p-8 transition-all duration-300">
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-zinc-800/50 rounded-lg border border-zinc-700/50 group-hover:bg-zinc-800/70 transition-colors duration-300 flex-shrink-0">
-              <GraduationCap size={18} className="text-zinc-400" />
+            <div className="p-2 bg-foreground/5 rounded-lg border border-border group-hover:bg-foreground/10 transition-colors duration-300 flex-shrink-0">
+              <GraduationCap size={18} className="text-foreground/60" />
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-medium text-white">{degree.university}</h3>
-              <p className="text-zinc-300 font-medium">{degree.degree}</p>
+              <h3 className="text-lg font-medium text-foreground font-display">{degree.university}</h3>
+              <p className="text-foreground/80 font-medium">{degree.degree}</p>
               {degree.track && (
-                <p className="text-zinc-500 text-sm italic">{degree.track}</p>
+                <p className="text-muted-foreground text-sm italic">{degree.track}</p>
               )}
             </div>
           </div>
           <div className="flex flex-col sm:items-end gap-2">
-            <div className="flex items-center gap-2 text-zinc-500 text-sm">
+            <div className="flex items-center gap-2 text-muted-foreground text-sm">
               <Calendar size={14} />
               <span>{degree.date}</span>
             </div>
             {degree.gpa && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
-                <Star size={14} className="text-emerald-400" />
-                <span className="text-emerald-400 font-semibold text-sm">GPA: {degree.gpa}</span>
+              <div className="flex items-center gap-2 px-3 py-1 bg-foreground/10 border border-foreground/20 rounded-full">
+                <Star size={14} className="text-foreground" />
+                <span className="text-foreground font-semibold text-sm">GPA: {degree.gpa}</span>
               </div>
             )}
           </div>
         </div>
 
         {degree.research && (
-          <div className="bg-zinc-800/30 rounded-lg p-4 border border-zinc-700/30">
+          <div className="bg-card rounded-lg p-4 border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <BookOpen size={14} className="text-zinc-500" />
-              <span className="text-zinc-300 text-sm font-medium">Research</span>
+              <BookOpen size={14} className="text-muted-foreground" />
+              <span className="text-foreground/80 text-sm font-medium">Research</span>
             </div>
-            <p className="text-sm text-zinc-400 leading-relaxed">{degree.research.description}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{degree.research.description}</p>
           </div>
         )}
 
         {degree.coursework && (
           <div>
-            <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2">Relevant Coursework</p>
+            <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Relevant Coursework</p>
             <div className="flex flex-wrap gap-2">
               {degree.coursework.map((course) => (
                 <span
                   key={course}
-                  className="px-2 py-1 bg-zinc-800/50 text-zinc-300 text-xs rounded border border-zinc-700/50 transition-all duration-200"
+                  className="px-2 py-1 bg-card text-muted-foreground text-xs rounded border border-border"
                 >
                   {course}
                 </span>
@@ -121,11 +126,11 @@ const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
 
         {degree.involvement && (
           <div>
-            <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2">Involvement & Achievements</p>
+            <p className="text-muted-foreground text-xs uppercase tracking-wider mb-2">Involvement & Achievements</p>
             <ul className="space-y-2">
               {degree.involvement.map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
-                  <ChevronRight size={14} className="text-zinc-600 flex-shrink-0" />
+                <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <ChevronRight size={14} className="text-foreground/20 flex-shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -139,72 +144,102 @@ const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
 
 const CertificationCard = ({ cert, index }: { cert: Certification; index: number }) => {
   return (
-    <div className="flex items-center gap-3 px-4 py-3 bg-zinc-900/50 rounded-lg border border-zinc-800/50 hover:border-amber-500/30 transition-all duration-300">
-      <div className="p-2 bg-amber-500/10 rounded-lg border border-amber-500/20">
-        <span className="text-amber-400">{cert.icon}</span>
+    <div className="card-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300">
+      <div className="p-2 bg-foreground/5 rounded-lg border border-border">
+        <span className="text-foreground/60">{cert.icon}</span>
       </div>
-      <span className="text-zinc-300 text-sm font-medium">{cert.name}</span>
+      <span className="text-foreground/80 text-sm font-medium">{cert.name}</span>
     </div>
   );
 };
 
 const AchievementBadge = ({ achievement, index }: { achievement: Achievement; index: number }) => {
   return (
-    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 rounded-lg border border-zinc-700/50 hover:border-zinc-600/50 transition-all duration-200">
+    <div className="card-surface flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200">
       {achievement.icon}
-      <span className="text-zinc-300 text-sm">{achievement.title}</span>
+      <span className="text-foreground/80 text-sm">{achievement.title}</span>
     </div>
   );
 };
 
 const Education = () => {
-  const { selectedCategories, searchQuery } = useCategory();
-  const isFilterActive = selectedCategories.length > 0 || searchQuery.length > 0;
+  const reduceMotion = useReducedMotion();
+  const headerMotion = revealMotionProps(reduceMotion);
+  const { container: staggerContainer, item: staggerItem } =
+    staggerVariants(reduceMotion);
 
   return (
-    <div className="py-20 bg-zinc-950">
+    <div className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+        <motion.div className="mb-12" {...headerMotion}>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">05 / Education</p>
+          <h2 className="font-display text-4xl md:text-5xl text-foreground">
             Education & Certifications
           </h2>
-          <p className="text-zinc-400 text-base max-w-2xl">
-            Academic background and professional certifications.
-          </p>
-        </div>
+        </motion.div>
 
-        <div className="space-y-6 mb-12">
+        <motion.div
+          className="mb-12 space-y-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+        >
           {degrees.map((degree, index) => (
-            <DegreeCard key={degree.degree} degree={degree} index={index} />
+            <motion.div key={degree.degree} variants={staggerItem}>
+              <DegreeCard degree={degree} index={index} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mt-16">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-amber-500/10 rounded-lg border border-amber-500/20">
-              <Award size={20} className="text-amber-400" />
+          <motion.div
+            className="mb-6 flex items-center gap-3"
+            {...revealMotionProps(reduceMotion)}
+          >
+            <div className="rounded-lg border border-border bg-foreground/5 p-2">
+              <Award size={20} className="text-foreground/60" />
             </div>
-            <h2 className="text-2xl font-semibold text-white">Certifications</h2>
-          </div>
+            <h2 className="font-display text-2xl text-foreground">Certifications</h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+          <motion.div
+            className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+          >
             {certifications.map((cert, index) => (
-              <CertificationCard key={cert.name} cert={cert} index={index} />
+              <motion.div key={cert.name} variants={staggerItem}>
+                <CertificationCard cert={cert} index={index} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
-              <Trophy size={20} className="text-yellow-400" />
+          <motion.div
+            className="mb-6 flex items-center gap-3"
+            {...revealMotionProps(reduceMotion)}
+          >
+            <div className="rounded-lg border border-border bg-foreground/5 p-2">
+              <Trophy size={20} className="text-foreground/60" />
             </div>
-            <h2 className="text-2xl font-semibold text-white">Achievements</h2>
-          </div>
+            <h2 className="font-display text-2xl text-foreground">Achievements</h2>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-3">
+          <motion.div
+            className="flex flex-wrap gap-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+          >
             {achievements.map((achievement, index) => (
-              <AchievementBadge key={achievement.title} achievement={achievement} index={index} />
+              <motion.div key={achievement.title} variants={staggerItem}>
+                <AchievementBadge achievement={achievement} index={index} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

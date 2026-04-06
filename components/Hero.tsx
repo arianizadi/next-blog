@@ -1,102 +1,82 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FileText } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import ScrollIndicator from "./ScrollIndicator";
 import { siteConfig } from "@/app/config/site";
+import { staggerVariants } from "@/lib/motion";
+
+const HERO_VIDEO_SRC =
+  "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/bosch.webm";
 
 const Hero = () => {
+  const reduceMotion = useReducedMotion();
+  const { container: staggerContainer, item: staggerItem } =
+    staggerVariants(reduceMotion);
+
   return (
-    <div className="relative h-screen w-full overflow-hidden">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 min-h-full min-w-full object-cover"
-      >
-        <source
-          src="https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/bosch.webm"
-          type="video/webm"
-        />
-        Your browser does not support the video tag.
-      </video>
-
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-      <div className="relative flex h-full items-center justify-center px-5">
-        <div className="text-center text-white">
-          <div className="flex flex-col md:flex-row justify-center pb-5 md:space-x-5">
-            <DecodeEffect text="Arian" />
-            <DecodeEffect text="Izadi" />
-          </div>
-          <p className="pb-6 text-3xl italic">
-            Systems Engineer & Researcher
-          </p>
-          <div>
-            <p className="pb-6 text-xl flex flex-col">
-              <span className="font-light">
-                M.S. Computer Science @ UNLV
-              </span>
-            </p>
-          </div>
-          <a
-            href={siteConfig.links.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-white/50 bg-white/10 px-5 py-2.5 text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/20 hover:scale-105 active:scale-[0.98]"
+    <div className="relative h-screen min-h-[32rem] w-full overflow-hidden bg-[#0a0a0a]">
+      {/* Background: video (motion OK) or static fallback */}
+      {!reduceMotion ? (
+        <>
+          <video
+            className="absolute left-0 top-0 min-h-full min-w-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden
           >
-            <FileText className="h-5 w-5" />
-            <span>Resume</span>
-          </a>
-        </div>
+            <source src={HERO_VIDEO_SRC} type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(0_0%_10%)_0%,#0a0a0a_70%)]" />
+      )}
+
+      {/* Content: bottom left editorial alignment */}
+      <div className="relative z-10 flex h-full flex-col items-start justify-end px-8 pb-24 md:px-16">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            variants={staggerItem}
+            className="font-display font-extrabold text-display-xl text-foreground pb-4 text-7xl md:text-[9rem] md:leading-[0.92] tracking-tight"
+          >
+            Arian Izadi
+          </motion.h1>
+
+          <motion.p
+            variants={staggerItem}
+            className="pb-8 font-sans text-sm uppercase tracking-[0.3em] text-foreground/40"
+          >
+            Systems Engineer &amp; Researcher
+          </motion.p>
+
+          <motion.div variants={staggerItem}>
+            <motion.a
+              href={siteConfig.links.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 rounded-full border border-foreground/20 px-8 py-3 font-sans text-sm tracking-wide text-foreground/70 transition-colors hover:border-foreground/50 hover:text-foreground"
+              whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            >
+              <FileText className="h-4 w-4" />
+              <span>Resume</span>
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </div>
-      <ScrollIndicator></ScrollIndicator>
+
+      <ScrollIndicator />
     </div>
-  );
-};
-
-interface DecodeEffectProps {
-  text: string;
-}
-
-const DecodeEffect: React.FC<DecodeEffectProps> = ({ text }) => {
-  const [displayText, setDisplayText] = useState("");
-
-  const characters =
-    "AAAAABCDEFGHIIIIIIJKLMNOPQRSTUVWXYZaaaaaaabcddddddddefghiiiiiijklmnnnnnnnopqrrrrrrrstuvwxyzzzzz0123456789!@#$%^&*()        ";
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (displayText !== text) {
-      interval = setInterval(() => {
-        setDisplayText((current) => {
-          const currentArray = current.split("");
-          const finalArray = text.split("");
-          let newText = "";
-
-          for (let i = 0; i < finalArray.length; i++) {
-            if (i < currentArray.length && currentArray[i] === finalArray[i]) {
-              newText += currentArray[i];
-            } else if (i === currentArray.length) {
-              newText += finalArray[i];
-            } else {
-              newText +=
-                characters[Math.floor(Math.random() * characters.length)];
-            }
-          }
-
-          return newText;
-        });
-      }, 50);
-    }
-    return () => clearInterval(interval);
-  }, [displayText, text]);
-
-  return (
-    <h1 className="text-6xl font-bold font-mono">
-      {displayText}
-    </h1>
   );
 };
 

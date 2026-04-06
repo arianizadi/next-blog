@@ -1,8 +1,13 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useInView } from "framer-motion";
+import { motion, useScroll, useInView, useReducedMotion } from "framer-motion";
 import { Terminal, Wifi, Shield, ShoppingBag, Car, GraduationCap, Brain, Zap, Code } from "lucide-react";
+import {
+  defaultViewport,
+  fadeUpTransition,
+  revealMotionProps,
+} from "@/lib/motion";
 
 interface TimelineItemProps {
   age: number;
@@ -16,90 +21,102 @@ interface TimelineItemProps {
 
 const TypewriterText: React.FC<{ text: string; className?: string }> = ({ text, className = "" }) => {
   const ref = useRef<HTMLParagraphElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const reduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (reduceMotion || !isInView) return;
 
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + text[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
-      }, 30); // Typing speed
+      }, 30);
 
       return () => clearTimeout(timeout);
     }
-  }, [isInView, currentIndex, text]);
+  }, [isInView, currentIndex, text, reduceMotion]);
+
+  if (reduceMotion) {
+    return (
+      <p ref={ref} className={className}>
+        {text}
+      </p>
+    );
+  }
 
   return (
     <p ref={ref} className={className}>
       {displayedText}
       {currentIndex < text.length && (
-        <span className="inline-block w-0.5 h-5 bg-emerald-500 ml-1 animate-pulse" />
+        <span className="ml-1 inline-block h-5 w-0.5 animate-pulse bg-foreground" />
       )}
     </p>
   );
 };
 
-const TimelineItem: React.FC<TimelineItemProps> = ({ 
-  age, 
-  year, 
-  title, 
-  description, 
-  icon, 
+const TimelineItem: React.FC<TimelineItemProps> = ({
+  age,
+  year,
+  title,
+  description,
+  icon,
   index,
-  isLast = false 
+  isLast = false
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <div ref={itemRef} className="relative flex items-center justify-center mb-16 md:mb-32">
+    <div ref={itemRef} className="relative mb-16 flex items-center justify-center md:mb-32">
       <div
-        className={`relative flex items-center w-full max-w-5xl ${
+        className={`relative flex w-full max-w-5xl items-center ${
           index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
         }`}
       >
         {/* Content Card */}
-        <div className="flex-1 w-full pl-16 md:pl-0">
+        <div className="w-full flex-1 pl-16 md:pl-0">
           <motion.div
-            whileHover={{ y: -5, transition: { duration: 0.2 } }}
-            className={`relative group bg-zinc-900/40 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-white/10 hover:border-emerald-500/50 transition-all duration-300 shadow-2xl ${
+            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={defaultViewport}
+            transition={fadeUpTransition(reduceMotion)}
+            whileHover={
+              reduceMotion ? undefined : { y: -5, transition: { duration: 0.2 } }
+            }
+            className={`card-surface group relative rounded-2xl p-6 transition-all duration-300 md:p-8 ${
               index % 2 === 0 ? "md:mr-12" : "md:ml-12"
             }`}
           >
-            {/* Ambient Glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/0 via-emerald-500/10 to-emerald-500/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
             <div className="relative z-10">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
                 <div className="relative shrink-0">
-                  <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full" />
-                  <div className="relative p-3 bg-zinc-800/80 rounded-xl text-emerald-400 border border-white/5 group-hover:text-emerald-300 transition-colors">
+                  <div className="relative p-3 bg-card rounded-xl text-foreground/60 border border-border group-hover:text-foreground transition-colors">
                     {icon}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-100 transition-colors">
+                  <h3 className="text-xl md:text-2xl font-display text-foreground group-hover:text-foreground/80 transition-colors">
                     {title}
                   </h3>
                   <div className="flex items-center gap-2 text-sm font-medium">
-                    <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Age {age}</span>
-                    {year && <span className="text-zinc-500">• {year}</span>}
+                    <span className="text-foreground bg-foreground/10 px-2 py-0.5 rounded">Age {age}</span>
+                    {year && <span className="text-muted-foreground">• {year}</span>}
                   </div>
                 </div>
               </div>
-              <p className="text-zinc-400 leading-relaxed text-base md:text-lg">
+              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
                 {description}
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* Timeline dot with pulse */}
+        {/* Timeline dot */}
         <div className="absolute left-8 md:relative md:left-0 transform -translate-x-1/2 md:translate-x-0 md:flex z-20 items-center justify-center w-12">
-          <div className="w-4 h-4 md:w-5 md:h-5 bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)] border-2 md:border-4 border-black" />
+          <div className="w-4 h-4 md:w-5 md:h-5 bg-foreground rounded-full border-2 md:border-4 border-background" />
         </div>
 
         {/* Empty space for desktop layout */}
@@ -111,6 +128,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 
 const Timeline = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
@@ -128,13 +146,13 @@ const Timeline = () => {
     {
       age: 14,
       title: "Reverse Shells",
-      description: "Diving into the world of offensive security, I spent my nights configuring VMS to attack on BackTrack Linux. I successfully executed my first reverse shells, learning how systems talk and how they can be made to listen.",
+      description: "Diving into the world of offensive security, I spent my nights configuring VMs to attack on BackTrack Linux. I successfully executed my first reverse shells, learning how systems talk and how they can be made to listen.",
       icon: <Shield size={24} />,
     },
       {
         age: 15,
         title: "WiFi Cracking",
-        description: "When my father changed the WiFi password, I taught myself to capture the 4 way handshake (using a few deauth packets) and use a dictionary to crack it - just so my brother and I could play games again.",
+        description: "When my father changed the WiFi password, I taught myself to capture the 4 way handshake (using a few deauth packets) and use a dictionary to crack it, just so my brother and I could play games again.",
         icon: <Wifi size={24} />,
       },
     {
@@ -180,25 +198,29 @@ const Timeline = () => {
   ];
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-zinc-950 py-32 overflow-hidden">
+    <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-background py-32">
       {/* Header */}
-      <div className="max-w-6xl mx-auto px-6 mb-20 relative z-10">
-        <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3">
+      <motion.div
+        className="relative z-10 mx-auto mb-20 max-w-6xl px-6"
+        {...revealMotionProps(reduceMotion)}
+      >
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">01 / Journey</p>
+        <h2 className="mb-3 font-display text-4xl md:text-5xl text-foreground">
           My Journey
         </h2>
         <TypewriterText
           text="From a naive kid to a passionate systems engineer and researcher"
-          className="text-base text-zinc-400 max-w-2xl font-light leading-relaxed"
+          className="max-w-2xl text-base font-light leading-relaxed text-muted-foreground"
         />
-      </div>
+      </motion.div>
 
       {/* Main Timeline Body */}
       <div className="relative px-4 max-w-7xl mx-auto">
         {/* The Animated Line */}
-        <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-zinc-800">
-          <motion.div 
+        <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-px bg-border">
+          <motion.div
             style={{ scaleY: pathLength, originY: 0 }}
-            className="absolute inset-0 w-full bg-gradient-to-b from-emerald-500 via-emerald-500/50 to-transparent"
+            className="absolute inset-0 w-full bg-foreground"
           />
         </div>
 
@@ -213,27 +235,29 @@ const Timeline = () => {
       </div>
 
       {/* Conclusion Section */}
-      <div className="text-center mt-32 mb-20 relative z-10">
-        <div className="inline-block relative mb-8">
-          <div className="absolute inset-0 bg-emerald-500/30 blur-3xl rounded-full" />
-          <div className="relative p-6 bg-zinc-900/50 rounded-full border border-emerald-500/30 backdrop-blur-xl">
-            <Zap className="text-emerald-400 w-10 h-10 animate-pulse" />
+      <motion.div
+        className="relative z-10 mx-auto mb-20 mt-32 max-w-2xl px-6 text-center"
+        {...revealMotionProps(reduceMotion)}
+      >
+        <div className="relative mb-8 inline-block">
+          <div className="relative rounded-full border border-border bg-card p-6">
+            <Zap className="h-10 w-10 text-foreground/60" />
           </div>
         </div>
-        
-        <h3 className="text-3xl md:text-4xl font-semibold mb-6 text-white">
+
+        <h3 className="mb-6 text-3xl font-display text-foreground md:text-4xl">
           To be continued...
         </h3>
-        
-        <p className="text-xl text-zinc-400 max-w-2xl mx-auto px-6 font-light leading-relaxed">
-          The same naive curiosity that started with a C# book still drives me today. 
-          Whether it's deep learning research or systems engineering, I'm still that 
+
+        <p className="text-xl font-light leading-relaxed text-muted-foreground">
+          The same naive curiosity that started with a C# book still drives me today.
+          Whether it&apos;s deep learning research or systems engineering, I&apos;m still that
           kid who just wants to see how things work, and make them work better.
         </p>
-      </div>
+      </motion.div>
 
       {/* Bottom fade out */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
     </div>
   );
 };

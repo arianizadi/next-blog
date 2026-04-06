@@ -22,6 +22,16 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        display: ["var(--font-display)", ...fontFamily.sans],
+        mono: ["var(--font-mono)", ...fontFamily.mono],
+      },
+      fontSize: {
+        'display-lg': ['5rem', { lineHeight: '1.05', letterSpacing: '-0.04em' }],
+        'display-xl': ['7rem', { lineHeight: '1', letterSpacing: '-0.05em' }],
+      },
+      letterSpacing: {
+        tighter: '-0.04em',
+        display: '-0.05em',
       },
       colors: {
         border: "hsl(var(--border))",

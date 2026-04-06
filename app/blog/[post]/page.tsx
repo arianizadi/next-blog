@@ -1,6 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { BlogPost } from "@prisma/client";
 import { getPost, getPosts } from "@/app/actions/actions";
+import { BlogArticleHeader } from "@/components/BlogArticleHeader";
 
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeSlug from "rehype-slug";
@@ -56,22 +57,20 @@ export default async function Page({ params }: PageProps) {
     throw new Error("Post not found");
   }
 
+  const dateLabel = postData.date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <article className="max-w-4xl mx-auto px-4">
+    <article className="max-w-4xl mx-auto px-6">
       <div className="dark:prose-invert prose pt-20">
-        <header className="mb-8">
-          <h1 className="mb-2">{postData.title}</h1>
-          <time
-            dateTime={postData.date.toISOString()}
-            className="text-gray-500"
-          >
-            {postData.date.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
-        </header>
+        <BlogArticleHeader
+          title={postData.title}
+          dateLabel={dateLabel}
+          dateISO={postData.date.toISOString()}
+        />
 
         <MDXRemote source={postData.content} options={options} />
 

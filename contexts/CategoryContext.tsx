@@ -154,6 +154,6 @@ export const categoryConfig: Record<Category, { label: string; color: string; de
   all: { label: "All", color: "from-zinc-500 to-zinc-400", description: "Show everything" },
   systems: { label: "Systems Engineering", color: "from-emerald-500 to-green-400", description: "C++, Rust, Embedded, OS, Build Systems" },
   robotics: { label: "Robotics", color: "from-blue-500 to-cyan-400", description: "LiDAR, CV, Autonomous Vehicles, Perception" },
-  data: { label: "Data Science", color: "from-purple-500 to-pink-400", description: "ML, Deep Learning, Pipelines, Analytics" },
+  data: { label: "Data Science", color: "from-cyan-500 to-teal-400", description: "ML, Deep Learning, Pipelines, Analytics" },
   security: { label: "Cybersecurity", color: "from-red-500 to-orange-400", description: "CTF, Reverse Engineering, Security" },
 };
