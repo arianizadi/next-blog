@@ -6,7 +6,6 @@ import { Search, X, ChevronUp, ChevronDown } from "lucide-react";
 
 const CategoryFilter = () => {
   const {
-    clearFilters,
     searchQuery,
     setSearchQuery,
     suggestions,

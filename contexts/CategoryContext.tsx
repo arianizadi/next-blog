@@ -9,7 +9,7 @@ export interface SearchableItem {
   subtitle?: string;
   description?: string;
   technologies?: string[];
-  type: "project" | "experience" | "opensource";
+  type: "project" | "experience" | "opensource" | "tech";
 }
 
 interface CategoryContextType {
@@ -20,7 +20,6 @@ interface CategoryContextType {
   fuzzyResults: FuseResult<SearchableItem>[];
   setSearchableItems: React.Dispatch<React.SetStateAction<SearchableItem[]>>;
   currentMatchIndex: number;
-  setCurrentMatchIndex: (index: number) => void;
   nextMatch: () => void;
   prevMatch: () => void;
   totalMatches: number;
@@ -105,7 +104,6 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
         fuzzyResults,
         setSearchableItems,
         currentMatchIndex,
-        setCurrentMatchIndex,
         nextMatch,
         prevMatch,
         totalMatches,

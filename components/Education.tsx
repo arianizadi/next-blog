@@ -67,7 +67,7 @@ const achievements: Achievement[] = [
   { title: "President of Layer Zero", icon: <Award size={16} className="text-foreground/60" /> }
 ];
 
-const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
+const DegreeCard = ({ degree }: { degree: Degree }) => {
   return (
     <div className="card-surface group relative rounded-xl p-8 transition-all duration-300">
       <div className="space-y-4">
@@ -142,7 +142,7 @@ const DegreeCard = ({ degree, index }: { degree: Degree; index: number }) => {
   );
 };
 
-const CertificationCard = ({ cert, index }: { cert: Certification; index: number }) => {
+const CertificationCard = ({ cert }: { cert: Certification }) => {
   return (
     <div className="card-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300">
       <div className="p-2 bg-foreground/5 rounded-lg border border-border">
@@ -153,7 +153,7 @@ const CertificationCard = ({ cert, index }: { cert: Certification; index: number
   );
 };
 
-const AchievementBadge = ({ achievement, index }: { achievement: Achievement; index: number }) => {
+const AchievementBadge = ({ achievement }: { achievement: Achievement }) => {
   return (
     <div className="card-surface flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200">
       {achievement.icon}
@@ -187,7 +187,7 @@ const Education = () => {
         >
           {degrees.map((degree, index) => (
             <motion.div key={degree.degree} variants={staggerItem}>
-              <DegreeCard degree={degree} index={index} />
+              <DegreeCard degree={degree} />
             </motion.div>
           ))}
         </motion.div>
@@ -212,7 +212,7 @@ const Education = () => {
           >
             {certifications.map((cert, index) => (
               <motion.div key={cert.name} variants={staggerItem}>
-                <CertificationCard cert={cert} index={index} />
+                <CertificationCard cert={cert} />
               </motion.div>
             ))}
           </motion.div>
@@ -236,7 +236,7 @@ const Education = () => {
           >
             {achievements.map((achievement, index) => (
               <motion.div key={achievement.title} variants={staggerItem}>
-                <AchievementBadge achievement={achievement} index={index} />
+                <AchievementBadge achievement={achievement} />
               </motion.div>
             ))}
           </motion.div>

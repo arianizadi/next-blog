@@ -274,7 +274,7 @@ const CurrentTech = () => {
       title: tech.name,
       description: tech.description,
       subtitle: tech.category,
-      type: "opensource",
+      type: "tech",
     }));
 
     setSearchableItems(prev => {

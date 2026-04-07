@@ -140,7 +140,6 @@ const ProjectCard = ({ project, index, isHighlighted, isFocused }: { project: Pr
 };
 
 const Projects = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const headerMotion = revealMotionProps(reduceMotion);
   const { container: staggerContainer, item: staggerItem } =
@@ -316,7 +315,7 @@ const Projects = () => {
   });
 
   return (
-    <div ref={containerRef} className="py-20 bg-background">
+    <div className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div className="mb-12" {...headerMotion}>
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">02 / Projects</p>
