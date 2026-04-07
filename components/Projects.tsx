@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
+import { useCategory, SearchableItem } from "@/contexts/CategoryContext";
 import {
   defaultViewport,
   revealMotionProps,
@@ -22,7 +22,6 @@ interface Project {
   liveUrl?: string;
   status: "In Progress" | "Completed" | "Planning";
   year: string;
-  categories: Category[];
 }
 
 const statusColor: Record<string, string> = {
@@ -75,7 +74,7 @@ const ProjectCard = ({ project, index, isHighlighted, isFocused }: { project: Pr
           <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 group-hover:hidden group-focus-within:hidden">
             {project.description}
           </p>
-          <p className="hidden max-h-48 overflow-y-auto overscroll-contain text-pretty text-muted-foreground text-sm leading-relaxed group-hover:block group-focus-within:block">
+          <p className="hidden text-pretty text-muted-foreground text-sm leading-relaxed group-hover:block group-focus-within:block">
             {project.longDescription}
           </p>
         </div>
@@ -146,7 +145,7 @@ const Projects = () => {
   const headerMotion = revealMotionProps(reduceMotion);
   const { container: staggerContainer, item: staggerItem } =
     staggerVariants(reduceMotion);
-  const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
+  const { searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   const projects: Project[] = [
     {
@@ -159,7 +158,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/mmsegmentation",
       status: "In Progress",
       year: "2025",
-      categories: ["data", "robotics"] as Category[],
     },
     {
       id: 11,
@@ -171,7 +169,6 @@ const Projects = () => {
       liveUrl: "https://inference-checker.vercel.app",
       status: "Completed",
       year: "2025",
-      categories: ["data", "robotics"] as Category[],
     },
     {
       id: 12,
@@ -194,7 +191,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/opensource-cal",
       status: "In Progress",
       year: "2026",
-      categories: ["data"] as Category[],
     },
     {
       id: 8,
@@ -206,7 +202,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/rustos",
       status: "In Progress",
       year: "2025",
-      categories: ["systems"] as Category[],
     },
     {
       id: 10,
@@ -218,7 +213,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/sealcrypt",
       status: "Completed",
       year: "2024",
-      categories: ["systems", "security"] as Category[],
     },
     {
       id: 3,
@@ -230,7 +224,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/pointclouds_livox",
       status: "Completed",
       year: "2024",
-      categories: ["systems", "robotics"] as Category[],
     },
     {
       id: 2,
@@ -242,7 +235,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/rust-parser-wcet",
       status: "Completed",
       year: "2025",
-      categories: ["systems"] as Category[],
     },
     {
       id: 6,
@@ -254,7 +246,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/ReverseEngineering",
       status: "Completed",
       year: "2021",
-      categories: ["security", "systems"] as Category[],
     },
     {
       id: 9,
@@ -266,7 +257,6 @@ const Projects = () => {
       liveUrl: "https://knowledge-mapper.vercel.app",
       status: "Completed",
       year: "2025",
-      categories: ["data"] as Category[],
     },
     {
       id: 4,
@@ -279,7 +269,6 @@ const Projects = () => {
       liveUrl: "https://lazy-wordler.vercel.app",
       status: "Completed",
       year: "2024",
-      categories: ["data"] as Category[],
     },
     {
       id: 5,
@@ -291,7 +280,6 @@ const Projects = () => {
       githubUrl: "https://github.com/arianizadi/protonpasstochrome",
       status: "Completed",
       year: "2024",
-      categories: ["security"] as Category[],
     }
   ];
 
@@ -303,7 +291,6 @@ const Projects = () => {
       description: p.description,
       technologies: p.technologies,
       type: "project",
-      categories: p.categories
     }));
 
     setSearchableItems(prev => {
@@ -313,24 +300,19 @@ const Projects = () => {
   }, [setSearchableItems]);
 
   const filteredProjects = projects.filter((project) => {
-    const isAllSelected = selectedCategories.includes("all");
-    const matchesCategory =
-      isAllSelected ||
-      selectedCategories.some(cat => project.categories.includes(cat));
+    if (!searchQuery) return true;
 
-    if (!searchQuery) return matchesCategory;
-
-    const isFuzzyMatch = fuzzyResults.some(result =>
-      result.item.type === "project" && result.item.id === project.id
+    const isFuzzyMatch = fuzzyResults.some(
+      (result) => result.item.type === "project" && result.item.id === project.id
     );
 
     const searchLower = searchQuery.toLowerCase();
     const matchesExact =
       project.title.toLowerCase().includes(searchLower) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(searchLower)) ||
+      project.technologies.some((tech) => tech.toLowerCase().includes(searchLower)) ||
       project.description.toLowerCase().includes(searchLower);
 
-    return matchesCategory && (isFuzzyMatch || matchesExact);
+    return isFuzzyMatch || matchesExact;
   });
 
   return (
@@ -369,8 +351,8 @@ const Projects = () => {
           </motion.div>
         ) : (
           <div className="py-20 text-center border border-dashed border-border rounded-2xl">
-            <p className="text-muted-foreground text-lg">No projects match your current filters.</p>
-            <p className="text-muted-foreground/60 text-sm mt-2">Try adjusting your search or categories to find what you&apos;re looking for.</p>
+            <p className="text-muted-foreground text-lg">No projects match your search.</p>
+            <p className="text-muted-foreground/60 text-sm mt-2">Try a different search term.</p>
           </div>
         )}
       </div>

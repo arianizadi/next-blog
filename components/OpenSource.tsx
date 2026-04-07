@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { GitPullRequest, ExternalLink, Code, CheckCircle, Circle, AlertCircle, GitFork } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
+import { useCategory, SearchableItem } from "@/contexts/CategoryContext";
 import {
   defaultViewport,
   revealMotionProps,
@@ -19,7 +19,6 @@ interface Contribution {
   prUrl?: string;
   status: "merged" | "open" | "pending" | "forked";
   technologies?: string[];
-  categories: Category[];
 }
 
 const StatusBadge = ({ status }: { status: "merged" | "open" | "pending" | "forked" }) => {
@@ -149,7 +148,6 @@ const contributions: Contribution[] = [
     prUrl: "https://github.com/OctoMap/octomap/pull/430",
     status: "merged",
     technologies: ["C++", "Point Cloud", "3D Mapping"],
-    categories: ["systems", "robotics"] as Category[],
   },
   {
     id: 2,
@@ -160,7 +158,6 @@ const contributions: Contribution[] = [
     prUrl: "https://github.com/cvat-ai/cvat/pull/9063",
     status: "merged",
     technologies: ["TypeScript", "React", "Annotation Tools"],
-    categories: ["data", "robotics"] as Category[],
   },
   {
     id: 3,
@@ -171,7 +168,6 @@ const contributions: Contribution[] = [
     prUrl: "https://github.com/cvat-ai/cvat/pull/9464",
     status: "open",
     technologies: ["TypeScript", "React", "UI/UX"],
-    categories: ["data", "robotics"] as Category[],
   },
   {
     id: 4,
@@ -181,7 +177,6 @@ const contributions: Contribution[] = [
     githubUrl: "https://github.com/arianizadi/mmsegmentation",
     status: "forked",
     technologies: ["Python", "PyTorch", "Computer Vision", "Deep Learning"],
-    categories: ["data", "robotics"] as Category[],
   },
 ];
 
@@ -191,7 +186,7 @@ const OpenSource = () => {
   const headerMotion = revealMotionProps(reduceMotion);
   const { container: staggerContainer, item: staggerItem } =
     staggerVariants(reduceMotion);
-  const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
+  const { searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   // Index contributions for global fuzzy search
   useEffect(() => {
@@ -202,7 +197,6 @@ const OpenSource = () => {
       description: con.description,
       technologies: con.technologies,
       type: "opensource",
-      categories: con.categories
     }));
 
     setSearchableItems(prev => {
@@ -212,15 +206,10 @@ const OpenSource = () => {
   }, [setSearchableItems]);
 
   const filteredContributions = contributions.filter((con) => {
-    const isAllSelected = selectedCategories.includes("all");
-    const matchesCategory =
-      isAllSelected ||
-      selectedCategories.some(cat => con.categories.includes(cat));
+    if (!searchQuery) return true;
 
-    if (!searchQuery) return matchesCategory;
-
-    const isFuzzyMatch = fuzzyResults.some(result =>
-      result.item.type === "opensource" && result.item.id === con.id
+    const isFuzzyMatch = fuzzyResults.some(
+      (result) => result.item.type === "opensource" && result.item.id === con.id
     );
 
     const searchLower = searchQuery.toLowerCase();
@@ -228,9 +217,9 @@ const OpenSource = () => {
       con.project.toLowerCase().includes(searchLower) ||
       con.feature.toLowerCase().includes(searchLower) ||
       con.description.toLowerCase().includes(searchLower) ||
-      (con.technologies && con.technologies.some(tech => tech.toLowerCase().includes(searchLower)));
+      (con.technologies && con.technologies.some((tech) => tech.toLowerCase().includes(searchLower)));
 
-    return matchesCategory && (isFuzzyMatch || matchesExact);
+    return isFuzzyMatch || matchesExact;
   });
 
   return (

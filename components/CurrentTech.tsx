@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
+import { useCategory, SearchableItem } from "@/contexts/CategoryContext";
 import {
   defaultViewport,
   revealMotionProps,
@@ -15,7 +15,6 @@ interface Technology {
   name: string;
   description: string;
   category: string;
-  filterCategories: Category[];
 }
 
 const TechnologyCard = ({
@@ -71,7 +70,7 @@ const CurrentTech = () => {
   const headerMotion = revealMotionProps(reduceMotion);
   const { container: staggerContainer, item: staggerItem } =
     staggerVariants(reduceMotion);
-  const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
+  const { searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   const technologies: Technology[] = [
     {
@@ -79,236 +78,203 @@ const CurrentTech = () => {
       name: "C++",
       description: "Systems programming",
       category: "backend",
-      filterCategories: ["systems", "robotics"] as Category[],
     },
     {
       icon: "https://doc.rust-lang.org/book/img/ferris/does_not_compile.svg",
       name: "Rust",
       description: "Systems programming",
       category: "backend",
-      filterCategories: ["systems"] as Category[],
     },
     {
       icon: "https://www.gnu.org/software/gdb/images/archer.svg",
       name: "GDB",
       description: "Debugger",
       category: "backend",
-      filterCategories: ["systems"] as Category[],
     },
     {
       icon: "https://img.icons8.com/color/96/assembly.png",
       name: "Assembly",
       description: "Low level programming",
       category: "backend",
-      filterCategories: ["systems", "security"] as Category[],
     },
     {
       icon: "https://llvm.org/img/LLVM-Logo-Derivative-1.png",
       name: "LLVM",
       description: "Compiler infrastructure",
       category: "backend",
-      filterCategories: ["systems"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/cmake.webp",
       name: "CMake",
       description: "Build system",
       category: "tools",
-      filterCategories: ["systems"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
       name: "GitHub Actions",
       description: "CI/CD",
       category: "tools",
-      filterCategories: ["systems", "data"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
       name: "Docker",
       description: "Containerization",
       category: "tools",
-      filterCategories: ["systems", "data"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg",
       name: "Linux",
       description: "Operating system",
       category: "tools",
-      filterCategories: ["systems", "security"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/ida.webp",
       name: "IDA Pro",
       description: "Disassembler",
       category: "security",
-      filterCategories: ["security"] as Category[],
     },
     {
       icon: "https://upload.wikimedia.org/wikipedia/commons/f/f6/Ghidra_logo.svg",
       name: "Ghidra",
       description: "Reverse engineering",
       category: "security",
-      filterCategories: ["security"] as Category[],
     },
     {
       icon: "https://images.icon-icons.com/3053/PNG/512/burp_suite_macos_bigsur_icon_190319.png",
       name: "Burp Suite",
       description: "Web security testing",
       category: "security",
-      filterCategories: ["security"] as Category[],
     },
     {
       icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Wireshark_icon_new.png/960px-Wireshark_icon_new.png",
       name: "Wireshark",
       description: "Network analyzer",
       category: "security",
-      filterCategories: ["security"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
       name: "Python",
       description: "Programming language",
       category: "data",
-      filterCategories: ["data", "robotics"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg",
       name: "PyTorch",
       description: "ML framework",
       category: "data",
-      filterCategories: ["data", "robotics"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg",
       name: "TensorFlow",
       description: "ML framework",
       category: "data",
-      filterCategories: ["data", "robotics"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apacheairflow/apacheairflow-original.svg",
       name: "Airflow",
       description: "Workflow orchestration",
       category: "data",
-      filterCategories: ["data"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
       name: "SQL",
       description: "Query language",
       category: "data",
-      filterCategories: ["data"] as Category[],
     },
     {
       icon: "https://logos-world.net/wp-content/uploads/2022/11/Snowflake-Symbol.png",
       name: "Snowflake",
       description: "Cloud data platform",
       category: "data",
-      filterCategories: ["data"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
       name: "AWS",
       description: "Cloud platform",
       category: "data",
-      filterCategories: ["data", "systems"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg",
       name: "Google Cloud",
       description: "Cloud platform",
       category: "data",
-      filterCategories: ["data"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/mongo.webp",
       name: "MongoDB",
       description: "Database",
       category: "data",
-      filterCategories: ["data"] as Category[],
     },
     {
       icon: "https://pointclouds.org/assets/images/logo.png",
       name: "PCL",
       description: "Point Cloud Library",
       category: "data",
-      filterCategories: ["robotics", "systems"] as Category[],
     },
     {
       icon: "https://www.livoxtech.com/dps/2d9e037e6d457ef7ffec037f7d16dcf8.png",
       name: "Livox Mid 360",
       description: "LiDAR sensor",
       category: "data",
-      filterCategories: ["robotics", "systems"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg",
       name: "OpenCV",
       description: "Computer vision",
       category: "data",
-      filterCategories: ["robotics", "data"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/typescript.webp",
       name: "TypeScript",
       description: "Premium JS",
       category: "frontend",
-      filterCategories: ["all"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/next-js.webp",
       name: "NextJS",
       description: "React framework",
       category: "frontend",
-      filterCategories: ["all"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/tailwindcss.webp",
       name: "TailwindCSS",
       description: "CSS framework",
       category: "frontend",
-      filterCategories: ["all"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
       name: "Framer Motion",
       description: "Animation library",
       category: "frontend",
-      filterCategories: ["all"] as Category[],
     },
     {
       icon: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/git.webp",
       name: "Git",
       description: "Version control",
       category: "tools",
-      filterCategories: ["systems", "data", "robotics", "security"] as Category[],
     },
     {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anaconda/anaconda-original.svg",
       name: "Conda",
       description: "Package manager",
       category: "tools",
-      filterCategories: ["data", "systems"] as Category[],
     },
     {
       icon: "https://www.proxmox.com/images/proxmox/Proxmox_logo_standard_hex_400px.png",
       name: "Proxmox",
       description: "Virtualization platform",
       category: "tools",
-      filterCategories: ["systems", "security"] as Category[],
     },
   ];
 
   // Index technologies for global fuzzy search
   useEffect(() => {
-    const items: SearchableItem[] = technologies.map(tech => ({
+    const items: SearchableItem[] = technologies.map((tech) => ({
       id: tech.name,
       title: tech.name,
       description: tech.description,
       subtitle: tech.category,
       type: "opensource",
-      categories: tech.filterCategories
     }));
 
     setSearchableItems(prev => {
@@ -331,21 +297,16 @@ const CurrentTech = () => {
   }, {} as Record<string, Technology[]>);
 
   const getTechHighlightStatus = (tech: Technology) => {
-    const isAllSelected = selectedCategories.includes("all");
-    const matchesCategory =
-      isAllSelected ||
-      selectedCategories.some(cat => tech.filterCategories.includes(cat));
+    if (!searchQuery) return true;
 
-    if (!searchQuery) return matchesCategory;
-
-    const isFuzzyMatch = fuzzyResults.some(result => result.item.id === tech.name);
+    const isFuzzyMatch = fuzzyResults.some((result) => result.item.id === tech.name);
 
     const searchLower = searchQuery.toLowerCase();
     const matchesExact =
       tech.name.toLowerCase().includes(searchLower) ||
       tech.description.toLowerCase().includes(searchLower);
 
-    return matchesCategory && (isFuzzyMatch || matchesExact);
+    return isFuzzyMatch || matchesExact;
   };
 
   const getCategoryHighlight = (categoryKey: string): { isHighlighted: boolean } => {
@@ -353,7 +314,7 @@ const CurrentTech = () => {
     const hasMatchingTech = techsInCategory.some(getTechHighlightStatus);
 
     return {
-      isHighlighted: hasMatchingTech || (selectedCategories.length === 0 && !searchQuery),
+      isHighlighted: hasMatchingTech || !searchQuery,
     };
   };
 
@@ -400,9 +361,7 @@ const CurrentTech = () => {
                   {techs.map((tech) => {
                     const isHighlighted = getTechHighlightStatus(tech);
                     const isFocused = searchQuery && fuzzyResults[currentMatchIndex]?.item.id === tech.name;
-                    const highlightRing = isHighlighted && (selectedCategories.length > 0 || searchQuery)
-                      ? "ring-1 ring-foreground/20"
-                      : "";
+                    const highlightRing = isHighlighted && searchQuery ? "ring-1 ring-foreground/20" : "";
 
                     return (
                       <motion.div key={tech.name} variants={staggerItem} className="min-w-0">

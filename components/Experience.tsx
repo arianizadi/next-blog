@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { Building2, Calendar, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useCategory, Category, SearchableItem } from "@/contexts/CategoryContext";
+import { useCategory, SearchableItem } from "@/contexts/CategoryContext";
 import {
   defaultViewport,
   revealMotionProps,
@@ -16,7 +16,6 @@ interface ExperienceItem {
   dates: string;
   technologies: string[];
   bulletPoints: string[];
-  categories: Category[];
 }
 
 const ExperienceCard = ({ experience, index, isHighlighted, isFocused }: { experience: ExperienceItem; index: number; isHighlighted: boolean; isFocused: boolean }) => {
@@ -85,7 +84,7 @@ const Experience = () => {
   const headerMotion = revealMotionProps(reduceMotion);
   const { container: staggerContainer, item: staggerItem } =
     staggerVariants(reduceMotion);
-  const { selectedCategories, searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
+  const { searchQuery, fuzzyResults, setSearchableItems, currentMatchIndex } = useCategory();
 
   const experiences: ExperienceItem[] = [
     {
@@ -98,7 +97,6 @@ const Experience = () => {
         "Metadata & Lineage: Developed OpenMetadata lineage integrations, ensuring consistent data discovery and state tracking across a distributed Snowflake/Trino ecosystem.",
         "Engineering Standards: Developed a SQL Static Analysis (Linting) framework adopted by 80+ engineers, enforcing strict schema and performance standards to prevent production regressions in Snowflake and Trino."
       ],
-      categories: ["data"] as Category[],
     },
     {
       company: "Koshee AI",
@@ -110,7 +108,6 @@ const Experience = () => {
         "Performance Engineering: Created a scalable LiDAR perception pipeline (C++/PCL) to process 100k+ points per frame within strict timing and unified memory constraints.",
         "Build Systems: Engineered a CMake and GitHub Actions build system with distributed caching, slashing build times by 73% (15m to 4m) to accelerate deployment cycles and developer iteration."
       ],
-      categories: ["systems", "robotics"] as Category[],
     },
     {
       company: "Code Central",
@@ -121,7 +118,6 @@ const Experience = () => {
         "Security: Enhanced data protection for a Learning Management System (LMS) by designing security measures using PHP and MySQL, including patching over 100 SQL injection vulnerabilities.",
         "SSO Implementation: Implemented Single Sign On solution allowing 200+ students to access material using school accounts on Clever, enabling expansion with Nevada schools."
       ],
-      categories: ["security", "data"] as Category[],
     }
   ];
 
@@ -134,7 +130,6 @@ const Experience = () => {
       description: exp.bulletPoints.join(" "),
       technologies: exp.technologies,
       type: "experience",
-      categories: exp.categories
     }));
 
     setSearchableItems(prev => {
@@ -144,25 +139,20 @@ const Experience = () => {
   }, [setSearchableItems]);
 
   const filteredExperiences = experiences.filter((exp) => {
-    const isAllSelected = selectedCategories.includes("all");
-    const matchesCategory =
-      isAllSelected ||
-      selectedCategories.some(cat => exp.categories.includes(cat));
+    if (!searchQuery) return true;
 
-    if (!searchQuery) return matchesCategory;
-
-    const isFuzzyMatch = fuzzyResults.some(result =>
-      result.item.type === "experience" && result.item.id === exp.company
+    const isFuzzyMatch = fuzzyResults.some(
+      (result) => result.item.type === "experience" && result.item.id === exp.company
     );
 
     const searchLower = searchQuery.toLowerCase();
     const matchesExact =
       exp.company.toLowerCase().includes(searchLower) ||
       exp.role.toLowerCase().includes(searchLower) ||
-      exp.technologies.some(tech => tech.toLowerCase().includes(searchLower)) ||
-      exp.bulletPoints.some(point => point.toLowerCase().includes(searchLower));
+      exp.technologies.some((tech) => tech.toLowerCase().includes(searchLower)) ||
+      exp.bulletPoints.some((point) => point.toLowerCase().includes(searchLower));
 
-    return matchesCategory && (isFuzzyMatch || matchesExact);
+    return isFuzzyMatch || matchesExact;
   });
 
   return (
