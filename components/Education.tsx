@@ -34,7 +34,6 @@ const degrees: Degree[] = [
   {
     university: "University of Nevada, Las Vegas",
     degree: "Master of Science, Computer Science",
-    track: "Part Time / Professional Track",
     gpa: "4.0",
     date: "Expected: Dec 2026",
     coursework: ["Real Time & Embedded Systems", "Cloud Computing", "Advanced Operating Systems", "Network Security"],

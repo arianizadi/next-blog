@@ -48,13 +48,13 @@ const TechnologyCard = ({
       ref={cardRef}
       className={`card-surface flex items-center gap-3 rounded-lg p-4 text-balance transition-all duration-300 ${opacityClass} ${highlightRing} ${focusRing}`}
     >
-      <div className="relative shrink-0 flex items-center justify-center w-10 h-10">
+      <div className="relative h-10 w-10 shrink-0">
         <Image
           src={icon}
           alt={`${name} icon`}
-          width={40}
-          height={40}
-          className="rounded-md"
+          fill
+          sizes="40px"
+          className="object-contain rounded-md"
         />
       </div>
       <div>
