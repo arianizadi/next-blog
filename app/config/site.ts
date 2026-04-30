@@ -5,7 +5,7 @@ export const siteConfig = {
   links: {
     linkedin: "https://www.linkedin.com/in/arianizadi/",
     github: "https://github.com/arianizadi",
-    x: "https://x.com/arianizadi",
+    x: "https://x.com/outkast_1337",
     gitroll: "https://gitroll.io/profile/uxRzURTxojrQpVm5WoMobaqxHVpH2",
     website: "https://ariandev.com/",
     resume: "https://drive.google.com/file/d/12faCyQS27PgWFLjwe98ldmcs36HCPP5j/view?usp=drive_link"
