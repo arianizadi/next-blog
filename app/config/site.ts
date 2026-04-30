@@ -8,7 +8,7 @@ export const siteConfig = {
     x: "https://x.com/arianizadi",
     gitroll: "https://gitroll.io/profile/uxRzURTxojrQpVm5WoMobaqxHVpH2",
     website: "https://ariandev.com/",
-    resume: "https://drive.google.com/file/d/1CMh-kaQc_qV_6ciXu_i66v5lt5DcOx_f/view?usp=sharing"
+    resume: "https://drive.google.com/file/d/12faCyQS27PgWFLjwe98ldmcs36HCPP5j/view?usp=drive_link"
   }
 }
 

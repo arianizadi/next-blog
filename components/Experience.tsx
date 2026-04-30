@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { Building2, Calendar, ChevronRight } from "lucide-react";
+import { Building2, Calendar, ChevronRight, MapPin } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useCategory, SearchableItem } from "@/contexts/CategoryContext";
 import {
@@ -13,6 +13,7 @@ import {
 interface ExperienceItem {
   company: string;
   role: string;
+  location?: string;
   dates: string;
   technologies: string[];
   bulletPoints: string[];
@@ -46,6 +47,12 @@ const ExperienceCard = ({ experience, index, isHighlighted, isFocused }: { exper
             <div>
               <h3 className="text-lg font-medium text-foreground font-display">{experience.company}</h3>
               <p className="text-muted-foreground text-sm">{experience.role}</p>
+              {experience.location && (
+                <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <MapPin size={12} className="text-foreground/30" />
+                  <span>{experience.location}</span>
+                </p>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground text-sm">
@@ -89,12 +96,13 @@ const Experience = () => {
     {
       company: "Credit One Bank",
       role: "Software Engineer",
+      location: "Las Vegas, NV",
       dates: "July 2025 to Present",
-      technologies: ["Airflow", "HUE", "Python", "SQL", "Trino", "Snowflake"],
+      technologies: ["Java", "Spring Boot", "Kafka", "Kubernetes", "Elasticsearch"],
       bulletPoints: [
-        "Distributed Data Infrastructure: Engineered automated ETL pipelines in Apache Airflow, implementing idempotent logic and retry strategies for availability to ensure 99.9% OLA for reliability in our enterprise data operations.",
-        "Metadata & Lineage: Developed OpenMetadata lineage integrations, ensuring consistent data discovery and state tracking across a distributed Snowflake/Trino ecosystem.",
-        "Engineering Standards: Developed a SQL Static Analysis (Linting) framework adopted by 80+ engineers, enforcing strict schema and performance standards to prevent production regressions in Snowflake and Trino."
+        "Develop and maintain Java/Spring Boot microservices that process account and customer events through Kafka-based workflows.",
+        "Implement and test Kafka consumers/producers, error handling, retry logic, and dead-letter queue flows to improve reliability.",
+        "Support integrations with Elasticsearch and relational databases for account search, indexing, and event-driven data synchronization."
       ],
     },
     {
@@ -126,7 +134,7 @@ const Experience = () => {
       id: exp.company,
       title: exp.company,
       subtitle: exp.role,
-      description: exp.bulletPoints.join(" "),
+      description: [exp.location, ...exp.bulletPoints].filter(Boolean).join(" "),
       technologies: exp.technologies,
       type: "experience",
     }));
@@ -148,6 +156,7 @@ const Experience = () => {
     const matchesExact =
       exp.company.toLowerCase().includes(searchLower) ||
       exp.role.toLowerCase().includes(searchLower) ||
+      exp.location?.toLowerCase().includes(searchLower) ||
       exp.technologies.some((tech) => tech.toLowerCase().includes(searchLower)) ||
       exp.bulletPoints.some((point) => point.toLowerCase().includes(searchLower));
 
