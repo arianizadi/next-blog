@@ -22,9 +22,8 @@ export function fadeUpTransition(reducedMotion: boolean | null): Transition {
 }
 
 export function revealMotionProps(reducedMotion: boolean | null) {
-  const instant = !!reducedMotion;
   return {
-    initial: instant ? fadeUpVisible : fadeUpHidden,
+    initial: fadeUpHidden,
     whileInView: fadeUpVisible,
     transition: fadeUpTransition(reducedMotion),
     viewport: defaultViewport,
@@ -66,7 +65,7 @@ export function staggerVariants(reducedMotion: boolean | null): {
         visible: { transition: { duration: 0 } },
       },
       item: {
-        hidden: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0 } },
       },
     };

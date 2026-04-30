@@ -39,7 +39,7 @@ const degrees: Degree[] = [
     coursework: ["Real Time & Embedded Systems", "Cloud Computing", "Advanced Operating Systems", "Network Security"],
     research: {
       title: "Railway Track Segmentation",
-      description: "Semantic segmentation of POV train images to detect mud pumping and track related issues, finetuning HRNET and other models. Added Railseg19 Transfer Learning to MMSEGMENTATION"
+      description: "Semantic segmentation of point-of-view railway imagery for track-condition analysis, including HRNet fine-tuning and RailSem19 transfer-learning work in MMSegmentation."
     },
   },
   {
@@ -68,11 +68,11 @@ const achievements: Achievement[] = [
 
 const DegreeCard = ({ degree }: { degree: Degree }) => {
   return (
-    <div className="card-surface group relative rounded-xl p-8 transition-all duration-300">
+    <div className="card-surface group relative rounded-lg p-8 transition-all duration-300">
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-foreground/5 rounded-lg border border-border group-hover:bg-foreground/10 transition-colors duration-300 flex-shrink-0">
+            <div className="p-2 bg-foreground/5 rounded-md border border-border group-hover:bg-foreground/10 transition-colors duration-300 flex-shrink-0">
               <GraduationCap size={18} className="text-foreground/60" />
             </div>
             <div className="flex-1">
@@ -144,7 +144,7 @@ const DegreeCard = ({ degree }: { degree: Degree }) => {
 const CertificationCard = ({ cert }: { cert: Certification }) => {
   return (
     <div className="card-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300">
-      <div className="p-2 bg-foreground/5 rounded-lg border border-border">
+      <div className="p-2 bg-foreground/5 rounded-md border border-border">
         <span className="text-foreground/60">{cert.icon}</span>
       </div>
       <span className="text-foreground/80 text-sm font-medium">{cert.name}</span>
@@ -171,7 +171,7 @@ const Education = () => {
     <div className="py-20 bg-background">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div className="mb-12" {...headerMotion}>
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">05 / Education</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40 mb-4">04 / Education</p>
           <h2 className="font-display text-4xl md:text-5xl text-foreground">
             Education & Certifications
           </h2>
@@ -184,7 +184,7 @@ const Education = () => {
           whileInView="visible"
           viewport={defaultViewport}
         >
-          {degrees.map((degree, index) => (
+          {degrees.map((degree) => (
             <motion.div key={degree.degree} variants={staggerItem}>
               <DegreeCard degree={degree} />
             </motion.div>
@@ -209,7 +209,7 @@ const Education = () => {
             whileInView="visible"
             viewport={defaultViewport}
           >
-            {certifications.map((cert, index) => (
+            {certifications.map((cert) => (
               <motion.div key={cert.name} variants={staggerItem}>
                 <CertificationCard cert={cert} />
               </motion.div>
@@ -233,7 +233,7 @@ const Education = () => {
             whileInView="visible"
             viewport={defaultViewport}
           >
-            {achievements.map((achievement, index) => (
+            {achievements.map((achievement) => (
               <motion.div key={achievement.title} variants={staggerItem}>
                 <AchievementBadge achievement={achievement} />
               </motion.div>

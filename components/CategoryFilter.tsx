@@ -67,7 +67,7 @@ const CategoryFilter = () => {
                 {searchQuery && (
                   <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                     {totalMatches > 0 && (
-                      <span className="text-[10px] bg-foreground/10 text-foreground border border-foreground/20 px-1.5 py-0.5 rounded font-mono font-bold tracking-tighter">
+                      <span className="text-[10px] bg-foreground/10 text-foreground border border-foreground/20 px-1.5 py-0.5 rounded font-mono font-bold">
                         {currentMatchIndex + 1}/{totalMatches}
                       </span>
                     )}

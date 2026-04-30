@@ -1,6 +1,6 @@
 export const siteConfig = {
   url: "https://ariandev.com/",
-  description: "Systems engineer specializing in real time embedded systems, robotics, and distributed data infrastructure. M.S. Computer Science @ UNLV.",
+  description: "Software engineer focused on reliable backend systems, robotics perception, low-level programming, and security-minded engineering. M.S. Computer Science @ UNLV.",
   author: "Arian Izadi",
   links: {
     linkedin: "https://www.linkedin.com/in/arianizadi/",

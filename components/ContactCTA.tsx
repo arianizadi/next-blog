@@ -1,132 +1,176 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Mail, Linkedin, Github, ArrowUpRight, Code2, FileText } from "lucide-react";
+import {
+  ArrowUpRight,
+  Code2,
+  FileText,
+  Mail,
+} from "lucide-react";
 import { siteConfig } from "@/app/config/site";
-import { defaultViewport, revealMotionProps, staggerVariants } from "@/lib/motion";
+import { Icons } from "@/components/Icons";
+import {
+  defaultViewport,
+  revealMotionProps,
+  staggerVariants,
+} from "@/lib/motion";
 
 const ContactCTA = () => {
   const reduceMotion = useReducedMotion();
   const headerMotion = revealMotionProps(reduceMotion);
-  const { container: linkStagger, item: linkItem } = staggerVariants(reduceMotion);
-  const tapHover = reduceMotion
-    ? {}
-    : { whileHover: { scale: 1.02 }, whileTap: { scale: 0.98 } };
+  const { container: linkStagger, item: linkItem } =
+    staggerVariants(reduceMotion);
+  const tapHover = {
+    whileHover: { y: reduceMotion ? 0 : -2 },
+    whileTap: { scale: reduceMotion ? 1 : 0.98 },
+  };
+
+  const links = [
+    {
+      label: "Email",
+      detail: "izadi2000@gmail.com",
+      href: "mailto:izadi2000@gmail.com",
+      icon: <Mail size={18} />,
+      primary: true,
+    },
+    {
+      label: "Resume",
+      detail: "PDF via Google Drive",
+      href: siteConfig.links.resume,
+      icon: <FileText size={18} />,
+    },
+    {
+      label: "LinkedIn",
+      detail: "Professional profile",
+      href: siteConfig.links.linkedin,
+      icon: <Icons.Linkedin className="h-[18px] w-[18px] fill-current" />,
+    },
+    {
+      label: "GitHub",
+      detail: "Code and PRs",
+      href: siteConfig.links.github,
+      icon: <Icons.Github className="h-[18px] w-[18px] fill-current" />,
+    },
+    {
+      label: "GitRoll",
+      detail: "Contribution profile",
+      href: siteConfig.links.gitroll,
+      icon: <Code2 size={18} />,
+    },
+  ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-background py-40">
-      <div className="relative mx-auto max-w-5xl px-6">
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-2xl bg-card border border-border p-12 md:p-20">
-            <div className="relative z-10 flex flex-col items-start justify-between gap-12 lg:flex-row">
-              <motion.div className="flex-1 space-y-6" {...headerMotion}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">07 / Contact</p>
+    <section
+      id="contact"
+      className="scroll-mt-24 border-t border-border bg-background py-24"
+    >
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-start">
+          <motion.div className="max-w-3xl" {...headerMotion}>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+              07 / Contact
+            </p>
 
-                <h2 className="font-display text-5xl leading-snug tracking-tight text-foreground md:text-7xl">
-                  Let&apos;s build <br />
-                  <span className="inline-block origin-left pb-[0.08em] pl-[0.04em] pr-[0.12em] italic">
-                    something cool
-                  </span>{" "}
-                  together.
-                </h2>
+            <h2 className="font-display text-4xl leading-tight text-foreground md:text-6xl">
+              Let&apos;s talk systems, robotics, or backend work.
+            </h2>
 
-                <p className="max-w-lg text-lg font-light leading-relaxed text-muted-foreground">
-                  I&apos;m seeking opportunities in systems engineering, robotics perception, and high performance development. If you need someone who speaks low level, reach out.
+            <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
+              I&apos;m open to software engineering roles where reliability,
+              low-level reasoning, and product impact matter. Email is the best
+              way to reach me, and my resume is linked here too.
+            </p>
+
+            <div className="mt-10 grid gap-4 border-y border-border py-6 sm:grid-cols-3">
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Based in
                 </p>
-              </motion.div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Las Vegas, NV
+                </p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Focus
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Systems, backend, robotics
+                </p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Resume
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  PDF linked above
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
-              <motion.div
-                className="grid min-w-[280px] grid-cols-1 gap-4 sm:grid-cols-2 lg:flex lg:w-auto lg:flex-col"
-                variants={linkStagger}
-                initial="hidden"
-                whileInView="visible"
-                viewport={defaultViewport}
+          <motion.div
+            className="grid gap-3"
+            variants={linkStagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+          >
+            {links.map((link) => (
+              <motion.a
+                key={link.label}
+                variants={linkItem}
+                href={link.href}
+                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  link.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className={`group flex items-center justify-between rounded-lg border p-4 transition-colors ${
+                  link.primary
+                    ? "border-foreground bg-foreground text-background hover:bg-foreground/90"
+                    : "border-border text-foreground/70 hover:border-foreground/35 hover:text-foreground"
+                }`}
+                {...tapHover}
               >
-                <motion.a
-                  variants={linkItem}
-                  href="mailto:izadi2000@gmail.com"
-                  className="group relative flex items-center justify-between overflow-hidden rounded-xl bg-foreground p-4 font-semibold text-background transition-all duration-300 hover:bg-foreground/90"
-                  {...tapHover}
-                >
-                  <div className="flex items-center gap-3">
-                    <Mail size={18} />
-                    <span>Send Message</span>
-                  </div>
-                  <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </motion.a>
+                <span className="flex min-w-0 items-center gap-3">
+                  <span
+                    className={`rounded-md border p-2 ${
+                      link.primary
+                        ? "border-background/20 bg-background/10"
+                        : "border-border bg-card"
+                    }`}
+                  >
+                    {link.icon}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold">
+                      {link.label}
+                    </span>
+                    <span
+                      className={`block truncate text-xs ${
+                        link.primary
+                          ? "text-background/70"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {link.detail}
+                    </span>
+                  </span>
+                </span>
+                <ArrowUpRight
+                  size={18}
+                  className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
 
-                <motion.a
-                  variants={linkItem}
-                  href={siteConfig.links.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-xl border border-border p-4 text-foreground/50 transition-all duration-300 hover:border-foreground/30 hover:text-foreground"
-                  {...tapHover}
-                >
-                  <div className="flex items-center gap-3">
-                    <Linkedin size={18} />
-                    <span>LinkedIn</span>
-                  </div>
-                  <ArrowUpRight size={18} className="text-foreground/20 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </motion.a>
-
-                <motion.a
-                  variants={linkItem}
-                  href={siteConfig.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-xl border border-border p-4 text-foreground/50 transition-all duration-300 hover:border-foreground/30 hover:text-foreground"
-                  {...tapHover}
-                >
-                  <div className="flex items-center gap-3">
-                    <Github size={18} />
-                    <span>GitHub</span>
-                  </div>
-                  <ArrowUpRight size={18} className="text-foreground/20 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </motion.a>
-
-                <motion.a
-                  variants={linkItem}
-                  href={siteConfig.links.gitroll}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-xl border border-border p-4 text-foreground/50 transition-all duration-300 hover:border-foreground/30 hover:text-foreground"
-                  {...tapHover}
-                >
-                  <div className="flex items-center gap-3">
-                    <Code2 size={18} />
-                    <span>GitRoll</span>
-                  </div>
-                  <ArrowUpRight size={18} className="text-foreground/20 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </motion.a>
-
-                <motion.a
-                  variants={linkItem}
-                  href={siteConfig.links.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-xl border border-border p-4 text-foreground/50 transition-all duration-300 hover:border-foreground/30 hover:text-foreground"
-                  {...tapHover}
-                >
-                  <div className="flex items-center gap-3">
-                    <FileText size={18} />
-                    <span>Resume</span>
-                  </div>
-                  <ArrowUpRight size={18} className="text-foreground/20 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </motion.a>
-              </motion.div>
-            </div>
-
-            {/* Clean Footer */}
-            <div className="mt-12 flex flex-col justify-between gap-4 border-t border-border pt-8 md:flex-row md:items-center">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                Las Vegas, NV
-              </div>
-              <div className="text-xs text-muted-foreground/60">
-                &copy; 2026 Arian Izadi. All rights reserved.
-              </div>
-            </div>
-          </div>
+        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground/70 md:flex-row md:items-center">
+          <span>&copy; 2026 Arian Izadi. All rights reserved.</span>
+          <span>Built with Next.js.</span>
         </div>
       </div>
     </section>

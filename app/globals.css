@@ -32,7 +32,7 @@
     --input: 0 0% 88%;
     --ring: 0 0% 6%;
 
-    --radius: 0.875rem;
+    --radius: 0.5rem;
   }
 
   .dark {
@@ -87,6 +87,11 @@
     @apply bg-background text-foreground;
   }
 
+  :where(a, button, input, textarea, select, [role="button"]):focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+
   ::selection {
     background-color: hsl(0 0% 93% / 0.2);
     color: hsl(0 0% 93%);
@@ -130,6 +135,17 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   @keyframes accordion-down {

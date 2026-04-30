@@ -1,4 +1,4 @@
-export default {
+const nextConfig = {
   async headers() {
     return [
       {
@@ -170,3 +170,5 @@ export default {
     ],
   },
 };
+
+export default nextConfig;

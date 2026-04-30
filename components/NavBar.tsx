@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { siteConfig } from "@/app/config/site";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/Icons";
-import { Menu, X } from "lucide-react";
+import { FileText, Menu, X } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,12 +18,8 @@ import { usePathname } from "next/navigation";
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mobileMenuReady, setMobileMenuReady] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    setMobileMenuReady(true);
-  }, []);
   const { scrollY } = useScroll();
 
   const bgAlpha = useTransform(scrollY, [0, 100], [0.62, 0.88]);
@@ -33,6 +29,7 @@ export function NavBar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/projects", label: "Projects" },
     { href: "/blog", label: "Blog" },
     { href: "/journey", label: "Journey" },
   ];
@@ -59,7 +56,7 @@ export function NavBar() {
         }}
         className={cn(
           "flex items-center justify-between gap-2",
-          "w-full max-w-3xl px-4 py-2.5 md:px-6 md:py-3",
+          "w-full max-w-4xl px-4 py-2.5 md:px-6 md:py-3",
           "rounded-[2.25rem]",
           "border border-white/[0.12]",
           "shadow-[0_12px_40px_-12px_rgba(0,0,0,0.55),inset_0_1px_0_0_rgba(255,255,255,0.08)]",
@@ -69,7 +66,7 @@ export function NavBar() {
         <Link
           href="/"
           prefetch={true}
-          className="whitespace-nowrap font-display text-base font-bold tracking-tight text-foreground transition-colors hover:text-foreground/80 md:text-lg"
+          className="whitespace-nowrap font-display text-base font-bold text-foreground transition-colors hover:text-foreground/80 md:text-lg"
         >
           Arian Izadi
         </Link>
@@ -115,69 +112,81 @@ export function NavBar() {
             ))}
           </nav>
 
+          <a
+            href={siteConfig.links.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 hidden items-center gap-2 rounded-full border border-foreground/15 px-3 py-1.5 text-xs font-semibold text-foreground/70 transition-colors hover:border-foreground/35 hover:text-foreground md:inline-flex"
+          >
+            <FileText className="h-3.5 w-3.5" />
+            Resume
+          </a>
+
           <div className="md:hidden">
-            {mobileMenuReady ? (
-              <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-foreground/40 transition-colors duration-200 hover:bg-foreground/5 hover:text-foreground"
-                    aria-label="Toggle menu"
-                  >
-                    {isOpen ? (
-                      <X className="h-4 w-4" />
-                    ) : (
-                      <Menu className="h-4 w-4" />
-                    )}
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="mt-3 w-52 rounded-3xl border border-white/10 bg-card/95 p-1 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
+            <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-foreground/40 transition-colors duration-200 hover:bg-foreground/5 hover:text-foreground"
+                  aria-label="Toggle menu"
                 >
-                  {navLinks.map((link) => (
-                    <DropdownMenuItem key={link.href} asChild>
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={cn(
-                          "flex items-center gap-2 rounded-xl font-sans transition-colors",
-                          isActive(link.href) ? "text-foreground" : "text-foreground/40"
-                        )}
-                      >
-                        {isActive(link.href) && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
-                        )}
-                        {link.label}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                  <DropdownMenuSeparator className="bg-border" />
-                  {socialLinks.map((link) => (
-                    <DropdownMenuItem key={link.href} asChild>
-                      <Link
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-2.5 rounded-xl text-foreground/40 transition-colors hover:text-foreground"
-                      >
-                        <link.icon className="h-3.5 w-3.5 fill-foreground/40" />
-                        {link.label}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <button
-                type="button"
-                className="flex h-8 w-8 items-center justify-center rounded-full text-foreground/40 transition-colors duration-200 hover:bg-foreground/5 hover:text-foreground"
-                aria-label="Toggle menu"
-                disabled
+                  {isOpen ? (
+                    <X className="h-4 w-4" />
+                  ) : (
+                    <Menu className="h-4 w-4" />
+                  )}
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="end"
+                className="mt-3 w-52 rounded-lg border border-white/10 bg-card/95 p-1 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
               >
-                <Menu className="h-4 w-4" />
-              </button>
-            )}
+                {navLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} asChild>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        "flex items-center gap-2 rounded-md font-sans transition-colors",
+                        isActive(link.href) ? "text-foreground" : "text-foreground/40"
+                      )}
+                    >
+                      {isActive(link.href) && (
+                        <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+                      )}
+                      {link.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator className="bg-border" />
+                <DropdownMenuItem asChild>
+                  <a
+                    href={siteConfig.links.resume}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2.5 rounded-md text-foreground/60 transition-colors hover:text-foreground"
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    Resume
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-border" />
+                {socialLinks.map((link) => (
+                  <DropdownMenuItem key={link.href} asChild>
+                    <Link
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-2.5 rounded-md text-foreground/40 transition-colors hover:text-foreground"
+                    >
+                      <link.icon className="h-3.5 w-3.5 fill-foreground/40" />
+                      {link.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </motion.nav>

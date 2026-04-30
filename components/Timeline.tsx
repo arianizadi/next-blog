@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useInView, useReducedMotion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useReducedMotion } from "framer-motion";
 import { Terminal, Wifi, Shield, ShoppingBag, Car, GraduationCap, Brain, Zap, Code } from "lucide-react";
 import {
   defaultViewport,
@@ -16,46 +16,12 @@ interface TimelineItemProps {
   description: string;
   icon: React.ReactNode;
   index: number;
-  isLast?: boolean;
 }
 
-const TypewriterText: React.FC<{ text: string; className?: string }> = ({ text, className = "" }) => {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const reduceMotion = useReducedMotion();
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (reduceMotion || !isInView) return;
-
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev + text[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }, 30);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [isInView, currentIndex, text, reduceMotion]);
-
-  if (reduceMotion) {
-    return (
-      <p ref={ref} className={className}>
-        {text}
-      </p>
-    );
-  }
-
-  return (
-    <p ref={ref} className={className}>
-      {displayedText}
-      {currentIndex < text.length && (
-        <span className="ml-1 inline-block h-5 w-0.5 animate-pulse bg-foreground" />
-      )}
-    </p>
-  );
-};
+const TypewriterText: React.FC<{ text: string; className?: string }> = ({
+  text,
+  className = "",
+}) => <p className={className}>{text}</p>;
 
 const TimelineItem: React.FC<TimelineItemProps> = ({
   age,
@@ -64,7 +30,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   description,
   icon,
   index,
-  isLast = false
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
@@ -79,14 +44,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         {/* Content Card */}
         <div className="w-full flex-1 pl-16 md:pl-0">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={defaultViewport}
             transition={fadeUpTransition(reduceMotion)}
-            whileHover={
-              reduceMotion ? undefined : { y: -5, transition: { duration: 0.2 } }
-            }
-            className={`card-surface group relative rounded-2xl p-6 transition-all duration-300 md:p-8 ${
+            whileHover={{
+              y: reduceMotion ? 0 : -5,
+              transition: { duration: reduceMotion ? 0 : 0.2 },
+            }}
+            className={`card-surface group relative rounded-lg p-6 transition-all duration-300 md:p-8 ${
               index % 2 === 0 ? "md:mr-12" : "md:ml-12"
             }`}
           >
@@ -103,7 +69,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
                   </h3>
                   <div className="flex items-center gap-2 text-sm font-medium">
                     <span className="text-foreground bg-foreground/10 px-2 py-0.5 rounded">Age {age}</span>
-                    {year && <span className="text-muted-foreground">• {year}</span>}
+                    {year && <span className="text-muted-foreground">/ {year}</span>}
                   </div>
                 </div>
               </div>
@@ -127,12 +93,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
 };
 
 const Timeline = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
+  const { scrollYProgress } = useScroll();
 
   const pathLength = scrollYProgress;
 
@@ -140,65 +102,65 @@ const Timeline = () => {
     {
       age: 12,
       title: "C# Beginnings",
-      description: "My journey into coding began when my father handed me a C# programming manual from a friend. What started as simple curiosity quickly transformed into a lifelong obsession with building and understanding software at its core.",
+      description: "My journey into coding began when my father handed me a C# programming manual from a friend. Curiosity turned into a lasting habit of building software and then digging into how it works underneath.",
       icon: <Terminal size={24} />,
     },
     {
       age: 14,
-      title: "Reverse Shells",
-      description: "Diving into the world of offensive security, I spent my nights configuring VMs to attack on BackTrack Linux. I successfully executed my first reverse shells, learning how systems talk and how they can be made to listen.",
+      title: "Security Labs",
+      description: "I started learning security in isolated virtual machines with BackTrack Linux, using intentionally vulnerable targets to understand networking, shells, and how small configuration mistakes become system risk.",
       icon: <Shield size={24} />,
     },
       {
         age: 15,
-        title: "WiFi Cracking",
-        description: "When my father changed the WiFi password, I taught myself to capture the 4 way handshake (using a few deauth packets) and use a dictionary to crack it, just so my brother and I could play games again.",
+        title: "Wireless Protocols",
+        description: "Home networking problems pushed me to learn how WPA handshakes, packet capture, and password strength work. The useful lesson was not bypassing a network, but understanding why wireless security depends on protocol details and responsible authorization.",
         icon: <Wifi size={24} />,
       },
     {
       age: 17,
-      title: "Plz Don't Watch Me",
-      description: "Back in high school, I got so tired of the school's monitoring software watching everything I did. So, I built my own little program that used a UAC bypass to kill the monitoring app whenever I wanted to play games with friends. When I was done, I'd just restart it like nothing ever happened.",
+      title: "Privilege Boundaries",
+      description: "Endpoint restrictions made me curious about process privileges, Windows internals, and why bypasses are treated seriously. That curiosity eventually moved into CTFs, lab machines, and a clearer respect for authorization and disclosure boundaries.",
       icon: <Zap size={24} />,
     },
       {
         age: 19,
-        title: "I Am Not a Robot",
-        description: "Capitalized on high demand releases by building automation tools for the sneaker and streetwear world. I developed techniques to boost the human score of Gmail accounts, reducing the likelihood of encountering captchas and increasing success rates for limited edition drops.",
+        title: "Automation Systems",
+        description: "High-demand ecommerce releases introduced me to queues, rate limits, anti-abuse systems, browser automation, and distributed coordination. It was a messy but formative way to learn why production systems defend against automation and how resilient workflows are designed.",
         icon: <ShoppingBag size={24} />,
       },
       {
         age: 22,
         year: 2022,
         title: "Autonomous Vehicles",
-        description: "Represented the United States in Romania for an international autonomous vehicle competition hosted by Bosch. It was here that I got introduced to embedded systems, and I went with four guys who became some of my closest computer science friends.",
+        description: "Represented the United States in Romania for an international autonomous vehicle competition hosted by Bosch. That experience introduced me to embedded systems, robotics constraints, and the engineering friendships that shaped my direction.",
         icon: <Car size={24} />,
       },
       {
         age: 24,
         year: 2024,
         title: "Academic Milestone",
-        description: "Earned my B.S. in Computer Science and transitioned into my Master's degree. Won CyberFire CTF (1st Place) and ranked Top 8% nationally in NCL CTF competitions.",
+        description: "Earned my B.S. in Computer Science and transitioned into my Master's degree. Around the same period, I won CyberFire CTF and ranked in the top 8% nationally in NCL CTF competitions.",
         icon: <GraduationCap size={24} />,
       },
       {
         age: 25,
         year: 2025,
         title: "The Researcher & Systems Engineer",
-        description: "Currently pursuing my M.S. at UNLV, specializing in deep learning for semantic segmentation. Serving as President of Layer Zero, UNLV's hacking/CTF club. My work on autonomous vehicles and invaluable mentorship at Koshee.ai sparked my passion for systems programming and applying cutting edge research to real world problems.",
+        description: "Now pursuing my M.S. at UNLV with research in deep learning for semantic segmentation. Work on autonomous vehicles and mentorship at Koshee AI pushed me toward systems programming, robotics perception, and applied research.",
         icon: <Brain size={24} />,
       },
       {
         age: 25,
         year: 2025,
         title: "Open Source & Industry Impact",
-        description: "Made meaningful contributions to open source projects including Octomap (PCD file reading) and CVAT (Z layer controls, point cloud slider). Building tools that help the broader robotics and computer vision community.",
+        description: "Contributed to open source projects including OctoMap for point-cloud file reading and CVAT for annotation tooling. I am now applying the same reliability mindset to backend systems at Credit One Bank.",
         icon: <Code size={24} />,
       },
   ];
 
   return (
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden bg-background py-32">
+    <div className="relative min-h-screen overflow-hidden bg-background py-32">
       {/* Header */}
       <motion.div
         className="relative z-10 mx-auto mb-20 max-w-6xl px-6"
@@ -209,7 +171,7 @@ const Timeline = () => {
           My Journey
         </h2>
         <TypewriterText
-          text="From a naive kid to a passionate systems engineer and researcher"
+          text="From curiosity-driven tinkering to systems engineering, robotics perception, and security-minded software."
           className="max-w-2xl text-base font-light leading-relaxed text-muted-foreground"
         />
       </motion.div>
@@ -229,7 +191,6 @@ const Timeline = () => {
             key={index}
             {...milestone}
             index={index}
-            isLast={index === milestones.length - 1}
           />
         ))}
       </div>
@@ -246,13 +207,13 @@ const Timeline = () => {
         </div>
 
         <h3 className="mb-6 text-3xl font-display text-foreground md:text-4xl">
-          To be continued...
+          To be continued
         </h3>
 
         <p className="text-xl font-light leading-relaxed text-muted-foreground">
-          The same naive curiosity that started with a C# book still drives me today.
-          Whether it&apos;s deep learning research or systems engineering, I&apos;m still that
-          kid who just wants to see how things work, and make them work better.
+          The same curiosity that started with a C# book still drives the work:
+          understand the system, respect the constraints, and build something
+          reliable enough to matter.
         </p>
       </motion.div>
 

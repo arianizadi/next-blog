@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss"
 import { fontFamily } from "tailwindcss/defaultTheme"
+import typography from "@tailwindcss/typography"
+import animate from "tailwindcss-animate"
 
 const config = {
   darkMode: ["class"],
@@ -26,12 +28,8 @@ const config = {
         mono: ["var(--font-mono)", ...fontFamily.mono],
       },
       fontSize: {
-        'display-lg': ['5rem', { lineHeight: '1.05', letterSpacing: '-0.04em' }],
-        'display-xl': ['7rem', { lineHeight: '1', letterSpacing: '-0.05em' }],
-      },
-      letterSpacing: {
-        tighter: '-0.04em',
-        display: '-0.05em',
+        'display-lg': ['5rem', { lineHeight: '1.05', letterSpacing: '0' }],
+        'display-xl': ['7rem', { lineHeight: '1', letterSpacing: '0' }],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -89,7 +87,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
+  plugins: [animate, typography],
 } satisfies Config
 
 export default config

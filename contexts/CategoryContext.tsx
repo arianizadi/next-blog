@@ -32,6 +32,11 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   const [searchableItems, setSearchableItems] = useState<SearchableItem[]>([]);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(-1);
 
+  const updateSearchQuery = (query: string) => {
+    setSearchQuery(query);
+    setCurrentMatchIndex(-1);
+  };
+
   const clearFilters = () => {
     setSearchQuery("");
     setCurrentMatchIndex(-1);
@@ -58,23 +63,25 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   }, [fuse, searchQuery]);
 
   const totalMatches = fuzzyResults.length;
-
-  React.useEffect(() => {
-    if (totalMatches > 0) {
-      setCurrentMatchIndex(0);
-    } else {
-      setCurrentMatchIndex(-1);
-    }
-  }, [totalMatches]);
+  const safeCurrentMatchIndex =
+    totalMatches === 0
+      ? -1
+      : Math.min(Math.max(currentMatchIndex, 0), totalMatches - 1);
 
   const nextMatch = () => {
     if (totalMatches === 0) return;
-    setCurrentMatchIndex((prev) => (prev + 1) % totalMatches);
+    setCurrentMatchIndex((prev) => {
+      const normalized = prev < 0 ? 0 : prev;
+      return (normalized + 1) % totalMatches;
+    });
   };
 
   const prevMatch = () => {
     if (totalMatches === 0) return;
-    setCurrentMatchIndex((prev) => (prev - 1 + totalMatches) % totalMatches);
+    setCurrentMatchIndex((prev) => {
+      if (prev < 0) return totalMatches - 1;
+      return (prev - 1 + totalMatches) % totalMatches;
+    });
   };
 
   const suggestions = useMemo(() => {
@@ -98,12 +105,12 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
     <CategoryContext.Provider
       value={{
         searchQuery,
-        setSearchQuery,
+        setSearchQuery: updateSearchQuery,
         clearFilters,
         suggestions,
         fuzzyResults,
         setSearchableItems,
-        currentMatchIndex,
+        currentMatchIndex: safeCurrentMatchIndex,
         nextMatch,
         prevMatch,
         totalMatches,

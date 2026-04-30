@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Nunito, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "@/app/globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 
+import { siteConfig } from "@/app/config/site";
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavBar } from "@/components/NavBar";
@@ -27,8 +29,38 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arian Izadi | Systems Engineer",
-  description: "Systems engineer specializing in real time embedded systems, robotics, and distributed data infrastructure. M.S. Computer Science @ UNLV.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "Arian Izadi | Systems Engineer",
+    template: "%s | Arian Izadi",
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Arian Izadi",
+    "systems engineer",
+    "software engineer",
+    "robotics perception",
+    "backend engineer",
+    "computer vision",
+  ],
+  authors: [{ name: siteConfig.author, url: siteConfig.url }],
+  creator: siteConfig.author,
+  openGraph: {
+    title: "Arian Izadi | Systems Engineer",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: "Arian Izadi",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Arian Izadi | Systems Engineer",
+    description: siteConfig.description,
+  },
+  alternates: {
+    canonical: siteConfig.url,
+  },
 };
 
 export default function RootLayout({
@@ -61,7 +93,11 @@ export default function RootLayout({
             <Analytics />
           </div>
         </ThemeProvider>
-        <script defer src="https://umami.arianizadi.com/script.js" data-website-id="55e8a407-c2db-4928-a81e-cc207eb1bc47"></script>
+        <Script
+          src="https://umami.arianizadi.com/script.js"
+          strategy="afterInteractive"
+          data-website-id="55e8a407-c2db-4928-a81e-cc207eb1bc47"
+        />
       </body>
     </html>
   );
