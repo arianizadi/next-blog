@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "check": "bun run lint && bun run typecheck && bun run build",
+    "post:vpndad": "bun scripts/upsert-vpndad-post.ts",
     "postinstall": "prisma generate",
     "db:push": "prisma db push"
   },

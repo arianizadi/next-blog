@@ -206,9 +206,9 @@ const OpenSource = () => {
               Open source contributions.
             </h2>
             <p className="mt-5 text-base leading-7 text-muted-foreground md:text-lg">
-              These are changes I contributed to existing robotics, annotation,
-              and segmentation projects where the code had to fit the project
-              around it.
+              These are changes I contributed to existing robotics,
+              networking, and segmentation projects where the code had to fit
+              the project around it.
             </p>
           </div>
           <a

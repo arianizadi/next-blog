@@ -121,6 +121,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "www.americanprogress.org",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "code.visualstudio.com",
         port: "",
         pathname: "/**",

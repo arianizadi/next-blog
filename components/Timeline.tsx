@@ -154,7 +154,7 @@ const Timeline = () => {
         age: 25,
         year: 2025,
         title: "Open Source & Industry Impact",
-        description: "Contributed to open source projects including OctoMap for point-cloud file reading and CVAT for annotation tooling. I am now applying the same reliability mindset to backend systems at Credit One Bank.",
+        description: "Contributed to open source projects including OctoMap for point-cloud file reading and MasterDnsVPN mobile networking. I am now applying the same reliability mindset to backend systems at Credit One Bank.",
         icon: <Code size={24} />,
       },
   ];

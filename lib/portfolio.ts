@@ -60,7 +60,7 @@ export const impactMetrics: ImpactMetric[] = [
   {
     label: "Open Source",
     value: "Merged PRs",
-    detail: "OctoMap point clouds and CVAT annotation tooling",
+    detail: "OctoMap point clouds and MasterDnsVPN mobile networking",
   },
   {
     label: "Research",
@@ -70,6 +70,22 @@ export const impactMetrics: ImpactMetric[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    id: 13,
+    title: "VpnDad",
+    eyebrow: "iOS Packet Tunnel",
+    problem:
+      "MasterDnsVPN is powerful on the server side, but it did not have a practical iOS client for family members who just need a reliable connect button.",
+    contribution:
+      "Built a SwiftUI app with a Network Extension packet tunnel, a Go mobile bridge, JSON profile import/export, diagnostics, and MasterDnsVPN-aware reliability controls.",
+    impact:
+      "Turned a command-line DNS tunnel into a mobile workflow that can run against standard MasterDnsVPN servers while exposing custom profile controls when the server supports them.",
+    image:
+      "https://www.americanprogress.org/wp-content/uploads/sites/2/2026/03/CaseAgainstIranColumn-2264384567.jpg?w=1680",
+    technologies: ["SwiftUI", "NetworkExtension", "Go", "gomobile", "MasterDnsVPN"],
+    githubUrl: "https://github.com/arianizadi/VpnDad",
+    featured: true,
+  },
   {
     id: 1,
     title: "Railway Semantic Segmentation Research",
@@ -282,14 +298,13 @@ export const contributions: Contribution[] = [
   },
   {
     id: 2,
-    project: "CVAT",
-    feature: "Z Layer Controls",
+    project: "MasterDnsVPN",
+    feature: "iOS Mobile Bridge and Reliability Controls",
     description:
-      "Implemented z-layer increment and decrement controls for annotation layers in CVAT.",
-    githubUrl: "https://github.com/cvat-ai/cvat",
-    prUrl: "https://github.com/cvat-ai/cvat/pull/9063",
-    status: "merged",
-    technologies: ["TypeScript", "React", "Annotation Tools"],
+      "Extended a DNS-tunneled proxy stack with a gomobile-friendly bridge, app diagnostics, profile-driven settings, and negotiated reliability experiments for mobile use.",
+    githubUrl: "https://github.com/arianizadi/MasterDnsVPN",
+    status: "forked",
+    technologies: ["Go", "DNS Tunneling", "gomobile", "iOS"],
   },
   {
     id: 4,
