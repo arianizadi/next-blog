@@ -11,9 +11,6 @@ import { cn } from "@/lib/utils"
 import { NavBar } from "@/components/NavBar";
 import { MotionProvider } from "@/components/MotionProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import Preloader from "@/components/Preloader";
-import CustomCursor from "@/components/CustomCursor";
-import NoiseOverlay from "@/components/NoiseOverlay";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -79,9 +76,6 @@ export default function RootLayout({
           <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <MotionProvider>
-          <Preloader />
-          <CustomCursor />
-          <NoiseOverlay />
           <SmoothScroll>
             <div className="relative flex min-h-dvh flex-col bg-background">
               <NavBar />

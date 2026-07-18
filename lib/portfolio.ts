@@ -1,9 +1,3 @@
-export interface ImpactMetric {
-  label: string;
-  value: string;
-  detail: string;
-}
-
 export interface Project {
   id: number;
   title: string;
@@ -45,29 +39,6 @@ export interface TechGroup {
   description: string;
   skills: string[];
 }
-
-export const impactMetrics: ImpactMetric[] = [
-  {
-    label: "Credit One Bank",
-    value: "Software Engineer",
-    detail: "Java, Spring Boot, Kafka, Kubernetes",
-  },
-  {
-    label: "UNLV",
-    value: "M.S. CS, 4.0 GPA",
-    detail: "Real-time systems, security, operating systems",
-  },
-  {
-    label: "Open Source",
-    value: "Merged PRs",
-    detail: "OctoMap point clouds and MasterDnsVPN mobile networking",
-  },
-  {
-    label: "Research",
-    value: "Railway CV",
-    detail: "Semantic segmentation for track condition analysis",
-  },
-];
 
 export const projects: Project[] = [
   {

@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Marquee from "@/components/Marquee";
-import ScrambleText from "@/components/ScrambleText";
 import { siteConfig } from "@/app/config/site";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -18,31 +16,19 @@ const SOCIALS = [
 const Contact = () => {
   return (
     <footer id="contact" className="relative scroll-mt-16 border-t border-border">
-      <Marquee
-        items={[
-          "Open to work",
-          "Systems engineering",
-          "Backend platforms",
-          "Robotics perception",
-          "Security-minded design",
-        ]}
-        className="font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/50"
-      />
-
       <div className="px-6 py-24 md:px-12 md:py-32">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mb-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+          className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
         >
-          <span className="inline-block h-1.5 w-1.5 bg-phosphor" />
-          05 // Transmission
+          05 {"//"} Contact
         </motion.p>
 
         <h2 className="max-w-5xl font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground">
-          <ScrambleText text="Open a channel." />
+          Open a channel.
         </h2>
 
         <motion.a
@@ -68,8 +54,6 @@ const Contact = () => {
             </p>
             <p className="mt-3 text-sm leading-6 text-foreground/70">
               Las Vegas, NV
-              <br />
-              36.1699° N, 115.1398° W
             </p>
           </div>
           <div>
@@ -106,10 +90,9 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 md:flex-row md:items-center">
+        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
           <span>© 2026 Arian Izadi</span>
-          <span>Rendered by the perception stack — Next.js</span>
-          <span className="text-phosphor/60">END OF TRANSMISSION</span>
+          <span>Las Vegas, NV</span>
         </div>
       </div>
     </footer>

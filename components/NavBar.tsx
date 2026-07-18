@@ -15,32 +15,6 @@ const NAV_LINKS = [
   { href: "/#contact", label: "Contact", id: "04" },
 ];
 
-const Clock = () => {
-  const [time, setTime] = useState("");
-  useEffect(() => {
-    const tick = () =>
-      setTime(
-        new Date().toLocaleTimeString("en-US", {
-          hour12: false,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })
-      );
-    const first = requestAnimationFrame(tick);
-    const id = window.setInterval(tick, 1000);
-    return () => {
-      cancelAnimationFrame(first);
-      window.clearInterval(id);
-    };
-  }, []);
-  return (
-    <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/55 lg:inline">
-      {time}
-    </span>
-  );
-};
-
 export function NavBar() {
   const [open, setOpen] = useState(false);
   const [hash, setHash] = useState("");
@@ -120,10 +94,7 @@ export function NavBar() {
             href="/"
             className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping bg-phosphor/60 motion-reduce:animate-none" />
-              <span className="relative inline-flex h-2 w-2 bg-phosphor" />
-            </span>
+            <span className="inline-block h-2 w-2 bg-phosphor" />
             Arian Izadi
           </Link>
 
@@ -149,10 +120,6 @@ export function NavBar() {
           </nav>
 
           <div className="flex items-center gap-5">
-            <Clock />
-            <span className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-phosphor/80 md:flex">
-              SYS.OK
-            </span>
             <a
               href={siteConfig.links.resume}
               target="_blank"

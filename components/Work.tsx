@@ -41,11 +41,9 @@ const ProjectLinks = ({ project }: { project: Project }) => (
 
 const FrameCard = ({
   project,
-  index,
   priority,
 }: {
   project: Project;
-  index: number;
   priority?: boolean;
 }) => (
   <article className="work-pin-card group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
@@ -63,24 +61,14 @@ const FrameCard = ({
         />
       )}
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.25),transparent_40%,rgba(4,7,10,0.55))]" />
-      {/* Frame chrome */}
-      <div aria-hidden className="absolute inset-3 border border-foreground/15">
-        <span className="absolute -left-px -top-px h-3 w-3 border-l border-t border-phosphor/80" />
-        <span className="absolute -right-px -top-px h-3 w-3 border-r border-t border-phosphor/80" />
-        <span className="absolute -bottom-px -left-px h-3 w-3 border-b border-l border-phosphor/80" />
-        <span className="absolute -bottom-px -right-px h-3 w-3 border-b border-r border-phosphor/80" />
-      </div>
       <p className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/70">
-        FRAME_{String(index + 1).padStart(3, "0")} · {project.eyebrow}
-      </p>
-      <p className="absolute bottom-5 right-5 font-mono text-[9px] tracking-[0.22em] text-phosphor/80">
-        CONF 0.9{5 + (index % 4)}
+        {project.eyebrow}
       </p>
     </div>
 
     {/* Analysis */}
     <div className="flex flex-1 flex-col p-6 md:p-8">
-      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground md:text-4xl">
+      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground [overflow-wrap:anywhere] md:text-4xl">
         {project.title}
       </h3>
       <p className="mt-4 hidden text-sm leading-6 text-foreground/60 sm:block">
@@ -156,7 +144,6 @@ const HorizontalGallery = () => {
             <FrameCard
               key={project.id}
               project={project}
-              index={index}
               priority={index === 0}
             />
           ))}
@@ -165,7 +152,7 @@ const HorizontalGallery = () => {
         {/* Progress rail */}
         <div className="work-pin-progress absolute inset-x-6 bottom-8 flex items-center gap-6 md:inset-x-12">
           <p className="font-mono text-[10px] tracking-[0.26em] text-foreground/50">
-            FRAME {String(active + 1).padStart(2, "0")} /{" "}
+            {String(active + 1).padStart(2, "0")} /{" "}
             {String(featured.length).padStart(2, "0")}
           </p>
           <div className="relative h-px flex-1 bg-border">
@@ -174,9 +161,6 @@ const HorizontalGallery = () => {
               className="absolute inset-0 origin-left bg-phosphor"
             />
           </div>
-          <p className="hidden font-mono text-[10px] tracking-[0.26em] text-foreground/50 md:block">
-            SCROLL TO ADVANCE FRAME
-          </p>
         </div>
       </div>
     </section>

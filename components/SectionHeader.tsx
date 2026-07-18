@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ScrambleText from "@/components/ScrambleText";
 import { easeOutExpo } from "@/lib/motion";
 
 type SectionHeaderProps = {
@@ -29,14 +28,13 @@ const SectionHeader = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: easeOutExpo }}
-        className="mb-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+        className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
       >
-        <span className="inline-block h-1.5 w-1.5 bg-phosphor" />
         {index} {"//"} {label}
       </motion.p>
 
       <TitleTag className="font-display text-[clamp(2.6rem,8vw,7rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
-        <ScrambleText text={title} />
+        {title}
       </TitleTag>
 
       {description && (

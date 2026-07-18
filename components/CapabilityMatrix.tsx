@@ -30,12 +30,6 @@ const CapabilityMatrix = () => {
               }}
               className="group relative bg-card p-6 transition-colors hover:bg-background md:p-8"
             >
-              <div className="mb-8 flex items-start justify-between">
-                <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-phosphor/80">
-                  MOD_{String(index + 1).padStart(2, "0")}
-                </p>
-                <span className="h-1.5 w-1.5 bg-foreground/20 transition-colors group-hover:bg-phosphor" />
-              </div>
               <h3 className="font-display text-xl font-black uppercase tracking-tight text-foreground md:text-2xl">
                 {group.title}
               </h3>
@@ -47,24 +41,6 @@ const CapabilityMatrix = () => {
               </p>
             </motion.div>
           ))}
-
-          {/* Filler cell: status readout */}
-          <div className="hidden items-end justify-between bg-card p-8 xl:flex">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/40">
-                SYS.STATUS
-              </p>
-              <p className="mt-3 font-display text-2xl font-black uppercase text-foreground">
-                All modules
-                <br />
-                <span className="text-phosphor">operational</span>
-              </p>
-            </div>
-            <span className="relative flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping bg-phosphor/50 motion-reduce:animate-none" />
-              <span className="relative inline-flex h-3 w-3 bg-phosphor" />
-            </span>
-          </div>
         </div>
       </div>
     </section>

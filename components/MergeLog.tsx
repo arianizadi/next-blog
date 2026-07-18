@@ -39,10 +39,8 @@ const MergeLog = () => {
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[11px] tracking-[0.14em] text-foreground/45">
-                    <span className="mr-2 text-phosphor">*</span>
-                    patch/{String(index + 1).padStart(3, "0")} →{" "}
-                    <span className="text-foreground/80">{c.project}</span>
+                  <p className="font-mono text-[11px] tracking-[0.14em] text-foreground/60">
+                    {c.project}
                   </p>
                   <h3 className="mt-3 font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-2xl">
                     + {c.feature}
@@ -88,15 +86,14 @@ const MergeLog = () => {
             </motion.article>
           ))}
 
-          <div className="flex items-center justify-between p-5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/40 md:p-7">
-            <span>End of log — more on GitHub</span>
+          <div className="flex items-center justify-between p-5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/55 md:p-7">
             <a
               href="https://github.com/arianizadi"
               target="_blank"
               rel="noopener noreferrer"
               className="text-phosphor transition-colors hover:text-foreground"
             >
-              git log --all ↗
+              Full history on GitHub ↗
             </a>
           </div>
         </div>

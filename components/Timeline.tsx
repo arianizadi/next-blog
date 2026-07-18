@@ -7,7 +7,6 @@ import { easeOutExpo } from "@/lib/motion";
 
 interface Milestone {
   stamp: string;
-  process: string;
   title: string;
   description: string;
 }
@@ -15,63 +14,54 @@ interface Milestone {
 const MILESTONES: Milestone[] = [
   {
     stamp: "AGE 12",
-    process: "exec: csharp_primer.exe",
     title: "C# Beginnings",
     description:
       "My journey into coding began when my father handed me a C# programming manual from a friend. Curiosity turned into a lasting habit of building software and then digging into how it works underneath.",
   },
   {
     stamp: "AGE 14",
-    process: "exec: security_labs.sh",
     title: "Security Labs",
     description:
       "I started learning security in isolated virtual machines with BackTrack Linux, using intentionally vulnerable targets to understand networking, shells, and how small configuration mistakes become system risk.",
   },
   {
     stamp: "AGE 15",
-    process: "sniff: wpa_handshake.cap",
     title: "Wireless Protocols",
     description:
       "Home networking problems pushed me to learn how WPA handshakes, packet capture, and password strength work. The useful lesson was not bypassing a network, but understanding why wireless security depends on protocol details and responsible authorization.",
   },
   {
     stamp: "AGE 17",
-    process: "read: windows_internals.pdf",
     title: "Privilege Boundaries",
     description:
       "Endpoint restrictions made me curious about process privileges, Windows internals, and why bypasses are treated seriously. That curiosity eventually moved into CTFs, lab machines, and a clearer respect for authorization and disclosure boundaries.",
   },
   {
     stamp: "AGE 19",
-    process: "scale: automation_fleet",
     title: "Automation Systems",
     description:
       "High-demand ecommerce releases introduced me to queues, rate limits, anti-abuse systems, browser automation, and distributed coordination. It was a messy but formative way to learn why production systems defend against automation and how resilient workflows are designed.",
   },
   {
     stamp: "2022 · AGE 22",
-    process: "deploy: bosch_av_trial",
     title: "Autonomous Vehicles",
     description:
       "Represented the United States in Romania for an international autonomous vehicle competition hosted by Bosch. That experience introduced me to embedded systems, robotics constraints, and the engineering friendships that shaped my direction.",
   },
   {
     stamp: "2024 · AGE 24",
-    process: "complete: bs_computer_science",
     title: "Academic Milestone",
     description:
       "Earned my B.S. in Computer Science and transitioned into my Master's degree. Around the same period, I won CyberFire CTF and ranked in the top 8% nationally in NCL CTF competitions.",
   },
   {
     stamp: "2025 · AGE 25",
-    process: "train: railsem19_seg",
     title: "The Researcher & Systems Engineer",
     description:
       "Now pursuing my M.S. at UNLV with research in deep learning for semantic segmentation. Work on autonomous vehicles and mentorship at Koshee AI pushed me toward systems programming, robotics perception, and applied research.",
   },
   {
     stamp: "2025 · AGE 25",
-    process: "push: upstream_patches",
     title: "Open Source & Industry Impact",
     description:
       "Contributed to open source projects including OctoMap for point-cloud file reading and MasterDnsVPN mobile networking. I am now applying the same reliability mindset to backend systems at Credit One Bank.",
@@ -100,7 +90,6 @@ const LogEntry = ({
 
       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
         [{milestone.stamp}]
-        <span className="ml-3 text-phosphor/70">{milestone.process}</span>
       </p>
       <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
         <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
@@ -133,7 +122,7 @@ const Timeline = () => {
           index="02"
           label="System Boot Log"
           title="Journey"
-          description="Every process leaves a trace. From a borrowed C# manual to robotics perception research — the log, unedited."
+          description="From a borrowed C# manual to robotics perception research — the log, unedited."
         />
 
         <div ref={traceRef} className="relative">
@@ -148,13 +137,13 @@ const Timeline = () => {
           <ul className="space-y-10 md:space-y-14">
             {MILESTONES.map((milestone, index) => (
               <LogEntry
-                key={milestone.process}
+                key={milestone.title}
                 milestone={milestone}
                 index={index}
               />
             ))}
 
-            {/* Process still running */}
+            {/* Still running */}
             <motion.li
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -163,12 +152,10 @@ const Timeline = () => {
               className="relative pl-14 md:pl-24"
             >
               <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 animate-pulse bg-phosphor motion-reduce:animate-none" />
+                <span className="h-1.5 w-1.5 bg-phosphor" />
               </span>
               <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
                 [NOW]
-                <span className="ml-3">process: arian — still running</span>
-                <span className="animate-blink ml-2 inline-block h-3 w-1.5 translate-y-0.5 bg-phosphor" />
               </p>
               <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
                 The same curiosity that started with a C# book still drives the
