@@ -1,8 +1,10 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import Fuse from "fuse.js";
 import { motion, useReducedMotion } from "framer-motion";
-import { defaultViewport, staggerVariants } from "@/lib/motion";
+import { easeOutExpo } from "@/lib/motion";
 
 export type BlogPostSummary = {
   id: string;
@@ -12,52 +14,95 @@ export type BlogPostSummary = {
   tags: string[];
 };
 
+const formatDate = (iso: string) =>
+  new Date(iso)
+    .toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .replaceAll("/", ".");
+
 export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
   const reduceMotion = useReducedMotion();
-  const { container, item } = staggerVariants(reduceMotion);
+  const [query, setQuery] = useState("");
+
+  const fuse = useMemo(
+    () =>
+      new Fuse(posts, {
+        keys: ["title", "description", "tags"],
+        threshold: 0.35,
+        ignoreLocation: true,
+      }),
+    [posts]
+  );
+
+  const visible = query ? fuse.search(query).map((r) => r.item) : posts;
 
   return (
-    <motion.div
-      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={defaultViewport}
-    >
-      {posts.map((post) => (
-        <motion.div key={post.id} variants={item} className="min-w-0">
-          <Link href={`/blog/${post.id}`} className="group block h-full">
-            <div className="card-surface h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1">
-              <div className="flex h-full flex-col">
-                <div className="mb-4">
-                  <h2 className="mb-2 text-xl font-semibold text-foreground transition-colors group-hover:text-foreground/80 font-display">
-                    {post.title}
-                  </h2>
-                  <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                    {post.description}
-                  </p>
-                </div>
+    <div>
+      {/* grep search */}
+      <div className="mb-10 flex items-center gap-3 border border-border bg-card px-4 py-3 focus-within:border-phosphor/50">
+        <span className="font-mono text-sm text-phosphor">&gt;</span>
+        <span className="font-mono text-sm text-foreground/55">grep</span>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="search the log…"
+          aria-label="Search posts"
+          className="w-full bg-transparent font-mono text-sm text-foreground placeholder:text-foreground/30 focus:outline-none"
+        />
+        <span className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-foreground/50">
+          {visible.length}/{posts.length} RECORDS
+        </span>
+      </div>
 
-                <div className="mt-auto border-t border-border pt-4">
-                  <time className="mb-3 block text-xs text-muted-foreground">
-                    {new Date(post.date).toDateString()}
-                  </time>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag, i) => (
-                      <span
-                        key={`${post.id}-${tag}-${i}`}
-                        className="rounded-full bg-foreground/5 border border-border px-2.5 py-1 text-xs font-medium text-foreground/60"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </motion.div>
-      ))}
-    </motion.div>
+      {visible.length === 0 ? (
+        <p className="border border-dashed border-border py-16 text-center font-mono text-sm text-foreground/55">
+          — no matches. the log keeps its secrets.
+        </p>
+      ) : (
+        <ul>
+          {visible.map((post, index) => (
+            <motion.li
+              key={post.id}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{
+                duration: 0.55,
+                delay: reduceMotion ? 0 : Math.min(index * 0.05, 0.3),
+                ease: easeOutExpo,
+              }}
+              className="border-b border-border"
+            >
+              <Link
+                href={`/blog/${post.id}`}
+                className="group flex flex-col gap-2 py-6 transition-colors hover:bg-foreground/[0.03] md:flex-row md:items-baseline md:gap-8 md:py-7"
+              >
+                <span className="shrink-0 font-mono text-[11px] tracking-[0.18em] text-foreground/55">
+                  {formatDate(post.date)}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-3xl">
+                    {post.title}
+                  </span>
+                  <span className="mt-2 line-clamp-2 block max-w-2xl text-sm leading-6 text-muted-foreground">
+                    {post.description}
+                  </span>
+                </span>
+                <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/50 lg:block">
+                  {post.tags.map((t) => `#${t}`).join(" ")}
+                </span>
+                <span className="shrink-0 font-mono text-sm text-foreground/55 transition-all group-hover:translate-x-1 group-hover:text-phosphor">
+                  →
+                </span>
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

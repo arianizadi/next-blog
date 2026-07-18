@@ -23,13 +23,14 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        display: ["var(--font-display)", ...fontFamily.sans],
+        sans: ["var(--font-archivo)", ...fontFamily.sans],
+        display: ["var(--font-archivo)", ...fontFamily.sans],
         mono: ["var(--font-mono)", ...fontFamily.mono],
       },
       fontSize: {
         'display-lg': ['5rem', { lineHeight: '1.05', letterSpacing: '0' }],
         'display-xl': ['7rem', { lineHeight: '1', letterSpacing: '0' }],
+        'display-hero': ['clamp(3.5rem, 13vw, 12rem)', { lineHeight: '0.88', letterSpacing: '-0.01em' }],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -37,6 +38,10 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        phosphor: {
+          DEFAULT: "hsl(var(--phosphor))",
+          dim: "hsl(var(--phosphor-dim))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

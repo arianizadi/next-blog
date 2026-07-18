@@ -2,6 +2,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { BlogPost } from "@prisma/client";
 import { getPost, getPosts } from "@/app/actions/actions";
 import { BlogArticleHeader } from "@/components/BlogArticleHeader";
+import ReadingProgress from "@/components/ReadingProgress";
 
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeSlug from "rehype-slug";
@@ -64,8 +65,9 @@ export default async function Page({ params }: PageProps) {
   });
 
   return (
-    <article className="max-w-4xl mx-auto px-6">
-      <div className="dark:prose-invert prose pt-20">
+    <article className="max-w-3xl mx-auto">
+      <ReadingProgress />
+      <div className="dark:prose-invert prose pt-16 prose-headings:font-display prose-headings:uppercase prose-a:text-phosphor prose-a:decoration-phosphor/40 prose-strong:text-foreground prose-code:text-phosphor/90 prose-img:border prose-img:border-border">
         <BlogArticleHeader
           title={postData.title}
           dateLabel={dateLabel}

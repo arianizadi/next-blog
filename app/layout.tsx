@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Nunito, Plus_Jakarta_Sans } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "@/app/globals.css";
 
@@ -8,23 +8,20 @@ import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/app/config/site";
 import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/theme-provider";
 import { NavBar } from "@/components/NavBar";
-import { CategoryProvider } from "@/contexts/CategoryContext";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import Preloader from "@/components/Preloader";
+import CustomCursor from "@/components/CustomCursor";
+import NoiseOverlay from "@/components/NoiseOverlay";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
-});
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-display",
+  variable: "--font-archivo",
+  axes: ["wdth"],
 });
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   variable: "--font-mono",
 });
 
@@ -69,30 +66,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          plusJakartaSans.variable,
-          nunito.variable,
+          archivo.variable,
           jetbrainsMono.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Preloader />
+        <CustomCursor />
+        <NoiseOverlay />
+        <SmoothScroll>
           <div className="relative flex min-h-dvh flex-col bg-background">
             <NavBar />
-            <main className="flex-1">
-              <CategoryProvider>{children}</CategoryProvider>
-            </main>
+            <main className="flex-1">{children}</main>
             <SpeedInsights />
             <Analytics />
           </div>
-        </ThemeProvider>
+        </SmoothScroll>
         <Script
           src="https://umami.arianizadi.com/script.js"
           strategy="afterInteractive"

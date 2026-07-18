@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { revealMotionProps } from "@/lib/motion";
+import { easeOutExpo } from "@/lib/motion";
 
 type BlogArticleHeaderProps = {
   title: string;
@@ -16,37 +16,34 @@ export function BlogArticleHeader({
   dateISO,
 }: BlogArticleHeaderProps) {
   const reduceMotion = useReducedMotion();
-  const reveal = revealMotionProps(reduceMotion);
 
   return (
-    <motion.div className="mb-8" {...reveal}>
+    <motion.div
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: easeOutExpo }}
+      className="mb-12"
+    >
       <Link
         href="/blog"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm text-foreground/40 no-underline transition-colors hover:text-foreground"
+        className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/55 no-underline transition-colors hover:text-phosphor"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="m15 18-6-6 6-6" />
-        </svg>
-        Back to blog
+        ← /blog
       </Link>
 
       <header>
-        <h1 className="mb-2">{title}</h1>
-        <time dateTime={dateISO} className="text-muted-foreground">
-          {dateLabel}
-        </time>
+        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
+          Log entry ·{" "}
+          <time dateTime={dateISO} className="text-foreground/50">
+            {dateLabel}
+          </time>
+        </p>
+        <h1 className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-foreground md:text-6xl">
+          {title}
+        </h1>
       </header>
+
+      <div className="mt-10 h-px w-full bg-border" />
     </motion.div>
   );
 }

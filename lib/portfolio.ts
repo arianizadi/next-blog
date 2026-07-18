@@ -318,6 +318,42 @@ export const contributions: Contribution[] = [
   },
 ];
 
+export interface Degree {
+  university: string;
+  degree: string;
+  gpa?: string;
+  date: string;
+  highlights: string[];
+}
+
+export const education: Degree[] = [
+  {
+    university: "University of Nevada, Las Vegas",
+    degree: "M.S. Computer Science",
+    gpa: "4.0 GPA",
+    date: "Expected Dec 2026",
+    highlights: [
+      "Real-time & embedded systems",
+      "Advanced operating systems",
+      "Network security",
+      "Railway track segmentation research",
+    ],
+  },
+  {
+    university: "University of Nevada, Las Vegas",
+    degree: "B.S. Computer Science",
+    date: "Jul 2024",
+    highlights: [
+      "CyberFire CTF — 1st place",
+      "NCL CTF — top 8% nationally",
+      "Bosch Future Mobility Challenge",
+      "President of Layer Zero",
+    ],
+  },
+];
+
+export const certifications: string[] = ["AWS Certified Cloud Practitioner"];
+
 export const techGroups: TechGroup[] = [
   {
     id: "systems",
