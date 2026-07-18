@@ -11,7 +11,7 @@ merge log, and a boot-log journey page.
 - **Tailwind CSS 3** with a custom phosphor-on-near-black design token set
 - **framer-motion 12** — scroll-driven galleries, scan reveals, scramble text
 - **Lenis** — smooth scrolling
-- **Prisma + PostgreSQL** — blog storage, MDX rendered via `next-mdx-remote`
+- **Prisma + MongoDB** — blog storage, MDX rendered via `next-mdx-remote`
 - **Archivo** (variable, expanded width axis) + **JetBrains Mono**
 
 ## Map
@@ -50,7 +50,7 @@ bun run dev        # http://localhost:3000
 bun run check      # lint + typecheck + production build
 ```
 
-Blog posts live in Postgres (see `prisma/schema.prisma`); `bun run db:push`
+Blog posts live in MongoDB (see `prisma/schema.prisma`); `bun run db:push`
 syncs the schema and `bun run post:vpndad` seeds a post.
 
 ## Accessibility & motion

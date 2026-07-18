@@ -58,7 +58,7 @@ const CustomCursor = () => {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[200]"
+      className="pointer-events-none fixed left-0 top-0 z-[400]"
       style={{ x: springX, y: springY }}
     >
       {/* Crosshair */}

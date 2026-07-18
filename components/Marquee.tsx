@@ -30,7 +30,7 @@ const Marquee = ({ items, className, separator = "//" }: MarqueeProps) => {
         className
       )}
     >
-      <div className="animate-marquee flex w-max motion-reduce:animate-none">
+      <div className="animate-marquee flex w-max hover:[animation-play-state:paused] focus-within:[animation-play-state:paused] motion-reduce:animate-none">
         {row(false)}
         {row(true)}
       </div>

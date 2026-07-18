@@ -1,13 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
 import { techGroups } from "@/lib/portfolio";
 import { easeOutExpo } from "@/lib/motion";
 
 const CapabilityMatrix = () => {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section className="relative border-t border-border py-24 md:py-32">
       <div className="px-6 md:px-12">
@@ -22,12 +20,12 @@ const CapabilityMatrix = () => {
           {techGroups.map((group, index) => (
             <motion.div
               key={group.id}
-              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.6,
-                delay: reduceMotion ? 0 : index * 0.07,
+                delay: index * 0.07,
                 ease: easeOutExpo,
               }}
               className="group relative bg-card p-6 transition-colors hover:bg-background md:p-8"
@@ -53,7 +51,7 @@ const CapabilityMatrix = () => {
           {/* Filler cell: status readout */}
           <div className="hidden items-end justify-between bg-card p-8 xl:flex">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/40">
                 SYS.STATUS
               </p>
               <p className="mt-3 font-display text-2xl font-black uppercase text-foreground">

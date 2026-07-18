@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   useMotionValueEvent,
@@ -49,7 +48,7 @@ const FrameCard = ({
   index: number;
   priority?: boolean;
 }) => (
-  <article className="group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
+  <article className="work-pin-card group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
     {/* Captured frame */}
     <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border">
       {project.image && (
@@ -57,7 +56,7 @@ const FrameCard = ({
           src={project.image}
           alt=""
           fill
-          sizes="(max-width: 768px) 86vw, 44vw"
+          sizes="(max-width: 768px) 86vw, (max-width: 1024px) 56vw, (max-width: 1280px) 44vw, 40vw"
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
           className="object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
@@ -84,7 +83,13 @@ const FrameCard = ({
       <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground md:text-4xl">
         {project.title}
       </h3>
-      <p className="mt-4 max-w-lg text-sm leading-6 text-muted-foreground">
+      <p className="mt-4 hidden text-sm leading-6 text-foreground/60 sm:block">
+        <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
+          Problem —
+        </span>
+        {project.problem}
+      </p>
+      <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
         {project.contribution}
       </p>
       <p className="mt-3 border-l border-phosphor/50 pl-3 font-mono text-[11px] leading-5 text-phosphor/80">
@@ -102,7 +107,6 @@ const FrameCard = ({
 );
 
 const HorizontalGallery = () => {
-  const reduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [range, setRange] = useState(0);
@@ -135,28 +139,18 @@ const HorizontalGallery = () => {
     };
   }, []);
 
-  if (reduceMotion) {
-    return (
-      <div className="grid gap-6 px-6 md:grid-cols-2 md:px-12">
-        {featured.map((project, index) => (
-          <FrameCard
-            key={project.id}
-            project={project}
-            index={index}
-            priority={index === 0}
-          />
-        ))}
-      </div>
-    );
-  }
-
+  /*
+   * Static fallback for reduced-motion users and short viewports is handled
+   * purely in CSS (see .work-pin-* rules in globals.css), so this tree is
+   * identical on server and client — no hydration divergence.
+   */
   return (
-    <section ref={sectionRef} className="relative h-[380vh]">
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+    <section ref={sectionRef} className="work-pin-section relative h-[380vh]">
+      <div className="work-pin-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <motion.div
           ref={trackRef}
           style={{ x }}
-          className="flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12"
+          className="work-pin-track flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12"
         >
           {featured.map((project, index) => (
             <FrameCard
@@ -169,7 +163,7 @@ const HorizontalGallery = () => {
         </motion.div>
 
         {/* Progress rail */}
-        <div className="absolute inset-x-6 bottom-8 flex items-center gap-6 md:inset-x-12">
+        <div className="work-pin-progress absolute inset-x-6 bottom-8 flex items-center gap-6 md:inset-x-12">
           <p className="font-mono text-[10px] tracking-[0.26em] text-foreground/50">
             FRAME {String(active + 1).padStart(2, "0")} /{" "}
             {String(featured.length).padStart(2, "0")}
@@ -186,6 +180,83 @@ const HorizontalGallery = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const ArchiveRow = ({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) => {
+  const primaryHref = project.liveUrl ?? project.githubUrl;
+
+  return (
+    <li className="group border-b border-border transition-colors hover:bg-foreground/[0.03]">
+      <div className="flex items-center gap-5 py-5 md:gap-8">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50">
+          P.{String(featured.length + index + 1).padStart(2, "0")}
+        </span>
+
+        <div className="min-w-0 flex-1">
+          {primaryHref ? (
+            <a
+              href={primaryHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <span className="block truncate font-display text-lg font-bold uppercase tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-2xl">
+                {project.title}
+              </span>
+              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+                {project.eyebrow}
+              </span>
+            </a>
+          ) : (
+            <>
+              <span className="block truncate font-display text-lg font-bold uppercase tracking-tight text-foreground md:text-2xl">
+                {project.title}
+              </span>
+              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+                {project.eyebrow}
+              </span>
+            </>
+          )}
+        </div>
+
+        <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
+          {project.eyebrow}
+        </span>
+        <span className="hidden w-56 shrink-0 truncate text-right font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/50 lg:block">
+          {project.technologies.slice(0, 3).join(" · ")}
+        </span>
+
+        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/55 transition-colors hover:text-phosphor"
+            >
+              Code ↗
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/55 transition-colors hover:text-phosphor"
+            >
+              Live ↗
+            </a>
+          )}
+        </span>
+      </div>
+    </li>
   );
 };
 
@@ -206,58 +277,17 @@ const ArchiveTable = () => (
     </div>
 
     <ul>
-      {archive.map((project, index) => {
-        const href = project.liveUrl ?? project.githubUrl;
-        const row = (
-          <>
-            <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50">
-              P.{String(featured.length + index + 1).padStart(2, "0")}
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block truncate font-display text-lg font-bold uppercase tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-2xl">
-                {project.title}
-              </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
-                {project.eyebrow}
-              </span>
-            </span>
-            <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
-              {project.eyebrow}
-            </span>
-            <span className="hidden w-64 shrink-0 truncate text-right font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/50 lg:block">
-              {project.technologies.slice(0, 3).join(" · ")}
-            </span>
-            <span className="shrink-0 font-mono text-sm text-foreground/55 transition-all group-hover:translate-x-1 group-hover:text-phosphor">
-              →
-            </span>
-          </>
-        );
-
-        return (
-          <li key={project.id} className="border-b border-border">
-            {href ? (
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-5 py-5 transition-colors hover:bg-foreground/[0.03] md:gap-8"
-              >
-                {row}
-              </a>
-            ) : (
-              <div className="group flex items-center gap-5 py-5 md:gap-8">
-                {row}
-              </div>
-            )}
-          </li>
-        );
-      })}
+      {archive.map((project, index) => (
+        <ArchiveRow key={project.id} project={project} index={index} />
+      ))}
     </ul>
   </div>
 );
 
 const Work = () => (
   <section id="work" className="relative scroll-mt-16 py-24 md:py-32">
+    {/* Legacy anchor alias: old /#projects links still land here */}
+    <span id="projects" aria-hidden className="absolute -top-24" />
     <div className="px-6 md:px-12">
       <SectionHeader
         index="01"

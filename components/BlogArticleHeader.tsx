@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { easeOutExpo } from "@/lib/motion";
 
 type BlogArticleHeaderProps = {
@@ -15,11 +15,9 @@ export function BlogArticleHeader({
   dateLabel,
   dateISO,
 }: BlogArticleHeaderProps) {
-  const reduceMotion = useReducedMotion();
-
   return (
     <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
       className="mb-12"

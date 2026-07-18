@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { siteConfig } from "@/app/config/site";
 import { cn } from "@/lib/utils"
 import { NavBar } from "@/components/NavBar";
+import { MotionProvider } from "@/components/MotionProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import CustomCursor from "@/components/CustomCursor";
@@ -74,17 +75,22 @@ export default function RootLayout({
           jetbrainsMono.variable
         )}
       >
-        <Preloader />
-        <CustomCursor />
-        <NoiseOverlay />
-        <SmoothScroll>
-          <div className="relative flex min-h-dvh flex-col bg-background">
-            <NavBar />
-            <main className="flex-1">{children}</main>
-            <SpeedInsights />
-            <Analytics />
-          </div>
-        </SmoothScroll>
+        <noscript>
+          <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        <MotionProvider>
+          <Preloader />
+          <CustomCursor />
+          <NoiseOverlay />
+          <SmoothScroll>
+            <div className="relative flex min-h-dvh flex-col bg-background">
+              <NavBar />
+              <main className="flex-1">{children}</main>
+              <SpeedInsights />
+              <Analytics />
+            </div>
+          </SmoothScroll>
+        </MotionProvider>
         <Script
           src="https://umami.arianizadi.com/script.js"
           strategy="afterInteractive"

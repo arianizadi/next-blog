@@ -55,7 +55,8 @@ const ScrambleText = ({
   }, [inView, text, speed, once, reduceMotion]);
 
   return (
-    <span ref={ref} className={className} aria-label={text}>
+    <span ref={ref} className={className}>
+      <span className="sr-only">{text}</span>
       <span aria-hidden>{output}</span>
     </span>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useReducedMotion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -85,11 +85,9 @@ const LogEntry = ({
   milestone: Milestone;
   index: number;
 }) => {
-  const reduceMotion = useReducedMotion();
-
   return (
     <motion.li
-      initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
@@ -123,7 +121,6 @@ const LogEntry = ({
 
 const Timeline = () => {
   const traceRef = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: traceRef,
     offset: ["start 0.7", "end 0.65"],
@@ -143,7 +140,7 @@ const Timeline = () => {
           {/* Signal trace */}
           <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
             <motion.div
-              style={reduceMotion ? undefined : { scaleY: scrollYProgress }}
+              style={{ scaleY: scrollYProgress }}
               className="absolute inset-0 origin-top bg-phosphor"
             />
           </div>
@@ -159,7 +156,7 @@ const Timeline = () => {
 
             {/* Process still running */}
             <motion.li
-              initial={reduceMotion ? false : { opacity: 0 }}
+              initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}

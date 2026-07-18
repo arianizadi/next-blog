@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
 import { contributions, type Contribution } from "@/lib/portfolio";
 import { easeOutExpo } from "@/lib/motion";
@@ -13,8 +13,6 @@ const STATUS_STYLE: Record<Contribution["status"], string> = {
 };
 
 const MergeLog = () => {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section className="relative border-t border-border py-24 md:py-32">
       <div className="px-6 md:px-12">
@@ -29,19 +27,19 @@ const MergeLog = () => {
           {contributions.map((c, index) => (
             <motion.article
               key={c.id}
-              initial={reduceMotion ? false : { opacity: 0, x: -24 }}
+              initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.6,
-                delay: reduceMotion ? 0 : index * 0.08,
+                delay: index * 0.08,
                 ease: easeOutExpo,
               }}
               className="group relative border-b border-border p-5 last:border-b-0 hover:bg-foreground/[0.03] md:p-7"
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
-                  <p className="font-mono text-[11px] tracking-[0.14em] text-foreground/60">
+                  <p className="font-mono text-[11px] tracking-[0.14em] text-foreground/45">
                     <span className="mr-2 text-phosphor">*</span>
                     patch/{String(index + 1).padStart(3, "0")} →{" "}
                     <span className="text-foreground/80">{c.project}</span>
@@ -53,7 +51,7 @@ const MergeLog = () => {
                     {c.description}
                   </p>
                   {c.technologies && (
-                    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/55">
+                    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/40">
                       {c.technologies.join(" · ")}
                     </p>
                   )}
@@ -90,7 +88,7 @@ const MergeLog = () => {
             </motion.article>
           ))}
 
-          <div className="flex items-center justify-between p-5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/55 md:p-7">
+          <div className="flex items-center justify-between p-5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/40 md:p-7">
             <span>End of log — more on GitHub</span>
             <a
               href="https://github.com/arianizadi"

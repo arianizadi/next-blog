@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -16,6 +16,7 @@ const Preloader = () => {
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [lineCount, setLineCount] = useState(0);
+  const timersRef = useRef<number[]>([]);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -39,13 +40,21 @@ const Preloader = () => {
     }, 90);
 
     const lineTimer = window.setInterval(() => {
-      setLineCount((prev) => Math.min(prev + 1, BOOT_LINES.length));
+      setLineCount((prev) => {
+        if (prev >= BOOT_LINES.length) {
+          window.clearInterval(lineTimer);
+          return prev;
+        }
+        return prev + 1;
+      });
     }, 260);
+
+    timersRef.current = [progressTimer, lineTimer];
 
     return () => {
       cancelAnimationFrame(show);
-      window.clearInterval(progressTimer);
-      window.clearInterval(lineTimer);
+      timersRef.current.forEach((t) => window.clearInterval(t));
+      timersRef.current = [];
       document.documentElement.style.overflow = "";
     };
   }, [reduceMotion]);
@@ -61,6 +70,8 @@ const Preloader = () => {
   }, [progress]);
 
   const skip = () => {
+    timersRef.current.forEach((t) => window.clearInterval(t));
+    timersRef.current = [];
     sessionStorage.setItem("perception-booted", "1");
     setVisible(false);
     document.documentElement.style.overflow = "";
@@ -74,13 +85,16 @@ const Preloader = () => {
           exit={{ y: "-100%", transition: { duration: 0.7, ease: easeOutExpo } }}
           onClick={skip}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " " || e.key === "Escape") skip();
+            if (e.key === "Enter" || e.key === " " || e.key === "Escape") {
+              e.preventDefault();
+              skip();
+            }
           }}
           role="button"
           tabIndex={0}
           aria-label="Skip intro"
         >
-          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/55">
             <span>arianizadi.com</span>
             <span className="text-phosphor/70">SYS.BOOT</span>
           </div>
@@ -92,7 +106,7 @@ const Preloader = () => {
                 {line}
               </p>
             ))}
-            <p className="mt-4 text-foreground/35">
+            <p className="mt-4 text-foreground/55">
               <span className="mr-3 text-phosphor">&gt;</span>
               CLICK TO SKIP
               <span className="animate-blink ml-2 inline-block h-3.5 w-2 translate-y-0.5 bg-phosphor/80" />

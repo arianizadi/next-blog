@@ -161,6 +161,88 @@
     animation: marquee-x 28s linear infinite;
   }
 
+  /* Route transition (app/template.tsx) — CSS-only, hydration-safe */
+  @keyframes template-scan {
+    0% {
+      transform: translateY(-4px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  .template-scan {
+    animation: template-scan 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes template-rise {
+    from {
+      transform: translateY(14px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .template-rise {
+    animation: template-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .template-rise {
+      animation: none;
+    }
+  }
+
+  /*
+   * Work gallery static fallback: reduced-motion users and short viewports
+   * get a plain column/grid instead of the pinned horizontal scroll.
+   * CSS-driven so server and client markup stay identical.
+   */
+  @media (prefers-reduced-motion: reduce), (max-height: 640px) {
+    .work-pin-section {
+      height: auto !important;
+    }
+    .work-pin-sticky {
+      position: static !important;
+      height: auto !important;
+      overflow: visible !important;
+      padding-bottom: 3rem;
+    }
+    .work-pin-track {
+      transform: none !important;
+      width: 100% !important;
+      max-width: 72rem;
+      margin-inline: auto;
+      flex-direction: column !important;
+      padding-inline: 1.5rem !important;
+      padding-right: 1.5rem !important;
+    }
+    .work-pin-card {
+      width: 100% !important;
+    }
+    .work-pin-progress {
+      display: none !important;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) and (min-width: 768px),
+    (max-height: 640px) and (min-width: 768px) {
+    .work-pin-track {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      padding-inline: 3rem !important;
+      padding-right: 3rem !important;
+    }
+  }
+
   @keyframes blink {
     0%,
     49% {

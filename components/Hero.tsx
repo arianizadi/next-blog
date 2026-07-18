@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 import { siteConfig } from "@/app/config/site";
 import { impactMetrics } from "@/lib/portfolio";
@@ -20,6 +15,9 @@ const Telemetry = () => {
   const [tick, setTick] = useState(0);
 
   useEffect(() => {
+    // Effect-only media check keeps SSR/client markup identical while
+    // leaving reduced-motion users with a static readout.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => setTick((t) => t + 1), 480);
     return () => window.clearInterval(id);
   }, []);
@@ -43,25 +41,21 @@ const Telemetry = () => {
 };
 
 /** Small scanning box that sweeps the frame once before lock-on. */
-const SweepBox = ({ reduceMotion }: { reduceMotion: boolean | null }) => {
-  if (reduceMotion) return null;
-  return (
-    <motion.div
-      aria-hidden
-      className="absolute top-1/4 h-40 w-56 border border-phosphor/50"
-      initial={{ x: "110vw", opacity: 0 }}
-      animate={{ x: "-60vw", opacity: [0, 1, 1, 0] }}
-      transition={{ duration: 2.1, delay: 0.7, ease: "linear" }}
-    >
-      <span className="absolute -top-5 left-0 font-mono text-[9px] tracking-[0.2em] text-phosphor/70">
-        SCANNING…
-      </span>
-    </motion.div>
-  );
-};
+const SweepBox = () => (
+  <motion.div
+    aria-hidden
+    className="absolute top-1/4 h-40 w-56 border border-phosphor/50 motion-reduce:hidden"
+    initial={{ x: "110vw", opacity: 0 }}
+    animate={{ x: "-60vw", opacity: [0, 1, 1, 0] }}
+    transition={{ duration: 2.1, delay: 0.7, ease: "linear" }}
+  >
+    <span className="absolute -top-5 left-0 font-mono text-[9px] tracking-[0.2em] text-phosphor/70">
+      SCANNING…
+    </span>
+  </motion.div>
+);
 
 const Hero = () => {
-  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0.2]);
@@ -83,11 +77,12 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.5)_0%,rgba(4,7,10,0.35)_40%,#04070a_96%)]" />
 
       {/* Scanline sweep */}
-      {!reduceMotion && (
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-          <div className="h-24 w-full animate-[scanline-sweep_7s_linear_infinite] bg-[linear-gradient(180deg,transparent,hsl(var(--phosphor)/0.06),transparent)]" />
-        </div>
-      )}
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
+        aria-hidden
+      >
+        <div className="h-24 w-full animate-[scanline-sweep_7s_linear_infinite] bg-[linear-gradient(180deg,transparent,hsl(var(--phosphor)/0.06),transparent)]" />
+      </div>
 
       {/* HUD chrome */}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-10">
@@ -103,13 +98,13 @@ const Hero = () => {
           REC · CAM_01 — LIVE
         </div>
 
-        <SweepBox reduceMotion={reduceMotion} />
+        <SweepBox />
       </div>
 
       {/* Content */}
       <motion.div
-        style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity }}
-        className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-end px-6 pb-16 pt-32 sm:px-8 md:px-12 lg:px-16"
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-end px-6 pb-16 pt-32 motion-reduce:[transform:none!important] motion-reduce:[opacity:1!important] sm:px-8 md:px-12 lg:px-16"
       >
         <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80 md:text-[11px]">
           Systems · Robotics Perception · Backend
@@ -120,11 +115,7 @@ const Hero = () => {
           <motion.div
             aria-hidden
             className="pointer-events-none absolute -inset-x-4 -inset-y-3 md:-inset-x-8 md:-inset-y-5"
-            initial={
-              reduceMotion
-                ? false
-                : { opacity: 0, scale: 1.5, filter: "blur(2px)" }
-            }
+            initial={{ opacity: 0, scale: 1.5, filter: "blur(2px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ delay: 2.2, duration: 0.55, ease: easeOutExpo }}
           >
@@ -145,9 +136,9 @@ const Hero = () => {
         </div>
 
         <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: reduceMotion ? 0 : 0.5, duration: 0.8, ease: easeOutExpo }}
+          transition={{ delay: 0.5, duration: 0.8, ease: easeOutExpo }}
           className="mt-6 max-w-xl text-base leading-7 text-foreground/70 md:text-lg md:leading-8"
         >
           I build reliable software where production backend systems meet
@@ -155,9 +146,9 @@ const Hero = () => {
         </motion.p>
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: reduceMotion ? 0 : 0.65, duration: 0.8, ease: easeOutExpo }}
+          transition={{ delay: 0.65, duration: 0.8, ease: easeOutExpo }}
           className="mt-8 flex flex-wrap items-center gap-3"
         >
           <a
@@ -184,9 +175,9 @@ const Hero = () => {
 
         {/* Sensor readout strip */}
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: reduceMotion ? 0 : 0.85, duration: 0.9 }}
+          transition={{ delay: 0.85, duration: 0.9 }}
           className="mt-12 grid gap-px border border-border/70 bg-border/70 sm:grid-cols-2 lg:grid-cols-4"
         >
           {impactMetrics.map((metric, index) => (

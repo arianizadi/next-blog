@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -43,8 +43,23 @@ const Clock = () => {
 
 export function NavBar() {
   const [open, setOpen] = useState(false);
+  const [hash, setHash] = useState("");
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const wasOpen = useRef(false);
+
+  // Track the URL hash so in-page links show the correct active section.
+  useEffect(() => {
+    const update = () => setHash(window.location.hash);
+    const first = requestAnimationFrame(update);
+    window.addEventListener("hashchange", update);
+    return () => {
+      cancelAnimationFrame(first);
+      window.removeEventListener("hashchange", update);
+    };
+  }, [pathname]);
 
   // Close the mobile menu on navigation (derived-state reset during render)
   const [lastPath, setLastPath] = useState(pathname);
@@ -53,15 +68,47 @@ export function NavBar() {
     setOpen(false);
   }
 
+  // Scroll lock (native + Lenis) while the menu is open.
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
+    if (open) window.__lenis?.stop();
+    else window.__lenis?.start();
     return () => {
       document.documentElement.style.overflow = "";
+      window.__lenis?.start();
     };
   }, [open]);
 
+  // Escape key, breakpoint close, and initial focus into the menu.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onBreakpoint = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    mq.addEventListener("change", onBreakpoint);
+    const focusFirst = requestAnimationFrame(() =>
+      firstLinkRef.current?.focus()
+    );
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      mq.removeEventListener("change", onBreakpoint);
+      cancelAnimationFrame(focusFirst);
+    };
+  }, [open]);
+
+  // Restore focus to the toggle only after a real open→close cycle.
+  useEffect(() => {
+    if (wasOpen.current && !open) toggleRef.current?.focus();
+    wasOpen.current = open;
+  }, [open]);
+
   const isActive = (href: string) => {
-    if (href.startsWith("/#")) return pathname === "/";
+    if (href.startsWith("/#")) return pathname === "/" && hash === href.slice(1);
     return pathname.startsWith(href);
   };
 
@@ -115,6 +162,7 @@ export function NavBar() {
               Resume
             </a>
             <button
+              ref={toggleRef}
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -161,6 +209,7 @@ export function NavBar() {
                   >
                     <Link
                       href={link.href}
+                      ref={index === 0 ? firstLinkRef : undefined}
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline gap-4 border-b border-border py-4"
                     >

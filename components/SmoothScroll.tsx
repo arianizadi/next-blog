@@ -30,18 +30,33 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     };
     rafId = requestAnimationFrame(raf);
 
-    // Route in-page anchor clicks through Lenis for buttery jumps
+    // Route in-page anchor clicks through Lenis for buttery jumps while
+    // preserving native fragment semantics (history + focus target).
     const onClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
       const anchor = (event.target as HTMLElement).closest<HTMLAnchorElement>(
         'a[href^="#"]'
       );
       if (!anchor) return;
       const id = anchor.getAttribute("href");
       if (!id || id === "#") return;
-      const target = document.querySelector(id);
+      const target = document.querySelector<HTMLElement>(id);
       if (!target) return;
       event.preventDefault();
-      lenis.scrollTo(target as HTMLElement, { offset: -80, duration: 1.4 });
+      lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+      history.pushState(null, "", id);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
     };
     document.addEventListener("click", onClick);
 

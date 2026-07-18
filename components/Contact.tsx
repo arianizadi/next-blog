@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Marquee from "@/components/Marquee";
 import ScrambleText from "@/components/ScrambleText";
 import { siteConfig } from "@/app/config/site";
@@ -16,8 +16,6 @@ const SOCIALS = [
 ];
 
 const Contact = () => {
-  const reduceMotion = useReducedMotion();
-
   return (
     <footer id="contact" className="relative scroll-mt-16 border-t border-border">
       <Marquee
@@ -33,7 +31,7 @@ const Contact = () => {
 
       <div className="px-6 py-24 md:px-12 md:py-32">
         <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
@@ -48,14 +46,14 @@ const Contact = () => {
         </h2>
 
         <motion.a
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: reduceMotion ? 0 : 0.15, ease: easeOutExpo }}
+          transition={{ duration: 0.7, delay: 0.15, ease: easeOutExpo }}
           href={`mailto:${EMAIL}`}
-          className="group mt-10 inline-flex flex-wrap items-baseline gap-x-4 gap-y-2"
+          className="group mt-10 inline-flex max-w-full flex-wrap items-baseline gap-x-4 gap-y-2"
         >
-          <span className="font-display text-[clamp(1.4rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 transition-colors duration-300 group-hover:text-phosphor">
+          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 [overflow-wrap:anywhere] transition-colors duration-300 group-hover:text-phosphor">
             {EMAIL}
           </span>
           <span className="font-mono text-sm text-phosphor transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
