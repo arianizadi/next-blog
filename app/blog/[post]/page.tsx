@@ -67,6 +67,7 @@ export default async function Page({ params }: PageProps) {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 
   return (
