@@ -16,10 +16,13 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (reduceMotion) return;
 
+    const prefersNativeTouchScroll =
+      window.matchMedia("(pointer: coarse)").matches;
+    if (prefersNativeTouchScroll) return;
+
     const lenis = new Lenis({
       lerp: 0.11,
       wheelMultiplier: 1,
-      touchMultiplier: 1.4,
     });
     window.__lenis = lenis;
 

@@ -1,13 +1,4 @@
-"use client";
-
-import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
 import { projects, type Project } from "@/lib/portfolio";
 
@@ -95,51 +86,15 @@ const FrameCard = ({
 );
 
 const HorizontalGallery = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [range, setRange] = useState(0);
-  const [active, setActive] = useState(0);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -range]);
-  const progressScale = useTransform(scrollYProgress, [0, 1], [0.08, 1]);
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setActive(Math.min(featured.length - 1, Math.floor(v * featured.length)));
-  });
-
-  useEffect(() => {
-    const measure = () => {
-      if (trackRef.current) {
-        setRange(
-          Math.max(trackRef.current.scrollWidth - window.innerWidth, 0)
-        );
-      }
-    };
-    const first = requestAnimationFrame(measure);
-    window.addEventListener("resize", measure);
-    return () => {
-      cancelAnimationFrame(first);
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
-
   /*
-   * Static fallback for reduced-motion users and short viewports is handled
-   * purely in CSS (see .work-pin-* rules in globals.css), so this tree is
-   * identical on server and client — no hydration divergence.
+   * The track and progress rail use a named CSS ViewTimeline in globals.css,
+   * keeping the entire gallery off the JavaScript scroll path. Reduced-motion,
+   * short-view, and unsupported-browser fallbacks are CSS-only too.
    */
   return (
-    <section ref={sectionRef} className="work-pin-section relative h-[380vh]">
+    <section className="work-pin-section relative h-[380vh]">
       <div className="work-pin-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <motion.div
-          ref={trackRef}
-          style={{ x }}
-          className="work-pin-track flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12"
-        >
+        <div className="work-pin-track flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12">
           {featured.map((project, index) => (
             <FrameCard
               key={project.id}
@@ -147,19 +102,16 @@ const HorizontalGallery = () => {
               priority={index === 0}
             />
           ))}
-        </motion.div>
+        </div>
 
         {/* Progress rail */}
         <div className="work-pin-progress absolute inset-x-6 bottom-8 flex items-center gap-6 md:inset-x-12">
           <p className="font-mono text-[10px] tracking-[0.26em] text-foreground/50">
-            {String(active + 1).padStart(2, "0")} /{" "}
+            01 —{" "}
             {String(featured.length).padStart(2, "0")}
           </p>
           <div className="relative h-px flex-1 bg-border">
-            <motion.div
-              style={{ scaleX: progressScale }}
-              className="absolute inset-0 origin-left bg-phosphor"
-            />
+            <div className="work-pin-progress-fill absolute inset-0 origin-left bg-phosphor" />
           </div>
         </div>
       </div>
