@@ -191,7 +191,7 @@ const ArchiveRow = ({
               rel="noopener noreferrer"
               className="block"
             >
-              <span className="block truncate font-display text-lg font-bold uppercase tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-2xl">
+              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors [overflow-wrap:anywhere] group-hover:text-phosphor md:truncate md:text-2xl">
                 {project.title}
               </span>
               <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
@@ -200,7 +200,7 @@ const ArchiveRow = ({
             </a>
           ) : (
             <>
-              <span className="block truncate font-display text-lg font-bold uppercase tracking-tight text-foreground md:text-2xl">
+              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground [overflow-wrap:anywhere] md:truncate md:text-2xl">
                 {project.title}
               </span>
               <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
