@@ -97,7 +97,7 @@ const About = () => {
                 <article key={job.company} className="relative">
                   <span
                     aria-hidden
-                    className="absolute -left-[27px] top-1.5 h-2.5 w-2.5 border border-phosphor bg-background"
+                    className="absolute left-[-27px] top-1.5 h-2.5 w-2.5 border border-phosphor bg-background"
                   />
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/60">
                     {job.dates}

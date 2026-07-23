@@ -12,7 +12,11 @@ export async function getPosts() {
 }
 
 export async function getPost(postId: string) {
-  const post = await prisma.blogPost.findUniqueOrThrow({
+  if (!/^[a-f\d]{24}$/i.test(postId)) {
+    return null;
+  }
+
+  const post = await prisma.blogPost.findUnique({
     where: {
       id: postId,
     },

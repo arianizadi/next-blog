@@ -1,4 +1,5 @@
 const nextConfig = {
+  reactCompiler: true,
   async headers() {
     return [
       {

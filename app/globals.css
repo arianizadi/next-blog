@@ -1,6 +1,153 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+  @media (width >= 2400px) {
+    max-width: 2400px;
+  }
+}
+
+@theme {
+  --font-sans:
+    var(--font-archivo), ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-display:
+    var(--font-archivo), ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+
+  --text-display-lg: 5rem;
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: 0;
+  --text-display-xl: 7rem;
+  --text-display-xl--line-height: 1;
+  --text-display-xl--letter-spacing: 0;
+  --text-display-hero: clamp(3.5rem, 13vw, 12rem);
+  --text-display-hero--line-height: 0.88;
+  --text-display-hero--letter-spacing: -0.01em;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-phosphor: hsl(var(--phosphor));
+  --color-phosphor-dim: hsl(var(--phosphor-dim));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility card-surface {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+  &:hover {
+    border-color: hsl(var(--phosphor) / 0.35);
+    box-shadow: 0 16px 48px -12px hsl(210 60% 2% / 0.8);
+  }
+}
+
+@layer components {
+  .article-prose {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .article-prose :where(pre, table, .katex-display) {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-prose table {
+    display: block;
+    width: 100%;
+  }
+
+  .article-prose :where(img, video, svg) {
+    height: auto;
+    max-width: 100%;
+  }
+}
 
 @layer base {
   :root {
@@ -37,18 +184,6 @@
     --phosphor-dim: 183 60% 40%;
 
     --radius: 0.25rem;
-  }
-}
-
-@layer components {
-  .card-surface {
-    background: hsl(var(--card));
-    border: 1px solid hsl(var(--border));
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
-  }
-  .card-surface:hover {
-    border-color: hsl(var(--phosphor) / 0.35);
-    box-shadow: 0 16px 48px -12px hsl(210 60% 2% / 0.8);
   }
 }
 

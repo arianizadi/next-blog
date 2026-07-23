@@ -88,7 +88,7 @@ export function NavBar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[100]">
+      <header className="fixed inset-x-0 top-0 z-100">
         <div className="flex items-center justify-between border-b border-border/60 bg-background/72 px-5 py-3 backdrop-blur-xl md:px-8">
           <Link
             href="/"
@@ -144,7 +144,7 @@ export function NavBar() {
               <span
                 className={cn(
                   "h-px w-5 bg-foreground transition-transform duration-300",
-                  open && "-translate-y-[3.5px] -rotate-45"
+                  open && "translate-y-[-3.5px] -rotate-45"
                 )}
               />
             </button>
@@ -159,7 +159,7 @@ export function NavBar() {
             animate={reduceMotion ? { opacity: 1 } : { clipPath: "inset(0 0 0% 0)" }}
             exit={reduceMotion ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.5, ease: easeOutExpo }}
-            className="fixed inset-0 z-[95] flex flex-col justify-end bg-background px-6 pb-10 pt-24 md:hidden"
+            className="fixed inset-0 z-95 flex flex-col justify-end bg-background px-6 pb-10 pt-24 md:hidden"
           >
             <nav aria-label="Mobile">
               <ul className="space-y-2">

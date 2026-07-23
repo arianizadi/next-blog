@@ -36,7 +36,7 @@ export function BlogArticleHeader({
             {dateLabel}
           </time>
         </p>
-        <h1 className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-foreground md:text-6xl">
+        <h1 className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-foreground wrap-anywhere md:text-6xl">
           {title}
         </h1>
       </header>

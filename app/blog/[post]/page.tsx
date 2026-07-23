@@ -1,5 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { BlogPost } from "@prisma/client";
+import { notFound } from "next/navigation";
+import type { BlogPost } from "@prisma/client";
 import { getPost, getPosts } from "@/app/actions/actions";
 import { BlogArticleHeader } from "@/components/BlogArticleHeader";
 import ReadingProgress from "@/components/ReadingProgress";
@@ -36,6 +37,10 @@ export async function generateMetadata({ params }: PageProps) {
   const resolvedParams = await params;
   const postData = await getPost(resolvedParams.post);
 
+  if (!postData) {
+    notFound();
+  }
+
   return {
     title: postData.title,
     description: postData.description || postData.title,
@@ -52,10 +57,10 @@ export const revalidate = 3600;
 
 export default async function Page({ params }: PageProps) {
   const resolvedParams = await params;
-  const postData: BlogPost = await getPost(resolvedParams.post);
+  const postData = await getPost(resolvedParams.post);
 
   if (!postData) {
-    throw new Error("Post not found");
+    notFound();
   }
 
   const dateLabel = postData.date.toLocaleDateString("en-US", {
@@ -65,9 +70,9 @@ export default async function Page({ params }: PageProps) {
   });
 
   return (
-    <article className="max-w-3xl mx-auto">
+    <article className="mx-auto w-full min-w-0 max-w-3xl">
       <ReadingProgress />
-      <div className="dark:prose-invert prose pt-16 prose-headings:font-display prose-headings:uppercase prose-a:text-phosphor prose-a:decoration-phosphor/40 prose-strong:text-foreground prose-code:text-phosphor/90 prose-img:border prose-img:border-border">
+      <div className="article-prose prose max-w-none min-w-0 pt-16 dark:prose-invert prose-headings:font-display prose-headings:uppercase prose-a:text-phosphor prose-a:decoration-phosphor/40 prose-strong:text-foreground prose-code:text-phosphor/90 prose-img:border prose-img:border-border">
         <BlogArticleHeader
           title={postData.title}
           dateLabel={dateLabel}

@@ -9,7 +9,7 @@ const STATUS_STYLE: Record<Contribution["status"], string> = {
   merged: "text-phosphor border-phosphor/40 bg-phosphor/10",
   open: "text-foreground border-foreground/30 bg-foreground/5",
   pending: "text-foreground/50 border-border bg-transparent",
-  forked: "text-foreground/70 border-foreground/20 bg-foreground/[0.03]",
+  forked: "text-foreground/70 border-foreground/20 bg-foreground/3",
 };
 
 const MergeLog = () => {
@@ -35,7 +35,7 @@ const MergeLog = () => {
                 delay: index * 0.08,
                 ease: easeOutExpo,
               }}
-              className="group relative border-b border-border p-5 last:border-b-0 hover:bg-foreground/[0.03] md:p-7"
+              className="group relative border-b border-border p-5 last:border-b-0 hover:bg-foreground/3 md:p-7"
             >
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">

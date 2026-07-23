@@ -3,11 +3,11 @@ import { Archivo, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "@/app/globals.css";
 
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 import { siteConfig } from "@/app/config/site";
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import { NavBar } from "@/components/NavBar";
 import { MotionProvider } from "@/components/MotionProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -20,7 +20,7 @@ const archivo = Archivo({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  variable: "--font-mono",
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -64,14 +64,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          archivo.variable,
-          jetbrainsMono.variable
-        )}
-      >
+    <html
+      lang="en"
+      className={cn("dark", archivo.variable, jetbrainsMono.variable)}
+    >
+      <body className="min-h-screen bg-background font-sans antialiased">
         <noscript>
           <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
@@ -80,11 +77,11 @@ export default function RootLayout({
             <div className="relative flex min-h-dvh flex-col bg-background">
               <NavBar />
               <main className="flex-1">{children}</main>
-              <SpeedInsights />
-              <Analytics />
             </div>
           </SmoothScroll>
         </MotionProvider>
+        <SpeedInsights />
+        <Analytics />
         <Script
           src="https://umami.arianizadi.com/script.js"
           strategy="afterInteractive"

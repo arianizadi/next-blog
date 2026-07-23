@@ -39,7 +39,7 @@ const Contact = () => {
           href={`mailto:${EMAIL}`}
           className="group mt-10 inline-flex max-w-full flex-wrap items-baseline gap-x-4 gap-y-2"
         >
-          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 [overflow-wrap:anywhere] transition-colors duration-300 group-hover:text-phosphor">
+          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 wrap-anywhere transition-colors duration-300 group-hover:text-phosphor">
             {EMAIL}
           </span>
           <span className="font-mono text-sm text-phosphor transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">

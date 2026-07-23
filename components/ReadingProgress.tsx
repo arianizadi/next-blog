@@ -13,7 +13,7 @@ const ReadingProgress = () => {
     <motion.div
       aria-hidden
       style={{ scaleX: scrollYProgress }}
-      className="fixed inset-x-0 top-0 z-[110] h-0.5 origin-left bg-phosphor"
+      className="fixed inset-x-0 top-0 z-110 h-0.5 origin-left bg-phosphor"
     />
   );
 };

@@ -50,7 +50,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="search the log…"
           aria-label="Search posts"
-          className="w-full bg-transparent font-mono text-sm text-foreground placeholder:text-foreground/50 focus:outline-none"
+          className="w-full bg-transparent font-mono text-base text-foreground placeholder:text-foreground/50 focus:outline-hidden sm:text-sm"
         />
         <span
           role="status"
@@ -85,7 +85,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
             >
               <Link
                 href={`/blog/${post.id}`}
-                className="group flex flex-col gap-2 py-6 transition-colors hover:bg-foreground/[0.03] md:flex-row md:items-baseline md:gap-8 md:py-7"
+                className="group flex flex-col gap-2 py-6 transition-colors hover:bg-foreground/3 md:flex-row md:items-baseline md:gap-8 md:py-7"
               >
                 <time
                   dateTime={post.date}

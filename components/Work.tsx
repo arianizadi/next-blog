@@ -39,7 +39,7 @@ const FrameCard = ({
 }) => (
   <article className="work-pin-card group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
     {/* Captured frame */}
-    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border">
+    <div className="relative aspect-video w-full overflow-hidden border-b border-border">
       {project.image && (
         <Image
           src={project.image}
@@ -59,7 +59,7 @@ const FrameCard = ({
 
     {/* Analysis */}
     <div className="flex flex-1 flex-col p-6 md:p-8">
-      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground [overflow-wrap:anywhere] md:text-4xl">
+      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground wrap-anywhere md:text-4xl">
         {project.title}
       </h3>
       <p className="mt-4 hidden text-sm leading-6 text-foreground/60 sm:block">
@@ -129,7 +129,7 @@ const ArchiveRow = ({
   const primaryHref = project.liveUrl ?? project.githubUrl;
 
   return (
-    <li className="group border-b border-border transition-colors hover:bg-foreground/[0.03]">
+    <li className="group border-b border-border transition-colors hover:bg-foreground/3">
       <div className="flex items-center gap-5 py-5 md:gap-8">
         <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50">
           P.{String(featured.length + index + 1).padStart(2, "0")}
@@ -143,7 +143,7 @@ const ArchiveRow = ({
               rel="noopener noreferrer"
               className="block"
             >
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors [overflow-wrap:anywhere] group-hover:text-phosphor md:truncate md:text-2xl">
+              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-phosphor md:truncate md:text-2xl">
                 {project.title}
               </span>
               <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
@@ -152,7 +152,7 @@ const ArchiveRow = ({
             </a>
           ) : (
             <>
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground [overflow-wrap:anywhere] md:truncate md:text-2xl">
+              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground wrap-anywhere md:truncate md:text-2xl">
                 {project.title}
               </span>
               <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
