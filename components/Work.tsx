@@ -64,7 +64,7 @@ const FrameCard = ({
       </h3>
       <p className="mt-4 hidden text-sm leading-6 text-foreground/60 sm:block">
         <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
-          Problem —
+          Problem:
         </span>
         {project.problem}
       </p>
@@ -107,7 +107,7 @@ const HorizontalGallery = () => {
         {/* Progress rail */}
         <div className="work-pin-progress absolute inset-x-6 bottom-8 flex items-center gap-6 md:inset-x-12">
           <p className="font-mono text-[10px] tracking-[0.26em] text-foreground/50">
-            01 —{" "}
+            01 /{" "}
             {String(featured.length).padStart(2, "0")}
           </p>
           <div className="relative h-px flex-1 bg-border">

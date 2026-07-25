@@ -128,7 +128,7 @@ const Timeline = () => {
           index="02"
           label="System Boot Log"
           title="Journey"
-          description="From a borrowed C# manual to robotics perception research — the log, unedited."
+          description="From a borrowed C# manual to robotics perception research. The log, unedited."
         />
 
         <div ref={traceRef} className="relative">

@@ -8,7 +8,7 @@ type SectionHeaderProps = {
   label: string;
   title: string;
   description?: string;
-  /** Heading level — use "h1" for the page's primary title. */
+  /** Heading level. Use "h1" for the page's primary title. */
   level?: "h1" | "h2";
 };
 

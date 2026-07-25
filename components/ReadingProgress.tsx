@@ -4,7 +4,7 @@ import { motion, useScroll } from "framer-motion";
 
 /**
  * Tracks scroll position directly (no spring), so it behaves like a
- * scrollbar — acceptable for reduced-motion users, no tree branching.
+ * scrollbar. This is acceptable for reduced-motion users with no tree branching.
  */
 const ReadingProgress = () => {
   const { scrollYProgress } = useScroll();

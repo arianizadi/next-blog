@@ -13,7 +13,7 @@ const CapabilityMatrix = () => {
           index="04"
           label="Capability Matrix"
           title="Stack"
-          description="The instruments on the panel — grouped by the problems they solve, not by resume keyword density."
+          description="The instruments on the panel, grouped by the problems they solve rather than by resume keyword density."
         />
 
         <div className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-3">

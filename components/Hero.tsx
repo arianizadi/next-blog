@@ -39,7 +39,7 @@ const Hero = () => {
           Systems · Robotics Perception · Backend
         </p>
 
-        {/* Lock-on headline — the one signature moment */}
+        {/* Lock-on headline, the one signature moment */}
         <div className="relative mt-7 inline-block self-start md:mt-9">
           <motion.div
             aria-hidden
@@ -53,7 +53,7 @@ const Hero = () => {
             <span className="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-phosphor" />
             <span className="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-phosphor" />
             <span className="absolute -top-3 left-0 whitespace-nowrap bg-phosphor px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-background md:text-[9px] md:tracking-[0.2em]">
-              Subject: Arian Izadi — 0.99
+              Subject: Arian Izadi / 0.99
             </span>
           </motion.div>
 

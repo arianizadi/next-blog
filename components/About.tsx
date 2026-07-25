@@ -32,7 +32,7 @@ const About = () => {
           {/* Bio + education */}
           <motion.div {...fadeUp()}>
             <p className="max-w-xl text-base leading-8 text-foreground/70 md:text-lg">
-              I&apos;m Arian — an Embedded Software Engineer II at Konami
+              I&apos;m Arian, an Embedded Software Engineer II at Konami
               Gaming in Las Vegas, building production C/C++ software at the
               boundary of embedded hardware, connected systems, and regulated
               gaming. Before Konami, I engineered event-driven banking

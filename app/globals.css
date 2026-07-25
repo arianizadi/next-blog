@@ -264,7 +264,7 @@
     animation: slide-down 2s ease-in-out infinite;
   }
 
-  /* Route transition (app/template.tsx) — CSS-only, hydration-safe */
+  /* Route transition (app/template.tsx): CSS-only and hydration-safe */
   @keyframes template-rise {
     from {
       transform: translateY(14px);

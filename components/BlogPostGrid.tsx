@@ -67,7 +67,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
           role="status"
           className="border border-dashed border-border py-16 text-center font-mono text-sm text-foreground/55"
         >
-          — no matches. the log keeps its secrets.
+          No matches. The log keeps its secrets.
         </p>
       ) : (
         <ul>

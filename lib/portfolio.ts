@@ -335,8 +335,8 @@ export const education: Degree[] = [
     degree: "B.S. Computer Science",
     date: "Jul 2024",
     highlights: [
-      "CyberFire CTF — 1st place",
-      "NCL CTF — top 8% nationally",
+      "CyberFire CTF: 1st place",
+      "NCL CTF: top 8% nationally",
       "Bosch Future Mobility Challenge",
       "President of Layer Zero",
     ],

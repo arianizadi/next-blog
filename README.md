@@ -1,4 +1,4 @@
-# arianizadi.com — PERCEPTION
+# arianizadi.com: PERCEPTION
 
 Personal site of Arian Izadi, systems engineer. A minimalist dark experience
 with a single machine-perception signature: a detection lock-on over
@@ -10,8 +10,8 @@ whitespace, and quiet mono accents.
 - **Next.js 16** (App Router, Turbopack) + React 19
 - **Tailwind CSS 3** with a custom phosphor-on-near-black design token set
 - **framer-motion 12** + `MotionConfig reducedMotion="user"`
-- **Lenis** — smooth scrolling
-- **Prisma + MongoDB** — blog storage, MDX rendered via `next-mdx-remote`
+- **Lenis**: smooth scrolling
+- **Prisma + MongoDB**: blog storage, MDX rendered via `next-mdx-remote`
 - **Archivo** (variable, expanded width axis) + **JetBrains Mono**
 
 ## Map
@@ -59,4 +59,4 @@ syncs the schema and `bun run post:vpndad` seeds a post.
 Reduced-motion users get a fully static experience via `MotionConfig` and
 CSS `motion-reduce` fallbacks (the pinned gallery becomes a plain grid, and
 short viewports get the same treatment). Server and client markup are
-identical — no hydration divergence.
+identical, with no hydration divergence.
