@@ -64,7 +64,13 @@ const MILESTONES: Milestone[] = [
     stamp: "2025 · AGE 25",
     title: "Open Source & Industry Impact",
     description:
-      "Contributed to open source projects including OctoMap for point-cloud file reading and MasterDnsVPN mobile networking. I am now applying the same reliability mindset to backend systems at Credit One Bank.",
+      "Contributed to open source projects including OctoMap for point-cloud file reading and MasterDnsVPN mobile networking, then carried the same reliability mindset into event-driven banking systems at Credit One Bank.",
+  },
+  {
+    stamp: "2026 · AGE 26",
+    title: "Embedded R&D at Konami",
+    description:
+      "Joined Konami Gaming as an Embedded Software Engineer II, building production C/C++ systems where hardware integration, connected software, and regulated reliability converge.",
   },
 ];
 

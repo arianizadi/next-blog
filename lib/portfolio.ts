@@ -214,10 +214,30 @@ export const projects: Project[] = [
 
 export const experiences: ExperienceItem[] = [
   {
+    company: "Konami Gaming, Inc.",
+    role: "Embedded Software Engineer II",
+    location: "Las Vegas, NV",
+    dates: "July 2026 to Present",
+    summary:
+      "Embedded systems engineer in Konami Gaming's R&D organization, building production software where C/C++, hardware, and regulated gaming systems meet.",
+    technologies: [
+      "C/C++",
+      "Embedded Systems",
+      "Hardware Integration",
+      "Unit Testing",
+      "Technical Leadership",
+    ],
+    bulletPoints: [
+      "Research, design, and maintain C/C++ components integrated with embedded hardware and manufacturing systems.",
+      "Translate complex requirements into testable, standards-aligned software through code review, unit testing, revision control, and clear documentation.",
+      "Coordinate delivery across Engineering, QA, Training, and Documentation while providing technical guidance to junior developers.",
+    ],
+  },
+  {
     company: "Credit One Bank",
     role: "Software Engineer",
     location: "Las Vegas, NV",
-    dates: "July 2025 to Present",
+    dates: "July 2025 to July 2026",
     summary:
       "Backend engineer working on event-driven account and customer systems in a regulated banking environment.",
     technologies: ["Java", "Spring Boot", "Kafka", "Kubernetes", "Elasticsearch"],

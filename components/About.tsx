@@ -25,19 +25,19 @@ const About = () => {
           index="02"
           label="Operator Profile"
           title="About"
-          description="Backend engineer at a regulated bank by day; robotics perception researcher and low-level tinkerer by training. The common thread: systems that have to work, under constraints that don't negotiate."
+          description="Embedded software engineer in Konami Gaming R&D, building C/C++ systems where hardware and production reliability converge. Backed by event-driven banking, robotics perception, and low-level systems."
         />
 
         <div className="grid gap-16 lg:grid-cols-[1.1fr_1fr]">
           {/* Bio + education */}
           <motion.div {...fadeUp()}>
             <p className="max-w-xl text-base leading-8 text-foreground/70 md:text-lg">
-              I&apos;m Arian — a software engineer in Las Vegas working on
-              event-driven banking systems at Credit One Bank while finishing
-              my M.S. in Computer Science at UNLV with a 4.0. Before banking,
-              I built LiDAR perception pipelines and safety-critical shutdown
-              systems for robots at Koshee AI, and represented the US at an
-              international autonomous-vehicle competition in Romania.
+              I&apos;m Arian — an Embedded Software Engineer II at Konami
+              Gaming in Las Vegas, building production C/C++ software at the
+              boundary of embedded hardware, connected systems, and regulated
+              gaming. Before Konami, I engineered event-driven banking
+              services at Credit One Bank and built LiDAR perception and
+              safety-critical robotics infrastructure at Koshee AI.
             </p>
             <p className="mt-5 max-w-xl text-base leading-8 text-foreground/70 md:text-lg">
               My happy place is the layer where software meets physics:
@@ -99,9 +99,20 @@ const About = () => {
                     aria-hidden
                     className="absolute left-[-27px] top-1.5 h-2.5 w-2.5 border border-phosphor bg-background"
                   />
-                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/60">
-                    {job.dates}
-                  </p>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/60">
+                      {job.dates}
+                    </p>
+                    {job.dates.endsWith("Present") && (
+                      <span className="inline-flex items-center gap-1.5 border border-phosphor/30 bg-phosphor/5 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.22em] text-phosphor">
+                        <span
+                          aria-hidden
+                          className="h-1.5 w-1.5 bg-phosphor"
+                        />
+                        Current
+                      </span>
+                    )}
+                  </div>
                   <h3 className="mt-2 font-display text-xl font-bold uppercase tracking-tight text-foreground">
                     {job.company}
                   </h3>
@@ -124,7 +135,7 @@ const About = () => {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/55">
+                  <p className="mt-3 break-words font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/55">
                     {job.technologies.join(" · ")}
                   </p>
                 </article>
