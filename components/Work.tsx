@@ -105,12 +105,8 @@ const HorizontalGallery = () => {
         </div>
 
         {/* Progress rail */}
-        <div className="work-pin-progress absolute inset-x-6 bottom-8 flex items-center gap-6 md:inset-x-12">
-          <p className="font-mono text-[10px] tracking-[0.26em] text-foreground/50">
-            01 /{" "}
-            {String(featured.length).padStart(2, "0")}
-          </p>
-          <div className="relative h-px flex-1 bg-border">
+        <div className="work-pin-progress absolute inset-x-6 bottom-8 md:inset-x-12">
+          <div className="relative h-px w-full bg-border">
             <div className="work-pin-progress-fill absolute inset-0 origin-left bg-phosphor" />
           </div>
         </div>
