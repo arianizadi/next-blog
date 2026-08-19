@@ -132,6 +132,19 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/arianizadi/opensource-cal",
   },
   {
+    id: 14,
+    title: "Fantasy Football Notifier",
+    eyebrow: "Real-Time Alerting",
+    problem:
+      "Breaking NFL news is fast but noisy, and a headline alone does not show whether a roster move is actually available in each fantasy league.",
+    contribution:
+      "Built a Python pipeline that joins X and RotoWire reports with ESPN and Sleeper rosters, deterministic depth charts, model-assisted classification, deduplication, and Telegram delivery.",
+    impact:
+      "Turns raw player news into per-league lineup and waiver guidance while keeping credentials and roster state outside the repository.",
+    technologies: ["Python", "OpenRouter", "Telegram", "X API", "Sleeper"],
+    githubUrl: "https://github.com/arianizadi/fantasy-football-notifier",
+  },
+  {
     id: 3,
     title: "LiDAR 2D Room Mapping",
     eyebrow: "Robotics Perception",
