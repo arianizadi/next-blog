@@ -59,17 +59,17 @@ export const projects: Project[] = [
   },
   {
     id: 1,
-    title: "Railway Semantic Segmentation Research",
-    eyebrow: "Computer Vision Research",
+    title: "Segmentary",
+    eyebrow: "Semantic Segmentation Framework",
     problem:
-      "Railway inspection workflows need reliable pixel-level understanding of track, ballast, and surrounding scene context.",
+      "Semantic segmentation experiments are difficult to reproduce when configs, taxonomy mappings, checkpoints, metrics, and deployment benchmarks live in separate tools.",
     contribution:
-      "Fine-tuned segmentation models on RailSem19-style data, added transfer-learning support in an MMSegmentation fork, and evaluated railway-specific failure modes.",
+      "Built a config-driven PyTorch suite for training, transfer learning, evaluation, comparison, export, and analysis across Hugging Face, native, and SMP models.",
     impact:
-      "Turned academic segmentation work into a practical inspection pipeline for detecting track-adjacent issues such as mud pumping indicators.",
+      "Created a reproducible model lifecycle today while building toward a complete segmentation suite for the Hugging Face ecosystem.",
     image: "https://www.wilddash.cc/static/images/lab3-rs19.jpg",
-    technologies: ["Python", "PyTorch", "MMSegmentation", "RailSem19"],
-    githubUrl: "https://github.com/arianizadi/mmsegmentation",
+    technologies: ["Python", "PyTorch", "Hugging Face", "Lightning", "CUDA"],
+    githubUrl: "https://github.com/arianizadi/segmentary",
     featured: true,
   },
   {
@@ -387,7 +387,7 @@ export const techGroups: TechGroup[] = [
     skills: [
       "Python",
       "PyTorch",
-      "MMSegmentation",
+      "Segmentary",
       "OpenCV",
       "PCL",
       "LiDAR",

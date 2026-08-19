@@ -52,7 +52,7 @@ bun run check      # lint + typecheck + production build
 ```
 
 Blog posts live in MongoDB (see `prisma/schema.prisma`); `bun run db:push`
-syncs the schema and `bun run post:vpndad` seeds a post.
+syncs the schema. Versioned upsert scripts seed the Segmentary and VpnDad posts.
 
 ## Accessibility & motion
 
