@@ -134,7 +134,7 @@ export const projects: Project[] = [
   {
     id: 14,
     title: "Fantasy Football Notifier",
-    eyebrow: "Real-Time Alerting",
+    eyebrow: "Near-Real-Time Alerting",
     problem:
       "Breaking NFL news is fast but noisy, and a headline alone does not show whether a roster move is actually available in each fantasy league.",
     contribution:

@@ -161,8 +161,8 @@ const ArchiveRow = ({
         <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-56 shrink-0 truncate text-right font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/50 lg:block">
-          {project.technologies.slice(0, 3).join(" · ")}
+        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-4 tracking-[0.14em] text-foreground/50 lg:block">
+          {project.technologies.join(" · ")}
         </span>
 
         <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
