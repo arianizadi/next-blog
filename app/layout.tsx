@@ -8,9 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { siteConfig } from "@/app/config/site";
 import { cn } from "@/lib/utils";
-import { NavBar } from "@/components/NavBar";
 import { MotionProvider } from "@/components/MotionProvider";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -32,7 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Arian Izadi | Embedded Systems Engineer & Researcher",
+    default: "Arian Izadi | Embedded & Systems Software Engineer",
     template: "%s | Arian Izadi",
   },
   description: siteConfig.description,
@@ -55,7 +53,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
   openGraph: {
-    title: "Arian Izadi | Embedded Systems Engineer & Researcher",
+    title: "Arian Izadi | Embedded & Systems Software Engineer",
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: "Arian Izadi",
@@ -64,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Arian Izadi | Embedded Systems Engineer & Researcher",
+    title: "Arian Izadi | Embedded & Systems Software Engineer",
     description: siteConfig.description,
   },
 };
@@ -90,14 +88,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionProvider>
-          <SmoothScroll>
-            <div className="relative flex min-h-dvh flex-col bg-background">
-              <NavBar />
-              <main id="main" className="flex-1">
-                {children}
-              </main>
-            </div>
-          </SmoothScroll>
+          <main id="main">{children}</main>
         </MotionProvider>
         <SpeedInsights />
         <Analytics />

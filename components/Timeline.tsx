@@ -122,7 +122,7 @@ const Timeline = () => {
   });
 
   return (
-    <div className="relative min-h-screen bg-background pb-32 pt-28 md:pt-36">
+    <div className="relative min-h-screen bg-background pb-32 pt-12 md:pt-16">
       <div className="px-6 md:px-12">
         <SectionHeader
           index="A·1"
@@ -163,7 +163,7 @@ const Timeline = () => {
               <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent">
                 [NOW]
               </p>
-              <div className="panel-grid mt-4 max-w-xl border border-panel-border bg-panel p-6 md:p-8">
+              <div className="mt-4 max-w-xl border border-panel-border bg-panel p-6 md:p-8">
                 <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-panel-accent">
                   <span
                     aria-hidden
