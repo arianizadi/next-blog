@@ -262,9 +262,9 @@ const Work = () => (
     <div className="px-6 md:px-12">
       <SectionHeader
         index="02"
-        label="Embedded / Systems Portfolio"
-        title="Systems Work"
-        description="Robotics perception, communication-failure handling, bare-metal development, timing analysis, and tested C++ libraries."
+        label="Engineering Portfolio"
+        title="Selected Work"
+        description="Projects organized around the problem, the system built, and the constraints that shaped it."
       />
     </div>
     <HorizontalGallery />
@@ -279,9 +279,9 @@ export const AdditionalWork = () => (
     <div className="px-6 md:px-12">
       <SectionHeader
         index="04"
-        label="Project Archive"
-        title="Additional Work"
-        description="Networking, computer vision, mobile, backend, security, and application work retained to show engineering breadth."
+        label="Across Computer Science"
+        title="More Things I've Built"
+        description="Computer vision tools, security work, web applications, and practical utilities from across my GitHub."
       />
     </div>
     <ArchiveTable />

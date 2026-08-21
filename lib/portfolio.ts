@@ -130,13 +130,26 @@ export const projects: Project[] = [
     title: "Reverse Engineering Tutorials",
     eyebrow: "Low-Level Security",
     problem:
-      "Low-level security learning is easier when examples are legal, reproducible, and focused on reasoning.",
+      "Reverse-engineering concepts are easier to learn through legal, reproducible crackmes and byte-patching exercises.",
     contribution:
-      "Documented CTF-style reverse engineering walkthroughs using tools such as Ghidra and IDA.",
+      "Documented beginner crackme and binary-patching walkthroughs using Hopper and Ghidra.",
     impact:
-      "Created a structured learning trail for binary analysis, debugging, and defensive security thinking.",
-    technologies: ["C++", "Python", "Assembly", "Ghidra", "IDA Pro"],
+      "Created a structured learning trail for decompilation, assembly reasoning, and binary patching.",
+    technologies: ["C++", "Python", "Assembly", "Ghidra", "Hopper"],
     githubUrl: "https://github.com/arianizadi/ReverseEngineering",
+  },
+  {
+    id: 17,
+    title: "Image / Video Suite",
+    eyebrow: "Hardware-Aware ML Tooling",
+    problem:
+      "Running large media models on shared GPU machines requires matching each task to available hardware without colliding with active jobs.",
+    contribution:
+      "Built a modular Python CLI with model adapters, hardware and VRAM inspection, process detection, GPU recommendations, and soft resource locks.",
+    impact:
+      "Unified image editing, compositing, identity, and image-to-video workflows behind one hardware-aware entry point with tested resource-selection logic.",
+    technologies: ["Python", "CUDA", "Hugging Face", "Diffusers", "Rich"],
+    githubUrl: "https://github.com/arianizadi/image-watermark-remover",
   },
   {
     id: 13,
@@ -163,7 +176,7 @@ export const projects: Project[] = [
     contribution:
       "Built a config-driven PyTorch suite for training, transfer learning, evaluation, comparison, export, and analysis across Hugging Face, native, and SMP models.",
     impact:
-      "Created a reproducible model lifecycle today while building toward a complete segmentation suite for the Hugging Face ecosystem.",
+      "Kept training, evaluation, export, and benchmark evidence together so experiments remain reproducible and comparable.",
     image: "https://www.wilddash.cc/static/images/lab3-rs19.jpg",
     technologies: ["Python", "PyTorch", "Hugging Face", "Lightning", "CUDA"],
     githubUrl: "https://github.com/arianizadi/segmentary",
@@ -342,7 +355,7 @@ export const contributions: Contribution[] = [
     feature: "RailSem19 Transfer Learning",
     description:
       "Maintained railway segmentation training changes for model experimentation and research.",
-    githubUrl: "https://github.com/arianizadi/mmsegmentation",
+    githubUrl: "https://github.com/arianizadi/mmseg-arian",
     status: "forked",
     technologies: ["Python", "PyTorch", "Computer Vision"],
   },
@@ -352,7 +365,7 @@ export interface Degree {
   university: string;
   degree: string;
   gpa?: string;
-  date: string;
+  date?: string;
   highlights: string[];
 }
 
@@ -361,7 +374,6 @@ export const education: Degree[] = [
     university: "University of Nevada, Las Vegas",
     degree: "M.S. Computer Science",
     gpa: "4.0 GPA",
-    date: "Expected Dec 2026",
     highlights: [
       "Real-time & embedded systems",
       "Advanced operating systems",

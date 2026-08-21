@@ -77,29 +77,18 @@ const Hero = () => {
         </motion.p>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: easeOutExpo }}
-          className="mt-4 max-w-2xl text-base leading-7 text-foreground/75 md:text-lg md:leading-8"
-        >
-          Building production C/C++ software, with experience spanning robotics,
-          real-time systems, Linux, hardware integration, networking, and
-          low-level development.
-        </motion.p>
-
-        <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.48, duration: 0.75, ease: easeOutExpo }}
-          className="mt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55 md:text-[10px]"
+          transition={{ delay: 0.4, duration: 0.75, ease: easeOutExpo }}
+          className="mt-4 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55 md:text-[10px]"
         >
-          M.S. Computer Science, UNLV · Expected Dec 2026
+          M.S. Computer Science, UNLV
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.8, ease: easeOutExpo }}
+          transition={{ delay: 0.48, duration: 0.8, ease: easeOutExpo }}
           className="mt-8 flex flex-wrap items-center gap-3"
         >
           <a
@@ -112,7 +101,7 @@ const Hero = () => {
             href="#work"
             className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor"
           >
-            Systems Work
+            Selected Work
           </a>
           <a
             href={siteConfig.links.resume}

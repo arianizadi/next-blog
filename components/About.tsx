@@ -47,9 +47,11 @@ const About = () => (
               <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-phosphor/80">
                 {index === 0 ? "Graduate study" : "Undergraduate study"}
               </p>
-              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55">
-                {degree.date}
-              </p>
+              {degree.date && (
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55">
+                  {degree.date}
+                </p>
+              )}
             </div>
 
             <h3 className="mt-7 font-display text-3xl font-black uppercase leading-none tracking-tight text-foreground md:text-4xl">
