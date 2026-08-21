@@ -120,6 +120,10 @@ export function NavBar() {
     return pathname.startsWith(href);
   };
 
+  // The homepage provides its own exhibition-canvas navigation. Content
+  // routes keep the conventional site header for orientation.
+  if (pathname === "/") return null;
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-100">
