@@ -50,7 +50,7 @@ const SchematicFrame = ({
   index: number;
 }) => (
   <div className="lab-grid absolute inset-0 overflow-hidden bg-card">
-    <span className="absolute left-5 top-4 font-mono text-[10px] tracking-[0.16em] text-muted-foreground">
+    <span className="absolute left-5 top-4 font-mono text-xs tracking-[0.16em] text-muted-foreground">
       No imagery on file
     </span>
     <span
@@ -63,7 +63,7 @@ const SchematicFrame = ({
       {project.technologies.slice(0, 4).map((technology) => (
         <span
           key={technology}
-          className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground"
+          className="font-mono text-xs tracking-[0.1em] text-muted-foreground"
         >
           {technology}
         </span>
@@ -101,7 +101,7 @@ const FrameCard = ({
 
     {/* Figure caption */}
     <div className="flex items-baseline gap-3 border-b border-border px-6 py-3 md:px-8">
-      <span className="shrink-0 font-mono text-[10px] tracking-[0.12em] text-signal">
+      <span className="shrink-0 font-mono text-xs tracking-[0.12em] text-signal">
         {figNumber(index)}
       </span>
       <span className="min-w-0 truncate font-serif text-sm italic text-muted-foreground">
@@ -117,7 +117,7 @@ const FrameCard = ({
 
       <dl className="mt-5 space-y-0">
         <div className="grid grid-cols-[4.5rem_1fr] gap-4 border-t border-border/70 py-3">
-          <dt className="font-mono text-[10px] uppercase tracking-[0.16em] leading-5 text-muted-foreground">
+          <dt className="font-mono text-xs uppercase tracking-[0.16em] leading-5 text-muted-foreground">
             Problem
           </dt>
           <dd className="text-sm leading-6 text-foreground/70">
@@ -125,7 +125,7 @@ const FrameCard = ({
           </dd>
         </div>
         <div className="grid grid-cols-[4.5rem_1fr] gap-4 border-t border-border/70 py-3">
-          <dt className="font-mono text-[10px] uppercase tracking-[0.16em] leading-5 text-muted-foreground">
+          <dt className="font-mono text-xs uppercase tracking-[0.16em] leading-5 text-muted-foreground">
             Built
           </dt>
           <dd className="text-sm leading-6 text-foreground/70">
@@ -133,7 +133,7 @@ const FrameCard = ({
           </dd>
         </div>
         <div className="grid grid-cols-[4.5rem_1fr] gap-4 border-t border-border/70 py-3">
-          <dt className="font-mono text-[10px] uppercase tracking-[0.16em] leading-5 text-signal">
+          <dt className="font-mono text-xs uppercase tracking-[0.16em] leading-5 text-signal">
             Result
           </dt>
           <dd className="text-sm leading-6 text-foreground/85">
@@ -143,7 +143,7 @@ const FrameCard = ({
       </dl>
 
       <div className="mt-auto flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t border-border pt-5">
-        <p className="min-w-0 font-mono text-[10px] leading-5 tracking-[0.06em] text-muted-foreground">
+        <p className="min-w-0 font-mono text-xs leading-5 tracking-[0.06em] text-muted-foreground">
           {project.technologies.join(" · ")}
         </p>
         <ProjectLinks project={project} />
@@ -198,7 +198,7 @@ const ArchiveRow = ({
   return (
     <li className="group border-b border-border transition-colors hover:bg-foreground/[0.03]">
       <div className="flex items-center gap-5 py-5 md:gap-8">
-        <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
+        <span className="shrink-0 font-mono text-xs text-muted-foreground">
           {String(featured.length + index + 1).padStart(2, "0")}
         </span>
 
@@ -232,7 +232,7 @@ const ArchiveRow = ({
         <span className="hidden w-44 shrink-0 font-serif text-[13px] italic leading-5 text-muted-foreground md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] leading-5 tracking-[0.04em] text-muted-foreground/80 lg:block">
+        <span className="hidden w-64 shrink-0 text-right font-mono text-xs leading-5 tracking-[0.04em] text-muted-foreground/80 lg:block">
           {project.technologies.join(" · ")}
         </span>
 
@@ -266,7 +266,7 @@ const ArchiveRow = ({
 const ArchiveTable = () => (
   <div className="lab-container pb-8">
     <div className="mb-6 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-10">
-      <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+      <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">
         <span className="text-signal">04.1</span>
         <span className="mx-2 text-muted-foreground/60">/</span>
         Project index
@@ -275,7 +275,7 @@ const ArchiveTable = () => (
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[11px] text-muted-foreground transition-colors hover:text-signal"
+        className="font-mono text-xs text-muted-foreground transition-colors hover:text-signal"
       >
         github.com/arianizadi ↗
       </a>

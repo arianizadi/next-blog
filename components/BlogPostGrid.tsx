@@ -43,7 +43,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
       <div className="mb-10 flex items-center gap-3 border border-border bg-card px-4 py-3 transition-colors focus-within:border-signal/60">
         <span
           aria-hidden
-          className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
+          className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground"
         >
           Filter
         </span>
@@ -58,7 +58,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
         <span
           role="status"
           aria-live="polite"
-          className="shrink-0 font-mono text-[10px] tracking-[0.1em] text-muted-foreground"
+          className="shrink-0 font-mono text-xs tracking-[0.1em] text-muted-foreground"
         >
           {visible.length} / {posts.length}
         </span>
@@ -92,7 +92,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
               >
                 <time
                   dateTime={post.date}
-                  className="shrink-0 font-mono text-[11px] tracking-[0.08em] text-muted-foreground md:w-24"
+                  className="shrink-0 font-mono text-xs tracking-[0.08em] text-muted-foreground md:w-24"
                 >
                   {formatDate(post.date)}
                 </time>
@@ -104,7 +104,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
                     {post.description}
                   </span>
                 </span>
-                <span className="hidden shrink-0 font-mono text-[10px] tracking-[0.08em] text-muted-foreground lg:block">
+                <span className="hidden shrink-0 font-mono text-xs tracking-[0.08em] text-muted-foreground lg:block">
                   {post.tags.join(" · ")}
                 </span>
                 <span

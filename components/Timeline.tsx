@@ -95,7 +95,7 @@ const LogEntry = ({
         className="absolute left-0 top-[7px] h-px w-6 bg-signal/80 md:left-2 md:w-8"
       />
 
-      <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+      <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">
         <span className="mr-3 text-signal">
           {String(index + 1).padStart(2, "0")}
         </span>
@@ -162,7 +162,7 @@ const Timeline = () => {
                 aria-hidden
                 className="absolute left-0 top-[7px] h-px w-6 bg-signal md:left-2 md:w-8"
               />
-              <p className="font-mono text-[11px] tracking-[0.14em] text-signal">
+              <p className="font-mono text-xs tracking-[0.14em] text-signal">
                 Now
               </p>
               <p className="mt-4 max-w-xl font-serif text-lg italic leading-8 text-muted-foreground">

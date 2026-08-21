@@ -29,7 +29,7 @@ const SectionHeader = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.55, ease: easeOutExpo }}
-        className="mb-5 font-mono text-[11px] tracking-[0.14em] text-signal"
+        className="mb-5 font-mono text-xs tracking-[0.14em] text-signal"
       >
         {index}
         <span className="mx-2 text-muted-foreground/60">/</span>

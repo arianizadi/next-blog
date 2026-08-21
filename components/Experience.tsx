@@ -27,7 +27,7 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "font-mono text-[10px] tracking-[0.08em] text-muted-foreground",
+          "font-mono text-xs tracking-[0.08em] text-muted-foreground",
           isPrimaryTechnology(technology) && "text-signal"
         )}
       >
@@ -63,11 +63,11 @@ const PreviousExperienceRow = ({
     className="grid gap-4 border-t border-border py-9 md:grid-cols-[11rem_1fr] md:gap-10 md:py-11"
   >
     <div>
-      <p className="font-mono text-[11px] leading-5 text-muted-foreground">
+      <p className="font-mono text-xs leading-5 text-muted-foreground">
         {job.dates}
       </p>
       {job.location && (
-        <p className="mt-1 font-mono text-[10px] text-muted-foreground/60">
+        <p className="mt-1 font-mono text-xs text-muted-foreground/60">
           {job.location}
         </p>
       )}
@@ -113,10 +113,10 @@ const Experience = () => (
         <div aria-hidden className="absolute inset-y-0 left-0 w-0.5 bg-signal" />
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-6 py-4 md:px-10">
-          <p className="font-mono text-[10px] tracking-[0.18em] text-signal">
+          <p className="font-mono text-xs tracking-[0.18em] text-signal">
             Current post
           </p>
-          <p className="font-mono text-[11px] text-muted-foreground">
+          <p className="font-mono text-xs text-muted-foreground">
             {currentExperience.dates}
             {currentExperience.location && (
               <span className="text-muted-foreground/60">
@@ -145,7 +145,7 @@ const Experience = () => (
           </div>
 
           <div className="border-t border-border pt-7 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-1">
-            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
               Scope
             </p>
             <ExperienceBullets points={currentExperience.bulletPoints} />
@@ -154,7 +154,7 @@ const Experience = () => (
       </motion.article>
 
       <div className="mt-16 md:mt-20">
-        <p className="mb-2 font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+        <p className="mb-2 font-mono text-xs tracking-[0.14em] text-muted-foreground">
           <span className="text-signal">01.1</span>
           <span className="mx-2 text-muted-foreground/60">/</span>
           Prior roles

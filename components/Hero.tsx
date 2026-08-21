@@ -47,7 +47,7 @@ const DimensionLine = () => (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.9, duration: 0.7 }}
-      className="shrink-0 font-mono text-[10px] tracking-[0.14em] text-signal md:text-[11px]"
+      className="shrink-0 font-mono text-xs tracking-[0.14em] text-signal md:text-xs"
     >
       systems engineer · researcher
     </motion.p>
@@ -81,7 +81,7 @@ const Hero = () => {
       >
         <motion.p
           {...rise(0.05)}
-          className="mb-6 font-mono text-[10px] tracking-[0.16em] text-muted-foreground md:mb-8 md:text-[11px]"
+          className="mb-6 font-mono text-xs tracking-[0.16em] text-muted-foreground md:mb-8 md:text-xs"
         >
           Portfolio <span className="text-muted-foreground/50">·</span> rev.
           2026
@@ -109,7 +109,7 @@ const Hero = () => {
         >
           {SPECS.map((spec) => (
             <div key={spec.label} className="bg-card/85 p-4 backdrop-blur-sm md:p-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 {spec.label}
               </p>
               <p className="mt-2 text-[13px] leading-5 text-foreground/85">
@@ -150,7 +150,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.9 }}
           href="#experience"
-          className="group mt-14 hidden items-center gap-3 self-start font-mono text-[10px] tracking-[0.2em] text-muted-foreground transition-colors hover:text-signal md:flex"
+          className="group mt-14 hidden items-center gap-3 self-start font-mono text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-signal md:flex"
         >
           Scroll
           <span className="h-8 w-px overflow-hidden bg-foreground/20">

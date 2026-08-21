@@ -22,7 +22,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55, ease: easeOutExpo }}
-          className="mb-6 font-mono text-[11px] tracking-[0.14em] text-signal"
+          className="mb-6 font-mono text-xs tracking-[0.14em] text-signal"
         >
           06
           <span className="mx-2 text-muted-foreground/60">/</span>
@@ -56,7 +56,7 @@ const Contact = () => {
 
         <div className="mt-10 grid gap-10 md:grid-cols-3">
           <div>
-            <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground">
+            <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground">
               Location
             </p>
             <p className="mt-3 text-sm leading-6 text-foreground/75">
@@ -64,7 +64,7 @@ const Contact = () => {
             </p>
           </div>
           <div>
-            <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground">
+            <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground">
               Elsewhere
             </p>
             <ul className="mt-3 space-y-1.5">
@@ -83,7 +83,7 @@ const Contact = () => {
             </ul>
           </div>
           <div>
-            <p className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground">
+            <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground">
               Documents
             </p>
             <a
@@ -97,7 +97,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] tracking-[0.1em] text-muted-foreground/80">
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 font-mono text-xs tracking-[0.1em] text-muted-foreground/80">
           <span>© 2026 Arian Izadi</span>
           <span className="font-serif text-[12px] italic tracking-normal">
             Set in Archivo, JetBrains Mono &amp; Newsreader

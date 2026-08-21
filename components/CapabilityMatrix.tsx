@@ -46,7 +46,7 @@ const CapabilityMatrix = () => {
                 />
               )}
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-[10px] text-signal">
+                <span className="font-mono text-xs text-signal">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="font-display text-xl font-bold tracking-tight text-foreground md:text-2xl">
@@ -67,7 +67,7 @@ const CapabilityMatrix = () => {
                     <li
                       key={skill}
                       className={cn(
-                        "font-mono text-[11px] tracking-[0.06em] text-foreground/70",
+                        "font-mono text-xs tracking-[0.06em] text-foreground/70",
                         primary &&
                           "border border-signal/50 bg-signal/8 px-2.5 py-0.5 font-semibold text-signal"
                       )}

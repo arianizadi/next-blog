@@ -44,11 +44,11 @@ const About = () => (
               />
             )}
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <p className="font-mono text-[10px] tracking-[0.16em] text-signal">
+              <p className="font-mono text-xs tracking-[0.16em] text-signal">
                 {index === 0 ? "Graduate study" : "Undergraduate study"}
               </p>
               {degree.date && (
-                <p className="font-mono text-[10px] text-muted-foreground">
+                <p className="font-mono text-xs text-muted-foreground">
                   {degree.date}
                 </p>
               )}
@@ -86,7 +86,7 @@ const About = () => (
 
       <div className="mt-8 flex flex-col gap-6 border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between md:p-8">
         <div>
-          <p className="font-mono text-[10px] tracking-[0.16em] text-muted-foreground">
+          <p className="font-mono text-xs tracking-[0.16em] text-muted-foreground">
             Certification
           </p>
           <p className="mt-2 text-sm text-foreground/80">

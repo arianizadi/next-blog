@@ -29,7 +29,7 @@ const ContributionList = () => (
       >
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <p className="font-mono text-[11px] text-muted-foreground">
+            <p className="font-mono text-xs text-muted-foreground">
               {c.project}
             </p>
             <h3 className="mt-2.5 font-display text-xl font-bold leading-tight tracking-tight text-foreground wrap-anywhere transition-colors group-hover:text-signal md:text-2xl">
@@ -39,7 +39,7 @@ const ContributionList = () => (
               {c.description}
             </p>
             {c.technologies && (
-              <p className="mt-3 font-mono text-[10px] tracking-[0.06em] text-muted-foreground/80">
+              <p className="mt-3 font-mono text-xs tracking-[0.06em] text-muted-foreground/80">
                 {c.technologies.join(" · ")}
               </p>
             )}
@@ -47,7 +47,7 @@ const ContributionList = () => (
 
           <div className="flex shrink-0 flex-col items-end gap-3">
             <span
-              className={`border px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${STATUS_STYLE[c.status]}`}
+              className={`border px-2 py-1 font-mono text-xs font-semibold uppercase tracking-[0.18em] ${STATUS_STYLE[c.status]}`}
             >
               {c.status}
             </span>
@@ -93,7 +93,7 @@ const MergeLog = ({ embedded = false }: { embedded?: boolean }) => {
   if (embedded) {
     return (
       <div className="mt-20 border-t border-border pt-12">
-        <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+        <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">
           <span className="text-signal">04.2</span>
           <span className="mx-2 text-muted-foreground/60">/</span>
           Open source

@@ -164,7 +164,7 @@ export function NavBar() {
               >
                 <span
                   className={cn(
-                    "font-mono text-[10px]",
+                    "font-mono text-xs",
                     isActive(link.href)
                       ? "text-signal"
                       : "text-muted-foreground/60 transition-colors group-hover:text-signal"
@@ -248,7 +248,7 @@ export function NavBar() {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline gap-4 border-b border-border py-4"
                     >
-                      <span className="shrink-0 font-mono text-[11px] text-signal">
+                      <span className="shrink-0 font-mono text-xs text-signal">
                         {link.id}
                       </span>
                       <span className="min-w-0 font-display text-[clamp(1.6rem,8vw,2.4rem)] font-bold leading-none tracking-tight text-foreground transition-colors group-hover:text-signal">
@@ -268,7 +268,7 @@ export function NavBar() {
               >
                 Resume ↗
               </a>
-              <span className="font-mono text-[10px]">Las Vegas, NV</span>
+              <span className="font-mono text-xs">Las Vegas, NV</span>
             </div>
           </motion.div>
         )}

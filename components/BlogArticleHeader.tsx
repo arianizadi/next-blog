@@ -30,7 +30,7 @@ export function BlogArticleHeader({
       </Link>
 
       <header>
-        <p className="mb-4 font-mono text-[11px] tracking-[0.14em] text-signal">
+        <p className="mb-4 font-mono text-xs tracking-[0.14em] text-signal">
           Entry
           <span className="mx-2 text-muted-foreground/60">/</span>
           <time dateTime={dateISO} className="text-muted-foreground">
