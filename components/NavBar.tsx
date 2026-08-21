@@ -25,7 +25,6 @@ export function NavBar() {
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const wasOpen = useRef(false);
 
-  // Track the URL hash so in-page links show the correct active section.
   useEffect(() => {
     const update = () => setHash(window.location.hash);
     const first = requestAnimationFrame(update);
@@ -36,14 +35,12 @@ export function NavBar() {
     };
   }, [pathname]);
 
-  // Close the mobile menu on navigation (derived-state reset during render)
   const [lastPath, setLastPath] = useState(pathname);
   if (lastPath !== pathname) {
     setLastPath(pathname);
     setOpen(false);
   }
 
-  // Scroll lock (native + Lenis) while the menu is open.
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     const main = document.querySelector("main");
@@ -64,7 +61,6 @@ export function NavBar() {
     };
   }, [open]);
 
-  // Escape key, breakpoint close, and initial focus into the menu.
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
@@ -109,7 +105,6 @@ export function NavBar() {
     };
   }, [open]);
 
-  // Restore focus to the toggle only after a real open→close cycle.
   useEffect(() => {
     if (wasOpen.current && !open) toggleRef.current?.focus();
     wasOpen.current = open;
@@ -122,15 +117,15 @@ export function NavBar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-100">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/72 px-5 py-3 backdrop-blur-xl md:px-8">
+      <header className="fixed inset-x-0 top-0 z-[100]">
+        <div className="flex items-center justify-between border-b border-border/60 bg-background/80 px-5 py-3 backdrop-blur-xl md:px-8">
           <Link
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
             className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
           >
-            <span className="inline-block h-2 w-2 bg-phosphor" />
+            <span className="inline-block h-2 w-2 bg-terracotta" />
             Arian Izadi
           </Link>
 
@@ -153,13 +148,13 @@ export function NavBar() {
                   "group flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
                   isActive(link.href)
                     ? "text-foreground"
-                    : "text-foreground/55 hover:text-foreground"
+                    : "text-foreground/70 hover:text-foreground"
                 )}
               >
-                <span className="text-[8px] text-phosphor/70">{link.id}</span>
+                <span className="text-[10px] text-terracotta">{link.id}</span>
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-phosphor" />
+                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-terracotta" />
                 )}
               </Link>
             ))}
@@ -170,7 +165,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor lg:inline-block"
+              className="hidden border border-foreground/20 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta lg:inline-block"
             >
               Resume
             </a>
@@ -208,7 +203,7 @@ export function NavBar() {
             transition={{ duration: 0.5, ease: easeOutExpo }}
             id="mobile-navigation"
             data-lenis-prevent
-            className="fixed inset-0 z-95 flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-background px-6 pb-10 pt-24 md:hidden"
+            className="fixed inset-0 z-[95] flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-background px-6 pb-10 pt-24 md:hidden"
           >
             <nav aria-label="Mobile">
               <ul className="space-y-2">
@@ -236,10 +231,10 @@ export function NavBar() {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline gap-4 border-b border-border py-4"
                     >
-                      <span className="shrink-0 font-mono text-xs text-phosphor">
+                      <span className="shrink-0 font-mono text-xs text-terracotta">
                         {link.id}
                       </span>
-                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-phosphor">
+                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-terracotta">
                         {link.label}
                       </span>
                     </Link>
@@ -247,12 +242,12 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-phosphor"
+                className="text-terracotta"
               >
                 Resume ↗
               </a>

@@ -5,57 +5,53 @@ import ScrambleText from "./ScrambleText";
 import { siteConfig } from "@/app/config/site";
 import { easeOutExpo } from "@/lib/motion";
 
-const HERO_VIDEO_SRC =
-  "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/bosch.webm";
-
 const Hero = () => {
   const { scrollYProgress } = useScroll();
-  const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0.2]);
+  const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -40]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0.25]);
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-background">
-      {/* Feed */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover opacity-60 motion-reduce:hidden"
-        autoPlay
-        loop
-        muted
-        playsInline
+      {/* Quiet editorial background texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--paper))_0%,hsl(var(--background))_60%,hsl(var(--paper))_100%)]" />
+      <div
         aria-hidden
-      >
-        <source src={HERO_VIDEO_SRC} type="video/webm" />
-      </video>
-      <div className="absolute inset-0 hidden bg-background motion-reduce:block" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.5)_0%,rgba(4,7,10,0.35)_40%,#04070a_96%)]" />
+        className="absolute left-0 top-0 h-full w-px bg-border/40"
+      />
+      <div
+        aria-hidden
+        className="absolute right-[8vw] top-0 hidden h-full w-px bg-border/40 lg:block"
+      />
 
       {/* Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-end px-6 pb-20 pt-32 motion-reduce:[transform:none!important] motion-reduce:[opacity:1!important] sm:px-8 md:px-12 lg:px-16"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-end px-6 pb-24 pt-32 motion-reduce:[transform:none!important] motion-reduce:[opacity:1!important] sm:px-8 md:px-12 lg:px-16"
       >
-        <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.26em] text-phosphor/90 md:text-[11px]">
-          Embedded Software Engineer II · Konami Gaming R&amp;D
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.6, ease: easeOutExpo }}
+          className="mb-6 font-mono text-[10px] uppercase tracking-[0.26em] text-terracotta md:text-[11px]"
+        >
+          Systems Engineer &amp; Researcher · Embedded Software Engineer II at
+          Konami Gaming
+        </motion.p>
 
-        <p className="max-w-5xl font-display text-[clamp(1.5rem,4vw,3.75rem)] font-black uppercase leading-[0.96] tracking-tight text-foreground">
-          Embedded &amp; Systems Software Engineer
-        </p>
-
-        {/* Lock-on headline, the one signature moment */}
-        <div className="relative mt-7 inline-block self-start md:mt-10">
+        {/* Lock-on headline with scramble */}
+        <div className="relative mt-2 inline-block self-start">
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute -inset-x-4 -inset-y-3 md:-inset-x-8 md:-inset-y-5"
-            initial={{ opacity: 0, scale: 1.5, filter: "blur(2px)" }}
+            className="pointer-events-none absolute -inset-x-3 -inset-y-2 md:-inset-x-5 md:-inset-y-3"
+            initial={{ opacity: 0, scale: 1.3, filter: "blur(2px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ delay: 1.2, duration: 0.55, ease: easeOutExpo }}
+            transition={{ delay: 0.9, duration: 0.55, ease: easeOutExpo }}
           >
-            <span className="absolute left-0 top-0 h-4 w-4 border-l-2 border-t-2 border-phosphor" />
-            <span className="absolute right-0 top-0 h-4 w-4 border-r-2 border-t-2 border-phosphor" />
-            <span className="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-phosphor" />
-            <span className="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-phosphor" />
-            <span className="absolute -top-3 left-0 whitespace-nowrap bg-phosphor px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-background md:text-[9px] md:tracking-[0.2em]">
+            <span className="absolute left-0 top-0 h-3 w-3 border-l border-t border-terracotta/40" />
+            <span className="absolute right-0 top-0 h-3 w-3 border-r border-t border-terracotta/40" />
+            <span className="absolute bottom-0 left-0 h-3 w-3 border-b border-l border-terracotta/40" />
+            <span className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-terracotta/40" />
+            <span className="absolute -top-2.5 left-0 whitespace-nowrap bg-terracotta px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-background md:text-[10px] md:tracking-[0.2em]">
               Subject: Arian Izadi / 0.99
             </span>
           </motion.div>
@@ -67,39 +63,32 @@ const Hero = () => {
           </h1>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.32, duration: 0.75, ease: easeOutExpo }}
-          className="mt-7 max-w-3xl font-mono text-[10px] font-semibold uppercase leading-6 tracking-[0.18em] text-phosphor md:text-[11px] md:tracking-[0.22em]"
-        >
-          C/C++ • Linux • Real-Time Systems • Robotics • Low-Level Software
-        </motion.p>
-
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.75, ease: easeOutExpo }}
-          className="mt-4 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55 md:text-[10px]"
+          transition={{ delay: 0.35, duration: 0.75, ease: easeOutExpo }}
+          className="mt-8 max-w-2xl"
         >
-          M.S. Computer Science, UNLV
-        </motion.p>
+          <p className="font-mono text-[10px] font-medium uppercase leading-6 tracking-[0.2em] text-foreground/70 md:text-[11px] md:tracking-[0.22em]">
+            C/C++ · Linux · Real-Time Systems · Robotics · Low-Level Software
+          </p>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.48, duration: 0.8, ease: easeOutExpo }}
-          className="mt-8 flex flex-wrap items-center gap-3"
+          transition={{ delay: 0.45, duration: 0.8, ease: easeOutExpo }}
+          className="mt-10 flex flex-wrap items-center gap-3"
         >
           <a
             href="#experience"
-            className="border border-phosphor bg-phosphor px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-background transition-colors hover:bg-transparent hover:text-phosphor"
+            className="border border-terracotta bg-terracotta px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-transparent hover:text-terracotta"
           >
             Experience
           </a>
           <a
             href="#work"
-            className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor"
+            className="border border-foreground/20 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta"
           >
             Selected Work
           </a>
@@ -107,7 +96,7 @@ const Hero = () => {
             href={siteConfig.links.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
+            className="border border-foreground/20 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
           >
             Resume ↗
           </a>
@@ -116,13 +105,13 @@ const Hero = () => {
         <motion.a
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.9 }}
+          transition={{ delay: 0.8, duration: 0.9 }}
           href="#experience"
-          className="group mt-16 hidden items-center gap-3 self-start font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55 transition-colors hover:text-phosphor md:flex"
+          className="group mt-20 hidden items-center gap-3 self-start font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70 transition-colors hover:text-terracotta md:flex"
         >
           Scroll
-          <span className="h-8 w-px overflow-hidden bg-foreground/20">
-            <span className="block h-3 w-px animate-slide-down bg-phosphor" />
+          <span className="h-8 w-px overflow-hidden bg-foreground/15">
+            <span className="block h-3 w-px animate-slide-down bg-terracotta" />
           </span>
         </motion.a>
       </motion.div>

@@ -6,7 +6,7 @@ export const Icons = {
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      fill="white"
+      fill="currentColor"
       {...props}
     >
       <title>GitHub</title>
@@ -18,7 +18,7 @@ export const Icons = {
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      fill="white"
+      fill="currentColor"
       {...props}
     >
       <title>X</title>
@@ -30,7 +30,7 @@ export const Icons = {
       role="img"
       viewBox="0 0 74 74"
       xmlns="http://www.w3.org/2000/svg"
-      fill="white"
+      fill="currentColor"
       {...props}
     >
       <title>GitRoll</title>
@@ -42,7 +42,7 @@ export const Icons = {
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      fill="white"
+      fill="currentColor"
       {...props}
     >
       <title>LinkedIn</title>

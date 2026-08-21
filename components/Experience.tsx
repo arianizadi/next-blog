@@ -24,9 +24,9 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "border border-border px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/60",
+          "border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/70",
           isPrimaryTechnology(technology) &&
-            "border-phosphor/50 bg-phosphor/8 font-semibold text-phosphor"
+            "border-terracotta/50 bg-terracotta/8 font-semibold text-terracotta"
         )}
       >
         {technology}
@@ -40,10 +40,10 @@ const ExperienceBullets = ({ points }: { points: string[] }) => (
     {points.map((point) => (
       <li
         key={point}
-        className="flex gap-3 text-sm leading-6 text-foreground/70"
+        className="flex gap-3 text-sm leading-6 text-foreground/65"
       >
-        <span aria-hidden className="shrink-0 font-mono text-phosphor">
-          +
+        <span aria-hidden className="shrink-0 font-mono text-terracotta">
+          —
         </span>
         <span>{point}</span>
       </li>
@@ -71,20 +71,20 @@ const PreviousExperienceCard = ({
         ease: easeOutExpo,
       }}
       className={cn(
-        "flex h-full flex-col border border-border bg-card p-6 transition-colors hover:border-foreground/25 md:p-7",
-        systemsRole && "border-phosphor/25"
+        "flex h-full flex-col border border-border bg-card p-6 transition-colors hover:border-foreground/20 md:p-7",
+        systemsRole && "border-terracotta/20"
       )}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground">
+          <h3 className="font-display text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
             {job.company}
           </h3>
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-phosphor/85">
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-terracotta">
             {job.role}
           </p>
         </div>
-        <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55">
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70">
           {job.dates}
         </p>
       </div>
@@ -118,20 +118,20 @@ const Experience = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: easeOutExpo }}
-        className="relative overflow-hidden border border-phosphor/35 bg-card"
+        className="relative overflow-hidden border border-terracotta/30 bg-card"
       >
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(120deg,hsl(var(--phosphor)/0.08),transparent_45%)]"
+          className="absolute inset-0 bg-[linear-gradient(120deg,hsl(var(--terracotta)/0.06),transparent_45%)]"
         />
         <div className="relative grid gap-10 p-6 md:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 border border-phosphor/40 bg-phosphor/8 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.22em] text-phosphor">
-                <span aria-hidden className="h-1.5 w-1.5 bg-phosphor" />
+              <span className="inline-flex items-center gap-2 border border-terracotta/40 bg-terracotta/8 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-terracotta">
+                <span aria-hidden className="h-1.5 w-1.5 bg-terracotta" />
                 Current
               </span>
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/55">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70">
                 {currentExperience.dates}
               </span>
             </div>
@@ -139,10 +139,10 @@ const Experience = () => (
             <h3 className="mt-7 font-display text-[clamp(2.25rem,5vw,5rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
               {currentExperience.company}
             </h3>
-            <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-phosphor md:text-sm">
+            <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-terracotta md:text-sm">
               {currentExperience.role}
             </p>
-            <p className="mt-5 max-w-xl text-base leading-7 text-foreground/70">
+            <p className="mt-5 max-w-xl text-base leading-7 text-foreground/65">
               {currentExperience.summary}
             </p>
             <TechnologyList
@@ -152,7 +152,7 @@ const Experience = () => (
           </div>
 
           <div className="border-t border-border pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <p className="mb-5 font-mono text-[9px] uppercase tracking-[0.24em] text-foreground/55">
+            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70">
               Engineering scope
             </p>
             <ExperienceBullets points={currentExperience.bulletPoints} />
@@ -161,7 +161,7 @@ const Experience = () => (
       </motion.article>
 
       <div className="mt-16">
-        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.28em] text-phosphor/80">
+        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.28em] text-terracotta">
           {"//"} Previous experience
         </p>
         <div className="grid gap-px border border-border bg-border lg:grid-cols-3">

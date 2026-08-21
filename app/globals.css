@@ -5,7 +5,7 @@
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: 1.25rem;
   @media (width >= --theme(--breakpoint-sm)) {
     max-width: none;
   }
@@ -31,13 +31,13 @@
 
   --text-display-lg: 5rem;
   --text-display-lg--line-height: 1.05;
-  --text-display-lg--letter-spacing: 0;
+  --text-display-lg--letter-spacing: -0.02em;
   --text-display-xl: 7rem;
   --text-display-xl--line-height: 1;
-  --text-display-xl--letter-spacing: 0;
+  --text-display-xl--letter-spacing: -0.02em;
   --text-display-hero: clamp(3.5rem, 13vw, 12rem);
   --text-display-hero--line-height: 0.88;
-  --text-display-hero--letter-spacing: -0.01em;
+  --text-display-hero--letter-spacing: -0.03em;
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -45,8 +45,9 @@
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
-  --color-phosphor: hsl(var(--phosphor));
-  --color-phosphor-dim: hsl(var(--phosphor-dim));
+  --color-ink: hsl(var(--ink));
+  --color-terracotta: hsl(var(--terracotta));
+  --color-terracotta-dim: hsl(var(--terracotta-dim));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
@@ -77,31 +78,16 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
   @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+/* Tailwind v4 compatibility: keep v3 default border color behavior */
 @layer base {
   *,
   ::after,
@@ -119,9 +105,13 @@
     border-color 0.4s ease,
     box-shadow 0.4s ease;
   &:hover {
-    border-color: hsl(var(--phosphor) / 0.35);
-    box-shadow: 0 16px 48px -12px hsl(210 60% 2% / 0.8);
+    border-color: hsl(var(--terracotta) / 0.35);
+    box-shadow: 0 12px 40px -12px hsl(24 10% 10% / 0.06);
   }
+}
+
+@utility wrap-anywhere {
+  overflow-wrap: anywhere;
 }
 
 @layer components {
@@ -151,39 +141,41 @@
 
 @layer base {
   :root {
-    --background: 210 24% 3%;
-    --foreground: 200 14% 93%;
+    --background: 42 24% 95%;
+    --foreground: 24 10% 10%;
 
-    --card: 210 20% 5%;
-    --card-foreground: 200 14% 93%;
+    --card: 40 20% 93%;
+    --card-foreground: 24 10% 10%;
 
-    --popover: 210 20% 5%;
-    --popover-foreground: 200 14% 93%;
+    --popover: 40 20% 93%;
+    --popover-foreground: 24 10% 10%;
 
-    --primary: 200 14% 93%;
-    --primary-foreground: 210 24% 3%;
+    --primary: 24 10% 10%;
+    --primary-foreground: 42 24% 95%;
 
-    --secondary: 210 16% 9%;
-    --secondary-foreground: 200 10% 68%;
+    --secondary: 35 14% 88%;
+    --secondary-foreground: 24 10% 10%;
 
-    --muted: 210 16% 9%;
-    --muted-foreground: 208 12% 64%;
+    --muted: 35 14% 88%;
+    --muted-foreground: 25 8% 42%;
 
-    --accent: 210 16% 9%;
-    --accent-foreground: 200 14% 93%;
+    --accent: 12 55% 48%;
+    --accent-foreground: 42 24% 95%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 14% 13%;
-    --input: 210 14% 13%;
-    --ring: 183 85% 62%;
+    --border: 32 12% 80%;
+    --input: 32 12% 80%;
+    --ring: 12 55% 48%;
 
-    /* Perception system accent */
-    --phosphor: 183 85% 62%;
-    --phosphor-dim: 183 60% 40%;
+    /* Editorial accent tokens */
+    --terracotta: 12 58% 43%;
+    --terracotta-dim: 12 45% 38%;
+    --ink: 24 10% 10%;
+    --paper: 42 24% 95%;
 
-    --radius: 0.25rem;
+    --radius: 0.125rem;
   }
 }
 
@@ -200,11 +192,13 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Archivo variable width axis: display type runs expanded */
   .font-display {
-    font-stretch: 122%;
+    font-stretch: 115%;
   }
 
   :where(a, button, input, textarea, select, [role="button"]):focus-visible {
@@ -213,8 +207,8 @@
   }
 
   ::selection {
-    background-color: hsl(var(--phosphor) / 0.28);
-    color: hsl(200 14% 97%);
+    background-color: hsl(var(--terracotta) / 0.18);
+    color: hsl(24 10% 8%);
   }
 
   ::-webkit-scrollbar {
@@ -224,11 +218,11 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(210 12% 18%);
+    background: hsl(32 10% 72%);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--phosphor-dim));
+    background: hsl(var(--terracotta-dim));
   }
 
   /* Lenis smooth scroll */
@@ -268,9 +262,11 @@
   @keyframes template-rise {
     from {
       transform: translateY(14px);
+      opacity: 0.85;
     }
     to {
       transform: translateY(0);
+      opacity: 1;
     }
   }
 

@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("dark", archivo.variable, jetbrainsMono.variable)}
+      className={cn(archivo.variable, jetbrainsMono.variable)}
     >
       <body className="min-h-screen bg-background font-sans antialiased">
         <noscript>

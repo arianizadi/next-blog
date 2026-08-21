@@ -22,7 +22,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+          className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-terracotta"
         >
           06 {"//"} Contact
         </motion.p>
@@ -39,17 +39,17 @@ const Contact = () => {
           href={`mailto:${EMAIL}`}
           className="group mt-10 inline-flex max-w-full flex-wrap items-baseline gap-x-4 gap-y-2"
         >
-          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 wrap-anywhere transition-colors duration-300 group-hover:text-phosphor">
+          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-bold uppercase leading-none tracking-tight text-foreground/70 wrap-anywhere transition-colors duration-300 group-hover:text-terracotta">
             {EMAIL}
           </span>
-          <span className="font-mono text-sm text-phosphor transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
+          <span className="font-mono text-sm text-terracotta transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
             ↗
           </span>
         </motion.a>
 
         <div className="mt-20 grid gap-10 border-t border-border pt-10 md:grid-cols-3">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70">
               Coordinates
             </p>
             <p className="mt-3 text-sm leading-6 text-foreground/70">
@@ -57,7 +57,7 @@ const Contact = () => {
             </p>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70">
               Signals
             </p>
             <ul className="mt-3 space-y-1.5">
@@ -67,7 +67,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/70 transition-colors hover:text-phosphor"
+                    className="text-sm text-foreground/70 transition-colors hover:text-terracotta"
                   >
                     {social.label} ↗
                   </a>
@@ -76,21 +76,21 @@ const Contact = () => {
             </ul>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70">
               Documents
             </p>
             <a
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block text-sm text-foreground/70 transition-colors hover:text-phosphor"
+              className="mt-3 inline-block text-sm text-foreground/70 transition-colors hover:text-terracotta"
             >
               Resume (PDF) ↗
             </a>
           </div>
         </div>
 
-        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70">
           <span>© 2026 Arian Izadi</span>
           <span>Las Vegas, NV</span>
         </div>

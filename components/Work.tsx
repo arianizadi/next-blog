@@ -17,7 +17,7 @@ const ProjectLinks = ({ project }: { project: Project }) => {
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
+          className="text-foreground/70 underline decoration-foreground/20 underline-offset-4 transition-colors hover:text-terracotta hover:decoration-terracotta"
         >
           Code ↗
         </a>
@@ -27,13 +27,13 @@ const ProjectLinks = ({ project }: { project: Project }) => {
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
+          className="text-foreground/70 underline decoration-foreground/20 underline-offset-4 transition-colors hover:text-terracotta hover:decoration-terracotta"
         >
           Live ↗
         </a>
       )}
       {!hasExternalLink && (
-        <span className="text-foreground/50">Professional experience</span>
+        <span className="text-foreground/70">Professional experience</span>
       )}
     </div>
   );
@@ -41,21 +41,21 @@ const ProjectLinks = ({ project }: { project: Project }) => {
 
 const TechnicalFrame = ({ project }: { project: Project }) => (
   <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(135deg,hsl(var(--card)),hsl(var(--background)))]">
-    <div className="absolute inset-5 border border-phosphor/15" />
-    <div className="absolute inset-y-5 left-1/3 w-px bg-phosphor/10" />
-    <div className="absolute inset-y-5 right-1/3 w-px bg-phosphor/10" />
-    <div className="absolute inset-x-5 top-1/2 h-px bg-phosphor/10" />
+    <div className="absolute inset-5 border border-terracotta/10" />
+    <div className="absolute inset-y-5 left-1/3 w-px bg-terracotta/8" />
+    <div className="absolute inset-y-5 right-1/3 w-px bg-terracotta/8" />
+    <div className="absolute inset-x-5 top-1/2 h-px bg-terracotta/8" />
     <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
       {project.technologies.slice(0, 4).map((technology) => (
         <span
           key={technology}
-          className="border border-foreground/15 bg-background/70 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-foreground/60"
+          className="border border-foreground/10 bg-background/70 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/70"
         >
           {technology}
         </span>
       ))}
     </div>
-    <p className="absolute right-5 top-5 hidden font-mono text-[8px] uppercase tracking-[0.2em] text-phosphor/60 sm:block">
+    <p className="absolute right-5 top-5 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-terracotta sm:block">
       System profile
     </p>
   </div>
@@ -79,24 +79,24 @@ const FrameCard = ({
           sizes="(max-width: 768px) 86vw, (max-width: 1024px) 56vw, (max-width: 1280px) 44vw, 40vw"
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
-          className="object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
+          className="object-cover opacity-85 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
         />
       ) : (
         <TechnicalFrame project={project} />
       )}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.25),transparent_40%,rgba(4,7,10,0.55))]" />
-      <p className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/70">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(var(--background)/0.25)_0%,transparent_40%,hsl(var(--background)/0.55)_100%)]" />
+      <p className="absolute left-5 top-5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/70">
         {project.eyebrow}
       </p>
     </div>
 
     {/* Analysis */}
     <div className="flex flex-1 flex-col p-6 md:p-8">
-      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground wrap-anywhere md:text-4xl">
+      <h3 className="font-display text-2xl font-bold uppercase leading-none tracking-tight text-foreground wrap-anywhere md:text-4xl">
         {project.title}
       </h3>
-      <p className="mt-4 text-sm leading-6 text-foreground/60">
-        <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
+      <p className="mt-4 text-sm leading-6 text-foreground/70">
+        <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70">
           Problem:
         </span>
         {project.problem}
@@ -104,12 +104,12 @@ const FrameCard = ({
       <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
         {project.contribution}
       </p>
-      <p className="mt-3 border-l border-phosphor/50 pl-3 font-mono text-[11px] leading-5 text-phosphor/80">
+      <p className="mt-3 border-l border-terracotta/40 pl-3 font-mono text-[11px] leading-5 text-terracotta">
         → {project.impact}
       </p>
 
       <div className="mt-auto pt-6">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55">
+        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70">
           {project.technologies.join(" · ")}
         </p>
         <ProjectLinks project={project} />
@@ -119,11 +119,6 @@ const FrameCard = ({
 );
 
 const HorizontalGallery = () => {
-  /*
-   * The track and progress rail use a named CSS ViewTimeline in globals.css,
-   * keeping the entire gallery off the JavaScript scroll path. Reduced-motion,
-   * short-view, and unsupported-browser fallbacks are CSS-only too.
-   */
   return (
     <section
       className="work-pin-section relative"
@@ -143,7 +138,7 @@ const HorizontalGallery = () => {
         {/* Progress rail */}
         <div className="work-pin-progress absolute inset-x-6 bottom-8 md:inset-x-12">
           <div className="relative h-px w-full bg-border">
-            <div className="work-pin-progress-fill absolute inset-0 origin-left bg-phosphor" />
+            <div className="work-pin-progress-fill absolute inset-0 origin-left bg-terracotta" />
           </div>
         </div>
       </div>
@@ -161,9 +156,9 @@ const ArchiveRow = ({
   const primaryHref = project.liveUrl ?? project.githubUrl;
 
   return (
-    <li className="group border-b border-border transition-colors hover:bg-foreground/3">
+    <li className="group border-b border-border transition-colors hover:bg-foreground/[0.02]">
       <div className="flex items-center gap-5 py-5 md:gap-8">
-        <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/70">
           P.{String(featured.length + index + 1).padStart(2, "0")}
         </span>
 
@@ -175,10 +170,10 @@ const ArchiveRow = ({
               rel="noopener noreferrer"
               className="block"
             >
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-phosphor md:truncate md:text-2xl">
+              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-terracotta md:truncate md:text-2xl">
                 {project.title}
               </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 md:hidden">
                 {project.eyebrow}
               </span>
             </a>
@@ -187,17 +182,17 @@ const ArchiveRow = ({
               <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground wrap-anywhere md:truncate md:text-2xl">
                 {project.title}
               </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 md:hidden">
                 {project.eyebrow}
               </span>
             </>
           )}
         </div>
 
-        <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
+        <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70 md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-foreground/50 lg:block">
+        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-foreground/70 lg:block">
           {project.technologies.join(" · ")}
         </span>
 
@@ -207,7 +202,7 @@ const ArchiveRow = ({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/55 transition-colors hover:text-phosphor"
+              className="text-foreground/70 transition-colors hover:text-terracotta"
             >
               Code ↗
             </a>
@@ -217,7 +212,7 @@ const ArchiveRow = ({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/55 transition-colors hover:text-phosphor"
+              className="text-foreground/70 transition-colors hover:text-terracotta"
             >
               Live ↗
             </a>
@@ -231,14 +226,14 @@ const ArchiveRow = ({
 const ArchiveTable = () => (
   <div className="px-6 pb-8 md:px-12">
     <div className="mb-6 flex items-end justify-between border-t border-border pt-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
+      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-terracotta">
         {"//"} Full archive
       </p>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/50 transition-colors hover:text-phosphor"
+        className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70 transition-colors hover:text-terracotta"
       >
         github.com/arianizadi ↗
       </a>

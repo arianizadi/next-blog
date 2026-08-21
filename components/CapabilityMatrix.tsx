@@ -37,10 +37,10 @@ const CapabilityMatrix = () => {
               className={cn(
                 "group relative bg-card p-6 transition-colors hover:bg-background md:p-8",
                 group.id === "systems" &&
-                  "ring-1 ring-inset ring-phosphor/30 md:col-span-2 xl:col-span-2"
+                  "ring-1 ring-inset ring-terracotta/25 md:col-span-2 xl:col-span-2"
               )}
             >
-              <h3 className="font-display text-xl font-black uppercase tracking-tight text-foreground md:text-2xl">
+              <h3 className="font-display text-xl font-bold uppercase tracking-tight text-foreground md:text-2xl">
                 {group.title}
               </h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -54,9 +54,9 @@ const CapabilityMatrix = () => {
                     <li
                       key={skill}
                       className={cn(
-                        "border border-border px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/60",
+                        "border border-border px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/70",
                         primary &&
-                          "border-phosphor/55 bg-phosphor/8 px-3 text-[11px] font-semibold text-phosphor"
+                          "border-terracotta/50 bg-terracotta/8 px-3 text-[11px] font-semibold text-terracotta"
                       )}
                     >
                       {skill}

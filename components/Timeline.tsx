@@ -90,19 +90,19 @@ const LogEntry = ({
       className="relative pl-14 md:pl-24"
     >
       {/* Node */}
-      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-phosphor/60 bg-background md:left-4">
-        <span className="h-1.5 w-1.5 bg-phosphor" />
+      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-terracotta/50 bg-background md:left-4">
+        <span className="h-1.5 w-1.5 bg-terracotta" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70">
         [{milestone.stamp}]
       </p>
-      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
+      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-terracotta/25 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
+        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/70 md:block">
           {String(index + 1).padStart(2, "0")}
         </span>
         <div>
-          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
+          <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-foreground md:text-3xl">
             {milestone.title}
           </h3>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
@@ -136,7 +136,7 @@ const Timeline = () => {
           <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
             <motion.div
               style={{ scaleY: scrollYProgress }}
-              className="absolute inset-0 origin-top bg-phosphor"
+              className="absolute inset-0 origin-top bg-terracotta"
             />
           </div>
 
@@ -157,13 +157,13 @@ const Timeline = () => {
               transition={{ duration: 0.7 }}
               className="relative pl-14 md:pl-24"
             >
-              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 bg-phosphor" />
+              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-terracotta bg-background md:left-4">
+                <span className="h-1.5 w-1.5 bg-terracotta" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-terracotta">
                 [NOW]
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
+              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/70">
                 The same curiosity that started with a C# book still drives the
                 work: understand the system, respect the constraints, and build
                 something reliable enough to matter.

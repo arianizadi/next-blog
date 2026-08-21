@@ -17,7 +17,7 @@ const About = () => (
         index="05"
         label="Systems Foundation"
         title="Education"
-        description="Completing an M.S. in Computer Science at UNLV with graduate coursework in real-time and embedded systems and advanced operating systems."
+        description="M.S. in Computer Science at UNLV with graduate coursework in real-time and embedded systems, advanced operating systems, and network security."
       />
 
       <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
@@ -40,28 +40,28 @@ const About = () => (
             {index === 0 && (
               <div
                 aria-hidden
-                className="absolute inset-x-0 top-0 h-px bg-phosphor"
+                className="absolute inset-x-0 top-0 h-px bg-terracotta"
               />
             )}
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-phosphor/80">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-terracotta">
                 {index === 0 ? "Graduate study" : "Undergraduate study"}
               </p>
               {degree.date && (
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70">
                   {degree.date}
                 </p>
               )}
             </div>
 
-            <h3 className="mt-7 font-display text-3xl font-black uppercase leading-none tracking-tight text-foreground md:text-4xl">
+            <h3 className="mt-7 font-display text-3xl font-bold uppercase leading-none tracking-tight text-foreground md:text-4xl">
               {degree.degree}
             </h3>
-            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/55">
+            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/70">
               {degree.university}
             </p>
             {degree.gpa && (
-              <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-phosphor">
+              <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-terracotta">
                 {degree.gpa}
               </p>
             )}
@@ -72,8 +72,8 @@ const About = () => (
                   key={highlight}
                   className="flex gap-3 text-sm leading-6 text-foreground/70"
                 >
-                  <span aria-hidden className="font-mono text-phosphor">
-                    +
+                  <span aria-hidden className="font-mono text-terracotta">
+                    —
                   </span>
                   {highlight}
                 </li>
@@ -85,18 +85,18 @@ const About = () => (
 
       <div className="mt-8 flex flex-col gap-6 border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between md:p-8">
         <div>
-          <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/55">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/70">
             Certification
           </p>
-          <p className="mt-2 text-sm text-foreground/75">
+          <p className="mt-2 text-sm text-foreground/65">
             {certifications.join(" · ")}
           </p>
         </div>
         <Link
           href="/journey"
-          className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-phosphor"
+          className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-terracotta"
         >
-          <span className="h-px w-8 bg-phosphor transition-all group-hover:w-12" />
+          <span className="h-px w-8 bg-terracotta transition-all group-hover:w-12" />
           View engineering journey
         </Link>
       </div>
