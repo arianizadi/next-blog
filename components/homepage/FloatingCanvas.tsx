@@ -154,6 +154,18 @@ export function FloatingCanvas() {
                   Works,
                 </h2>
 
+                <div className="absolute inset-x-4 top-[5.25rem] z-20 border-t border-black/15 pt-2 md:hidden">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em]">
+                    Arian Izadi
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-700">
+                    Embedded Software Engineer II · Konami Gaming
+                  </p>
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-neutral-500">
+                    C/C++ · Linux · Real-time · Robotics
+                  </p>
+                </div>
+
                 {/* Content: Gallery vs Detail */}
                 <AnimatePresence mode="wait">
                   {!projectSelected ? (
@@ -198,7 +210,7 @@ export function FloatingCanvas() {
                       </div>
 
                       {/* Mobile Carousel - showing primary + peek */}
-                      <div className="flex md:hidden w-full h-full flex-col pt-24 pb-8">
+                      <div className="flex md:hidden w-full h-full flex-col pb-8 pt-40">
                         <div 
                           ref={carouselRef}
                           className="flex-1 w-full overflow-x-auto snap-x snap-mandatory flex gap-4 px-6 hide-scrollbar items-center pb-4"
