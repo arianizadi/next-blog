@@ -87,27 +87,34 @@ const LogEntry = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
-      className="relative pl-14 md:pl-24"
+      className="group relative pl-12 md:pl-20"
     >
-      {/* Node */}
-      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-phosphor/60 bg-background md:left-4">
-        <span className="h-1.5 w-1.5 bg-phosphor" />
+      <span
+        aria-hidden
+        className="absolute left-0 top-1 flex h-5 w-5 items-center justify-center border border-border bg-background transition-colors duration-300 group-hover:border-accent md:left-2"
+      >
+        <span className="h-1 w-1 bg-accent" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+      <p className="font-mono text-[10px] uppercase tracking-[0.22em] tabular-nums text-muted-foreground">
         [{milestone.stamp}]
       </p>
-      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <div>
-          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
-            {milestone.title}
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-            {milestone.description}
-          </p>
+      <div className="mt-3 border border-border bg-card p-6 transition-colors group-hover:border-foreground/30 md:p-8">
+        <div className="flex items-baseline gap-4">
+          <span
+            aria-hidden
+            className="hidden shrink-0 font-mono text-[10px] tracking-[0.18em] tabular-nums text-muted-foreground md:block"
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <div className="min-w-0">
+            <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
+              {milestone.title}
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+              {milestone.description}
+            </p>
+          </div>
         </div>
       </div>
     </motion.li>
@@ -122,48 +129,53 @@ const Timeline = () => {
   });
 
   return (
-    <div className="relative min-h-screen bg-background pb-32 pt-32 md:pt-40">
-      <div className="px-6 md:px-12">
+    <div className="relative min-h-screen bg-background pb-32 pt-28 md:pt-36">
+      <div className="px-5 md:px-8 lg:px-12">
         <SectionHeader
-          index="02"
-          label="System Boot Log"
+          index="LOG"
+          label="System Boot Sequence"
           title="Journey"
+          level="h1"
           description="From a borrowed C# manual to robotics perception research. The log, unedited."
         />
 
         <div ref={traceRef} className="relative">
-          {/* Signal trace */}
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
+          <div
+            aria-hidden
+            className="absolute bottom-0 left-[9px] top-0 w-px bg-border md:left-[19px]"
+          >
             <motion.div
               style={{ scaleY: scrollYProgress }}
-              className="absolute inset-0 origin-top bg-phosphor"
+              className="absolute inset-0 origin-top bg-accent"
             />
           </div>
 
-          <ul className="space-y-10 md:space-y-14">
+          <ul className="space-y-8 md:space-y-10">
             {MILESTONES.map((milestone, index) => (
               <LogEntry
-                key={milestone.title}
+                key={`${milestone.stamp}-${milestone.title}`}
                 milestone={milestone}
                 index={index}
               />
             ))}
 
-            {/* Still running */}
             <motion.li
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="relative pl-14 md:pl-24"
+              className="relative pl-12 md:pl-20"
             >
-              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 bg-phosphor" />
+              <span
+                aria-hidden
+                className="absolute left-0 top-1 flex h-5 w-5 items-center justify-center border border-accent bg-background md:left-2"
+              >
+                <span className="animate-caret h-1 w-1 bg-accent" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-ink">
                 [NOW]
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
+              <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
                 The same curiosity that started with a C# book still drives the
                 work: understand the system, respect the constraints, and build
                 something reliable enough to matter.

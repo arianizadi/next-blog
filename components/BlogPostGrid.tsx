@@ -41,31 +41,34 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
 
   return (
     <div>
-      {/* grep search */}
-      <div className="mb-10 flex items-center gap-3 border border-border bg-card px-4 py-3 focus-within:border-phosphor/50">
-        <span className="font-mono text-sm text-phosphor">&gt;</span>
-        <span className="font-mono text-sm text-foreground/55">grep</span>
+      <div className="mb-8 flex items-center gap-3 border border-border bg-card px-4 py-3 transition-colors focus-within:border-foreground">
+        <span aria-hidden className="font-mono text-sm text-accent-ink">
+          $
+        </span>
+        <label htmlFor="post-search" className="sr-only">
+          Search posts
+        </label>
         <input
+          id="post-search"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="search the log…"
-          aria-label="Search posts"
-          className="w-full bg-transparent font-mono text-base text-foreground placeholder:text-foreground/50 focus:outline-hidden sm:text-sm"
+          placeholder="grep the log…"
+          className="w-full bg-transparent font-mono text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-hidden sm:text-sm"
         />
         <span
           role="status"
           aria-live="polite"
-          className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-foreground/50"
+          className="shrink-0 font-mono text-[10px] tabular-nums tracking-[0.14em] text-muted-foreground"
         >
-          {visible.length}/{posts.length} RECORDS
+          {visible.length}/{posts.length}
         </span>
       </div>
 
       {visible.length === 0 ? (
         <p
           role="status"
-          className="border border-dashed border-border py-16 text-center font-mono text-sm text-foreground/55"
+          className="border border-dashed border-border py-16 text-center font-mono text-sm text-muted-foreground"
         >
           No matches. The log keeps its secrets.
         </p>
@@ -82,30 +85,36 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
                 delay: Math.min(index * 0.05, 0.3),
                 ease: easeOutExpo,
               }}
-              className="border-b border-border"
+              className="group relative border-b border-border first:border-t"
             >
               <Link
                 href={`/blog/${post.id}`}
-                className="group flex flex-col gap-2 py-6 transition-colors hover:bg-foreground/3 md:flex-row md:items-baseline md:gap-8 md:py-7"
+                className="flex flex-col gap-2 py-6 transition-colors hover:bg-card md:flex-row md:items-baseline md:gap-8 md:py-7"
               >
                 <time
                   dateTime={post.date}
-                  className="shrink-0 font-mono text-[11px] tracking-[0.18em] text-foreground/55"
+                  className="shrink-0 pl-0 font-mono text-[11px] tabular-nums tracking-[0.14em] text-muted-foreground transition-colors group-hover:text-accent-ink md:pl-6"
                 >
                   {formatDate(post.date)}
                 </time>
                 <span className="min-w-0 flex-1">
-                  <h2 className="font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-3xl">
+                  <h2 className="font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground transition-colors group-hover:text-accent-ink md:text-2xl">
                     {post.title}
                   </h2>
-                  <span className="mt-2 line-clamp-2 block max-w-2xl text-sm leading-6 text-muted-foreground">
+                  <span className="mt-2 line-clamp-2 block max-w-2xl pr-6 text-sm leading-6 text-muted-foreground">
                     {post.description}
                   </span>
+                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 lg:hidden">
+                    {post.tags.map((t) => `#${t}`).join(" ")}
+                  </span>
                 </span>
-                <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/50 lg:block">
+                <span className="hidden shrink-0 pr-6 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:block">
                   {post.tags.map((t) => `#${t}`).join(" ")}
                 </span>
-                <span className="shrink-0 font-mono text-sm text-foreground/55 transition-all group-hover:translate-x-1 group-hover:text-phosphor">
+                <span
+                  aria-hidden
+                  className="absolute right-6 top-1/2 hidden -translate-y-1/2 font-mono text-sm text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent-ink md:block"
+                >
                   →
                 </span>
               </Link>

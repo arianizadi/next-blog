@@ -12,13 +12,15 @@ const NAV_LINKS = [
   { href: "/#experience", label: "Experience", id: "01" },
   { href: "/#work", label: "Work", id: "02" },
   { href: "/#skills", label: "Skills", id: "03" },
-  { href: "/blog", label: "Blog", id: "04" },
-  { href: "/#contact", label: "Contact", id: "05" },
+  { href: "/blog", label: "Writing", id: "04" },
+  { href: "/journey", label: "Journey", id: "05" },
+  { href: "/#contact", label: "Contact", id: "06" },
 ];
 
 export function NavBar() {
   const [open, setOpen] = useState(false);
   const [hash, setHash] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -35,6 +37,14 @@ export function NavBar() {
       window.removeEventListener("hashchange", update);
     };
   }, [pathname]);
+
+  // Solid bar once the page scrolls.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close the mobile menu on navigation (derived-state reset during render)
   const [lastPath, setLastPath] = useState(pathname);
@@ -93,7 +103,7 @@ export function NavBar() {
         first.focus();
       }
     };
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onBreakpoint = (event: MediaQueryListEvent) => {
       if (event.matches) setOpen(false);
     };
@@ -123,19 +133,29 @@ export function NavBar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-100">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/72 px-5 py-3 backdrop-blur-xl md:px-8">
+        <div
+          className={cn(
+            "flex items-center justify-between px-5 py-3 transition-all duration-300 md:px-8",
+            scrolled || open
+              ? "border-b border-border bg-background/85 backdrop-blur-md"
+              : "border-b border-transparent bg-transparent"
+          )}
+        >
           <Link
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
-            className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
+            className="group flex items-center gap-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground"
           >
-            <span className="inline-block h-2 w-2 bg-phosphor" />
+            <span
+              aria-hidden
+              className="inline-block h-2 w-2 bg-accent transition-transform duration-300 group-hover:rotate-45"
+            />
             Arian Izadi
           </Link>
 
           <nav
-            className="hidden items-center gap-4 md:flex lg:gap-7"
+            className="hidden items-center gap-5 lg:flex xl:gap-7"
             aria-label="Primary"
           >
             {NAV_LINKS.map((link) => (
@@ -150,29 +170,35 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "group flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
+                  "group flex items-baseline gap-1.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors",
                   isActive(link.href)
                     ? "text-foreground"
-                    : "text-foreground/55 hover:text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <span className="text-[8px] text-phosphor/70">{link.id}</span>
+                <span
+                  className={cn(
+                    "text-[10px] transition-colors",
+                    isActive(link.href)
+                      ? "text-accent-ink"
+                      : "text-muted-foreground/60 group-hover:text-accent-ink"
+                  )}
+                >
+                  {link.id}
+                </span>
                 {link.label}
-                {isActive(link.href) && (
-                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-phosphor" />
-                )}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4">
             <a
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor lg:inline-block"
+              className="hidden border border-foreground px-4 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground transition-all duration-200 hover:bg-foreground hover:text-background active:translate-y-px lg:inline-block"
             >
-              Resume
+              Resume ↗
             </a>
             <button
               ref={toggleRef}
@@ -180,17 +206,17 @@ export function NavBar() {
               aria-expanded={open}
               aria-controls="mobile-navigation"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden"
+              className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
             >
               <span
                 className={cn(
-                  "h-px w-5 bg-foreground transition-transform duration-300",
+                  "h-px w-6 bg-foreground transition-transform duration-300",
                   open && "translate-y-[3.5px] rotate-45"
                 )}
               />
               <span
                 className={cn(
-                  "h-px w-5 bg-foreground transition-transform duration-300",
+                  "h-px w-6 bg-foreground transition-transform duration-300",
                   open && "translate-y-[-3.5px] -rotate-45"
                 )}
               />
@@ -208,10 +234,16 @@ export function NavBar() {
             transition={{ duration: 0.5, ease: easeOutExpo }}
             id="mobile-navigation"
             data-lenis-prevent
-            className="fixed inset-0 z-95 flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-background px-6 pb-10 pt-24 md:hidden"
+            className="fixed inset-0 z-95 flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-inverse px-6 pb-10 pt-24 text-inverse-foreground lg:hidden"
           >
+            <p
+              aria-hidden
+              className="mb-8 font-mono text-[10px] uppercase tracking-[0.3em] text-inverse-muted"
+            >
+              Index
+            </p>
             <nav aria-label="Mobile">
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {NAV_LINKS.map((link, index) => (
                   <motion.li
                     key={link.href}
@@ -219,7 +251,7 @@ export function NavBar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                       duration: 0.5,
-                      delay: reduceMotion ? 0 : 0.15 + index * 0.07,
+                      delay: reduceMotion ? 0 : 0.15 + index * 0.06,
                       ease: easeOutExpo,
                     }}
                   >
@@ -234,12 +266,24 @@ export function NavBar() {
                       }
                       ref={index === 0 ? firstLinkRef : undefined}
                       onClick={() => setOpen(false)}
-                      className="group flex items-baseline gap-4 border-b border-border py-4"
+                      className="group flex items-baseline gap-4 border-b border-inverse-border py-4"
                     >
-                      <span className="shrink-0 font-mono text-xs text-phosphor">
+                      <span
+                        className={cn(
+                          "shrink-0 font-mono text-xs",
+                          isActive(link.href) ? "text-accent" : "text-inverse-muted"
+                        )}
+                      >
                         {link.id}
                       </span>
-                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-phosphor">
+                      <span
+                        className={cn(
+                          "min-w-0 font-display text-[clamp(1.75rem,8vw,2.6rem)] font-black uppercase leading-none transition-colors",
+                          isActive(link.href)
+                            ? "text-accent"
+                            : "text-inverse-foreground group-hover:text-accent"
+                        )}
+                      >
                         {link.label}
                       </span>
                     </Link>
@@ -247,12 +291,12 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-inverse-muted">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-phosphor"
+                className="text-accent"
               >
                 Resume ↗
               </a>

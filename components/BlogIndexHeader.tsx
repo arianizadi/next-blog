@@ -3,7 +3,7 @@ import SectionHeader from "@/components/SectionHeader";
 export function BlogIndexHeader() {
   return (
     <SectionHeader
-      index="03"
+      index="WRITING"
       label="Field Notes"
       title="Field Log"
       level="h1"

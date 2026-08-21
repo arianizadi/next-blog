@@ -24,15 +24,16 @@ export function BlogArticleHeader({
     >
       <Link
         href="/blog"
-        className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/55 no-underline transition-colors hover:text-phosphor"
+        className="mb-12 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground no-underline transition-colors hover:text-accent-ink"
       >
-        ← /blog
+        <span aria-hidden>←</span> /blog
       </Link>
 
       <header>
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
+        <p className="mb-5 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.26em] text-accent-ink">
+          <span aria-hidden className="inline-block h-2 w-2 bg-accent" />
           Log entry ·{" "}
-          <time dateTime={dateISO} className="text-foreground/50">
+          <time dateTime={dateISO} className="text-muted-foreground tabular-nums">
             {dateLabel}
           </time>
         </p>

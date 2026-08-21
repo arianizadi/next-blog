@@ -1,155 +1,11 @@
-import Image from "next/image";
+import Link from "next/link";
+import FeaturedCarousel from "@/components/FeaturedCarousel";
 import MergeLog from "@/components/MergeLog";
 import SectionHeader from "@/components/SectionHeader";
 import { projects, type Project } from "@/lib/portfolio";
 
 const featured = projects.filter((p) => p.featured);
 const archive = projects.filter((p) => !p.featured);
-const PINNED_GALLERY_HEIGHT_VH = 30 + featured.length * 70;
-
-const ProjectLinks = ({ project }: { project: Project }) => {
-  const hasExternalLink = project.githubUrl || project.liveUrl;
-
-  return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em]">
-      {project.githubUrl && (
-        <a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
-        >
-          Code ↗
-        </a>
-      )}
-      {project.liveUrl && (
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
-        >
-          Live ↗
-        </a>
-      )}
-      {!hasExternalLink && (
-        <span className="text-foreground/50">Professional experience</span>
-      )}
-    </div>
-  );
-};
-
-const TechnicalFrame = ({ project }: { project: Project }) => (
-  <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(135deg,hsl(var(--card)),hsl(var(--background)))]">
-    <div className="absolute inset-5 border border-phosphor/15" />
-    <div className="absolute inset-y-5 left-1/3 w-px bg-phosphor/10" />
-    <div className="absolute inset-y-5 right-1/3 w-px bg-phosphor/10" />
-    <div className="absolute inset-x-5 top-1/2 h-px bg-phosphor/10" />
-    <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
-      {project.technologies.slice(0, 4).map((technology) => (
-        <span
-          key={technology}
-          className="border border-foreground/15 bg-background/70 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-foreground/60"
-        >
-          {technology}
-        </span>
-      ))}
-    </div>
-    <p className="absolute right-5 top-5 hidden font-mono text-[8px] uppercase tracking-[0.2em] text-phosphor/60 sm:block">
-      System profile
-    </p>
-  </div>
-);
-
-const FrameCard = ({
-  project,
-  priority,
-}: {
-  project: Project;
-  priority?: boolean;
-}) => (
-  <article className="work-pin-card group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
-    {/* Captured frame */}
-    <div className="relative aspect-video w-full overflow-hidden border-b border-border">
-      {project.image ? (
-        <Image
-          src={project.image}
-          alt=""
-          fill
-          sizes="(max-width: 768px) 86vw, (max-width: 1024px) 56vw, (max-width: 1280px) 44vw, 40vw"
-          loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
-          className="object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
-        />
-      ) : (
-        <TechnicalFrame project={project} />
-      )}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.25),transparent_40%,rgba(4,7,10,0.55))]" />
-      <p className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/70">
-        {project.eyebrow}
-      </p>
-    </div>
-
-    {/* Analysis */}
-    <div className="flex flex-1 flex-col p-6 md:p-8">
-      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground wrap-anywhere md:text-4xl">
-        {project.title}
-      </h3>
-      <p className="mt-4 text-sm leading-6 text-foreground/60">
-        <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
-          Problem:
-        </span>
-        {project.problem}
-      </p>
-      <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
-        {project.contribution}
-      </p>
-      <p className="mt-3 border-l border-phosphor/50 pl-3 font-mono text-[11px] leading-5 text-phosphor/80">
-        → {project.impact}
-      </p>
-
-      <div className="mt-auto pt-6">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55">
-          {project.technologies.join(" · ")}
-        </p>
-        <ProjectLinks project={project} />
-      </div>
-    </div>
-  </article>
-);
-
-const HorizontalGallery = () => {
-  /*
-   * The track and progress rail use a named CSS ViewTimeline in globals.css,
-   * keeping the entire gallery off the JavaScript scroll path. Reduced-motion,
-   * short-view, and unsupported-browser fallbacks are CSS-only too.
-   */
-  return (
-    <section
-      className="work-pin-section relative"
-      style={{ height: `${PINNED_GALLERY_HEIGHT_VH}vh` }}
-    >
-      <div className="work-pin-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <div className="work-pin-track flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12">
-          {featured.map((project, index) => (
-            <FrameCard
-              key={project.id}
-              project={project}
-              priority={index === 0}
-            />
-          ))}
-        </div>
-
-        {/* Progress rail */}
-        <div className="work-pin-progress absolute inset-x-6 bottom-8 md:inset-x-12">
-          <div className="relative h-px w-full bg-border">
-            <div className="work-pin-progress-fill absolute inset-0 origin-left bg-phosphor" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const ArchiveRow = ({
   project,
@@ -159,12 +15,23 @@ const ArchiveRow = ({
   index: number;
 }) => {
   const primaryHref = project.liveUrl ?? project.githubUrl;
+  const rowNumber = String(featured.length + index + 1).padStart(2, "0");
+
+  const title = (
+    <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors group-hover:text-accent-ink wrap-anywhere md:truncate md:text-2xl">
+      {project.title}
+    </span>
+  );
 
   return (
-    <li className="group border-b border-border transition-colors hover:bg-foreground/3">
-      <div className="flex items-center gap-5 py-5 md:gap-8">
-        <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50">
-          P.{String(featured.length + index + 1).padStart(2, "0")}
+    <li className="group border-b border-border transition-colors hover:bg-card">
+      <div className="relative flex items-center gap-5 py-5 pl-0 md:gap-8 md:pl-6">
+        <span
+          aria-hidden
+          className="absolute left-0 top-1/2 hidden h-0 w-px -translate-y-1/2 bg-accent transition-all duration-300 group-hover:h-8 md:block"
+        />
+        <span className="w-8 shrink-0 font-mono text-[10px] tabular-nums tracking-[0.16em] text-muted-foreground">
+          {rowNumber}
         </span>
 
         <div className="min-w-0 flex-1">
@@ -175,39 +42,35 @@ const ArchiveRow = ({
               rel="noopener noreferrer"
               className="block"
             >
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-phosphor md:truncate md:text-2xl">
-                {project.title}
-              </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+              {title}
+              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:hidden">
                 {project.eyebrow}
               </span>
             </a>
           ) : (
             <>
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground wrap-anywhere md:truncate md:text-2xl">
-                {project.title}
-              </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+              {title}
+              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:hidden">
                 {project.eyebrow}
               </span>
             </>
           )}
         </div>
 
-        <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
+        <span className="hidden w-44 shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-foreground/50 lg:block">
+        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-muted-foreground/80 lg:block">
           {project.technologies.join(" · ")}
         </span>
 
-        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
+        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.16em]">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/55 transition-colors hover:text-phosphor"
+              className="text-muted-foreground transition-colors hover:text-accent-ink"
             >
               Code ↗
             </a>
@@ -217,7 +80,7 @@ const ArchiveRow = ({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/55 transition-colors hover:text-phosphor"
+              className="text-muted-foreground transition-colors hover:text-accent-ink"
             >
               Live ↗
             </a>
@@ -229,22 +92,22 @@ const ArchiveRow = ({
 };
 
 const ArchiveTable = () => (
-  <div className="px-6 pb-8 md:px-12">
+  <div className="px-5 pb-4 md:px-8 lg:px-12">
     <div className="mb-6 flex items-end justify-between border-t border-border pt-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
-        {"//"} Full archive
+      <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-accent-ink">
+        Full archive
       </p>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/50 transition-colors hover:text-phosphor"
+        className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent-ink"
       >
         github.com/arianizadi ↗
       </a>
     </div>
 
-    <ul>
+    <ul className="border-t border-border">
       {archive.map((project, index) => (
         <ArchiveRow key={project.id} project={project} index={index} />
       ))}
@@ -259,15 +122,27 @@ const Work = () => (
   >
     {/* Legacy anchor alias: old /#projects links still land here */}
     <span id="projects" aria-hidden className="absolute -top-24" />
-    <div className="px-6 md:px-12">
+    <div className="px-5 pb-14 md:px-8 lg:px-12">
       <SectionHeader
         index="02"
         label="Engineering Portfolio"
         title="Selected Work"
-        description="Projects organized around the problem, the system built, and the constraints that shaped it."
+        description="Featured builds, organized around the problem, the system, and the constraints that shaped it."
       />
     </div>
-    <HorizontalGallery />
+    <FeaturedCarousel projects={featured} />
+    <div className="mt-16 px-5 md:px-8 lg:px-12">
+      <Link
+        href="#additional-work"
+        className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-accent-ink"
+      >
+        <span
+          aria-hidden
+          className="h-px w-8 bg-muted-foreground transition-all duration-300 group-hover:w-12 group-hover:bg-accent-ink"
+        />
+        Full archive below
+      </Link>
+    </div>
   </section>
 );
 
@@ -276,7 +151,7 @@ export const AdditionalWork = () => (
     id="additional-work"
     className="relative scroll-mt-16 border-t border-border py-24 md:py-32"
   >
-    <div className="px-6 md:px-12">
+    <div className="px-5 md:px-8 lg:px-12">
       <SectionHeader
         index="04"
         label="Across Computer Science"
@@ -285,7 +160,7 @@ export const AdditionalWork = () => (
       />
     </div>
     <ArchiveTable />
-    <div className="px-6 md:px-12">
+    <div className="px-5 md:px-8 lg:px-12">
       <MergeLog embedded />
     </div>
   </section>

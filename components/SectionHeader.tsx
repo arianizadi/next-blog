@@ -22,18 +22,25 @@ const SectionHeader = ({
   const TitleTag = level;
 
   return (
-    <div className="relative mb-16 md:mb-24">
-      <motion.p
+    <div className="mb-14 md:mb-20">
+      <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: easeOutExpo }}
-        className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+        className="flex items-center gap-4"
       >
-        {index} {"//"} {label}
-      </motion.p>
+        <span
+          aria-hidden
+          className="inline-block h-2 w-2 shrink-0 bg-accent transition-transform duration-300 group-hover:rotate-45"
+        />
+        <p className="shrink-0 font-mono text-[10px] uppercase tracking-[0.3em] text-accent-ink">
+          {index} / {label}
+        </p>
+        <span aria-hidden className="h-px min-w-8 flex-1 bg-border" />
+      </motion.div>
 
-      <TitleTag className="font-display text-[clamp(2rem,10vw,7rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
+      <TitleTag className="mt-6 font-display text-[clamp(2.4rem,7.5vw,5.5rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
         {title}
       </TitleTag>
 
@@ -43,7 +50,7 @@ const SectionHeader = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: easeOutExpo }}
-          className="mt-6 max-w-xl text-base leading-7 text-muted-foreground md:text-lg"
+          className="mt-6 max-w-xl text-base leading-7 text-muted-foreground"
         >
           {description}
         </motion.p>

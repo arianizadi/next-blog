@@ -1,131 +1,148 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 import { siteConfig } from "@/app/config/site";
 import { easeOutExpo } from "@/lib/motion";
 
-const HERO_VIDEO_SRC =
-  "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/bosch.webm";
+const formatUtc = (date: Date) =>
+  `${String(date.getUTCHours()).padStart(2, "0")}:${String(
+    date.getUTCMinutes()
+  ).padStart(2, "0")}:${String(date.getUTCSeconds()).padStart(2, "0")}`;
 
-const Hero = () => {
-  const { scrollYProgress } = useScroll();
-  const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -60]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0.2]);
+const UtcClock = () => {
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    const initial = requestAnimationFrame(() => setTime(formatUtc(new Date())));
+    const id = window.setInterval(() => setTime(formatUtc(new Date())), 1000);
+    return () => {
+      cancelAnimationFrame(initial);
+      window.clearInterval(id);
+    };
+  }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-background">
-      {/* Feed */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover opacity-60 motion-reduce:hidden"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden
-      >
-        <source src={HERO_VIDEO_SRC} type="video/webm" />
-      </video>
-      <div className="absolute inset-0 hidden bg-background motion-reduce:block" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.5)_0%,rgba(4,7,10,0.35)_40%,#04070a_96%)]" />
+    <span className="tabular-nums">
+      <span aria-hidden className="text-muted-foreground">
+        UTC{" "}
+      </span>
+      <span className="sr-only">Coordinated Universal Time </span>
+      {time ?? "--:--:--"}
+    </span>
+  );
+};
 
-      {/* Content */}
+const RegMark = ({ className }: { className?: string }) => (
+  <span aria-hidden className={`pointer-events-none absolute h-4 w-4 ${className}`}>
+    <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-border" />
+    <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-border" />
+  </span>
+);
+
+const Hero = () => {
+  return (
+    <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-background">
+      <RegMark className="left-4 top-20 md:left-8 lg:left-12" />
+      <RegMark className="right-4 top-20 md:right-8 lg:right-12" />
+
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-end px-6 pb-20 pt-32 motion-reduce:[transform:none!important] motion-reduce:[opacity:1!important] sm:px-8 md:px-12 lg:px-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7, ease: easeOutExpo }}
+        className="flex items-center justify-between px-5 pt-24 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground md:px-8 md:pt-28 lg:px-12"
       >
-        <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.26em] text-phosphor/90 md:text-[11px]">
-          Embedded Software Engineer II · Konami Gaming R&amp;D
+        <p>Systems Engineer &amp; Researcher</p>
+        <p className="hidden sm:block">
+          Las Vegas, NV — <UtcClock />
         </p>
+      </motion.div>
 
-        <p className="max-w-5xl font-display text-[clamp(1.5rem,4vw,3.75rem)] font-black uppercase leading-[0.96] tracking-tight text-foreground">
-          Embedded &amp; Systems Software Engineer
-        </p>
-
-        {/* Lock-on headline, the one signature moment */}
-        <div className="relative mt-7 inline-block self-start md:mt-10">
-          <motion.div
-            aria-hidden
-            className="pointer-events-none absolute -inset-x-4 -inset-y-3 md:-inset-x-8 md:-inset-y-5"
-            initial={{ opacity: 0, scale: 1.5, filter: "blur(2px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ delay: 1.2, duration: 0.55, ease: easeOutExpo }}
-          >
-            <span className="absolute left-0 top-0 h-4 w-4 border-l-2 border-t-2 border-phosphor" />
-            <span className="absolute right-0 top-0 h-4 w-4 border-r-2 border-t-2 border-phosphor" />
-            <span className="absolute bottom-0 left-0 h-4 w-4 border-b-2 border-l-2 border-phosphor" />
-            <span className="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-phosphor" />
-            <span className="absolute -top-3 left-0 whitespace-nowrap bg-phosphor px-1.5 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-background md:text-[9px] md:tracking-[0.2em]">
-              Subject: Arian Izadi / 0.99
-            </span>
-          </motion.div>
-
-          <h1 className="font-display text-display-hero font-black uppercase text-foreground">
-            <ScrambleText text="Arian" speed={40} />
-            <br />
-            <ScrambleText text="Izadi" speed={40} />
-          </h1>
-        </div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.32, duration: 0.75, ease: easeOutExpo }}
-          className="mt-7 max-w-3xl font-mono text-[10px] font-semibold uppercase leading-6 tracking-[0.18em] text-phosphor md:text-[11px] md:tracking-[0.22em]"
-        >
-          C/C++ • Linux • Real-Time Systems • Robotics • Low-Level Software
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.75, ease: easeOutExpo }}
-          className="mt-4 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55 md:text-[10px]"
-        >
-          M.S. Computer Science, UNLV
-        </motion.p>
+      <div className="flex flex-1 flex-col justify-center px-5 py-16 md:px-8 lg:px-12">
+        <h1 className="font-display text-display-hero font-black uppercase text-foreground">
+          <ScrambleText text="Arian" speed={34} />
+          <br />
+          <span className="inline-flex items-baseline">
+            <ScrambleText text="Izadi" speed={34} />
+            <span
+              aria-hidden
+              className="animate-caret ml-[0.08em] inline-block h-[0.62em] w-[0.09em] translate-y-[0.06em] bg-accent"
+            />
+          </span>
+        </h1>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.48, duration: 0.8, ease: easeOutExpo }}
-          className="mt-8 flex flex-wrap items-center gap-3"
-        >
-          <a
-            href="#experience"
-            className="border border-phosphor bg-phosphor px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-background transition-colors hover:bg-transparent hover:text-phosphor"
-          >
-            Experience
-          </a>
-          <a
-            href="#work"
-            className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor"
-          >
-            Selected Work
-          </a>
-          <a
-            href={siteConfig.links.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
-          >
-            Resume ↗
-          </a>
-        </motion.div>
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 0.5, duration: 0.9, ease: easeOutExpo }}
+          className="mt-8 h-px w-full origin-left bg-foreground/80 motion-reduce:[transform:none]"
+        />
 
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.9 }}
+        <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.75, ease: easeOutExpo }}
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-accent-ink">
+              Current
+            </p>
+            <p className="mt-3 font-display text-[clamp(1.35rem,3.4vw,2.6rem)] font-bold uppercase leading-tight tracking-tight text-foreground">
+              Embedded Software Engineer II
+              <span className="text-muted-foreground"> — Konami Gaming R&amp;D</span>
+            </p>
+            <p className="mt-5 font-mono text-[11px] uppercase leading-6 tracking-[0.16em] text-muted-foreground">
+              C/C++ / Linux / Real-Time Systems / Robotics / Low-Level Software
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.48, duration: 0.75, ease: easeOutExpo }}
+            className="flex flex-wrap items-center gap-3 lg:flex-col lg:items-stretch"
+          >
+            <a
+              href="#work"
+              className="inline-flex items-center justify-center border border-foreground bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors duration-200 hover:bg-accent hover:border-accent hover:text-inverse-foreground active:translate-y-px"
+            >
+              Selected Work
+            </a>
+            <a
+              href={siteConfig.links.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center border border-border px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground transition-colors duration-200 hover:border-foreground active:translate-y-px"
+            >
+              Resume ↗
+            </a>
+          </motion.div>
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.9, duration: 0.9 }}
+        className="relative flex items-center justify-between px-5 pb-6 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground md:px-8 lg:px-12"
+      >
+        <a
           href="#experience"
-          className="group mt-16 hidden items-center gap-3 self-start font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55 transition-colors hover:text-phosphor md:flex"
+          className="group flex items-center gap-3 text-foreground/75 transition-colors hover:text-accent-ink"
         >
           Scroll
-          <span className="h-8 w-px overflow-hidden bg-foreground/20">
-            <span className="block h-3 w-px animate-slide-down bg-phosphor" />
+          <span aria-hidden className="block h-8 w-px overflow-hidden bg-border group-hover:bg-accent/40">
+            <span className="animate-slide-down block h-3 w-px bg-accent-ink" />
           </span>
-        </motion.a>
+        </a>
+        <p aria-hidden className="hidden md:block">
+          Portfolio / 2026
+        </p>
       </motion.div>
+
+      <RegMark className="bottom-6 left-4 top-auto md:left-8 lg:left-12" />
+      <RegMark className="bottom-6 right-4 top-auto md:right-8 lg:right-12" />
     </section>
   );
 };

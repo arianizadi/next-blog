@@ -67,11 +67,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn("dark", archivo.variable, jetbrainsMono.variable)}
-    >
-      <body className="min-h-screen bg-background font-sans antialiased">
+    <html lang="en" className={cn(archivo.variable, jetbrainsMono.variable)}>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <noscript>
           <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
