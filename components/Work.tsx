@@ -5,6 +5,7 @@ import { projects, type Project } from "@/lib/portfolio";
 
 const featured = projects.filter((p) => p.featured);
 const archive = projects.filter((p) => !p.featured);
+const PINNED_GALLERY_HEIGHT_VH = 30 + featured.length * 70;
 
 const ProjectLinks = ({ project }: { project: Project }) => {
   const hasExternalLink = project.githubUrl || project.liveUrl;
@@ -124,7 +125,10 @@ const HorizontalGallery = () => {
    * short-view, and unsupported-browser fallbacks are CSS-only too.
    */
   return (
-    <section className="work-pin-section relative h-[380vh]">
+    <section
+      className="work-pin-section relative"
+      style={{ height: `${PINNED_GALLERY_HEIGHT_VH}vh` }}
+    >
       <div className="work-pin-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div className="work-pin-track flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12">
           {featured.map((project, index) => (

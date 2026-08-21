@@ -152,6 +152,7 @@ export const projects: Project[] = [
       "https://www.americanprogress.org/wp-content/uploads/sites/2/2026/03/CaseAgainstIranColumn-2264384567.jpg?w=1680",
     technologies: ["SwiftUI", "NetworkExtension", "Go", "gomobile", "MasterDnsVPN"],
     githubUrl: "https://github.com/arianizadi/VpnDad",
+    featured: true,
   },
   {
     id: 1,
@@ -166,6 +167,7 @@ export const projects: Project[] = [
     image: "https://www.wilddash.cc/static/images/lab3-rs19.jpg",
     technologies: ["Python", "PyTorch", "Hugging Face", "Lightning", "CUDA"],
     githubUrl: "https://github.com/arianizadi/segmentary",
+    featured: true,
   },
   {
     id: 11,
