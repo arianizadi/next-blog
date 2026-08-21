@@ -32,7 +32,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.6, ease: easeOutExpo }}
-          className="mb-6 font-mono text-[10px] uppercase tracking-[0.26em] text-terracotta md:text-[11px]"
+          className="mb-6 font-mono text-xs uppercase tracking-[0.26em] text-terracotta md:text-xs"
         >
           Systems Engineer &amp; Researcher · Embedded Software Engineer II at
           Konami Gaming
@@ -51,7 +51,7 @@ const Hero = () => {
             <span className="absolute right-0 top-0 h-3 w-3 border-r border-t border-terracotta/40" />
             <span className="absolute bottom-0 left-0 h-3 w-3 border-b border-l border-terracotta/40" />
             <span className="absolute bottom-0 right-0 h-3 w-3 border-b border-r border-terracotta/40" />
-            <span className="absolute -top-2.5 left-0 whitespace-nowrap bg-terracotta px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-background md:text-[10px] md:tracking-[0.2em]">
+            <span className="absolute -top-2.5 left-0 whitespace-nowrap bg-terracotta px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-background md:text-xs md:tracking-[0.2em]">
               Subject: Arian Izadi / 0.99
             </span>
           </motion.div>
@@ -69,7 +69,7 @@ const Hero = () => {
           transition={{ delay: 0.35, duration: 0.75, ease: easeOutExpo }}
           className="mt-8 max-w-2xl"
         >
-          <p className="font-mono text-[10px] font-medium uppercase leading-6 tracking-[0.2em] text-foreground/70 md:text-[11px] md:tracking-[0.22em]">
+          <p className="font-mono text-xs font-medium uppercase leading-6 tracking-[0.2em] text-foreground/70 md:text-xs md:tracking-[0.22em]">
             C/C++ · Linux · Real-Time Systems · Robotics · Low-Level Software
           </p>
         </motion.div>
@@ -82,13 +82,13 @@ const Hero = () => {
         >
           <a
             href="#experience"
-            className="border border-terracotta bg-terracotta px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-transparent hover:text-terracotta"
+            className="border border-terracotta bg-terracotta px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-transparent hover:text-terracotta"
           >
             Experience
           </a>
           <a
             href="#work"
-            className="border border-foreground/20 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta"
+            className="border border-foreground/20 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta"
           >
             Selected Work
           </a>
@@ -96,7 +96,7 @@ const Hero = () => {
             href={siteConfig.links.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-foreground/20 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
+            className="border border-foreground/20 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
           >
             Resume ↗
           </a>
@@ -107,7 +107,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.9 }}
           href="#experience"
-          className="group mt-20 hidden items-center gap-3 self-start font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70 transition-colors hover:text-terracotta md:flex"
+          className="group mt-20 hidden items-center gap-3 self-start font-mono text-xs uppercase tracking-[0.26em] text-foreground/70 transition-colors hover:text-terracotta md:flex"
         >
           Scroll
           <span className="h-8 w-px overflow-hidden bg-foreground/15">

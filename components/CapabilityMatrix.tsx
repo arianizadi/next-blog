@@ -54,9 +54,9 @@ const CapabilityMatrix = () => {
                     <li
                       key={skill}
                       className={cn(
-                        "border border-border px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/70",
+                        "border border-border px-2.5 py-1.5 font-mono text-xs uppercase tracking-[0.14em] text-foreground/70",
                         primary &&
-                          "border-terracotta/50 bg-terracotta/8 px-3 text-[11px] font-semibold text-terracotta"
+                          "border-terracotta/50 bg-terracotta/8 px-3 text-xs font-semibold text-terracotta"
                       )}
                     >
                       {skill}

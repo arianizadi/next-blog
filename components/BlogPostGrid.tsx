@@ -56,7 +56,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
         <span
           role="status"
           aria-live="polite"
-          className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-foreground/70"
+          className="shrink-0 font-mono text-xs tracking-[0.18em] text-foreground/70"
         >
           {visible.length}/{posts.length} RECORDS
         </span>
@@ -90,7 +90,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
               >
                 <time
                   dateTime={post.date}
-                  className="shrink-0 font-mono text-[11px] tracking-[0.18em] text-foreground/70"
+                  className="shrink-0 font-mono text-xs tracking-[0.18em] text-foreground/70"
                 >
                   {formatDate(post.date)}
                 </time>
@@ -102,7 +102,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
                     {post.description}
                   </span>
                 </span>
-                <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/70 lg:block">
+                <span className="hidden shrink-0 font-mono text-xs uppercase tracking-[0.16em] text-foreground/70 lg:block">
                   {post.tags.map((t) => `#${t}`).join(" ")}
                 </span>
                 <span className="shrink-0 font-mono text-sm text-foreground/70 transition-all group-hover:translate-x-1 group-hover:text-terracotta">

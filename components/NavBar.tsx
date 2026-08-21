@@ -123,7 +123,7 @@ export function NavBar() {
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
-            className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
+            className="group flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.26em] text-foreground"
           >
             <span className="inline-block h-2 w-2 bg-terracotta" />
             Arian Izadi
@@ -145,13 +145,13 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "group flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
+                  "group flex items-baseline gap-1.5 font-mono text-xs uppercase tracking-[0.22em] transition-colors",
                   isActive(link.href)
                     ? "text-foreground"
                     : "text-foreground/70 hover:text-foreground"
                 )}
               >
-                <span className="text-[10px] text-terracotta">{link.id}</span>
+                <span className="text-xs text-terracotta">{link.id}</span>
                 {link.label}
                 {isActive(link.href) && (
                   <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-terracotta" />
@@ -165,7 +165,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/20 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta lg:inline-block"
+              className="hidden border border-foreground/20 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta lg:inline-block"
             >
               Resume
             </a>
@@ -242,7 +242,7 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70">
+            <div className="mt-10 flex items-center justify-between font-mono text-xs uppercase tracking-[0.24em] text-foreground/70">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"

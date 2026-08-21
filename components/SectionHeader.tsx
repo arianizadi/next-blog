@@ -28,7 +28,7 @@ const SectionHeader = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: easeOutExpo }}
-        className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-terracotta"
+        className="mb-6 font-mono text-xs uppercase tracking-[0.34em] text-terracotta"
       >
         {index} {"//"} {label}
       </motion.p>

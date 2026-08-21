@@ -22,7 +22,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-terracotta"
+          className="mb-8 font-mono text-xs uppercase tracking-[0.34em] text-terracotta"
         >
           06 {"//"} Contact
         </motion.p>
@@ -49,7 +49,7 @@ const Contact = () => {
 
         <div className="mt-20 grid gap-10 border-t border-border pt-10 md:grid-cols-3">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-foreground/70">
               Coordinates
             </p>
             <p className="mt-3 text-sm leading-6 text-foreground/70">
@@ -57,7 +57,7 @@ const Contact = () => {
             </p>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-foreground/70">
               Signals
             </p>
             <ul className="mt-3 space-y-1.5">
@@ -76,7 +76,7 @@ const Contact = () => {
             </ul>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/70">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-foreground/70">
               Documents
             </p>
             <a
@@ -90,7 +90,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70">
+        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.2em] text-foreground/70">
           <span>© 2026 Arian Izadi</span>
           <span>Las Vegas, NV</span>
         </div>

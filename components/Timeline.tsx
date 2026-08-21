@@ -94,11 +94,11 @@ const LogEntry = ({
         <span className="h-1.5 w-1.5 bg-terracotta" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70">
+      <p className="font-mono text-xs uppercase tracking-[0.24em] text-foreground/70">
         [{milestone.stamp}]
       </p>
       <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-terracotta/25 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/70 md:block">
+        <span className="hidden font-mono text-xs tracking-[0.2em] text-foreground/70 md:block">
           {String(index + 1).padStart(2, "0")}
         </span>
         <div>
@@ -160,7 +160,7 @@ const Timeline = () => {
               <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-terracotta bg-background md:left-4">
                 <span className="h-1.5 w-1.5 bg-terracotta" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-terracotta">
+              <p className="font-mono text-xs uppercase tracking-[0.24em] text-terracotta">
                 [NOW]
               </p>
               <p className="mt-4 max-w-xl text-base leading-7 text-foreground/70">

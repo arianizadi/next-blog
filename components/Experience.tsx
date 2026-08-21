@@ -24,7 +24,7 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/70",
+          "border border-border px-2.5 py-1 font-mono text-xs uppercase tracking-[0.16em] text-foreground/70",
           isPrimaryTechnology(technology) &&
             "border-terracotta/50 bg-terracotta/8 font-semibold text-terracotta"
         )}
@@ -80,11 +80,11 @@ const PreviousExperienceCard = ({
           <h3 className="font-display text-2xl font-bold uppercase leading-none tracking-tight text-foreground">
             {job.company}
           </h3>
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-terracotta">
+          <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-terracotta">
             {job.role}
           </p>
         </div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/70">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-foreground/70">
           {job.dates}
         </p>
       </div>
@@ -127,11 +127,11 @@ const Experience = () => (
         <div className="relative grid gap-10 p-6 md:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 border border-terracotta/40 bg-terracotta/8 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-terracotta">
+              <span className="inline-flex items-center gap-2 border border-terracotta/40 bg-terracotta/8 px-2.5 py-1 font-mono text-xs uppercase tracking-[0.22em] text-terracotta">
                 <span aria-hidden className="h-1.5 w-1.5 bg-terracotta" />
                 Current
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/70">
                 {currentExperience.dates}
               </span>
             </div>
@@ -152,7 +152,7 @@ const Experience = () => (
           </div>
 
           <div className="border-t border-border pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/70">
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.24em] text-foreground/70">
               Engineering scope
             </p>
             <ExperienceBullets points={currentExperience.bulletPoints} />
@@ -161,7 +161,7 @@ const Experience = () => (
       </motion.article>
 
       <div className="mt-16">
-        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.28em] text-terracotta">
+        <p className="mb-6 font-mono text-xs uppercase tracking-[0.28em] text-terracotta">
           {"//"} Previous experience
         </p>
         <div className="grid gap-px border border-border bg-border lg:grid-cols-3">
