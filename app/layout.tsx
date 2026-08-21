@@ -26,22 +26,28 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Arian Izadi | Systems Engineer",
+    default: "Arian Izadi | Embedded & Systems Software Engineer",
     template: "%s | Arian Izadi",
   },
   description: siteConfig.description,
   keywords: [
     "Arian Izadi",
-    "systems engineer",
-    "software engineer",
-    "robotics perception",
-    "backend engineer",
-    "computer vision",
+    "embedded software engineer",
+    "systems software engineer",
+    "C",
+    "C++",
+    "Linux",
+    "real-time systems",
+    "robotics",
+    "low-level software",
+    "RISC-V",
+    "Rust",
+    "hardware integration",
   ],
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
   openGraph: {
-    title: "Arian Izadi | Systems Engineer",
+    title: "Arian Izadi | Embedded & Systems Software Engineer",
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: "Arian Izadi",
@@ -50,11 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Arian Izadi | Systems Engineer",
+    title: "Arian Izadi | Embedded & Systems Software Engineer",
     description: siteConfig.description,
-  },
-  alternates: {
-    canonical: siteConfig.url,
   },
 };
 

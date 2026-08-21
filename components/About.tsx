@@ -3,149 +3,103 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionHeader from "@/components/SectionHeader";
-import {
-  education,
-  experiences,
-  certifications,
-} from "@/lib/portfolio";
+import { certifications, education } from "@/lib/portfolio";
 import { easeOutExpo } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, delay, ease: easeOutExpo },
-});
+const About = () => (
+  <section
+    id="education"
+    className="relative scroll-mt-16 border-t border-border py-24 md:py-32"
+  >
+    <div className="px-6 md:px-12">
+      <SectionHeader
+        index="05"
+        label="Systems Foundation"
+        title="Education"
+        description="Completing an M.S. in Computer Science at UNLV with graduate coursework in real-time and embedded systems and advanced operating systems."
+      />
 
-const About = () => {
-  return (
-    <section className="relative border-t border-border py-24 md:py-32">
-      <div className="px-6 md:px-12">
-        <SectionHeader
-          index="02"
-          label="Operator Profile"
-          title="About"
-          description="Embedded software engineer in Konami Gaming R&D, building C/C++ systems where hardware and production reliability converge. Backed by event-driven banking, robotics perception, and low-level systems."
-        />
-
-        <div className="grid gap-16 lg:grid-cols-[1.1fr_1fr]">
-          {/* Bio + education */}
-          <motion.div {...fadeUp()}>
-            <p className="max-w-xl text-base leading-8 text-foreground/70 md:text-lg">
-              I&apos;m Arian, an Embedded Software Engineer II at Konami
-              Gaming in Las Vegas, building production C/C++ software at the
-              boundary of embedded hardware, connected systems, and regulated
-              gaming. Before Konami, I engineered event-driven banking
-              services at Credit One Bank and built LiDAR perception and
-              safety-critical robotics infrastructure at Koshee AI.
-            </p>
-            <p className="mt-5 max-w-xl text-base leading-8 text-foreground/70 md:text-lg">
-              My happy place is the layer where software meets physics:
-              point clouds, packet tunnels, kernels, and the occasional CTF
-              binary that refuses to cooperate.
-            </p>
-
-            <Link
-              href="/journey"
-              className="group mt-8 inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.24em] text-phosphor"
-            >
-              <span className="h-px w-8 bg-phosphor transition-all group-hover:w-12" />
-              View full boot log
-            </Link>
-
-            {/* Education block */}
-            <div className="mt-14 space-y-px border border-border bg-border">
-              {education.map((degree) => (
-                <article key={degree.degree} className="bg-card p-5 md:p-6">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-display text-lg font-bold uppercase tracking-tight text-foreground">
-                      {degree.degree}
-                    </h3>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">
-                      {degree.date}
-                      {degree.gpa && (
-                        <span className="ml-3 text-phosphor">{degree.gpa}</span>
-                      )}
-                    </p>
-                  </div>
-                  <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground/50">
-                    {degree.university}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                    {degree.highlights.join(" · ")}
-                  </p>
-                </article>
-              ))}
-              <div className="bg-card p-5 md:p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/60">
-                  Certifications
-                </p>
-                <p className="mt-2 text-sm text-foreground/75">
-                  {certifications.join(" · ")}
-                </p>
-              </div>
+      <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
+        {education.map((degree, index) => (
+          <motion.article
+            key={degree.degree}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{
+              duration: 0.65,
+              delay: index * 0.1,
+              ease: easeOutExpo,
+            }}
+            className={cn(
+              "bg-card p-6 md:p-9",
+              index === 0 && "relative overflow-hidden"
+            )}
+          >
+            {index === 0 && (
+              <div
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-px bg-phosphor"
+              />
+            )}
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-phosphor/80">
+                {index === 0 ? "Graduate study" : "Undergraduate study"}
+              </p>
+              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55">
+                {degree.date}
+              </p>
             </div>
-          </motion.div>
 
-          {/* Employment log */}
-          <motion.div id="experience" className="scroll-mt-24" {...fadeUp(0.12)}>
-            <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
-              {"//"} Employment log
+            <h3 className="mt-7 font-display text-3xl font-black uppercase leading-none tracking-tight text-foreground md:text-4xl">
+              {degree.degree}
+            </h3>
+            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/55">
+              {degree.university}
             </p>
-            <div className="space-y-10 border-l border-border pl-6">
-              {experiences.map((job) => (
-                <article key={job.company} className="relative">
-                  <span
-                    aria-hidden
-                    className="absolute left-[-27px] top-1.5 h-2.5 w-2.5 border border-phosphor bg-background"
-                  />
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/60">
-                      {job.dates}
-                    </p>
-                    {job.dates.endsWith("Present") && (
-                      <span className="inline-flex items-center gap-1.5 border border-phosphor/30 bg-phosphor/5 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.22em] text-phosphor">
-                        <span
-                          aria-hidden
-                          className="h-1.5 w-1.5 bg-phosphor"
-                        />
-                        Current
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="mt-2 font-display text-xl font-bold uppercase tracking-tight text-foreground">
-                    {job.company}
-                  </h3>
-                  <p className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.16em] text-phosphor/80">
-                    {job.role}
-                  </p>
-                  <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
-                    {job.summary}
-                  </p>
-                  <ul className="mt-3 max-w-md space-y-1.5">
-                    {job.bulletPoints.map((point) => (
-                      <li
-                        key={point}
-                        className="flex gap-2 text-[13px] leading-6 text-foreground/65"
-                      >
-                        <span aria-hidden className="shrink-0 text-phosphor">
-                          +
-                        </span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-3 break-words font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/55">
-                    {job.technologies.join(" · ")}
-                  </p>
-                </article>
+            {degree.gpa && (
+              <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-phosphor">
+                {degree.gpa}
+              </p>
+            )}
+
+            <ul className="mt-8 space-y-3 border-t border-border pt-6">
+              {degree.highlights.map((highlight) => (
+                <li
+                  key={highlight}
+                  className="flex gap-3 text-sm leading-6 text-foreground/70"
+                >
+                  <span aria-hidden className="font-mono text-phosphor">
+                    +
+                  </span>
+                  {highlight}
+                </li>
               ))}
-            </div>
-          </motion.div>
-        </div>
+            </ul>
+          </motion.article>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      <div className="mt-8 flex flex-col gap-6 border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between md:p-8">
+        <div>
+          <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/55">
+            Certification
+          </p>
+          <p className="mt-2 text-sm text-foreground/75">
+            {certifications.join(" · ")}
+          </p>
+        </div>
+        <Link
+          href="/journey"
+          className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-phosphor"
+        >
+          <span className="h-px w-8 bg-phosphor transition-all group-hover:w-12" />
+          View engineering journey
+        </Link>
+      </div>
+    </div>
+  </section>
+);
 
 export default About;

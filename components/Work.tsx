@@ -1,32 +1,62 @@
 import Image from "next/image";
+import MergeLog from "@/components/MergeLog";
 import SectionHeader from "@/components/SectionHeader";
 import { projects, type Project } from "@/lib/portfolio";
 
 const featured = projects.filter((p) => p.featured);
 const archive = projects.filter((p) => !p.featured);
 
-const ProjectLinks = ({ project }: { project: Project }) => (
-  <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em]">
-    {project.githubUrl && (
-      <a
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
-      >
-        Code ↗
-      </a>
-    )}
-    {project.liveUrl && (
-      <a
-        href={project.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
-      >
-        Live ↗
-      </a>
-    )}
+const ProjectLinks = ({ project }: { project: Project }) => {
+  const hasExternalLink = project.githubUrl || project.liveUrl;
+
+  return (
+    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em]">
+      {project.githubUrl && (
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
+        >
+          Code ↗
+        </a>
+      )}
+      {project.liveUrl && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
+        >
+          Live ↗
+        </a>
+      )}
+      {!hasExternalLink && (
+        <span className="text-foreground/50">Professional experience</span>
+      )}
+    </div>
+  );
+};
+
+const TechnicalFrame = ({ project }: { project: Project }) => (
+  <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(135deg,hsl(var(--card)),hsl(var(--background)))]">
+    <div className="absolute inset-5 border border-phosphor/15" />
+    <div className="absolute inset-y-5 left-1/3 w-px bg-phosphor/10" />
+    <div className="absolute inset-y-5 right-1/3 w-px bg-phosphor/10" />
+    <div className="absolute inset-x-5 top-1/2 h-px bg-phosphor/10" />
+    <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
+      {project.technologies.slice(0, 4).map((technology) => (
+        <span
+          key={technology}
+          className="border border-foreground/15 bg-background/70 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-foreground/60"
+        >
+          {technology}
+        </span>
+      ))}
+    </div>
+    <p className="absolute right-5 top-5 hidden font-mono text-[8px] uppercase tracking-[0.2em] text-phosphor/60 sm:block">
+      System profile
+    </p>
   </div>
 );
 
@@ -40,7 +70,7 @@ const FrameCard = ({
   <article className="work-pin-card group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
     {/* Captured frame */}
     <div className="relative aspect-video w-full overflow-hidden border-b border-border">
-      {project.image && (
+      {project.image ? (
         <Image
           src={project.image}
           alt=""
@@ -50,6 +80,8 @@ const FrameCard = ({
           fetchPriority={priority ? "high" : "auto"}
           className="object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
         />
+      ) : (
+        <TechnicalFrame project={project} />
       )}
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.25),transparent_40%,rgba(4,7,10,0.55))]" />
       <p className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/70">
@@ -62,7 +94,7 @@ const FrameCard = ({
       <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground wrap-anywhere md:text-4xl">
         {project.title}
       </h3>
-      <p className="mt-4 hidden text-sm leading-6 text-foreground/60 sm:block">
+      <p className="mt-4 text-sm leading-6 text-foreground/60">
         <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
           Problem:
         </span>
@@ -161,8 +193,8 @@ const ArchiveRow = ({
         <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-56 shrink-0 truncate text-right font-mono text-[10px] uppercase tracking-[0.14em] text-foreground/50 lg:block">
-          {project.technologies.slice(0, 3).join(" · ")}
+        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-foreground/50 lg:block">
+          {project.technologies.join(" · ")}
         </span>
 
         <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
@@ -217,19 +249,41 @@ const ArchiveTable = () => (
 );
 
 const Work = () => (
-  <section id="work" className="relative scroll-mt-16 py-24 md:py-32">
+  <section
+    id="work"
+    className="relative scroll-mt-16 border-t border-border py-24 md:py-32"
+  >
     {/* Legacy anchor alias: old /#projects links still land here */}
     <span id="projects" aria-hidden className="absolute -top-24" />
     <div className="px-6 md:px-12">
       <SectionHeader
-        index="01"
-        label="Captured Frames"
-        title="Selected Work"
-        description="Frames pulled from the stream: packet tunnels, segmentation research, bare-metal kernels. Each one is a problem that got captured, processed, and shipped."
+        index="02"
+        label="Embedded / Systems Portfolio"
+        title="Systems Work"
+        description="Robotics perception, communication-failure handling, bare-metal development, timing analysis, and tested C++ libraries."
       />
     </div>
     <HorizontalGallery />
+  </section>
+);
+
+export const AdditionalWork = () => (
+  <section
+    id="additional-work"
+    className="relative scroll-mt-16 border-t border-border py-24 md:py-32"
+  >
+    <div className="px-6 md:px-12">
+      <SectionHeader
+        index="04"
+        label="Project Archive"
+        title="Additional Work"
+        description="Networking, computer vision, mobile, backend, security, and application work retained to show engineering breadth."
+      />
+    </div>
     <ArchiveTable />
+    <div className="px-6 md:px-12">
+      <MergeLog embedded />
+    </div>
   </section>
 );
 

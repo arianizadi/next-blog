@@ -42,6 +42,103 @@ export interface TechGroup {
 
 export const projects: Project[] = [
   {
+    id: 15,
+    title: "LiDAR Perception Pipeline",
+    eyebrow: "Koshee AI · Robotics Perception",
+    problem:
+      "High-density point-cloud processing had to stay within strict timing and memory constraints.",
+    contribution:
+      "Created a C++/PCL LiDAR perception pipeline that handled more than 100,000 points per frame.",
+    impact:
+      "Processed high-density LiDAR data within explicit timing and memory constraints.",
+    technologies: ["C++", "PCL", "LiDAR", "Point Clouds"],
+    featured: true,
+  },
+  {
+    id: 16,
+    title: "UDP Heartbeat Safety Switch",
+    eyebrow: "Koshee AI · Fault Handling",
+    problem:
+      "Loss of the network control link required a bounded response.",
+    contribution:
+      "Used UDP heartbeats to detect network partitions and connect communication loss to shutdown control.",
+    impact:
+      "Enforced hard shutdown behavior within a sub-two-second window.",
+    technologies: ["UDP", "Networking", "Heartbeat Monitoring", "Fault Handling"],
+    featured: true,
+  },
+  {
+    id: 8,
+    title: "RustOS: Bare-Metal RISC-V Kernel",
+    eyebrow: "Low-Level Systems",
+    problem:
+      "Understanding operating-system internals requires direct control over boot flow, memory layout, device I/O, and toolchain constraints.",
+    contribution:
+      "Implemented a boot path in RISC-V assembly, custom linker scripts, UART output, and a small Rust kernel environment.",
+    impact:
+      "Exercised low-level debugging across assembly, Rust, QEMU, and bare-metal constraints.",
+    image:
+      "https://images.downey.io/blog/cs140e-rust-ferris-crochet-downey-1.jpg",
+    technologies: ["Rust", "Assembly", "RISC-V", "QEMU", "Linker Scripts"],
+    githubUrl: "https://github.com/arianizadi/rustos",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "T-REX: WCET Analysis for Rust",
+    eyebrow: "Heuristic Timing Analysis",
+    problem:
+      "Timing analysis for Rust code needs a bridge from LLVM IR into call graphs and loop/cycle analysis.",
+    contribution:
+      "Parsed LLVM IR, built call graphs, detected cycles, and visualized timing paths with Python tooling.",
+    impact:
+      "Explored heuristic WCET workflows for systems where predictable execution matters.",
+    technologies: ["Python", "LLVM", "Rust", "NetworkX", "Matplotlib"],
+    githubUrl: "https://github.com/arianizadi/rust-parser-wcet",
+    featured: true,
+  },
+  {
+    id: 10,
+    title: "SEALCrypt",
+    eyebrow: "C++17 Library · Testing",
+    problem:
+      "Microsoft SEAL setup has enough context and parameter wiring to slow down experimentation with encrypted computation.",
+    contribution:
+      "Wrapped encryption-context initialization behind a modern C++17 interface with CMake, tests, and CI.",
+    impact:
+      "Reduced setup overhead while keeping configuration and testability explicit in the library interface.",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYL_2VvThixV3iCXrp3qzMlb5eWt8BE-sag&s",
+    technologies: ["C++17", "CMake", "Google Test", "GitHub Actions"],
+    githubUrl: "https://github.com/arianizadi/sealcrypt",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "LiDAR 2D Room Mapping",
+    eyebrow: "Robotics Perception",
+    problem:
+      "Raw LiDAR captures include floor planes and noisy points that obscure usable room geometry.",
+    contribution:
+      "Processed point clouds with PCL and OpenCV, removed floor planes with RANSAC, and generated 2D room maps.",
+    impact:
+      "Produced a clearer perception output from real sensor data for downstream robotics workflows.",
+    technologies: ["C++", "PCL", "OpenCV", "CMake", "LiDAR"],
+    githubUrl: "https://github.com/arianizadi/pointclouds_livox",
+  },
+  {
+    id: 6,
+    title: "Reverse Engineering Tutorials",
+    eyebrow: "Low-Level Security",
+    problem:
+      "Low-level security learning is easier when examples are legal, reproducible, and focused on reasoning.",
+    contribution:
+      "Documented CTF-style reverse engineering walkthroughs using tools such as Ghidra and IDA.",
+    impact:
+      "Created a structured learning trail for binary analysis, debugging, and defensive security thinking.",
+    technologies: ["C++", "Python", "Assembly", "Ghidra", "IDA Pro"],
+    githubUrl: "https://github.com/arianizadi/ReverseEngineering",
+  },
+  {
     id: 13,
     title: "VpnDad",
     eyebrow: "iOS Packet Tunnel",
@@ -55,7 +152,6 @@ export const projects: Project[] = [
       "https://www.americanprogress.org/wp-content/uploads/sites/2/2026/03/CaseAgainstIranColumn-2264384567.jpg?w=1680",
     technologies: ["SwiftUI", "NetworkExtension", "Go", "gomobile", "MasterDnsVPN"],
     githubUrl: "https://github.com/arianizadi/VpnDad",
-    featured: true,
   },
   {
     id: 1,
@@ -70,7 +166,6 @@ export const projects: Project[] = [
     image: "https://www.wilddash.cc/static/images/lab3-rs19.jpg",
     technologies: ["Python", "PyTorch", "Hugging Face", "Lightning", "CUDA"],
     githubUrl: "https://github.com/arianizadi/segmentary",
-    featured: true,
   },
   {
     id: 11,
@@ -85,38 +180,6 @@ export const projects: Project[] = [
     image: "https://arian-next-blog-assets.s3.us-west-2.amazonaws.com/inference.png",
     technologies: ["Next.js", "TypeScript", "Canvas API", "Tailwind CSS"],
     liveUrl: "https://inference-checker.vercel.app",
-    featured: true,
-  },
-  {
-    id: 10,
-    title: "SEALCrypt",
-    eyebrow: "C++ Library",
-    problem:
-      "Microsoft SEAL setup has enough context and parameter wiring to slow down experimentation with encrypted computation.",
-    contribution:
-      "Wrapped encryption-context initialization behind a modern C++17 interface with CMake, tests, and CI.",
-    impact:
-      "Reduced setup overhead for homomorphic encryption experiments while keeping thread-safety and testability visible.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYL_2VvThixV3iCXrp3qzMlb5eWt8BE-sag&s",
-    technologies: ["C++17", "CMake", "Google Test", "GitHub Actions"],
-    githubUrl: "https://github.com/arianizadi/sealcrypt",
-    featured: true,
-  },
-  {
-    id: 8,
-    title: "RustOS: Bare-Metal RISC-V Kernel",
-    eyebrow: "Systems Programming",
-    problem:
-      "Understanding OS internals requires working directly with boot flow, memory layout, device IO, and toolchain constraints.",
-    contribution:
-      "Implemented a boot path in RISC-V assembly, custom linker scripts, UART output, and a small Rust kernel environment.",
-    impact:
-      "Demonstrates low-level debugging discipline across assembly, Rust, QEMU, and bare-metal constraints.",
-    image:
-      "https://images.downey.io/blog/cs140e-rust-ferris-crochet-downey-1.jpg",
-    technologies: ["Rust", "Assembly", "RISC-V", "QEMU", "Linker Scripts"],
-    githubUrl: "https://github.com/arianizadi/rustos",
-    featured: true,
   },
   {
     id: 12,
@@ -145,32 +208,6 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/arianizadi/fantasy-football-notifier",
   },
   {
-    id: 3,
-    title: "LiDAR 2D Room Mapping",
-    eyebrow: "Robotics Perception",
-    problem:
-      "Raw LiDAR captures include floor planes and noisy points that obscure usable room geometry.",
-    contribution:
-      "Processed point clouds with PCL and OpenCV, removed floor planes with RANSAC, and generated 2D room maps.",
-    impact:
-      "Produced a clearer perception output from real sensor data for downstream robotics workflows.",
-    technologies: ["C++", "PCL", "OpenCV", "CMake", "LiDAR"],
-    githubUrl: "https://github.com/arianizadi/pointclouds_livox",
-  },
-  {
-    id: 2,
-    title: "T-REX: Rust WCET Analyzer",
-    eyebrow: "Static Analysis",
-    problem:
-      "Timing analysis for Rust code needs a bridge from LLVM IR into call graphs and loop/cycle analysis.",
-    contribution:
-      "Parsed LLVM IR, built call graphs, detected cycles, and visualized timing paths with Python tooling.",
-    impact:
-      "Explored practical WCET analysis workflows for systems where predictability matters.",
-    technologies: ["Python", "LLVM", "Rust", "NetworkX", "Matplotlib"],
-    githubUrl: "https://github.com/arianizadi/rust-parser-wcet",
-  },
-  {
     id: 9,
     title: "Knowledge Mapper",
     eyebrow: "AI Learning Tool",
@@ -182,19 +219,6 @@ export const projects: Project[] = [
       "Turned study sessions into targeted feedback loops rather than passive review.",
     technologies: ["Next.js", "TypeScript", "React", "LLMs"],
     liveUrl: "https://knowledge-mapper.vercel.app",
-  },
-  {
-    id: 6,
-    title: "Reverse Engineering Tutorials",
-    eyebrow: "Security Education",
-    problem:
-      "Low-level security learning is easier when examples are legal, reproducible, and focused on reasoning.",
-    contribution:
-      "Documented CTF-style reverse engineering walkthroughs using tools such as Ghidra and IDA.",
-    impact:
-      "Created a structured learning trail for binary analysis, debugging, and defensive security thinking.",
-    technologies: ["C++", "Python", "Assembly", "Ghidra", "IDA Pro"],
-    githubUrl: "https://github.com/arianizadi/ReverseEngineering",
   },
   {
     id: 4,
@@ -232,7 +256,7 @@ export const experiences: ExperienceItem[] = [
     location: "Las Vegas, NV",
     dates: "July 2026 to Present",
     summary:
-      "Embedded systems engineer in Konami Gaming's R&D organization, building production software where C/C++, hardware, and regulated gaming systems meet.",
+      "R&D work across embedded hardware, manufacturing systems, and regulated gaming software.",
     technologies: [
       "C/C++",
       "Embedded Systems",
@@ -265,10 +289,10 @@ export const experiences: ExperienceItem[] = [
     role: "Embedded Systems & Robotics Intern",
     dates: "Jan 2024 to July 2025",
     summary:
-      "Built robotics infrastructure across safety controls, LiDAR perception, and C++ build automation.",
+      "Built robotics systems across communication-failure handling, LiDAR perception, and C++ build automation.",
     technologies: ["C++", "CMake/CTest", "LiDAR", "Networking", "GitHub Actions"],
     bulletPoints: [
-      "Architected a UDP heartbeat safety switch that enforced hard shutdown behavior within a sub-2-second window during network partitions.",
+      "Architected a UDP heartbeat shutdown control that detected network partitions and enforced hard shutdown behavior within a sub-two-second window.",
       "Created a LiDAR perception pipeline in C++/PCL that handled 100k+ points per frame within strict timing and memory constraints.",
       "Built CMake and GitHub Actions workflows with distributed caching, reducing build times from 15 minutes to 4 minutes.",
     ],
@@ -361,66 +385,65 @@ export const certifications: string[] = ["AWS Certified Cloud Practitioner"];
 export const techGroups: TechGroup[] = [
   {
     id: "systems",
-    title: "Systems & Embedded",
-    description: "Low-level software, kernels, debugging, and real-time constraints.",
-    skills: ["C++", "Rust", "C", "RISC-V", "Linux", "CMake", "GDB", "QEMU"],
+    title: "Embedded & Systems",
+    description: "Production software, operating-system tooling, timing constraints, and networked fault handling.",
+    skills: [
+      "C/C++",
+      "Linux",
+      "Embedded Systems",
+      "Real-Time Systems",
+      "Multithreaded Systems",
+      "Networking",
+    ],
   },
   {
-    id: "backend",
-    title: "Backend & Platform",
-    description: "Production services, event streams, search, deployment, and CI.",
+    id: "low-level",
+    title: "Low-Level / Hardware",
+    description: "Bare-metal boot flow, architecture, device output, and hardware/software boundaries.",
     skills: [
-      "Java",
-      "Spring Boot",
-      "Kafka",
-      "Kubernetes",
-      "Elasticsearch",
-      "PostgreSQL",
-      "Docker",
+      "Rust",
+      "RISC-V",
+      "QEMU",
+      "UART",
+      "Assembly",
+      "GDB",
+      "Hardware Integration",
+    ],
+  },
+  {
+    id: "languages",
+    title: "Languages",
+    description: "Languages used across embedded, systems, research, and production service work.",
+    skills: ["C", "C++", "Rust", "Python", "Java"],
+  },
+  {
+    id: "tooling",
+    title: "Tooling & Debugging",
+    description: "Build, test, inspect, and version software across low-level and production environments.",
+    skills: [
+      "CMake/CTest",
+      "Google Test",
+      "Git",
       "GitHub Actions",
-    ],
-  },
-  {
-    id: "perception",
-    title: "Robotics & Perception",
-    description: "Sensor processing, segmentation, and computer vision research.",
-    skills: [
-      "Python",
-      "PyTorch",
-      "Segmentary",
-      "OpenCV",
-      "PCL",
-      "LiDAR",
-      "RANSAC",
-      "Semantic Segmentation",
-    ],
-  },
-  {
-    id: "security",
-    title: "Security",
-    description: "CTF practice, reverse engineering, network analysis, and secure coding.",
-    skills: [
-      "Network Security",
+      "LLVM",
       "Ghidra",
       "IDA Pro",
-      "Wireshark",
-      "Burp Suite",
-      "Binary Analysis",
-      "Secure Programming",
     ],
   },
   {
-    id: "product",
-    title: "Product & Web",
-    description: "Interfaces that make technical systems observable and usable.",
+    id: "additional",
+    title: "Additional",
+    description: "Robotics perception, computer vision, backend systems, and technical interfaces.",
     skills: [
+      "Robotics",
+      "LiDAR",
+      "PCL",
+      "OpenCV",
+      "PyTorch",
+      "Kafka",
+      "Spring Boot",
       "TypeScript",
       "Next.js",
-      "React",
-      "Tailwind CSS",
-      "Canvas API",
-      "SwiftUI",
-      "HealthKit",
     ],
   },
 ];

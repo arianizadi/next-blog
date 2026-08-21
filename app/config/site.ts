@@ -1,6 +1,6 @@
 export const siteConfig = {
   url: "https://ariandev.com/",
-  description: "Software engineer focused on reliable backend systems, robotics perception, low-level programming, and security-minded engineering. M.S. Computer Science @ UNLV.",
+  description: "Arian Izadi's portfolio: Embedded and Systems Software Engineer working with C/C++, Linux, real-time systems, robotics, and low-level software.",
   author: "Arian Izadi",
   links: {
     linkedin: "https://www.linkedin.com/in/arianizadi/",

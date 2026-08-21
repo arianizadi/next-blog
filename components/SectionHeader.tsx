@@ -33,7 +33,7 @@ const SectionHeader = ({
         {index} {"//"} {label}
       </motion.p>
 
-      <TitleTag className="font-display text-[clamp(2.6rem,8vw,7rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
+      <TitleTag className="font-display text-[clamp(2rem,10vw,7rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
         {title}
       </TitleTag>
 

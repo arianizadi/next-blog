@@ -24,7 +24,7 @@ const Contact = () => {
           transition={{ duration: 0.6, ease: easeOutExpo }}
           className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
         >
-          05 {"//"} Contact
+          06 {"//"} Contact
         </motion.p>
 
         <h2 className="max-w-5xl font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground">

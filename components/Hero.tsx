@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ScrambleText from "./ScrambleText";
 import { siteConfig } from "@/app/config/site";
@@ -35,12 +34,16 @@ const Hero = () => {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-20 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-end px-6 pb-20 pt-32 motion-reduce:[transform:none!important] motion-reduce:[opacity:1!important] sm:px-8 md:px-12 lg:px-16"
       >
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60 md:text-[11px]">
-          Systems · Robotics Perception · Backend
+        <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.26em] text-phosphor/90 md:text-[11px]">
+          Embedded Software Engineer II · Konami Gaming R&amp;D
+        </p>
+
+        <p className="max-w-5xl font-display text-[clamp(1.5rem,4vw,3.75rem)] font-black uppercase leading-[0.96] tracking-tight text-foreground">
+          Embedded &amp; Systems Software Engineer
         </p>
 
         {/* Lock-on headline, the one signature moment */}
-        <div className="relative mt-7 inline-block self-start md:mt-9">
+        <div className="relative mt-7 inline-block self-start md:mt-10">
           <motion.div
             aria-hidden
             className="pointer-events-none absolute -inset-x-4 -inset-y-3 md:-inset-x-8 md:-inset-y-5"
@@ -65,13 +68,32 @@ const Hero = () => {
         </div>
 
         <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.32, duration: 0.75, ease: easeOutExpo }}
+          className="mt-7 max-w-3xl font-mono text-[10px] font-semibold uppercase leading-6 tracking-[0.18em] text-phosphor md:text-[11px] md:tracking-[0.22em]"
+        >
+          C/C++ • Linux • Real-Time Systems • Robotics • Low-Level Software
+        </motion.p>
+
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: easeOutExpo }}
-          className="mt-6 max-w-xl text-base leading-7 text-foreground/70 md:text-lg md:leading-8"
+          className="mt-4 max-w-2xl text-base leading-7 text-foreground/75 md:text-lg md:leading-8"
         >
-          I build reliable software where production backend systems meet
-          low-level constraints, robotics data, and security-minded design.
+          Building production C/C++ software, with experience spanning robotics,
+          real-time systems, Linux, hardware integration, networking, and
+          low-level development.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.48, duration: 0.75, ease: easeOutExpo }}
+          className="mt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55 md:text-[10px]"
+        >
+          M.S. Computer Science, UNLV · Expected Dec 2026
         </motion.p>
 
         <motion.div
@@ -81,10 +103,16 @@ const Hero = () => {
           className="mt-8 flex flex-wrap items-center gap-3"
         >
           <a
-            href="#work"
+            href="#experience"
             className="border border-phosphor bg-phosphor px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-background transition-colors hover:bg-transparent hover:text-phosphor"
           >
-            View Work
+            Experience
+          </a>
+          <a
+            href="#work"
+            className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor"
+          >
+            Systems Work
           </a>
           <a
             href={siteConfig.links.resume}
@@ -94,19 +122,13 @@ const Hero = () => {
           >
             Resume ↗
           </a>
-          <a
-            href="mailto:izadi2000@gmail.com"
-            className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
-          >
-            Email
-          </a>
         </motion.div>
 
         <motion.a
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.9 }}
-          href="#work"
+          href="#experience"
           className="group mt-16 hidden items-center gap-3 self-start font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55 transition-colors hover:text-phosphor md:flex"
         >
           Scroll

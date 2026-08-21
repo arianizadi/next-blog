@@ -70,7 +70,7 @@ const MILESTONES: Milestone[] = [
     stamp: "2026 · AGE 26",
     title: "Embedded R&D at Konami",
     description:
-      "Joined Konami Gaming as an Embedded Software Engineer II, building production C/C++ systems where hardware integration, connected software, and regulated reliability converge.",
+      "Joined Konami Gaming as an Embedded Software Engineer II, building production C/C++ components integrated with embedded hardware and manufacturing systems.",
   },
 ];
 

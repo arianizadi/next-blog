@@ -1,6 +1,6 @@
-# arianizadi.com: PERCEPTION
+# ariandev.com: PERCEPTION
 
-Personal site of Arian Izadi, systems engineer. A minimalist dark experience
+Personal site of Arian Izadi, embedded and systems software engineer. A minimalist dark experience
 with a single machine-perception signature: a detection lock-on over
 autonomous-vehicle footage in the hero. Everything else is typography,
 whitespace, and quiet mono accents.
@@ -18,17 +18,18 @@ whitespace, and quiet mono accents.
 
 ```
 app/
-  page.tsx            Home: Hero → Work → About → Merge Log → Stack → Contact
+  page.tsx            Home: Hero → Experience → Systems Work → Skills → Additional Work → Education → Contact
   journey/            Boot-log timeline
   blog/               Field-log index + MDX articles
   projects/           308 redirect → /#work
   template.tsx        Route transition (quiet CSS rise)
 components/
   Hero.tsx            Video + single detection lock-on on the name
-  Work.tsx            Pinned horizontal gallery + project archive table
-  About.tsx           Bio, education, employment log
-  MergeLog.tsx        Open-source contributions
-  CapabilityMatrix.tsx  Stack grid
+  Experience.tsx      Current role + professional experience
+  Work.tsx            Featured systems gallery + additional project archive
+  About.tsx           Education + certification
+  MergeLog.tsx        Open-source contributions inside additional work
+  CapabilityMatrix.tsx  Engineering skills grid
   Contact.tsx         Footer with giant email
   NavBar.tsx          Slim mono bar + fullscreen mobile menu
   SmoothScroll.tsx    Lenis provider (hash/focus-aware anchors)

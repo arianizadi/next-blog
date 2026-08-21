@@ -324,11 +324,12 @@
   }
 
   /*
-   * Work gallery static fallback: reduced-motion users and short viewports
-   * get a plain column/grid instead of the pinned horizontal scroll.
+   * Work gallery static fallback: reduced-motion users, short viewports, and
+   * very narrow screens get a plain column/grid instead of the pinned scroll.
    * CSS-driven so server and client markup stay identical.
    */
-  @media (prefers-reduced-motion: reduce), (max-height: 640px) {
+  @media (prefers-reduced-motion: reduce), (max-height: 720px),
+    (max-width: 359px) {
     .work-pin-section {
       height: auto !important;
     }
@@ -359,7 +360,7 @@
     }
   }
   @media (prefers-reduced-motion: reduce) and (min-width: 768px),
-    (max-height: 640px) and (min-width: 768px) {
+    (max-height: 720px) and (min-width: 768px) {
     .work-pin-track {
       display: grid !important;
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
