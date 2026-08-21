@@ -3,9 +3,9 @@ import SectionHeader from "@/components/SectionHeader";
 export function BlogIndexHeader() {
   return (
     <SectionHeader
-      index="03"
-      label="Field Notes"
-      title="Field Log"
+      index="N"
+      label="Field notes"
+      title="Notebook"
       level="h1"
       description="Dispatches from the workbench: engineering, security, research, and the occasional kernel panic."
     />

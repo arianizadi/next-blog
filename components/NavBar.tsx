@@ -13,7 +13,8 @@ const NAV_LINKS = [
   { href: "/#work", label: "Work", id: "02" },
   { href: "/#skills", label: "Skills", id: "03" },
   { href: "/blog", label: "Blog", id: "04" },
-  { href: "/#contact", label: "Contact", id: "05" },
+  { href: "/journey", label: "Journey", id: "05" },
+  { href: "/#contact", label: "Contact", id: "06" },
 ];
 
 export function NavBar() {
@@ -123,19 +124,24 @@ export function NavBar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-100">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/72 px-5 py-3 backdrop-blur-xl md:px-8">
+        <div className="flex items-center justify-between border-b border-border/70 bg-background/80 px-5 py-3.5 backdrop-blur-xl md:px-8">
           <Link
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
-            className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
+            className="group flex items-baseline gap-2.5 text-sm font-semibold tracking-tight text-foreground"
           >
-            <span className="inline-block h-2 w-2 bg-phosphor" />
+            <span
+              aria-hidden
+              className="font-mono text-signal transition-transform duration-300 group-hover:rotate-90"
+            >
+              +
+            </span>
             Arian Izadi
           </Link>
 
           <nav
-            className="hidden items-center gap-4 md:flex lg:gap-7"
+            className="hidden items-center gap-5 md:flex lg:gap-7"
             aria-label="Primary"
           >
             {NAV_LINKS.map((link) => (
@@ -150,17 +156,23 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "group flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
+                  "group flex items-baseline gap-1.5 text-[13px] tracking-tight transition-colors",
                   isActive(link.href)
                     ? "text-foreground"
-                    : "text-foreground/55 hover:text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <span className="text-[8px] text-phosphor/70">{link.id}</span>
+                <span
+                  className={cn(
+                    "font-mono text-[10px]",
+                    isActive(link.href)
+                      ? "text-signal"
+                      : "text-muted-foreground/60 transition-colors group-hover:text-signal"
+                  )}
+                >
+                  {link.id}
+                </span>
                 {link.label}
-                {isActive(link.href) && (
-                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-phosphor" />
-                )}
               </Link>
             ))}
           </nav>
@@ -170,7 +182,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor lg:inline-block"
+              className="hidden border border-border px-3.5 py-1.5 text-[12px] tracking-tight text-muted-foreground transition-colors hover:border-signal/60 hover:text-foreground lg:inline-block"
             >
               Resume
             </a>
@@ -211,7 +223,7 @@ export function NavBar() {
             className="fixed inset-0 z-95 flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-background px-6 pb-10 pt-24 md:hidden"
           >
             <nav aria-label="Mobile">
-              <ul className="space-y-2">
+              <ul>
                 {NAV_LINKS.map((link, index) => (
                   <motion.li
                     key={link.href}
@@ -219,7 +231,7 @@ export function NavBar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                       duration: 0.5,
-                      delay: reduceMotion ? 0 : 0.15 + index * 0.07,
+                      delay: reduceMotion ? 0 : 0.15 + index * 0.06,
                       ease: easeOutExpo,
                     }}
                   >
@@ -236,10 +248,10 @@ export function NavBar() {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline gap-4 border-b border-border py-4"
                     >
-                      <span className="shrink-0 font-mono text-xs text-phosphor">
+                      <span className="shrink-0 font-mono text-[11px] text-signal">
                         {link.id}
                       </span>
-                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-phosphor">
+                      <span className="min-w-0 font-display text-[clamp(1.6rem,8vw,2.4rem)] font-bold leading-none tracking-tight text-foreground transition-colors group-hover:text-signal">
                         {link.label}
                       </span>
                     </Link>
@@ -247,16 +259,16 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+            <div className="mt-10 flex items-center justify-between text-[12px] tracking-tight text-muted-foreground">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-phosphor"
+                className="text-signal"
               >
                 Resume ↗
               </a>
-              <span>Las Vegas, NV</span>
+              <span className="font-mono text-[10px]">Las Vegas, NV</span>
             </div>
           </motion.div>
         )}

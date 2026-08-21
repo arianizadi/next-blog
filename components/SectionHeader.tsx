@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { easeOutExpo } from "@/lib/motion";
 
 type SectionHeaderProps = {
@@ -20,35 +20,53 @@ const SectionHeader = ({
   level = "h2",
 }: SectionHeaderProps) => {
   const TitleTag = level;
+  const reduceMotion = useReducedMotion();
 
   return (
-    <div className="relative mb-16 md:mb-24">
+    <header className="relative mb-14 md:mb-20">
       <motion.p
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, ease: easeOutExpo }}
-        className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+        transition={{ duration: 0.55, ease: easeOutExpo }}
+        className="mb-5 font-mono text-[11px] tracking-[0.14em] text-signal"
       >
-        {index} {"//"} {label}
+        {index}
+        <span className="mx-2 text-muted-foreground/60">/</span>
+        <span className="text-muted-foreground">{label}</span>
       </motion.p>
 
-      <TitleTag className="font-display text-[clamp(2rem,10vw,7rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
+      <TitleTag className="max-w-4xl font-display text-display-title font-bold text-foreground">
         {title}
       </TitleTag>
 
       {description && (
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: 0.15, ease: easeOutExpo }}
-          className="mt-6 max-w-xl text-base leading-7 text-muted-foreground md:text-lg"
+          transition={{ duration: 0.65, delay: 0.12, ease: easeOutExpo }}
+          className="mt-5 max-w-xl font-serif text-lg italic leading-7 text-muted-foreground md:text-xl md:leading-8"
         >
           {description}
         </motion.p>
       )}
-    </div>
+
+      <motion.div
+        aria-hidden
+        initial={
+          reduceMotion
+            ? { opacity: 0 }
+            : { clipPath: "inset(0 100% 0 0)" }
+        }
+        whileInView={
+          reduceMotion ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0)" }
+        }
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.9, delay: 0.1, ease: easeOutExpo }}
+        className="tick-rule mt-8"
+      />
+    </header>
   );
 };
 

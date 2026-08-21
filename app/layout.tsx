@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono, Newsreader } from "next/font/google";
 import Script from "next/script";
 import "@/app/globals.css";
 
@@ -21,6 +21,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-jetbrains-mono",
+});
+/* Annotation voice: italic serif for figure captions and margin notes */
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["italic"],
+  variable: "--font-newsreader",
 });
 
 export const metadata: Metadata = {
@@ -69,7 +75,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("dark", archivo.variable, jetbrainsMono.variable)}
+      className={cn(
+        "dark",
+        archivo.variable,
+        jetbrainsMono.variable,
+        newsreader.variable
+      )}
     >
       <body className="min-h-screen bg-background font-sans antialiased">
         <noscript>

@@ -1,43 +1,44 @@
-# ariandev.com: PERCEPTION
+# ariandev.com: SYSTEMS LAB
 
-Personal site of Arian Izadi, embedded and systems software engineer. A minimalist dark experience
-with a single machine-perception signature: a detection lock-on over
-autonomous-vehicle footage in the hero. Everything else is typography,
-whitespace, and quiet mono accents.
+Personal site of Arian Izadi, embedded and systems software engineer. The
+design reads like a precision instrument: graphite surfaces, warm ivory
+typography, a single calibration-amber accent, ruler tick-rules, figure
+numbering, and an italic serif annotation voice. The hero's signature is a
+drafting-style dimension line measuring the name.
 
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack) + React 19
-- **Tailwind CSS 3** with a custom phosphor-on-near-black design token set
+- **Tailwind CSS 4** with a graphite/ivory/amber design token set (`--signal`)
 - **framer-motion 12** + `MotionConfig reducedMotion="user"`
 - **Lenis**: smooth scrolling
 - **Prisma + MongoDB**: blog storage, MDX rendered via `next-mdx-remote`
-- **Archivo** (variable, expanded width axis) + **JetBrains Mono**
+- **Archivo** (variable, expanded width axis) + **JetBrains Mono** (data only)
+  + **Newsreader italic** (annotations)
 
 ## Map
 
 ```
 app/
-  page.tsx            Home: Hero → Experience → Systems Work → Skills → Additional Work → Education → Contact
-  journey/            Boot-log timeline
-  blog/               Field-log index + MDX articles
+  page.tsx            Home: Hero → Experience → Selected Work → Capabilities → Wider Bench → Education → Contact
+  journey/            Running-log timeline
+  blog/               Notebook index + MDX articles
   projects/           308 redirect → /#work
   template.tsx        Route transition (quiet CSS rise)
 components/
-  Hero.tsx            Video + single detection lock-on on the name
-  Experience.tsx      Current role + professional experience
-  Work.tsx            Featured systems gallery + additional project archive
+  Hero.tsx            Name + dimension line + spec plate (no paragraph)
+  Experience.tsx      Current post panel + prior roles as ruled entries
+  Work.tsx            Featured specimen-sheet rail + project index
   About.tsx           Education + certification
-  MergeLog.tsx        Open-source contributions inside additional work
-  CapabilityMatrix.tsx  Engineering skills grid
-  Contact.tsx         Footer with giant email
-  NavBar.tsx          Slim mono bar + fullscreen mobile menu
+  MergeLog.tsx        Upstream open-source contributions
+  CapabilityMatrix.tsx  Capabilities grid
+  Contact.tsx         Footer with large email + colophon
+  NavBar.tsx          Hairline bar + fullscreen mobile menu
   SmoothScroll.tsx    Lenis provider (hash/focus-aware anchors)
   MotionProvider.tsx  Global reduced-motion handling
-  ScrambleText.tsx    Decode-in text (hero name only)
-  SectionHeader.tsx   Section chrome (index // label + display title)
-  Timeline.tsx        Journey page entries
-  Blog*.tsx           Blog index header, field-log rows, article header
+  SectionHeader.tsx   Section chrome (index / label, title, annotation, tick-rule)
+  Timeline.tsx        Journey page entries on a measurement spine
+  Blog*.tsx           Notebook index header, entry rows, article header
   ReadingProgress.tsx Article progress rail
 lib/
   portfolio.ts        All content data (projects, experience, OSS, stack, education)

@@ -3,20 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
-  @media (width >= 2400px) {
-    max-width: 2400px;
-  }
-}
-
 @theme {
   --font-sans:
     var(--font-archivo), ui-sans-serif, system-ui, sans-serif,
@@ -28,16 +14,15 @@
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas,
     'Liberation Mono', 'Courier New', monospace;
+  --font-serif:
+    var(--font-newsreader), Georgia, 'Times New Roman', serif;
 
-  --text-display-lg: 5rem;
-  --text-display-lg--line-height: 1.05;
-  --text-display-lg--letter-spacing: 0;
-  --text-display-xl: 7rem;
-  --text-display-xl--line-height: 1;
-  --text-display-xl--letter-spacing: 0;
-  --text-display-hero: clamp(3.5rem, 13vw, 12rem);
-  --text-display-hero--line-height: 0.88;
-  --text-display-hero--letter-spacing: -0.01em;
+  --text-display-hero: clamp(2.5rem, 9vw, 8rem);
+  --text-display-hero--line-height: 0.98;
+  --text-display-hero--letter-spacing: -0.02em;
+  --text-display-title: clamp(2rem, 5.5vw, 4.25rem);
+  --text-display-title--line-height: 1.02;
+  --text-display-title--letter-spacing: -0.015em;
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -45,8 +30,9 @@
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
-  --color-phosphor: hsl(var(--phosphor));
-  --color-phosphor-dim: hsl(var(--phosphor-dim));
+  /* Calibration amber: the single instrument accent */
+  --color-signal: hsl(var(--signal));
+  --color-signal-dim: hsl(var(--signal-dim));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
@@ -70,37 +56,14 @@
   --color-card-foreground: hsl(var(--card-foreground));
 
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
+  --radius-md: var(--radius);
+  --radius-sm: var(--radius);
 }
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
 */
 @layer base {
   *,
@@ -112,16 +75,49 @@
   }
 }
 
-@utility card-surface {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  transition:
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
-  &:hover {
-    border-color: hsl(var(--phosphor) / 0.35);
-    box-shadow: 0 16px 48px -12px hsl(210 60% 2% / 0.8);
+/* Shared page gutter: contained, editorial column */
+@utility lab-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1.25rem;
+  @media (width >= 640px) {
+    padding-inline: 2rem;
   }
+}
+
+/*
+  Ruler strip: minor ticks every 8px (upper half), major ticks every 64px
+  (full height). Layered repeating gradients, no markup cost.
+*/
+@utility tick-rule {
+  height: 8px;
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      hsl(var(--foreground) / 0.32) 0,
+      hsl(var(--foreground) / 0.32) 1px,
+      transparent 1px,
+      transparent 64px
+    ),
+    repeating-linear-gradient(
+      to right,
+      hsl(var(--foreground) / 0.13) 0,
+      hsl(var(--foreground) / 0.13) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+  background-repeat: repeat-x;
+  background-position: left top, left top;
+  background-size: auto 100%, auto 50%;
+}
+
+/* Faint graph paper for instrument surfaces */
+@utility lab-grid {
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
 
 @layer components {
@@ -151,39 +147,40 @@
 
 @layer base {
   :root {
-    --background: 210 24% 3%;
-    --foreground: 200 14% 93%;
+    /* Graphite bench, warm ivory type */
+    --background: 216 11% 6%;
+    --foreground: 40 22% 92%;
 
-    --card: 210 20% 5%;
-    --card-foreground: 200 14% 93%;
+    --card: 217 10% 8%;
+    --card-foreground: 40 22% 92%;
 
-    --popover: 210 20% 5%;
-    --popover-foreground: 200 14% 93%;
+    --popover: 217 10% 8%;
+    --popover-foreground: 40 22% 92%;
 
-    --primary: 200 14% 93%;
-    --primary-foreground: 210 24% 3%;
+    --primary: 40 22% 92%;
+    --primary-foreground: 216 11% 6%;
 
-    --secondary: 210 16% 9%;
-    --secondary-foreground: 200 10% 68%;
+    --secondary: 217 8% 11%;
+    --secondary-foreground: 40 8% 70%;
 
-    --muted: 210 16% 9%;
-    --muted-foreground: 208 12% 64%;
+    --muted: 217 8% 11%;
+    --muted-foreground: 40 6% 63%;
 
-    --accent: 210 16% 9%;
-    --accent-foreground: 200 14% 93%;
+    --accent: 217 8% 11%;
+    --accent-foreground: 40 22% 92%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 14% 13%;
-    --input: 210 14% 13%;
-    --ring: 183 85% 62%;
+    --border: 217 7% 16%;
+    --input: 217 7% 16%;
+    --ring: 34 97% 60%;
 
-    /* Perception system accent */
-    --phosphor: 183 85% 62%;
-    --phosphor-dim: 183 60% 40%;
+    /* Calibration amber accent */
+    --signal: 34 97% 60%;
+    --signal-dim: 34 55% 42%;
 
-    --radius: 0.25rem;
+    --radius: 0;
   }
 }
 
@@ -199,12 +196,12 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "ss01", "cv11", "tnum";
   }
 
   /* Archivo variable width axis: display type runs expanded */
   .font-display {
-    font-stretch: 122%;
+    font-stretch: 118%;
   }
 
   :where(a, button, input, textarea, select, [role="button"]):focus-visible {
@@ -213,8 +210,8 @@
   }
 
   ::selection {
-    background-color: hsl(var(--phosphor) / 0.28);
-    color: hsl(200 14% 97%);
+    background-color: hsl(var(--signal) / 0.3);
+    color: hsl(40 22% 96%);
   }
 
   ::-webkit-scrollbar {
@@ -224,11 +221,11 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(210 12% 18%);
+    background: hsl(217 7% 20%);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--phosphor-dim));
+    background: hsl(var(--signal-dim));
   }
 
   /* Lenis smooth scroll */
@@ -346,8 +343,8 @@
       max-width: 72rem;
       margin-inline: auto;
       flex-direction: column !important;
-      padding-inline: 1.5rem !important;
-      padding-right: 1.5rem !important;
+      padding-inline: 1.25rem !important;
+      padding-right: 1.25rem !important;
     }
     .work-pin-card {
       width: 100% !important;
@@ -364,8 +361,8 @@
     .work-pin-track {
       display: grid !important;
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      padding-inline: 3rem !important;
-      padding-right: 3rem !important;
+      padding-inline: 2rem !important;
+      padding-right: 2rem !important;
     }
   }
 
@@ -388,8 +385,8 @@
       max-width: 72rem;
       margin-inline: auto;
       flex-direction: column !important;
-      padding-inline: 1.5rem !important;
-      padding-right: 1.5rem !important;
+      padding-inline: 1.25rem !important;
+      padding-right: 1.25rem !important;
     }
     .work-pin-card {
       width: 100% !important;
@@ -407,8 +404,8 @@
       .work-pin-track {
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        padding-inline: 3rem !important;
-        padding-right: 3rem !important;
+        padding-inline: 2rem !important;
+        padding-right: 2rem !important;
       }
     }
   }

@@ -7,17 +7,19 @@ const featured = projects.filter((p) => p.featured);
 const archive = projects.filter((p) => !p.featured);
 const PINNED_GALLERY_HEIGHT_VH = 30 + featured.length * 70;
 
+const figNumber = (index: number) => `Fig. ${String(index + 1).padStart(2, "0")}`;
+
 const ProjectLinks = ({ project }: { project: Project }) => {
   const hasExternalLink = project.githubUrl || project.liveUrl;
 
   return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em]">
+    <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] tracking-tight">
       {project.githubUrl && (
         <a
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
+          className="text-foreground/70 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
         >
           Code ↗
         </a>
@@ -27,49 +29,60 @@ const ProjectLinks = ({ project }: { project: Project }) => {
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-foreground/60 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-phosphor hover:decoration-phosphor"
+          className="text-foreground/70 underline decoration-foreground/25 underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
         >
           Live ↗
         </a>
       )}
       {!hasExternalLink && (
-        <span className="text-foreground/50">Professional experience</span>
+        <span className="text-muted-foreground">Professional experience</span>
       )}
     </div>
   );
 };
 
-const TechnicalFrame = ({ project }: { project: Project }) => (
-  <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(135deg,hsl(var(--card)),hsl(var(--background)))]">
-    <div className="absolute inset-5 border border-phosphor/15" />
-    <div className="absolute inset-y-5 left-1/3 w-px bg-phosphor/10" />
-    <div className="absolute inset-y-5 right-1/3 w-px bg-phosphor/10" />
-    <div className="absolute inset-x-5 top-1/2 h-px bg-phosphor/10" />
-    <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
+/* Placeholder plate for projects without imagery: graph paper + readouts */
+const SchematicFrame = ({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) => (
+  <div className="lab-grid absolute inset-0 overflow-hidden bg-card">
+    <span className="absolute left-5 top-4 font-mono text-[10px] tracking-[0.16em] text-muted-foreground">
+      No imagery on file
+    </span>
+    <span
+      aria-hidden
+      className="absolute -bottom-7 right-3 font-display text-[7rem] font-bold leading-none text-foreground/[0.07]"
+    >
+      {String(index + 1).padStart(2, "0")}
+    </span>
+    <div className="absolute bottom-4 left-5 right-5 flex flex-wrap gap-x-4 gap-y-1.5">
       {project.technologies.slice(0, 4).map((technology) => (
         <span
           key={technology}
-          className="border border-foreground/15 bg-background/70 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.16em] text-foreground/60"
+          className="font-mono text-[10px] tracking-[0.1em] text-muted-foreground"
         >
           {technology}
         </span>
       ))}
     </div>
-    <p className="absolute right-5 top-5 hidden font-mono text-[8px] uppercase tracking-[0.2em] text-phosphor/60 sm:block">
-      System profile
-    </p>
   </div>
 );
 
 const FrameCard = ({
   project,
+  index,
   priority,
 }: {
   project: Project;
+  index: number;
   priority?: boolean;
 }) => (
   <article className="work-pin-card group relative flex h-full w-[86vw] shrink-0 flex-col border border-border bg-card md:w-[56vw] lg:w-[44vw] xl:w-[40vw]">
-    {/* Captured frame */}
+    {/* Plate */}
     <div className="relative aspect-video w-full overflow-hidden border-b border-border">
       {project.image ? (
         <Image
@@ -79,37 +92,58 @@ const FrameCard = ({
           sizes="(max-width: 768px) 86vw, (max-width: 1024px) 56vw, (max-width: 1280px) 44vw, 40vw"
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
-          className="object-cover opacity-80 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-100"
+          className="object-cover opacity-85 saturate-[0.85] transition-all duration-700 group-hover:scale-[1.02] group-hover:opacity-100 group-hover:saturate-100"
         />
       ) : (
-        <TechnicalFrame project={project} />
+        <SchematicFrame project={project} index={index} />
       )}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,7,10,0.25),transparent_40%,rgba(4,7,10,0.55))]" />
-      <p className="absolute left-5 top-5 font-mono text-[9px] uppercase tracking-[0.22em] text-foreground/70">
-        {project.eyebrow}
-      </p>
     </div>
 
-    {/* Analysis */}
+    {/* Figure caption */}
+    <div className="flex items-baseline gap-3 border-b border-border px-6 py-3 md:px-8">
+      <span className="shrink-0 font-mono text-[10px] tracking-[0.12em] text-signal">
+        {figNumber(index)}
+      </span>
+      <span className="min-w-0 truncate font-serif text-sm italic text-muted-foreground">
+        {project.eyebrow}
+      </span>
+    </div>
+
+    {/* Sheet */}
     <div className="flex flex-1 flex-col p-6 md:p-8">
-      <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground wrap-anywhere md:text-4xl">
+      <h3 className="font-display text-2xl font-bold tracking-tight text-foreground wrap-anywhere md:text-3xl">
         {project.title}
       </h3>
-      <p className="mt-4 text-sm leading-6 text-foreground/60">
-        <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/45">
-          Problem:
-        </span>
-        {project.problem}
-      </p>
-      <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
-        {project.contribution}
-      </p>
-      <p className="mt-3 border-l border-phosphor/50 pl-3 font-mono text-[11px] leading-5 text-phosphor/80">
-        → {project.impact}
-      </p>
 
-      <div className="mt-auto pt-6">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55">
+      <dl className="mt-5 space-y-0">
+        <div className="grid grid-cols-[4.5rem_1fr] gap-4 border-t border-border/70 py-3">
+          <dt className="font-mono text-[10px] uppercase tracking-[0.16em] leading-5 text-muted-foreground">
+            Problem
+          </dt>
+          <dd className="text-sm leading-6 text-foreground/70">
+            {project.problem}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[4.5rem_1fr] gap-4 border-t border-border/70 py-3">
+          <dt className="font-mono text-[10px] uppercase tracking-[0.16em] leading-5 text-muted-foreground">
+            Built
+          </dt>
+          <dd className="text-sm leading-6 text-foreground/70">
+            {project.contribution}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[4.5rem_1fr] gap-4 border-t border-border/70 py-3">
+          <dt className="font-mono text-[10px] uppercase tracking-[0.16em] leading-5 text-signal">
+            Result
+          </dt>
+          <dd className="text-sm leading-6 text-foreground/85">
+            {project.impact}
+          </dd>
+        </div>
+      </dl>
+
+      <div className="mt-auto flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 border-t border-border pt-5">
+        <p className="min-w-0 font-mono text-[10px] leading-5 tracking-[0.06em] text-muted-foreground">
           {project.technologies.join(" · ")}
         </p>
         <ProjectLinks project={project} />
@@ -129,21 +163,22 @@ const HorizontalGallery = () => {
       className="work-pin-section relative"
       style={{ height: `${PINNED_GALLERY_HEIGHT_VH}vh` }}
     >
-      <div className="work-pin-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <div className="work-pin-track flex w-max items-stretch gap-6 pl-6 pr-[12vw] md:pl-12">
+      <div className="work-pin-sticky sticky top-0 flex h-screen flex-col justify-center overflow-hidden pt-14">
+        <div className="work-pin-track flex w-max items-stretch gap-6 pl-5 pr-[12vw] md:pl-8">
           {featured.map((project, index) => (
             <FrameCard
               key={project.id}
               project={project}
+              index={index}
               priority={index === 0}
             />
           ))}
         </div>
 
-        {/* Progress rail */}
-        <div className="work-pin-progress absolute inset-x-6 bottom-8 md:inset-x-12">
-          <div className="relative h-px w-full bg-border">
-            <div className="work-pin-progress-fill absolute inset-0 origin-left bg-phosphor" />
+        {/* Progress ruler */}
+        <div className="work-pin-progress absolute inset-x-5 bottom-8 md:inset-x-8">
+          <div className="tick-rule relative w-full">
+            <div className="work-pin-progress-fill absolute inset-x-0 bottom-0 h-px origin-left bg-signal" />
           </div>
         </div>
       </div>
@@ -161,10 +196,10 @@ const ArchiveRow = ({
   const primaryHref = project.liveUrl ?? project.githubUrl;
 
   return (
-    <li className="group border-b border-border transition-colors hover:bg-foreground/3">
+    <li className="group border-b border-border transition-colors hover:bg-foreground/[0.03]">
       <div className="flex items-center gap-5 py-5 md:gap-8">
-        <span className="font-mono text-[10px] tracking-[0.2em] text-foreground/50">
-          P.{String(featured.length + index + 1).padStart(2, "0")}
+        <span className="shrink-0 font-mono text-[10px] text-muted-foreground">
+          {String(featured.length + index + 1).padStart(2, "0")}
         </span>
 
         <div className="min-w-0 flex-1">
@@ -175,39 +210,39 @@ const ArchiveRow = ({
               rel="noopener noreferrer"
               className="block"
             >
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-phosphor md:truncate md:text-2xl">
+              <span className="block font-display text-lg font-bold leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-signal md:truncate md:text-2xl">
                 {project.title}
               </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+              <span className="mt-1 block font-serif text-[13px] italic text-muted-foreground md:hidden">
                 {project.eyebrow}
               </span>
             </a>
           ) : (
             <>
-              <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground wrap-anywhere md:truncate md:text-2xl">
+              <span className="block font-display text-lg font-bold leading-tight tracking-tight text-foreground wrap-anywhere md:truncate md:text-2xl">
                 {project.title}
               </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:hidden">
+              <span className="mt-1 block font-serif text-[13px] italic text-muted-foreground md:hidden">
                 {project.eyebrow}
               </span>
             </>
           )}
         </div>
 
-        <span className="hidden w-40 shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/55 md:block">
+        <span className="hidden w-44 shrink-0 font-serif text-[13px] italic leading-5 text-muted-foreground md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-foreground/50 lg:block">
+        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] leading-5 tracking-[0.04em] text-muted-foreground/80 lg:block">
           {project.technologies.join(" · ")}
         </span>
 
-        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
+        <span className="flex shrink-0 gap-4 text-[12px] tracking-tight">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/55 transition-colors hover:text-phosphor"
+              className="text-muted-foreground transition-colors hover:text-signal"
             >
               Code ↗
             </a>
@@ -217,7 +252,7 @@ const ArchiveRow = ({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground/55 transition-colors hover:text-phosphor"
+              className="text-muted-foreground transition-colors hover:text-signal"
             >
               Live ↗
             </a>
@@ -229,16 +264,18 @@ const ArchiveRow = ({
 };
 
 const ArchiveTable = () => (
-  <div className="px-6 pb-8 md:px-12">
-    <div className="mb-6 flex items-end justify-between border-t border-border pt-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
-        {"//"} Full archive
+  <div className="lab-container pb-8">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-3 border-t border-border pt-10">
+      <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+        <span className="text-signal">04.1</span>
+        <span className="mx-2 text-muted-foreground/60">/</span>
+        Project index
       </p>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/50 transition-colors hover:text-phosphor"
+        className="font-mono text-[11px] text-muted-foreground transition-colors hover:text-signal"
       >
         github.com/arianizadi ↗
       </a>
@@ -259,12 +296,12 @@ const Work = () => (
   >
     {/* Legacy anchor alias: old /#projects links still land here */}
     <span id="projects" aria-hidden className="absolute -top-24" />
-    <div className="px-6 md:px-12">
+    <div className="lab-container">
       <SectionHeader
         index="02"
-        label="Engineering Portfolio"
-        title="Selected Work"
-        description="Projects organized around the problem, the system built, and the constraints that shaped it."
+        label="Selected work"
+        title="Built under constraints"
+        description="Each project documented the same way: the problem, the system built, and the result it had to hold."
       />
     </div>
     <HorizontalGallery />
@@ -276,16 +313,16 @@ export const AdditionalWork = () => (
     id="additional-work"
     className="relative scroll-mt-16 border-t border-border py-24 md:py-32"
   >
-    <div className="px-6 md:px-12">
+    <div className="lab-container">
       <SectionHeader
         index="04"
-        label="Across Computer Science"
-        title="More Things I've Built"
+        label="Across computer science"
+        title="The wider bench"
         description="Computer vision tools, security work, web applications, and practical utilities from across my GitHub."
       />
     </div>
     <ArchiveTable />
-    <div className="px-6 md:px-12">
+    <div className="lab-container">
       <MergeLog embedded />
     </div>
   </section>

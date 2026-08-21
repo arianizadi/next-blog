@@ -83,33 +83,33 @@ const LogEntry = ({
 }) => {
   return (
     <motion.li
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: easeOutExpo }}
-      className="relative pl-14 md:pl-24"
+      transition={{ duration: 0.65, ease: easeOutExpo }}
+      className="relative pl-12 md:pl-24"
     >
-      {/* Node */}
-      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-phosphor/60 bg-background md:left-4">
-        <span className="h-1.5 w-1.5 bg-phosphor" />
-      </span>
+      {/* Gauge mark on the spine */}
+      <span
+        aria-hidden
+        className="absolute left-0 top-[7px] h-px w-6 bg-signal/80 md:left-2 md:w-8"
+      />
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
-        [{milestone.stamp}]
-      </p>
-      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
+      <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+        <span className="mr-3 text-signal">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <div>
-          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
-            {milestone.title}
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
-            {milestone.description}
-          </p>
-        </div>
+        {milestone.stamp}
+      </p>
+      <div className="mt-4">
+        <h3 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          {milestone.title}
+        </h3>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+          {milestone.description}
+        </p>
       </div>
+      <div aria-hidden className="mt-8 h-px max-w-2xl bg-border" />
     </motion.li>
   );
 };
@@ -123,24 +123,25 @@ const Timeline = () => {
 
   return (
     <div className="relative min-h-screen bg-background pb-32 pt-32 md:pt-40">
-      <div className="px-6 md:px-12">
+      <div className="lab-container">
         <SectionHeader
-          index="02"
-          label="System Boot Log"
+          index="J"
+          label="Running log"
           title="Journey"
-          description="From a borrowed C# manual to robotics perception research. The log, unedited."
+          level="h1"
+          description="From a borrowed C# manual to robotics perception research — the record, in order."
         />
 
         <div ref={traceRef} className="relative">
-          {/* Signal trace */}
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
+          {/* Measurement spine */}
+          <div className="absolute bottom-0 left-0 top-0 w-px bg-border md:left-2">
             <motion.div
               style={{ scaleY: scrollYProgress }}
-              className="absolute inset-0 origin-top bg-phosphor"
+              className="absolute inset-0 origin-top bg-signal"
             />
           </div>
 
-          <ul className="space-y-10 md:space-y-14">
+          <ul className="space-y-12 md:space-y-16">
             {MILESTONES.map((milestone, index) => (
               <LogEntry
                 key={milestone.title}
@@ -155,15 +156,16 @@ const Timeline = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="relative pl-14 md:pl-24"
+              className="relative pl-12 md:pl-24"
             >
-              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 bg-phosphor" />
-              </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
-                [NOW]
+              <span
+                aria-hidden
+                className="absolute left-0 top-[7px] h-px w-6 bg-signal md:left-2 md:w-8"
+              />
+              <p className="font-mono text-[11px] tracking-[0.14em] text-signal">
+                Now
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
+              <p className="mt-4 max-w-xl font-serif text-lg italic leading-8 text-muted-foreground">
                 The same curiosity that started with a C# book still drives the
                 work: understand the system, respect the constraints, and build
                 something reliable enough to matter.

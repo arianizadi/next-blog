@@ -17,31 +17,32 @@ export function BlogArticleHeader({
 }: BlogArticleHeaderProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: easeOutExpo }}
+      transition={{ duration: 0.65, ease: easeOutExpo }}
       className="mb-12"
     >
       <Link
         href="/blog"
-        className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/55 no-underline transition-colors hover:text-phosphor"
+        className="mb-10 inline-flex items-center gap-2 text-[13px] tracking-tight text-muted-foreground no-underline transition-colors hover:text-signal"
       >
-        ← /blog
+        ← All entries
       </Link>
 
       <header>
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
-          Log entry ·{" "}
-          <time dateTime={dateISO} className="text-foreground/50">
+        <p className="mb-4 font-mono text-[11px] tracking-[0.14em] text-signal">
+          Entry
+          <span className="mx-2 text-muted-foreground/60">/</span>
+          <time dateTime={dateISO} className="text-muted-foreground">
             {dateLabel}
           </time>
         </p>
-        <h1 className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-foreground wrap-anywhere md:text-6xl">
+        <h1 className="font-display text-4xl font-bold leading-[1.02] tracking-tight text-foreground wrap-anywhere md:text-6xl">
           {title}
         </h1>
       </header>
 
-      <div className="mt-10 h-px w-full bg-border" />
+      <div aria-hidden className="tick-rule mt-10" />
     </motion.div>
   );
 }

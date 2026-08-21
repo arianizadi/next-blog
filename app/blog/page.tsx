@@ -16,7 +16,7 @@ export default async function BlogPage() {
   }));
 
   return (
-    <div className="mx-auto min-h-screen max-w-6xl px-6 pb-24 pt-32 md:px-12 md:pt-40">
+    <div className="lab-container min-h-screen pb-24 pt-32 md:pt-40">
       <BlogIndexHeader />
       <BlogPostGrid posts={summaries} />
     </div>
