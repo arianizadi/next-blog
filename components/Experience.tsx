@@ -24,7 +24,7 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "border border-border bg-card px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/60",
+          "border border-border bg-card px-2.5 py-1 font-mono text-xs uppercase tracking-[0.16em] text-foreground/60",
           isPrimaryTechnology(technology) &&
             "border-accent/50 bg-accent/8 font-semibold text-accent"
         )}
@@ -75,7 +75,7 @@ const PreviousRoleRow = ({
         index === previousExperiences.length - 1 && "border-b"
       )}
     >
-      <p className="pt-1.5 font-mono text-[10px] uppercase leading-5 tracking-[0.18em] text-muted-foreground">
+      <p className="pt-1.5 font-mono text-xs uppercase leading-5 tracking-[0.18em] text-muted-foreground">
         {job.dates}
       </p>
 
@@ -84,7 +84,7 @@ const PreviousRoleRow = ({
           <h3 className="font-display text-2xl leading-tight text-foreground md:text-3xl">
             {job.company}
           </h3>
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
             {job.role}
           </p>
         </div>
@@ -100,7 +100,7 @@ const PreviousRoleRow = ({
       <p
         aria-hidden
         className={cn(
-          "hidden pt-1.5 text-right font-mono text-[10px] tracking-[0.2em] text-foreground/35 lg:block",
+          "hidden pt-1.5 text-right font-mono text-xs tracking-[0.2em] text-foreground/35 lg:block",
           systemsRole && "text-accent/60"
         )}
       >
@@ -135,10 +135,10 @@ const Experience = () => (
         <div className="relative grid gap-10 p-6 pl-7 md:p-10 md:pl-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <div className="flex flex-wrap items-center gap-4">
-              <span className="inline-flex -rotate-2 items-center border-2 border-accent/70 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-accent">
+              <span className="inline-flex -rotate-2 items-center border-2 border-accent/70 px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.28em] text-accent">
                 Current
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 {currentExperience.dates}
               </span>
             </div>
@@ -165,7 +165,7 @@ const Experience = () => (
           </div>
 
           <div className="border-t border-border pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
               Engineering scope
             </p>
             <ExperienceBullets points={currentExperience.bulletPoints} />
@@ -175,7 +175,7 @@ const Experience = () => (
 
       {/* Previous record */}
       <div className="mt-20">
-        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-accent">
+        <p className="mb-2 font-mono text-xs uppercase tracking-[0.28em] text-accent">
           § Previous record
         </p>
         <div className="mt-8">

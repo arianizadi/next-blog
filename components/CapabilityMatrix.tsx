@@ -50,7 +50,7 @@ const CapabilityMatrix = () => {
             >
               <div>
                 <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-[10px] tracking-[0.2em] text-accent">
+                  <span className="font-mono text-xs tracking-[0.2em] text-accent">
                     {GROUP_TAGS[group.id] ?? group.id.toUpperCase()}
                   </span>
                   <h3 className="font-display text-2xl leading-tight text-foreground">
@@ -61,7 +61,7 @@ const CapabilityMatrix = () => {
                   {group.description}
                 </p>
                 {group.id === "systems" && (
-                  <p className="mt-3 inline-block border border-accent/50 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
+                  <p className="mt-3 inline-block border border-accent/50 px-2 py-1 font-mono text-xs uppercase tracking-[0.24em] text-accent">
                     Primary domain
                   </p>
                 )}
@@ -78,7 +78,7 @@ const CapabilityMatrix = () => {
                     <li
                       key={skill}
                       className={cn(
-                        "font-mono text-[11px] uppercase tracking-[0.14em] after:ml-5 after:text-accent/40 after:content-['·'] last:after:content-none md:text-xs",
+                        "font-mono text-xs uppercase tracking-[0.14em] after:ml-5 after:text-accent/40 after:content-['·'] last:after:content-none md:text-xs",
                         primary
                           ? "font-semibold text-accent after:text-accent/50"
                           : "text-foreground/60"

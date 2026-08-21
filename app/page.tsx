@@ -25,7 +25,7 @@ const DocIndexStrip = () => (
     <dl className="grid grid-cols-2 gap-px border-border bg-border md:grid-cols-4">
       {INDEX_CELLS.map(([value, label]) => (
         <div key={label} className="bg-background px-6 py-5 md:px-8">
-          <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+          <dt className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
             {label}
           </dt>
           <dd className="mt-2 font-display text-2xl leading-none text-foreground md:text-3xl">

@@ -11,7 +11,7 @@ const ProjectLinks = ({ project }: { project: Project }) => {
   const hasExternalLink = project.githubUrl || project.liveUrl;
 
   return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em]">
+    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.22em]">
       {project.githubUrl && (
         <a
           href={project.githubUrl}
@@ -49,13 +49,13 @@ const TechnicalFrame = ({ project }: { project: Project }) => (
       {project.technologies.slice(0, 4).map((technology) => (
         <span
           key={technology}
-          className="border border-panel-border bg-panel/80 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-panel-muted"
+          className="border border-panel-border bg-panel/80 px-2 py-1 font-mono text-xs uppercase tracking-[0.16em] text-panel-muted"
         >
           {technology}
         </span>
       ))}
     </div>
-    <p className="absolute right-5 top-5 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-panel-accent/70 sm:block">
+    <p className="absolute right-5 top-5 hidden font-mono text-xs uppercase tracking-[0.2em] text-panel-accent/70 sm:block">
       Schematic
     </p>
   </div>
@@ -85,10 +85,10 @@ const FrameCard = ({
         <TechnicalFrame project={project} />
       )}
       <div className="absolute inset-0 bg-[linear-gradient(180deg,hsl(228_14%_8%/0.35),transparent_40%,hsl(228_14%_8%/0.6))]" />
-      <p className="absolute left-4 top-4 border border-panel-border bg-panel/85 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-panel-muted backdrop-blur-sm">
+      <p className="absolute left-4 top-4 border border-panel-border bg-panel/85 px-2 py-1 font-mono text-xs uppercase tracking-[0.2em] text-panel-muted backdrop-blur-sm">
         {project.eyebrow}
       </p>
-      <p className="absolute right-4 top-4 font-mono text-[10px] uppercase tracking-[0.2em] text-panel-foreground/70">
+      <p className="absolute right-4 top-4 font-mono text-xs uppercase tracking-[0.2em] text-panel-foreground/70">
         F.{String(featured.indexOf(project) + 1).padStart(2, "0")}
       </p>
     </div>
@@ -99,7 +99,7 @@ const FrameCard = ({
         {project.title}
       </h3>
       <p className="mt-4 text-sm leading-6 text-panel-foreground/70">
-        <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.18em] text-panel-muted">
+        <span className="mr-2 font-mono text-xs uppercase tracking-[0.18em] text-panel-muted">
           Problem:
         </span>
         {project.problem}
@@ -107,12 +107,12 @@ const FrameCard = ({
       <p className="mt-3 max-w-lg text-sm leading-6 text-panel-muted">
         {project.contribution}
       </p>
-      <p className="mt-3 border-l-2 border-panel-accent/60 pl-3 font-mono text-[11px] leading-5 text-panel-accent">
+      <p className="mt-3 border-l-2 border-panel-accent/60 pl-3 font-mono text-xs leading-5 text-panel-accent">
         → {project.impact}
       </p>
 
       <div className="mt-auto pt-6">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-panel-muted">
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-panel-muted">
           {project.technologies.join(" · ")}
         </p>
         <ProjectLinks project={project} />
@@ -145,7 +145,7 @@ const HorizontalGallery = () => {
 
         {/* Progress rail */}
         <div className="work-pin-progress absolute inset-x-6 bottom-8 md:inset-x-12">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.26em] text-panel-muted">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.26em] text-panel-muted">
             Track A — {featured.length} featured systems
           </p>
           <div className="relative h-px w-full bg-panel-border">
@@ -169,7 +169,7 @@ const ArchiveRow = ({
   return (
     <li className="group border-b border-border transition-colors hover:bg-foreground/3">
       <div className="flex flex-col gap-3 py-6 md:flex-row md:items-baseline md:gap-6">
-        <span className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-accent">
+        <span className="shrink-0 font-mono text-xs tracking-[0.2em] text-accent">
           P.{String(featured.length + index + 1).padStart(2, "0")}
         </span>
 
@@ -190,7 +190,7 @@ const ArchiveRow = ({
               {project.title}
             </span>
           )}
-          <span className="mt-1.5 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          <span className="mt-1.5 block font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
             {project.eyebrow}
             <span className="mx-2 text-accent/60" aria-hidden>
               ·
@@ -204,7 +204,7 @@ const ArchiveRow = ({
           className="mx-2 hidden min-w-8 flex-1 self-end border-b border-dotted border-foreground/25 md:block"
         />
 
-        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.18em] self-start md:self-auto">
+        <span className="flex shrink-0 gap-4 font-mono text-xs uppercase tracking-[0.18em] self-start md:self-auto">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -234,14 +234,14 @@ const ArchiveRow = ({
 const ArchiveTable = () => (
   <div className="px-6 pb-8 md:px-12">
     <div className="mb-8 flex items-end justify-between border-t border-border pt-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+      <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
         § Full index
       </p>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-accent"
+        className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-accent"
       >
         github.com/arianizadi ↗
       </a>
@@ -272,7 +272,7 @@ const Work = () => (
       />
     </div>
     <HorizontalGallery />
-    <div className="border-t border-panel-border px-6 py-5 font-mono text-[10px] uppercase tracking-[0.26em] text-panel-muted md:px-12">
+    <div className="border-t border-panel-border px-6 py-5 font-mono text-xs uppercase tracking-[0.26em] text-panel-muted md:px-12">
       End of track A — appendix index follows
     </div>
   </section>

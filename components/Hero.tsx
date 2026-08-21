@@ -73,7 +73,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.7, ease: easeOutExpo }}
-              className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-accent md:text-[11px]"
+              className="mt-8 font-mono text-xs uppercase tracking-[0.3em] text-accent md:text-xs"
             >
               [ Nº 001 ] Systems Engineer · Researcher
             </motion.p>
@@ -109,7 +109,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.48, duration: 0.75, ease: easeOutExpo }}
-              className="mt-7 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/70 md:text-[11px] md:tracking-[0.26em]"
+              className="mt-7 font-mono text-xs uppercase tracking-[0.22em] text-foreground/70 md:text-xs md:tracking-[0.26em]"
             >
               Embedded Software Engineer II
               <span className="mx-2 text-accent">—</span>
@@ -120,7 +120,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.56, duration: 0.75, ease: easeOutExpo }}
-              className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground md:text-[10px]"
+              className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground md:text-xs"
             >
               {SPEC_CHIPS.map((chip, index) => (
                 <span key={chip}>
@@ -138,7 +138,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.62, duration: 0.75, ease: easeOutExpo }}
-              className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 md:text-[10px]"
+              className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 md:text-xs"
             >
               M.S. Computer Science, UNLV
             </motion.p>
@@ -151,13 +151,13 @@ const Hero = () => {
             >
               <a
                 href="#experience"
-                className="border border-foreground bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-background transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
+                className="border border-foreground bg-foreground px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-background transition-colors hover:border-accent hover:bg-accent hover:text-accent-foreground"
               >
                 Experience
               </a>
               <a
                 href="#work"
-                className="border border-foreground/25 px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/75 transition-colors hover:border-accent hover:text-accent"
+                className="border border-foreground/25 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-foreground/75 transition-colors hover:border-accent hover:text-accent"
               >
                 Selected Work
               </a>
@@ -165,7 +165,7 @@ const Hero = () => {
                 href={siteConfig.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-2 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/60 underline decoration-foreground/25 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent"
+                className="px-2 py-3 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-foreground/60 underline decoration-foreground/25 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent"
               >
                 Resume ↗
               </a>
@@ -192,10 +192,10 @@ const Hero = () => {
               )
             )}
             <div className="flex items-center justify-between border-b border-panel-border px-5 py-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-panel-foreground">
+              <p className="font-mono text-xs uppercase tracking-[0.26em] text-panel-foreground">
                 System profile
               </p>
-              <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-panel-accent">
+              <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-panel-accent">
                 <span
                   aria-hidden
                   className="h-1.5 w-1.5 bg-panel-accent motion-safe:animate-pulse"
@@ -209,20 +209,20 @@ const Hero = () => {
                   key={key}
                   className="flex items-baseline gap-3 border-b border-panel-border/60 py-3 last:border-b-0"
                 >
-                  <dt className="w-24 shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-panel-muted">
+                  <dt className="w-24 shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-panel-muted">
                     {key}
                   </dt>
                   <span
                     aria-hidden
                     className="mb-1 flex-1 border-b border-dotted border-panel-border"
                   />
-                  <dd className="shrink-0 text-right font-mono text-[11px] leading-5 text-panel-foreground">
+                  <dd className="shrink-0 text-right font-mono text-xs leading-5 text-panel-foreground">
                     {value}
                   </dd>
                 </div>
               ))}
             </dl>
-            <div className="border-t border-panel-border px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-panel-muted">
+            <div className="border-t border-panel-border px-5 py-3 font-mono text-xs uppercase tracking-[0.22em] text-panel-muted">
               Doc ref — AI / 26 · LV, NV
             </div>
           </motion.aside>
@@ -233,7 +233,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.9 }}
-          className="mt-14 flex items-center justify-between gap-3 border-t border-border pt-5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground"
+          className="mt-14 flex items-center justify-between gap-3 border-t border-border pt-5 font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground"
         >
           <a
             href="#experience"

@@ -94,11 +94,11 @@ const LogEntry = ({
         <span className="h-1.5 w-1.5 bg-accent" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+      <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
         [{milestone.stamp}]
       </p>
       <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-accent/40 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden pt-1.5 font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
+        <span className="hidden pt-1.5 font-mono text-xs tracking-[0.2em] text-foreground/40 md:block">
           E.{String(index + 1).padStart(2, "0")}
         </span>
         <div>
@@ -160,11 +160,11 @@ const Timeline = () => {
               <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-accent bg-background md:left-4">
                 <span className="h-1.5 w-1.5 bg-accent" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
+              <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent">
                 [NOW]
               </p>
               <div className="panel-grid mt-4 max-w-xl border border-panel-border bg-panel p-6 md:p-8">
-                <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.24em] text-panel-accent">
+                <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.24em] text-panel-accent">
                   <span
                     aria-hidden
                     className="h-1.5 w-1.5 bg-panel-accent motion-safe:animate-pulse"

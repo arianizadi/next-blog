@@ -137,7 +137,7 @@ export function NavBar() {
             <span className="font-display text-lg leading-none">
               Arian Izadi
             </span>
-            <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:inline">
+            <span className="hidden font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground sm:inline">
               Systems · Research
             </span>
           </Link>
@@ -158,13 +158,13 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "flex items-baseline gap-1.5 border-b pb-0.5 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors",
+                  "flex items-baseline gap-1.5 border-b pb-0.5 font-mono text-xs uppercase tracking-[0.2em] transition-colors",
                   isActive(link.href)
                     ? "border-accent text-foreground"
                     : "border-transparent text-muted-foreground hover:border-accent/50 hover:text-foreground"
                 )}
               >
-                <span className="text-[10px] text-accent/80">{link.id}</span>
+                <span className="text-xs text-accent/80">{link.id}</span>
                 {link.label}
               </Link>
             ))}
@@ -175,7 +175,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/75 transition-colors hover:border-accent hover:text-accent lg:inline-block"
+              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-foreground/75 transition-colors hover:border-accent hover:text-accent lg:inline-block"
             >
               Resume
             </a>
@@ -252,7 +252,7 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+            <div className="mt-10 flex items-center justify-between font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"

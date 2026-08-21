@@ -29,7 +29,7 @@ const ContributionList = () => (
       >
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <p className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
+            <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground">
               {c.project}
             </p>
             <h3 className="mt-3 font-display text-xl leading-tight text-foreground wrap-anywhere transition-colors group-hover:text-accent md:text-2xl">
@@ -39,7 +39,7 @@ const ContributionList = () => (
               {c.description}
             </p>
             {c.technologies && (
-              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/50">
+              <p className="mt-3 font-mono text-xs uppercase tracking-[0.16em] text-foreground/50">
                 {c.technologies.join(" · ")}
               </p>
             )}
@@ -47,11 +47,11 @@ const ContributionList = () => (
 
           <div className="flex shrink-0 flex-col items-end gap-3">
             <span
-              className={`border px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] ${STATUS_STYLE[c.status]}`}
+              className={`border px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-[0.22em] ${STATUS_STYLE[c.status]}`}
             >
               {c.status}
             </span>
-            <div className="flex gap-4 font-mono text-[10px] uppercase tracking-[0.2em]">
+            <div className="flex gap-4 font-mono text-xs uppercase tracking-[0.2em]">
               {c.prUrl && (
                 <a
                   href={c.prUrl}
@@ -76,7 +76,7 @@ const ContributionList = () => (
       </motion.article>
     ))}
 
-    <div className="flex items-center justify-between p-5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground md:p-7">
+    <div className="flex items-center justify-between p-5 font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground md:p-7">
       <a
         href="https://github.com/arianizadi"
         target="_blank"
@@ -93,7 +93,7 @@ const MergeLog = ({ embedded = false }: { embedded?: boolean }) => {
   if (embedded) {
     return (
       <div className="mt-20 border-t border-border pt-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-accent">
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-accent">
           § Upstream patches
         </p>
         <h3 className="mt-5 font-display text-3xl leading-none text-foreground md:text-5xl">

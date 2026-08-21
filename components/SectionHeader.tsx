@@ -48,7 +48,7 @@ const SectionHeader = ({
         />
         <p
           className={cn(
-            "font-mono text-[10px] uppercase tracking-[0.34em]",
+            "font-mono text-xs uppercase tracking-[0.34em]",
             tone === "panel" ? "text-panel-accent" : "text-accent"
           )}
         >
