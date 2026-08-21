@@ -10,7 +10,7 @@ const ProjectLinks = ({ project }: { project: Project }) => {
   const hasExternalLink = project.githubUrl || project.liveUrl;
 
   return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em]">
+    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.18em]">
       {project.githubUrl && (
         <a
           href={project.githubUrl}
@@ -58,7 +58,7 @@ const SpecRow = ({
   children: React.ReactNode;
 }) => (
   <div className="grid grid-cols-[4.5rem_1fr] gap-x-3 border-t border-border pt-3">
-    <span className="font-mono text-[10px] uppercase leading-5 tracking-[0.18em] text-muted-foreground">
+    <span className="font-mono text-xs uppercase leading-5 tracking-[0.18em] text-muted-foreground">
       {label}
     </span>
     <div className="min-w-0 text-sm leading-6 text-foreground/80">{children}</div>
@@ -83,10 +83,10 @@ const SchematicFrame = ({ project }: { project: Project }) => (
       aria-hidden
       className="absolute inset-x-4 top-1/2 h-px bg-inverse-border"
     />
-    <p className="absolute left-6 top-6 font-mono text-[10px] uppercase tracking-[0.22em] text-inverse-muted">
+    <p className="absolute left-6 top-6 font-mono text-xs uppercase tracking-[0.22em] text-inverse-muted">
       FIG.{String(project.id).padStart(2, "0")}
     </p>
-    <p className="absolute bottom-6 left-6 max-w-[70%] font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-inverse-muted">
+    <p className="absolute bottom-6 left-6 max-w-[70%] font-mono text-xs uppercase leading-5 tracking-[0.14em] text-inverse-muted">
       {project.technologies.slice(0, 3).join(" / ")}
     </p>
     <span
@@ -124,7 +124,7 @@ const Slide = ({
         ) : (
           <SchematicFrame project={project} />
         )}
-        <p className="absolute left-4 top-4 border bg-background px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground">
+        <p className="absolute left-4 top-4 border bg-background px-2 py-1 font-mono text-xs uppercase tracking-[0.2em] text-foreground">
           {project.eyebrow}
         </p>
       </div>
@@ -151,7 +151,7 @@ const Slide = ({
         </div>
 
         <div className="mt-auto pt-6">
-          <p className="mb-4 font-mono text-[10px] uppercase leading-5 tracking-[0.14em] text-muted-foreground">
+          <p className="mb-4 font-mono text-xs uppercase leading-5 tracking-[0.14em] text-muted-foreground">
             {project.technologies.join(" · ")}
           </p>
           <ProjectLinks project={project} />
@@ -227,7 +227,7 @@ const FeaturedCarousel = ({ projects }: { projects: Project[] }) => {
       </ul>
 
       <div className="mt-8 flex items-center justify-between gap-6 px-5 md:px-8 lg:px-12">
-        <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+        <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
           <span className="text-foreground tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>

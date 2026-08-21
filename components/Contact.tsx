@@ -25,11 +25,11 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mb-10 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent"
+          className="mb-10 flex items-center gap-4 font-mono text-xs uppercase tracking-[0.3em] text-accent"
         >
           <span aria-hidden className="inline-block h-2 w-2 bg-accent" />
           06 / Contact
-          <span aria-hidden className="h-px min-w-8 flex-1 bg-inverse-border" />
+          <span aria-hidden className="h-px min-w-0 flex-1 bg-inverse-border" />
         </motion.p>
 
         <h2 className="max-w-5xl font-display text-[clamp(2.6rem,8vw,7rem)] font-black uppercase leading-[0.92] tracking-tight">
@@ -57,13 +57,13 @@ const Contact = () => {
 
         <div className="mt-20 grid gap-10 border-t border-inverse-border pt-10 md:grid-cols-3">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-inverse-muted">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-inverse-muted">
               Coordinates
             </p>
             <p className="mt-3 text-sm leading-6">Las Vegas, NV</p>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-inverse-muted">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-inverse-muted">
               Signals
             </p>
             <ul className="mt-3 space-y-1.5">
@@ -88,7 +88,7 @@ const Contact = () => {
             </ul>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-inverse-muted">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-inverse-muted">
               Documents
             </p>
             <a
@@ -108,7 +108,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-inverse-border pt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-inverse-muted">
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-inverse-border pt-6 font-mono text-xs uppercase tracking-[0.18em] text-inverse-muted">
           <span>© 2026 Arian Izadi</span>
           <span aria-hidden className="tabular-nums">
             36.17°N / 115.14°W

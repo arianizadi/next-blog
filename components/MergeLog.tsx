@@ -30,7 +30,7 @@ const ContributionList = () => (
       >
         <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-4">
           <div className="min-w-0 flex-1">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
               {String(index + 1).padStart(2, "0")} · {c.project}
             </p>
             <h3 className="mt-3 font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground wrap-anywhere transition-colors group-hover:text-accent-ink md:text-2xl">
@@ -40,7 +40,7 @@ const ContributionList = () => (
               {c.description}
             </p>
             {c.technologies && (
-              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80">
+              <p className="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground/80">
                 {c.technologies.join(" · ")}
               </p>
             )}
@@ -48,11 +48,11 @@ const ContributionList = () => (
 
           <div className={cn("flex shrink-0 items-center gap-4 md:flex-col md:items-end")}>
             <span
-              className={`border px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] ${STATUS_STYLE[c.status]}`}
+              className={`border px-2 py-1 font-mono text-xs uppercase tracking-[0.2em] ${STATUS_STYLE[c.status]}`}
             >
               {c.status}
             </span>
-            <div className="flex gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
+            <div className="flex gap-4 font-mono text-xs uppercase tracking-[0.18em]">
               {c.prUrl && (
                 <a
                   href={c.prUrl}
@@ -77,7 +77,7 @@ const ContributionList = () => (
       </motion.article>
     ))}
 
-    <div className="py-5 font-mono text-[10px] uppercase tracking-[0.22em] md:py-6">
+    <div className="py-5 font-mono text-xs uppercase tracking-[0.22em] md:py-6">
       <a
         href="https://github.com/arianizadi"
         target="_blank"
@@ -94,7 +94,7 @@ const MergeLog = ({ embedded = false }: { embedded?: boolean }) => {
   if (embedded) {
     return (
       <div className="mt-20 border-t border-border pt-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-accent-ink">
+        <p className="font-mono text-xs uppercase tracking-[0.26em] text-accent-ink">
           Open-source contributions
         </p>
         <h3 className="mt-4 font-display text-3xl font-black uppercase leading-none tracking-tight text-foreground md:text-5xl">

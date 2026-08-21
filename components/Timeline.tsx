@@ -96,14 +96,14 @@ const LogEntry = ({
         <span className="h-1 w-1 bg-accent" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.22em] tabular-nums text-muted-foreground">
+      <p className="font-mono text-xs uppercase tracking-[0.22em] tabular-nums text-muted-foreground">
         [{milestone.stamp}]
       </p>
       <div className="mt-3 border border-border bg-card p-6 transition-colors group-hover:border-foreground/30 md:p-8">
         <div className="flex items-baseline gap-4">
           <span
             aria-hidden
-            className="hidden shrink-0 font-mono text-[10px] tracking-[0.18em] tabular-nums text-muted-foreground md:block"
+            className="hidden shrink-0 font-mono text-xs tracking-[0.18em] tabular-nums text-muted-foreground md:block"
           >
             {String(index + 1).padStart(2, "0")}
           </span>
@@ -172,7 +172,7 @@ const Timeline = () => {
               >
                 <span className="animate-caret h-1 w-1 bg-accent" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-ink">
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent-ink">
                 [NOW]
               </p>
               <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">

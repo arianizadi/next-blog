@@ -145,7 +145,7 @@ export function NavBar() {
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
-            className="group flex items-center gap-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-foreground"
+            className="group flex items-center gap-2.5 font-mono text-xs font-semibold uppercase tracking-[0.24em] text-foreground"
           >
             <span
               aria-hidden
@@ -170,7 +170,7 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "group flex items-baseline gap-1.5 py-1 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors",
+                  "group flex items-baseline gap-1.5 py-1 font-mono text-xs uppercase tracking-[0.18em] transition-colors",
                   isActive(link.href)
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -178,7 +178,7 @@ export function NavBar() {
               >
                 <span
                   className={cn(
-                    "text-[10px] transition-colors",
+                    "text-xs transition-colors",
                     isActive(link.href)
                       ? "text-accent-ink"
                       : "text-muted-foreground/60 group-hover:text-accent-ink"
@@ -196,7 +196,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground px-4 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground transition-all duration-200 hover:bg-foreground hover:text-background active:translate-y-px lg:inline-block"
+              className="hidden border border-foreground px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-foreground transition-all duration-200 hover:bg-foreground hover:text-background active:translate-y-px lg:inline-block"
             >
               Resume ↗
             </a>
@@ -238,7 +238,7 @@ export function NavBar() {
           >
             <p
               aria-hidden
-              className="mb-8 font-mono text-[10px] uppercase tracking-[0.3em] text-inverse-muted"
+              className="mb-8 font-mono text-xs uppercase tracking-[0.3em] text-inverse-muted"
             >
               Index
             </p>
@@ -291,7 +291,7 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-inverse-muted">
+            <div className="mt-10 flex items-center justify-between font-mono text-xs uppercase tracking-[0.22em] text-inverse-muted">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"

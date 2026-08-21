@@ -30,11 +30,11 @@ const DegreeBlock = ({
     )}
   >
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent-ink">
+      <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent-ink">
         {index === 0 ? "Graduate study" : "Undergraduate study"}
       </p>
       {degree.date && (
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] tabular-nums text-muted-foreground">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] tabular-nums text-muted-foreground">
           {degree.date}
         </p>
       )}
@@ -43,7 +43,7 @@ const DegreeBlock = ({
     <h3 className="mt-7 font-display text-3xl font-black uppercase leading-none tracking-tight text-foreground md:text-4xl">
       {degree.degree}
     </h3>
-    <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+    <p className="mt-3 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
       {degree.university}
     </p>
     {degree.gpa && (
@@ -89,7 +89,7 @@ const About = () => (
 
       <div className="mt-5 flex flex-col gap-6 border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between md:p-8">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
             Certification
           </p>
           <p className="mt-2 font-mono text-sm uppercase tracking-[0.08em] text-foreground/85">
@@ -98,7 +98,7 @@ const About = () => (
         </div>
         <Link
           href="/journey"
-          className="group inline-flex shrink-0 items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-accent-ink"
+          className="group inline-flex shrink-0 items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-accent-ink"
         >
           <span
             aria-hidden

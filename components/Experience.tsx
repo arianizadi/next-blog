@@ -21,7 +21,7 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground",
+          "border border-border px-2.5 py-1 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground",
           isPrimaryTechnology(technology) &&
             "border-accent bg-accent font-semibold text-inverse-foreground"
         )}
@@ -68,13 +68,13 @@ const PreviousRole = ({
   >
     <div className="grid gap-6 lg:grid-cols-[minmax(11rem,15rem)_1fr] lg:gap-12">
       <div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] tabular-nums text-muted-foreground">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] tabular-nums text-muted-foreground">
           {String(index + 2).padStart(2, "0")} · {job.dates}
         </p>
         <h3 className="mt-3 font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground md:text-2xl">
           {job.company}
         </h3>
-        <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+        <p className="mt-1.5 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
           {job.role}
           {job.location ? ` · ${job.location}` : ""}
         </p>
@@ -118,11 +118,11 @@ const Experience = () => {
           <div className="grid gap-10 p-6 md:p-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
             <div>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 bg-accent px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-inverse-foreground">
+                <span className="inline-flex items-center gap-2 bg-accent px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-inverse-foreground">
                   <span aria-hidden className="h-1.5 w-1.5 bg-inverse-foreground" />
                   Current
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] tabular-nums text-inverse-muted">
+                <span className="font-mono text-xs uppercase tracking-[0.18em] tabular-nums text-inverse-muted">
                   {currentExperience.dates}
                 </span>
               </div>
@@ -140,7 +140,7 @@ const Experience = () => {
             </div>
 
             <div className="border-t border-inverse-border pt-7 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
-              <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-inverse-muted">
+              <p className="mb-5 font-mono text-xs uppercase tracking-[0.24em] text-inverse-muted">
                 Engineering scope
               </p>
               <ul className="space-y-2.5">
@@ -158,7 +158,7 @@ const Experience = () => {
                   <li
                     key={technology}
                     className={cn(
-                      "border border-inverse-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-inverse-muted",
+                      "border border-inverse-border px-2.5 py-1 font-mono text-xs uppercase tracking-[0.14em] text-inverse-muted",
                       isPrimaryTechnology(technology) && "border-accent font-semibold text-accent"
                     )}
                   >
@@ -171,7 +171,7 @@ const Experience = () => {
         </motion.article>
 
         <div className="mt-20">
-          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.28em] text-accent-ink">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.28em] text-accent-ink">
             Previous roles
           </p>
           <div>

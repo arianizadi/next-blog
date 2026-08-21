@@ -59,7 +59,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
         <span
           role="status"
           aria-live="polite"
-          className="shrink-0 font-mono text-[10px] tabular-nums tracking-[0.14em] text-muted-foreground"
+          className="shrink-0 font-mono text-xs tabular-nums tracking-[0.14em] text-muted-foreground"
         >
           {visible.length}/{posts.length}
         </span>
@@ -93,7 +93,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
               >
                 <time
                   dateTime={post.date}
-                  className="shrink-0 pl-0 font-mono text-[11px] tabular-nums tracking-[0.14em] text-muted-foreground transition-colors group-hover:text-accent-ink md:pl-6"
+                  className="shrink-0 pl-0 font-mono text-xs tabular-nums tracking-[0.14em] text-muted-foreground transition-colors group-hover:text-accent-ink md:pl-6"
                 >
                   {formatDate(post.date)}
                 </time>
@@ -104,11 +104,11 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
                   <span className="mt-2 line-clamp-2 block max-w-2xl pr-6 text-sm leading-6 text-muted-foreground">
                     {post.description}
                   </span>
-                  <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80 lg:hidden">
+                  <span className="mt-2 block font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground/80 lg:hidden">
                     {post.tags.map((t) => `#${t}`).join(" ")}
                   </span>
                 </span>
-                <span className="hidden shrink-0 pr-6 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:block">
+                <span className="hidden shrink-0 pr-6 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground lg:block">
                   {post.tags.map((t) => `#${t}`).join(" ")}
                 </span>
                 <span

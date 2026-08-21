@@ -30,7 +30,7 @@ const ArchiveRow = ({
           aria-hidden
           className="absolute left-0 top-1/2 hidden h-0 w-px -translate-y-1/2 bg-accent transition-all duration-300 group-hover:h-8 md:block"
         />
-        <span className="w-8 shrink-0 font-mono text-[10px] tabular-nums tracking-[0.16em] text-muted-foreground">
+        <span className="w-8 shrink-0 font-mono text-xs tabular-nums tracking-[0.16em] text-muted-foreground">
           {rowNumber}
         </span>
 
@@ -43,28 +43,28 @@ const ArchiveRow = ({
               className="block"
             >
               {title}
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:hidden">
+              <span className="mt-1 block font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground md:hidden">
                 {project.eyebrow}
               </span>
             </a>
           ) : (
             <>
               {title}
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:hidden">
+              <span className="mt-1 block font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground md:hidden">
                 {project.eyebrow}
               </span>
             </>
           )}
         </div>
 
-        <span className="hidden w-44 shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:block">
+        <span className="hidden w-44 shrink-0 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground md:block">
           {project.eyebrow}
         </span>
-        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-muted-foreground/80 lg:block">
+        <span className="hidden w-64 shrink-0 text-right font-mono text-xs uppercase leading-5 tracking-[0.12em] text-muted-foreground/80 lg:block">
           {project.technologies.join(" · ")}
         </span>
 
-        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.16em]">
+        <span className="flex shrink-0 gap-4 font-mono text-xs uppercase tracking-[0.16em]">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -94,14 +94,14 @@ const ArchiveRow = ({
 const ArchiveTable = () => (
   <div className="px-5 pb-4 md:px-8 lg:px-12">
     <div className="mb-6 flex items-end justify-between border-t border-border pt-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-accent-ink">
+      <p className="font-mono text-xs uppercase tracking-[0.28em] text-accent-ink">
         Full archive
       </p>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent-ink"
+        className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent-ink"
       >
         github.com/arianizadi ↗
       </a>
@@ -134,7 +134,7 @@ const Work = () => (
     <div className="mt-16 px-5 md:px-8 lg:px-12">
       <Link
         href="#additional-work"
-        className="group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-accent-ink"
+        className="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-accent-ink"
       >
         <span
           aria-hidden

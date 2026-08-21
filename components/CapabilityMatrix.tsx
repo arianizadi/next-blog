@@ -41,7 +41,7 @@ const CapabilityMatrix = () => {
               )}
             >
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] tabular-nums text-muted-foreground">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] tabular-nums text-muted-foreground">
                   {String(index + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mt-2 font-display text-xl font-black uppercase tracking-tight text-foreground md:text-2xl">

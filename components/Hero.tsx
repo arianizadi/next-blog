@@ -51,7 +51,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, ease: easeOutExpo }}
-        className="flex items-center justify-between px-5 pt-24 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground md:px-8 md:pt-28 lg:px-12"
+        className="flex items-center justify-between px-5 pt-24 font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground md:px-8 md:pt-28 lg:px-12"
       >
         <p>Systems Engineer &amp; Researcher</p>
         <p className="hidden sm:block">
@@ -85,14 +85,14 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.75, ease: easeOutExpo }}
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-accent-ink">
+            <p className="font-mono text-xs uppercase tracking-[0.26em] text-accent-ink">
               Current
             </p>
             <p className="mt-3 font-display text-[clamp(1.35rem,3.4vw,2.6rem)] font-bold uppercase leading-tight tracking-tight text-foreground">
               Embedded Software Engineer II
               <span className="text-muted-foreground"> — Konami Gaming R&amp;D</span>
             </p>
-            <p className="mt-5 font-mono text-[11px] uppercase leading-6 tracking-[0.16em] text-muted-foreground">
+            <p className="mt-5 font-mono text-xs uppercase leading-6 tracking-[0.16em] text-muted-foreground">
               C/C++ / Linux / Real-Time Systems / Robotics / Low-Level Software
             </p>
           </motion.div>
@@ -105,7 +105,7 @@ const Hero = () => {
           >
             <a
               href="#work"
-              className="inline-flex items-center justify-center border border-foreground bg-foreground px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-background transition-colors duration-200 hover:bg-accent hover:border-accent hover:text-inverse-foreground active:translate-y-px"
+              className="inline-flex items-center justify-center border border-foreground bg-foreground px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-background transition-colors duration-200 hover:bg-accent hover:border-accent hover:text-inverse-foreground active:translate-y-px"
             >
               Selected Work
             </a>
@@ -113,7 +113,7 @@ const Hero = () => {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center border border-border px-6 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground transition-colors duration-200 hover:border-foreground active:translate-y-px"
+              className="inline-flex items-center justify-center border border-border px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-colors duration-200 hover:border-foreground active:translate-y-px"
             >
               Resume ↗
             </a>
@@ -125,7 +125,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 0.9 }}
-        className="relative flex items-center justify-between px-5 pb-6 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground md:px-8 lg:px-12"
+        className="relative flex items-center justify-between px-5 pb-6 font-mono text-xs uppercase tracking-[0.26em] text-muted-foreground md:px-8 lg:px-12"
       >
         <a
           href="#experience"
