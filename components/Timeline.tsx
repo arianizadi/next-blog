@@ -95,7 +95,7 @@ const LogEntry = ({
       </span>
 
       <div className="flex items-center gap-4 mb-4">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 bg-border px-2 py-1">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 bg-border px-2 py-1">
           {milestone.stamp}
         </p>
         <div className="h-px bg-border flex-1 max-w-[50px]" />
@@ -106,7 +106,7 @@ const LogEntry = ({
 
         <div>
           <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl mb-4 border-b border-border/50 pb-4">
-            <span className="text-phosphor mr-4 font-mono text-[11px] opacity-70">
+            <span className="text-phosphor mr-4 font-mono text-xs opacity-70">
               {String(index + 1).padStart(2, "0")}
             </span>
             {milestone.title}
@@ -166,7 +166,7 @@ const Timeline = () => {
               <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border-2 border-phosphor bg-background md:left-4 z-10">
                 <span className="h-2 w-2 bg-phosphor animate-signal-pulse" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor bg-phosphor/10 px-2 py-1 inline-block border border-phosphor/20">
+              <p className="font-mono text-xs uppercase tracking-[0.24em] text-phosphor bg-phosphor/10 px-2 py-1 inline-block border border-phosphor/20">
                 [PARAMETER: NOW]
               </p>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/70 font-mono tracking-tight border-l border-phosphor/30 pl-4">

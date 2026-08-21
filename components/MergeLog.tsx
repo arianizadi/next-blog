@@ -31,7 +31,7 @@ const ContributionList = () => (
 
         <div className="relative z-10 flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60 bg-foreground/5 px-2 py-1 inline-block border border-border/50">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/60 bg-foreground/5 px-2 py-1 inline-block border border-border/50">
               Target: {c.project}
             </p>
             <h3 className="mt-4 font-display text-2xl font-black uppercase leading-[1.1] tracking-tight text-foreground wrap-anywhere transition-colors group-hover:text-phosphor md:text-3xl">
@@ -41,7 +41,7 @@ const ContributionList = () => (
               {c.description}
             </p>
             {c.technologies && (
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+              <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-foreground/50">
                 {c.technologies.join(" · ")}
               </p>
             )}
@@ -49,11 +49,11 @@ const ContributionList = () => (
 
           <div className="flex shrink-0 flex-col items-end gap-3 pt-1">
             <span
-              className={`border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] ${STATUS_STYLE[c.status]}`}
+              className={`border px-3 py-1 font-mono text-xs uppercase tracking-[0.2em] ${STATUS_STYLE[c.status]}`}
             >
               STATE: {c.status}
             </span>
-            <div className="flex gap-4 mt-2 font-mono text-[10px] uppercase tracking-[0.2em]">
+            <div className="flex gap-4 mt-2 font-mono text-xs uppercase tracking-[0.2em]">
               {c.prUrl && (
                 <a
                   href={c.prUrl}
@@ -78,7 +78,7 @@ const ContributionList = () => (
       </motion.article>
     ))}
 
-    <div className="flex items-center justify-between p-6 md:p-10 bg-muted/50 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+    <div className="flex items-center justify-between p-6 md:p-10 bg-muted/50 font-mono text-xs uppercase tracking-[0.3em] text-foreground/50">
       <span>END OF LOG</span>
       <a
         href="https://github.com/arianizadi"
@@ -96,7 +96,7 @@ const MergeLog = ({ embedded = false }: { embedded?: boolean }) => {
   if (embedded) {
     return (
       <div className="mt-24 border-t-2 border-border pt-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-6">
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60 mb-6">
           Open-Source Trace
         </p>
         <h3 className="font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-foreground md:text-5xl mb-6">

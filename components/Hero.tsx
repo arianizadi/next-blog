@@ -24,7 +24,7 @@ const Hero = () => {
             className="flex items-center gap-3"
           >
             <div className="h-2 w-2 bg-phosphor animate-signal-pulse" />
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/80 md:text-[11px]">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/80 md:text-xs">
               System Status: <span className="text-phosphor">Active</span>
             </p>
           </motion.div>
@@ -32,7 +32,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 border border-border px-3 py-1"
+            className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 border border-border px-3 py-1"
           >
             Las Vegas, NV
           </motion.p>
@@ -61,7 +61,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: easeOutExpo }}
-            className="max-w-3xl font-mono text-[11px] md:text-[13px] uppercase leading-relaxed tracking-[0.18em] text-foreground/80"
+            className="max-w-3xl font-mono text-xs md:text-[13px] uppercase leading-relaxed tracking-[0.18em] text-foreground/80"
           >
             Systems Engineer & Researcher specializing in <span className="text-phosphor">C/C++</span>, <span className="text-phosphor">Linux</span>, <span className="text-phosphor">Real-Time Systems</span>, <span className="text-phosphor">Robotics</span>, and <span className="text-phosphor">Hardware/Software Integration</span>.
           </motion.p>
@@ -70,7 +70,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8, ease: easeOutExpo }}
-            className="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground/50"
+            className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-foreground/50"
           >
             M.S. Computer Science, UNLV
           </motion.p>
@@ -99,7 +99,7 @@ const Hero = () => {
           <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-phosphor/80" />
           <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-phosphor/80" />
 
-          <div className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.2em] text-phosphor bg-background/80 px-2 py-1 border border-phosphor/30 backdrop-blur-sm">
+          <div className="absolute bottom-4 left-4 font-mono text-xs uppercase tracking-[0.2em] text-phosphor bg-background/80 px-2 py-1 border border-phosphor/30 backdrop-blur-sm">
             Visual Data Stream
           </div>
         </div>
@@ -109,13 +109,13 @@ const Hero = () => {
           <div className="absolute inset-0 bg-signal-grid opacity-10 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col gap-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-2 border-b border-border/50 pb-2">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60 mb-2 border-b border-border/50 pb-2">
               Command Execution
             </p>
 
             <a
               href="#experience"
-              className="flex items-center justify-between border border-border bg-background px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground transition-all hover:border-phosphor hover:text-phosphor group"
+              className="flex items-center justify-between border border-border bg-background px-6 py-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-all hover:border-phosphor hover:text-phosphor group"
             >
               <span>Initialize Experience</span>
               <span className="text-phosphor opacity-0 group-hover:opacity-100 transition-opacity">→</span>
@@ -123,7 +123,7 @@ const Hero = () => {
 
             <a
               href="#work"
-              className="flex items-center justify-between border border-border bg-background px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground transition-all hover:border-phosphor hover:text-phosphor group"
+              className="flex items-center justify-between border border-border bg-background px-6 py-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-all hover:border-phosphor hover:text-phosphor group"
             >
               <span>Access Portfolio</span>
               <span className="text-phosphor opacity-0 group-hover:opacity-100 transition-opacity">→</span>
@@ -133,7 +133,7 @@ const Hero = () => {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between border border-border bg-background px-6 py-4 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground transition-all hover:border-phosphor hover:text-phosphor group"
+              className="flex items-center justify-between border border-border bg-background px-6 py-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition-all hover:border-phosphor hover:text-phosphor group"
             >
               <span>Download Resume</span>
               <span className="text-phosphor opacity-0 group-hover:opacity-100 transition-opacity">↗</span>

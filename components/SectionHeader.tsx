@@ -31,10 +31,10 @@ const SectionHeader = ({
           transition={{ duration: 0.6, ease: easeOutExpo }}
           className="flex items-center gap-4 mb-6"
         >
-          <span className="font-mono text-[10px] text-background bg-foreground px-2 py-1 tracking-[0.2em] font-bold">
+          <span className="font-mono text-xs text-background bg-foreground px-2 py-1 tracking-[0.2em] font-bold">
             SEQ {index}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
             {label}
           </span>
         </motion.div>

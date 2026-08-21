@@ -24,7 +24,7 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/60",
+          "border border-border px-2.5 py-1 font-mono text-xs uppercase tracking-[0.16em] text-foreground/60",
           isPrimaryTechnology(technology) &&
             "border-phosphor/50 bg-phosphor/8 font-semibold text-phosphor"
         )}
@@ -76,13 +76,13 @@ const PreviousExperienceCard = ({
       )}
     >
       <div className="flex flex-col gap-1 mb-6 border-b border-border/50 pb-4">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/50">
           {job.dates}
         </p>
         <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground mt-2">
           {job.company}
         </h3>
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-phosphor/80 mt-1">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-phosphor/80 mt-1">
           {job.role}
         </p>
       </div>
@@ -123,11 +123,11 @@ const Experience = () => (
             <div className="absolute top-0 right-0 p-2 opacity-20 bg-signal-grid w-full h-full pointer-events-none" />
             <div className="relative z-10">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 border border-phosphor px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-phosphor bg-phosphor/10">
+                <span className="inline-flex items-center gap-2 border border-phosphor px-3 py-1 font-mono text-xs uppercase tracking-[0.2em] text-phosphor bg-phosphor/10">
                   <span aria-hidden className="h-1.5 w-1.5 bg-phosphor animate-signal-pulse" />
                   Active Node
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/50">
                   {currentExperience.dates}
                 </span>
               </div>
@@ -150,10 +150,10 @@ const Experience = () => (
 
           <div className="border-t-2 border-border pt-7 lg:border-t-0 lg:p-10 bg-background/50">
             <div className="flex justify-between items-end mb-8 border-b border-border pb-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/50">
                 System Scope & Parameters
               </p>
-              <span className="font-mono text-[10px] text-phosphor">v2.0</span>
+              <span className="font-mono text-xs text-phosphor">v2.0</span>
             </div>
             <ExperienceBullets points={currentExperience.bulletPoints} />
           </div>
@@ -162,7 +162,7 @@ const Experience = () => (
 
       <div className="mt-16">
         <div className="flex items-center justify-between mb-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/50">
             Historical System Logs
           </p>
           <div className="h-px bg-border flex-1 ml-4" />

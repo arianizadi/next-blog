@@ -56,7 +56,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
         <span
           role="status"
           aria-live="polite"
-          className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-foreground/50 border border-border px-2 py-1 relative z-10"
+          className="shrink-0 font-mono text-xs tracking-[0.2em] text-foreground/50 border border-border px-2 py-1 relative z-10"
         >
           {visible.length}/{posts.length} HITS
         </span>
@@ -93,7 +93,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
 
                 <time
                   dateTime={post.date}
-                  className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-foreground/50 bg-border/50 px-2 py-1 md:mt-1"
+                  className="shrink-0 font-mono text-xs tracking-[0.2em] text-foreground/50 bg-border/50 px-2 py-1 md:mt-1"
                 >
                   LOG.{formatDate(post.date)}
                 </time>
@@ -107,7 +107,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
                   </span>
                 </span>
 
-                <div className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 lg:flex flex-col gap-2 w-32 items-end mt-2 border-l border-border pl-4">
+                <div className="hidden shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 lg:flex flex-col gap-2 w-32 items-end mt-2 border-l border-border pl-4">
                   {post.tags.map((t) => (
                     <span key={t} className="bg-foreground/5 px-2 py-0.5 border border-border/50">
                       SYS.{t}

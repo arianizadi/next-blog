@@ -48,7 +48,7 @@ const CapabilityMatrix = () => {
                 <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
                   {group.title}
                 </h3>
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+                <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
                   {group.id.substring(0, 3)} {"//"} {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -66,7 +66,7 @@ const CapabilityMatrix = () => {
                       <li
                         key={skill}
                         className={cn(
-                          "border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/70",
+                          "border border-border px-3 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-foreground/70",
                           primary &&
                             "border-phosphor bg-phosphor/10 font-bold text-phosphor tracking-[0.2em] px-4"
                         )}

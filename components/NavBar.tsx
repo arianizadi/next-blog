@@ -128,7 +128,7 @@ export function NavBar() {
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
-            className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
+            className="group flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.26em] text-foreground"
           >
             <span className="inline-block h-2 w-2 bg-phosphor animate-signal-pulse" />
             <span className="hidden md:inline">ARIAN IZADI</span>
@@ -151,13 +151,13 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "group flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
+                  "group flex items-baseline gap-1.5 font-mono text-xs uppercase tracking-[0.22em] transition-colors",
                   isActive(link.href)
                     ? "text-foreground"
                     : "text-foreground/55 hover:text-foreground"
                 )}
               >
-                <span className="text-[10px] text-phosphor/70">{link.id}</span>
+                <span className="text-xs text-phosphor/70">{link.id}</span>
                 {link.label}
                 {isActive(link.href) && (
                   <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-phosphor" />
@@ -171,7 +171,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor lg:inline-block"
+              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor lg:inline-block"
             >
               Resume
             </a>
@@ -248,7 +248,7 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+            <div className="mt-10 flex items-center justify-between font-mono text-xs uppercase tracking-[0.24em] text-foreground/55">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"

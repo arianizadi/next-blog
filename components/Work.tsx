@@ -11,7 +11,7 @@ const ProjectLinks = ({ project }: { project: Project }) => {
   const hasExternalLink = project.githubUrl || project.liveUrl;
 
   return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.22em]">
+    <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.22em]">
       {project.githubUrl && (
         <a
           href={project.githubUrl}
@@ -54,13 +54,13 @@ const TechnicalFrame = ({ project }: { project: Project }) => (
       {project.technologies.slice(0, 4).map((technology) => (
         <span
           key={technology}
-          className="bg-card px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/80 border border-border"
+          className="bg-card px-2 py-1 font-mono text-xs uppercase tracking-[0.2em] text-foreground/80 border border-border"
         >
           {technology}
         </span>
       ))}
     </div>
-    <p className="absolute right-6 top-6 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/60 bg-card px-2 py-1 border border-border">
+    <p className="absolute right-6 top-6 font-mono text-xs uppercase tracking-[0.3em] text-phosphor/60 bg-card px-2 py-1 border border-border">
       Sys: {project.id}
     </p>
   </div>
@@ -90,7 +90,7 @@ const FrameCard = ({
         <TechnicalFrame project={project} />
       )}
       <div className="absolute top-0 left-0 w-full h-full bg-signal-grid opacity-10 pointer-events-none mix-blend-overlay" />
-      <div className="absolute top-4 left-4 bg-background/90 px-3 py-1.5 border border-border font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/80 backdrop-blur-sm">
+      <div className="absolute top-4 left-4 bg-background/90 px-3 py-1.5 border border-border font-mono text-xs uppercase tracking-[0.2em] text-foreground/80 backdrop-blur-sm">
         {project.eyebrow}
       </div>
     </div>
@@ -105,12 +105,12 @@ const FrameCard = ({
         </h3>
 
         <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-4 text-xs leading-relaxed text-foreground/70">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60 pt-1">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/60 pt-1">
             Prob
           </span>
           <p>{project.problem}</p>
 
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60 pt-1">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/60 pt-1">
             Impl
           </span>
           <p>{project.contribution}</p>
@@ -118,14 +118,14 @@ const FrameCard = ({
 
         <div className="mt-6 bg-phosphor/5 border border-phosphor/20 p-4 relative">
           <div className="absolute top-0 left-0 w-1 h-full bg-phosphor" />
-          <p className="font-mono text-[10px] leading-relaxed text-phosphor/90 uppercase tracking-[0.1em]">
+          <p className="font-mono text-xs leading-relaxed text-phosphor/90 uppercase tracking-[0.1em]">
             <span className="opacity-50 mr-2">Result:</span> {project.impact}
           </p>
         </div>
       </div>
 
       <div className="mt-auto pt-8 border-t border-border/50">
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-foreground/50">
           {project.technologies.join(" · ")}
         </p>
         <ProjectLinks project={project} />
@@ -179,7 +179,7 @@ const ArchiveRow = ({
   return (
     <li className="group border-b border-border transition-all hover:bg-muted/50 hover:pl-2">
       <div className="flex items-center gap-5 py-5 md:gap-8 pr-4">
-        <span className="font-mono text-[10px] tracking-[0.3em] text-foreground/60 w-8">
+        <span className="font-mono text-xs tracking-[0.3em] text-foreground/60 w-8">
           {String(featured.length + index + 1).padStart(2, "0")}
         </span>
 
@@ -194,7 +194,7 @@ const ArchiveRow = ({
               <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground transition-colors wrap-anywhere group-hover:text-phosphor md:truncate md:text-xl">
                 {project.title}
               </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 md:hidden">
+              <span className="mt-1 block font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 md:hidden">
                 {project.eyebrow}
               </span>
             </a>
@@ -203,21 +203,21 @@ const ArchiveRow = ({
               <span className="block font-display text-lg font-bold uppercase leading-tight tracking-tight text-foreground wrap-anywhere md:truncate md:text-xl">
                 {project.title}
               </span>
-              <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 md:hidden">
+              <span className="mt-1 block font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 md:hidden">
                 {project.eyebrow}
               </span>
             </>
           )}
         </div>
 
-        <span className="hidden w-48 shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 md:block border-l border-border pl-4">
+        <span className="hidden w-48 shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-foreground/50 md:block border-l border-border pl-4">
           {project.eyebrow}
         </span>
-        <span className="hidden w-64 shrink-0 text-right font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-foreground/60 lg:block">
+        <span className="hidden w-64 shrink-0 text-right font-mono text-xs uppercase leading-relaxed tracking-[0.2em] text-foreground/60 lg:block">
           {project.technologies.join(" · ")}
         </span>
 
-        <span className="flex shrink-0 gap-4 font-mono text-[10px] uppercase tracking-[0.2em] w-24 justify-end">
+        <span className="flex shrink-0 gap-4 font-mono text-xs uppercase tracking-[0.2em] w-24 justify-end">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -247,14 +247,14 @@ const ArchiveRow = ({
 const ArchiveTable = () => (
   <div className="px-6 pb-8 md:px-12">
     <div className="mb-6 flex items-end justify-between border-b-2 border-border pb-4">
-      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+      <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
         System Archive Log
       </p>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
-        className="font-mono text-[10px] uppercase tracking-[0.2em] text-phosphor transition-colors hover:text-foreground"
+        className="font-mono text-xs uppercase tracking-[0.2em] text-phosphor transition-colors hover:text-foreground"
       >
         github.com/arianizadi ↗
       </a>

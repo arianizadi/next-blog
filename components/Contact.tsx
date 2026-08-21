@@ -26,16 +26,16 @@ const Contact = () => {
           transition={{ duration: 0.6, ease: easeOutExpo }}
           className="flex items-center gap-4 mb-12"
         >
-          <span className="font-mono text-[10px] text-background bg-foreground px-2 py-1 tracking-[0.2em] font-bold">
+          <span className="font-mono text-xs text-background bg-foreground px-2 py-1 tracking-[0.2em] font-bold">
             SEQ 06
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
             Terminate Session
           </span>
           <div className="flex-1 h-px bg-border max-w-sm ml-4" />
         </motion.div>
 
-        <h2 className="max-w-5xl font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground border-l-4 border-phosphor pl-6">
+        <h2 className="max-w-5xl border-l border-phosphor pl-6 font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground">
           Establish Link
         </h2>
 
@@ -46,7 +46,7 @@ const Contact = () => {
           transition={{ duration: 0.7, delay: 0.15, ease: easeOutExpo }}
           className="mt-12 bg-card border border-border p-6 md:p-10 inline-block"
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-4 border-b border-border/50 pb-2">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60 mb-4 border-b border-border/50 pb-2">
             Primary Endpoint
           </p>
           <a
@@ -64,16 +64,16 @@ const Contact = () => {
 
         <div className="mt-24 grid gap-px bg-border border-2 border-border md:grid-cols-3">
           <div className="bg-background p-6 md:p-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
               Coordinates
             </p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/80">
+            <p className="font-mono text-xs uppercase tracking-[0.1em] text-foreground/80">
               Las Vegas, NV
             </p>
           </div>
 
           <div className="bg-background p-6 md:p-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
               Network
             </p>
             <ul className="space-y-3">
@@ -83,7 +83,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/80 transition-colors hover:text-phosphor flex items-center justify-between"
+                    className="font-mono text-xs uppercase tracking-[0.1em] text-foreground/80 transition-colors hover:text-phosphor flex items-center justify-between"
                   >
                     <span>{social.label}</span>
                     <span className="text-phosphor/50">↗</span>
@@ -94,14 +94,14 @@ const Contact = () => {
           </div>
 
           <div className="bg-background p-6 md:p-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
               Export
             </p>
             <a
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/80 transition-colors hover:text-phosphor flex items-center justify-between"
+              className="font-mono text-xs uppercase tracking-[0.1em] text-foreground/80 transition-colors hover:text-phosphor flex items-center justify-between"
             >
               <span>Resume (PDF)</span>
               <span className="text-phosphor/50">↗</span>
@@ -109,7 +109,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+        <div className="mt-8 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
           <span>Sys.Auth: 2026 Arian Izadi</span>
           <span className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-phosphor animate-signal-pulse" />
