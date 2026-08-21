@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import Hero from "@/components/Hero";
-import Experience from "@/components/Experience";
-import Work, { AdditionalWork } from "@/components/Work";
-import About from "@/components/About";
-import CapabilityMatrix from "@/components/CapabilityMatrix";
-import Contact from "@/components/Contact";
+import { Workbench } from "@/components/workbench/Workbench";
+import "@/components/workbench/workbench.css";
 
 export const metadata: Metadata = {
   alternates: {
@@ -13,15 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <Experience />
-      <Work />
-      <CapabilityMatrix />
-      <AdditionalWork />
-      <About />
-      <Contact />
-    </>
-  );
+  return <Workbench />;
 }

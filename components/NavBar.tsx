@@ -121,6 +121,10 @@ export function NavBar() {
     return pathname.startsWith(href);
   };
 
+  // The homepage is the ARIAN.SYSTEMS workbench window and carries its own
+  // chrome — the site navbar only exists on /blog and /journey.
+  if (pathname === "/") return null;
+
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-100">

@@ -112,14 +112,6 @@
   background-size: auto 100%, auto 50%;
 }
 
-/* Faint graph paper for instrument surfaces */
-@utility lab-grid {
-  background-image:
-    linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
-  background-size: 44px 44px;
-}
-
 @layer components {
   .article-prose {
     min-width: 0;
@@ -243,24 +235,6 @@
     overflow: hidden;
   }
 
-  @keyframes slide-down {
-    0% {
-      transform: translateY(-8px);
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(8px);
-      opacity: 0;
-    }
-  }
-
-  .animate-slide-down {
-    animation: slide-down 2s ease-in-out infinite;
-  }
-
   /* Route transition (app/template.tsx): CSS-only and hydration-safe */
   @keyframes template-rise {
     from {
@@ -275,138 +249,9 @@
     animation: template-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  @keyframes work-pin-pan {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(calc(-100% + 100vw), 0, 0);
-    }
-  }
-
-  @keyframes work-pin-progress {
-    from {
-      transform: scaleX(0.08);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-  @supports (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin) {
-    .work-pin-section {
-      view-timeline-axis: block;
-      view-timeline-name: --work-pin;
-    }
-
-    .work-pin-track {
-      animation: work-pin-pan 1ms linear both;
-      animation-timeline: --work-pin;
-      animation-range: contain 0% contain 100%;
-    }
-
-    .work-pin-progress-fill {
-      animation: work-pin-progress 1ms linear both;
-      animation-timeline: --work-pin;
-      animation-range: contain 0% contain 100%;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .template-rise {
       animation: none;
-    }
-  }
-
-  /*
-   * Work gallery static fallback: reduced-motion users, short viewports, and
-   * very narrow screens get a plain column/grid instead of the pinned scroll.
-   * CSS-driven so server and client markup stay identical.
-   */
-  @media (prefers-reduced-motion: reduce), (max-height: 720px),
-    (max-width: 359px) {
-    .work-pin-section {
-      height: auto !important;
-    }
-    .work-pin-sticky {
-      position: static !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 3rem;
-    }
-    .work-pin-track {
-      animation: none !important;
-      transform: none !important;
-      width: 100% !important;
-      max-width: 72rem;
-      margin-inline: auto;
-      flex-direction: column !important;
-      padding-inline: 1.25rem !important;
-      padding-right: 1.25rem !important;
-    }
-    .work-pin-card {
-      width: 100% !important;
-    }
-    .work-pin-progress {
-      display: none !important;
-    }
-    .work-pin-progress-fill {
-      animation: none !important;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) and (min-width: 768px),
-    (max-height: 720px) and (min-width: 768px) {
-    .work-pin-track {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      padding-inline: 2rem !important;
-      padding-right: 2rem !important;
-    }
-  }
-
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    .work-pin-section {
-      height: auto !important;
-    }
-    .work-pin-sticky {
-      position: static !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 3rem;
-    }
-    .work-pin-track {
-      width: 100% !important;
-      max-width: 72rem;
-      margin-inline: auto;
-      flex-direction: column !important;
-      padding-inline: 1.25rem !important;
-      padding-right: 1.25rem !important;
-    }
-    .work-pin-card {
-      width: 100% !important;
-    }
-    .work-pin-progress {
-      display: none !important;
-    }
-  }
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    @media (min-width: 768px) {
-      .work-pin-track {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        padding-inline: 2rem !important;
-        padding-right: 2rem !important;
-      }
     }
   }
 
