@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Hero from "@/components/Hero";
-import Experience from "@/components/Experience";
-import Work, { AdditionalWork } from "@/components/Work";
-import About from "@/components/About";
-import CapabilityMatrix from "@/components/CapabilityMatrix";
-import Contact from "@/components/Contact";
+import { Hero } from "@/components/monograph/Hero";
+import { ProjectGallery, WorkAppendix } from "@/components/monograph/ProjectGallery";
+import { ExperienceColophon } from "@/components/monograph/ExperienceColophon";
+import { MaterialsSpread } from "@/components/monograph/MaterialsSpread";
+import { Colophon } from "@/components/monograph/Colophon";
+import { ContactSpread } from "@/components/monograph/ContactSpread";
 
 export const metadata: Metadata = {
   alternates: {
@@ -16,12 +16,12 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Experience />
-      <Work />
-      <CapabilityMatrix />
-      <AdditionalWork />
-      <About />
-      <Contact />
+      <ProjectGallery />
+      <WorkAppendix />
+      <ExperienceColophon />
+      <MaterialsSpread />
+      <Colophon />
+      <ContactSpread />
     </>
   );
 }

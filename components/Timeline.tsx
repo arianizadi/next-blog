@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
-import SectionHeader from "@/components/SectionHeader";
+import { motion, useScroll, useReducedMotion } from "framer-motion";
 import { easeOutExpo } from "@/lib/motion";
 
 interface Milestone {
@@ -83,29 +82,30 @@ const LogEntry = ({
 }) => {
   return (
     <motion.li
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
-      className="relative pl-14 md:pl-24"
+      className="relative pl-10 md:pl-20"
     >
       {/* Node */}
-      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-phosphor/60 bg-background md:left-4">
-        <span className="h-1.5 w-1.5 bg-phosphor" />
-      </span>
+      <span
+        aria-hidden
+        className="absolute left-[-4.5px] top-3 h-[7px] w-[7px] rounded-full bg-accent md:left-[-4.5px]"
+      />
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
-        [{milestone.stamp}]
+      <p className="font-serif text-base italic text-muted-foreground md:text-lg">
+        {milestone.stamp}
       </p>
-      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
+      <div className="mt-2 grid gap-3 md:grid-cols-[auto_1fr] md:gap-10">
+        <span className="hidden font-serif text-base italic tabular-nums text-muted-foreground/70 md:block">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <div>
-          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
+        <div className="max-w-3xl">
+          <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-light leading-tight tracking-tight text-foreground">
             {milestone.title}
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+          </h2>
+          <p className="mt-3 text-[15px] leading-7 text-muted-foreground md:text-base md:leading-8">
             {milestone.description}
           </p>
         </div>
@@ -116,54 +116,61 @@ const LogEntry = ({
 
 const Timeline = () => {
   const traceRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: traceRef,
     offset: ["start 0.7", "end 0.65"],
   });
 
   return (
-    <div className="relative min-h-screen bg-background pb-32 pt-32 md:pt-40">
-      <div className="px-6 md:px-12">
-        <SectionHeader
-          index="02"
-          label="System Boot Log"
-          title="Journey"
-          description="From a borrowed C# manual to robotics perception research. The log, unedited."
-        />
+    <div className="relative min-h-dvh bg-background pb-32 pt-32 md:pt-44">
+      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
+        <header>
+          <p className="font-serif text-lg italic text-muted-foreground md:text-xl">
+            Journey
+          </p>
+          <h1 className="mt-6 max-w-4xl text-statement font-light text-foreground">
+            From a borrowed C# manual to robotics perception research
+            <span className="text-accent">.</span>
+          </h1>
+        </header>
 
-        <div ref={traceRef} className="relative">
-          {/* Signal trace */}
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
+        <div ref={traceRef} className="relative mt-16 md:mt-24">
+          {/* Reading trace */}
+          <div
+            aria-hidden
+            className="absolute bottom-0 left-0 top-0 w-px bg-border"
+          >
             <motion.div
-              style={{ scaleY: scrollYProgress }}
-              className="absolute inset-0 origin-top bg-phosphor"
+              style={reduceMotion ? undefined : { scaleY: scrollYProgress }}
+              className="absolute inset-0 origin-top bg-accent"
             />
           </div>
 
-          <ul className="space-y-10 md:space-y-14">
+          <ul className="space-y-14 md:space-y-20">
             {MILESTONES.map((milestone, index) => (
               <LogEntry
-                key={milestone.title}
+                key={`${milestone.stamp}-${milestone.title}`}
                 milestone={milestone}
                 index={index}
               />
             ))}
 
-            {/* Still running */}
             <motion.li
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="relative pl-14 md:pl-24"
+              className="relative pl-10 md:pl-20"
             >
-              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 bg-phosphor" />
-              </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
-                [NOW]
+              <span
+                aria-hidden
+                className="absolute left-[-4.5px] top-3 h-[7px] w-[7px] rounded-full bg-accent"
+              />
+              <p className="font-serif text-base italic text-accent md:text-lg">
+                Now
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
+              <p className="mt-3 max-w-2xl text-[15px] leading-7 text-foreground/80 md:text-base md:leading-8">
                 The same curiosity that started with a C# book still drives the
                 work: understand the system, respect the constraints, and build
                 something reliable enough to matter.

@@ -17,26 +17,23 @@ export function BlogArticleHeader({
 }: BlogArticleHeaderProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 22 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: easeOutExpo }}
       className="mb-12"
     >
       <Link
         href="/blog"
-        className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/55 no-underline transition-colors hover:text-phosphor"
+        className="mb-10 inline-flex items-center gap-2 font-serif text-lg italic text-muted-foreground no-underline transition-colors hover:text-foreground motion-reduce:transition-none"
       >
-        ← /blog
+        ← All notes
       </Link>
 
       <header>
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
-          Log entry ·{" "}
-          <time dateTime={dateISO} className="text-foreground/50">
-            {dateLabel}
-          </time>
+        <p className="mb-5 font-serif text-base italic text-muted-foreground md:text-lg">
+          <time dateTime={dateISO}>{dateLabel}</time>
         </p>
-        <h1 className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-foreground wrap-anywhere md:text-6xl">
+        <h1 className="max-w-3xl text-statement font-light leading-[1.05] tracking-tight text-foreground wrap-anywhere">
           {title}
         </h1>
       </header>

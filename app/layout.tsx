@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono, Manrope } from "next/font/google";
 import Script from "next/script";
 import "@/app/globals.css";
 
@@ -8,15 +8,20 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { siteConfig } from "@/app/config/site";
 import { cn } from "@/lib/utils";
-import { NavBar } from "@/components/NavBar";
-import { MotionProvider } from "@/components/MotionProvider";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { Masthead } from "@/components/monograph/Masthead";
 
-const archivo = Archivo({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-archivo",
-  axes: ["wdth"],
+  variable: "--font-manrope",
 });
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+});
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -69,20 +74,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("dark", archivo.variable, jetbrainsMono.variable)}
+      className={cn(manrope.variable, instrumentSerif.variable, jetbrainsMono.variable)}
     >
-      <body className="min-h-screen bg-background font-sans antialiased">
-        <noscript>
-          <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
-        </noscript>
-        <MotionProvider>
-          <SmoothScroll>
-            <div className="relative flex min-h-dvh flex-col bg-background">
-              <NavBar />
-              <main className="flex-1">{children}</main>
-            </div>
-          </SmoothScroll>
-        </MotionProvider>
+      <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-200 focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:text-accent-foreground"
+        >
+          Skip to content
+        </a>
+        <Masthead />
+        <main id="main" className="relative">
+          {children}
+        </main>
         <SpeedInsights />
         <Analytics />
         <Script

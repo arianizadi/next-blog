@@ -18,26 +18,29 @@
 }
 
 @theme {
+  /* Monograph type system: an elegant serif for labels/wordmark, a quiet
+     grotesque for giant light statements and body copy, mono reserved for code. */
   --font-sans:
-    var(--font-archivo), ui-sans-serif, system-ui, sans-serif,
+    var(--font-manrope), ui-sans-serif, system-ui, -apple-system, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-display:
-    var(--font-archivo), ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif:
+    var(--font-instrument), 'Iowan Old Style', Georgia, serif;
   --font-mono:
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  --text-display-lg: 5rem;
-  --text-display-lg--line-height: 1.05;
-  --text-display-lg--letter-spacing: 0;
-  --text-display-xl: 7rem;
-  --text-display-xl--line-height: 1;
-  --text-display-xl--letter-spacing: 0;
-  --text-display-hero: clamp(3.5rem, 13vw, 12rem);
-  --text-display-hero--line-height: 0.88;
-  --text-display-hero--letter-spacing: -0.01em;
+  /* Editorial display sizes */
+  --text-mega: clamp(2.85rem, 8vw, 8.25rem);
+  --text-mega--line-height: 0.98;
+  --text-mega--letter-spacing: -0.028em;
+
+  --text-statement: clamp(2.05rem, 4.8vw, 4.4rem);
+  --text-statement--line-height: 1.04;
+  --text-statement--letter-spacing: -0.022em;
+
+  --text-title: clamp(1.65rem, 3vw, 2.85rem);
+  --text-title--line-height: 1.04;
+  --text-title--letter-spacing: -0.018em;
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -45,8 +48,8 @@
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
-  --color-phosphor: hsl(var(--phosphor));
-  --color-phosphor-dim: hsl(var(--phosphor-dim));
+  --color-surface: hsl(var(--surface));
+  --color-raised: hsl(var(--raised));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
@@ -72,35 +75,12 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
 }
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
 */
 @layer base {
   *,
@@ -109,18 +89,6 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
-@utility card-surface {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  transition:
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
-  &:hover {
-    border-color: hsl(var(--phosphor) / 0.35);
-    box-shadow: 0 16px 48px -12px hsl(210 60% 2% / 0.8);
   }
 }
 
@@ -151,39 +119,38 @@
 
 @layer base {
   :root {
-    --background: 210 24% 3%;
-    --foreground: 200 14% 93%;
+    /* Black editorial field */
+    --background: 24 10% 4%;
+    --foreground: 40 22% 91%;
 
-    --card: 210 20% 5%;
-    --card-foreground: 200 14% 93%;
+    --surface: 22 8% 7%;
+    --raised: 22 7% 10%;
 
-    --popover: 210 20% 5%;
-    --popover-foreground: 200 14% 93%;
+    --card: 22 8% 7%;
+    --card-foreground: 40 22% 91%;
+    --popover: 22 8% 6%;
+    --popover-foreground: 40 22% 91%;
 
-    --primary: 200 14% 93%;
-    --primary-foreground: 210 24% 3%;
+    --primary: 40 22% 91%;
+    --primary-foreground: 24 10% 4%;
 
-    --secondary: 210 16% 9%;
-    --secondary-foreground: 200 10% 68%;
+    --secondary: 22 6% 12%;
+    --secondary-foreground: 40 14% 78%;
 
-    --muted: 210 16% 9%;
-    --muted-foreground: 208 12% 64%;
+    --muted: 22 6% 12%;
+    --muted-foreground: 38 12% 64%;
 
-    --accent: 210 16% 9%;
-    --accent-foreground: 200 14% 93%;
+    --accent: 18 100% 52%;
+    --accent-foreground: 24 10% 4%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 14% 13%;
-    --input: 210 14% 13%;
-    --ring: 183 85% 62%;
+    --border: 30 10% 15%;
+    --input: 30 10% 15%;
+    --ring: 18 100% 52%;
 
-    /* Perception system accent */
-    --phosphor: 183 85% 62%;
-    --phosphor-dim: 183 60% 40%;
-
-    --radius: 0.25rem;
+    --radius: 1.25rem;
   }
 }
 
@@ -199,22 +166,17 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "ss01", "cv11";
-  }
-
-  /* Archivo variable width axis: display type runs expanded */
-  .font-display {
-    font-stretch: 122%;
   }
 
   :where(a, button, input, textarea, select, [role="button"]):focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 3px;
+    border-radius: 2px;
   }
 
   ::selection {
-    background-color: hsl(var(--phosphor) / 0.28);
-    color: hsl(200 14% 97%);
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
   }
 
   ::-webkit-scrollbar {
@@ -224,11 +186,11 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(210 12% 18%);
+    background: hsl(30 8% 20%);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--phosphor-dim));
+    background: hsl(var(--accent));
   }
 
   /* Lenis smooth scroll */
@@ -246,24 +208,6 @@
     overflow: hidden;
   }
 
-  @keyframes slide-down {
-    0% {
-      transform: translateY(-8px);
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(8px);
-      opacity: 0;
-    }
-  }
-
-  .animate-slide-down {
-    animation: slide-down 2s ease-in-out infinite;
-  }
-
   /* Route transition (app/template.tsx): CSS-only and hydration-safe */
   @keyframes template-rise {
     from {
@@ -278,147 +222,25 @@
     animation: template-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  @keyframes work-pin-pan {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(calc(-100% + 100vw), 0, 0);
-    }
-  }
-
-  @keyframes work-pin-progress {
-    from {
-      transform: scaleX(0.08);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-  @supports (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin) {
-    .work-pin-section {
-      view-timeline-axis: block;
-      view-timeline-name: --work-pin;
-    }
-
-    .work-pin-track {
-      animation: work-pin-pan 1ms linear both;
-      animation-timeline: --work-pin;
-      animation-range: contain 0% contain 100%;
-    }
-
-    .work-pin-progress-fill {
-      animation: work-pin-progress 1ms linear both;
-      animation-timeline: --work-pin;
-      animation-range: contain 0% contain 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .template-rise {
-      animation: none;
-    }
-  }
-
-  /*
-   * Work gallery static fallback: reduced-motion users, short viewports, and
-   * very narrow screens get a plain column/grid instead of the pinned scroll.
-   * CSS-driven so server and client markup stay identical.
-   */
-  @media (prefers-reduced-motion: reduce), (max-height: 720px),
-    (max-width: 359px) {
-    .work-pin-section {
-      height: auto !important;
-    }
-    .work-pin-sticky {
-      position: static !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 3rem;
-    }
-    .work-pin-track {
-      animation: none !important;
-      transform: none !important;
-      width: 100% !important;
-      max-width: 72rem;
-      margin-inline: auto;
-      flex-direction: column !important;
-      padding-inline: 1.5rem !important;
-      padding-right: 1.5rem !important;
-    }
-    .work-pin-card {
-      width: 100% !important;
-    }
-    .work-pin-progress {
-      display: none !important;
-    }
-    .work-pin-progress-fill {
-      animation: none !important;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) and (min-width: 768px),
-    (max-height: 720px) and (min-width: 768px) {
-    .work-pin-track {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      padding-inline: 3rem !important;
-      padding-right: 3rem !important;
-    }
-  }
-
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    .work-pin-section {
-      height: auto !important;
-    }
-    .work-pin-sticky {
-      position: static !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 3rem;
-    }
-    .work-pin-track {
-      width: 100% !important;
-      max-width: 72rem;
-      margin-inline: auto;
-      flex-direction: column !important;
-      padding-inline: 1.5rem !important;
-      padding-right: 1.5rem !important;
-    }
-    .work-pin-card {
-      width: 100% !important;
-    }
-    .work-pin-progress {
-      display: none !important;
-    }
-  }
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    @media (min-width: 768px) {
-      .work-pin-track {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        padding-inline: 3rem !important;
-        padding-right: 3rem !important;
-      }
-    }
-  }
-
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Soft ambient shadow under media plates */
+  .plate-shadow {
+    box-shadow:
+      0 40px 120px -32px rgb(0 0 0 / 0.72),
+      0 12px 40px -16px rgb(0 0 0 / 0.55);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .template-rise {
+      animation: none;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -16,9 +16,11 @@ export default async function BlogPage() {
   }));
 
   return (
-    <div className="mx-auto min-h-screen max-w-6xl px-6 pb-24 pt-32 md:px-12 md:pt-40">
+    <div className="mx-auto min-h-dvh max-w-[1200px] px-5 pb-28 pt-32 md:px-10 md:pt-44">
       <BlogIndexHeader />
-      <BlogPostGrid posts={summaries} />
+      <div className="mt-14 md:mt-20">
+        <BlogPostGrid posts={summaries} />
+      </div>
     </div>
   );
 }

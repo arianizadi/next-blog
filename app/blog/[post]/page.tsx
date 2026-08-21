@@ -73,7 +73,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <article className="mx-auto w-full min-w-0 max-w-3xl">
       <ReadingProgress />
-      <div className="article-prose prose max-w-none min-w-0 pt-16 dark:prose-invert prose-headings:font-display prose-headings:uppercase prose-a:text-phosphor prose-a:decoration-phosphor/40 prose-strong:text-foreground prose-code:text-phosphor/90 prose-img:border prose-img:border-border">
+      <div className="article-prose prose max-w-none min-w-0 pt-16 dark:prose-invert prose-headings:font-light prose-headings:tracking-tight prose-a:text-foreground prose-a:decoration-accent/50 prose-a:underline-offset-4 prose-strong:text-foreground prose-code:rounded prose-code:bg-surface prose-code:px-1 prose-code:text-accent/90 prose-img:rounded-2xl">
         <BlogArticleHeader
           title={postData.title}
           dateLabel={dateLabel}
