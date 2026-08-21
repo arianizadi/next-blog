@@ -8,6 +8,14 @@ import { cn } from "@/lib/utils";
 
 const PRIMARY_SYSTEM_LANGUAGES = new Set(["C/C++", "C", "C++"]);
 
+const GROUP_TAGS: Record<string, string> = {
+  systems: "SYS",
+  "low-level": "HW",
+  languages: "LNG",
+  tooling: "TOOL",
+  additional: "ADJ",
+};
+
 const CapabilityMatrix = () => {
   return (
     <section
@@ -17,36 +25,52 @@ const CapabilityMatrix = () => {
       <div className="px-6 md:px-12">
         <SectionHeader
           index="03"
-          label="Engineering Toolkit"
-          title="Technical Skills"
+          label="Capability Index"
+          title="Skills & systems"
           description="Embedded and low-level capabilities first, followed by the languages, tooling, and adjacent systems used in production and research."
         />
 
-        <div className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
+        <div className="border-t border-border">
           {techGroups.map((group, index) => (
             <motion.div
               key={group.id}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{
                 duration: 0.6,
-                delay: index * 0.07,
+                delay: index * 0.05,
                 ease: easeOutExpo,
               }}
               className={cn(
-                "group relative bg-card p-6 transition-colors hover:bg-background md:p-8",
+                "grid gap-5 border-b border-border py-8 lg:grid-cols-[300px_1fr] lg:gap-16 lg:py-9",
                 group.id === "systems" &&
-                  "ring-1 ring-inset ring-phosphor/30 md:col-span-2 xl:col-span-2"
+                  "border-l-2 border-l-accent pl-5 lg:pl-6"
               )}
             >
-              <h3 className="font-display text-xl font-black uppercase tracking-tight text-foreground md:text-2xl">
-                {group.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {group.description}
-              </p>
-              <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${group.title} skills`}>
+              <div>
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-accent">
+                    {GROUP_TAGS[group.id] ?? group.id.toUpperCase()}
+                  </span>
+                  <h3 className="font-display text-2xl leading-tight text-foreground">
+                    {group.title}
+                  </h3>
+                </div>
+                <p className="mt-2 max-w-sm text-sm leading-6 text-muted-foreground">
+                  {group.description}
+                </p>
+                {group.id === "systems" && (
+                  <p className="mt-3 inline-block border border-accent/50 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
+                    Primary domain
+                  </p>
+                )}
+              </div>
+
+              <ul
+                className="flex flex-wrap gap-x-5 gap-y-2.5 self-center"
+                aria-label={`${group.title} skills`}
+              >
                 {group.skills.map((skill) => {
                   const primary = PRIMARY_SYSTEM_LANGUAGES.has(skill);
 
@@ -54,9 +78,10 @@ const CapabilityMatrix = () => {
                     <li
                       key={skill}
                       className={cn(
-                        "border border-border px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/60",
-                        primary &&
-                          "border-phosphor/55 bg-phosphor/8 px-3 text-[11px] font-semibold text-phosphor"
+                        "font-mono text-[11px] uppercase tracking-[0.14em] after:ml-5 after:text-accent/40 after:content-['·'] last:after:content-none md:text-xs",
+                        primary
+                          ? "font-semibold text-accent after:text-accent/50"
+                          : "text-foreground/60"
                       )}
                     >
                       {skill}

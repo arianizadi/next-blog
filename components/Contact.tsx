@@ -16,18 +16,21 @@ const SOCIALS = [
 const Contact = () => {
   return (
     <footer id="contact" className="relative scroll-mt-16 border-t border-border">
-      <div className="px-6 py-24 md:px-12 md:py-32">
-        <motion.p
+      <div className="paper-grid px-6 py-24 md:px-12 md:py-32">
+        <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+          className="flex items-center gap-3"
         >
-          06 {"//"} Contact
-        </motion.p>
+          <span aria-hidden className="inline-block h-1.5 w-1.5 bg-accent" />
+          <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-accent">
+            § 06 / Correspondence
+          </p>
+        </motion.div>
 
-        <h2 className="max-w-5xl font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground">
+        <h2 className="mt-5 font-display text-display-lg font-normal text-balance text-foreground">
           Open a channel.
         </h2>
 
@@ -39,25 +42,31 @@ const Contact = () => {
           href={`mailto:${EMAIL}`}
           className="group mt-10 inline-flex max-w-full flex-wrap items-baseline gap-x-4 gap-y-2"
         >
-          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 wrap-anywhere transition-colors duration-300 group-hover:text-phosphor">
+          <span className="font-display text-[clamp(1.3rem,4.5vw,3.5rem)] leading-none text-foreground/60 underline decoration-accent/40 decoration-2 underline-offset-8 transition-colors duration-300 wrap-anywhere group-hover:text-accent group-hover:decoration-accent">
             {EMAIL}
           </span>
-          <span className="font-mono text-sm text-phosphor transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
+          <span
+            aria-hidden
+            className="font-mono text-sm text-accent transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+          >
             ↗
           </span>
         </motion.a>
 
-        <div className="mt-20 grid gap-10 border-t border-border pt-10 md:grid-cols-3">
+        <div className="mt-20 grid gap-10 border-t border-border bg-background/60 pt-10 md:grid-cols-3">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground">
               Coordinates
             </p>
             <p className="mt-3 text-sm leading-6 text-foreground/70">
               Las Vegas, NV
+              <span className="block font-mono text-xs text-foreground/50">
+                36.1699° N / 115.1398° W
+              </span>
             </p>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground">
               Signals
             </p>
             <ul className="mt-3 space-y-1.5">
@@ -67,7 +76,7 @@ const Contact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/70 transition-colors hover:text-phosphor"
+                    className="text-sm text-foreground/70 transition-colors hover:text-accent"
                   >
                     {social.label} ↗
                   </a>
@@ -76,22 +85,23 @@ const Contact = () => {
             </ul>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground">
               Documents
             </p>
             <a
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block text-sm text-foreground/70 transition-colors hover:text-phosphor"
+              className="mt-3 inline-block text-sm text-foreground/70 transition-colors hover:text-accent"
             >
               Resume (PDF) ↗
             </a>
           </div>
         </div>
 
-        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
           <span>© 2026 Arian Izadi</span>
+          <span className="hidden sm:block">Research Console — Rev. 2026.08</span>
           <span>Las Vegas, NV</span>
         </div>
       </div>

@@ -123,19 +123,27 @@ export function NavBar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-100">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/72 px-5 py-3 backdrop-blur-xl md:px-8">
+        <div className="flex h-14 items-center justify-between border-b border-border/80 bg-background/85 px-5 backdrop-blur-md md:px-8">
           <Link
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
-            className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
+            className="group flex items-baseline gap-2.5 text-foreground"
           >
-            <span className="inline-block h-2 w-2 bg-phosphor" />
-            Arian Izadi
+            <span
+              aria-hidden
+              className="inline-block h-2 w-2 translate-y-[-1px] bg-accent transition-colors group-hover:bg-foreground"
+            />
+            <span className="font-display text-lg leading-none">
+              Arian Izadi
+            </span>
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:inline">
+              Systems · Research
+            </span>
           </Link>
 
           <nav
-            className="hidden items-center gap-4 md:flex lg:gap-7"
+            className="hidden items-center gap-5 md:flex lg:gap-7"
             aria-label="Primary"
           >
             {NAV_LINKS.map((link) => (
@@ -150,17 +158,14 @@ export function NavBar() {
                     : undefined
                 }
                 className={cn(
-                  "group flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] transition-colors",
+                  "flex items-baseline gap-1.5 border-b pb-0.5 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors",
                   isActive(link.href)
-                    ? "text-foreground"
-                    : "text-foreground/55 hover:text-foreground"
+                    ? "border-accent text-foreground"
+                    : "border-transparent text-muted-foreground hover:border-accent/50 hover:text-foreground"
                 )}
               >
-                <span className="text-[8px] text-phosphor/70">{link.id}</span>
+                <span className="text-[10px] text-accent/80">{link.id}</span>
                 {link.label}
-                {isActive(link.href) && (
-                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-phosphor" />
-                )}
               </Link>
             ))}
           </nav>
@@ -170,7 +175,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-phosphor hover:text-phosphor lg:inline-block"
+              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/75 transition-colors hover:border-accent hover:text-accent lg:inline-block"
             >
               Resume
             </a>
@@ -208,10 +213,10 @@ export function NavBar() {
             transition={{ duration: 0.5, ease: easeOutExpo }}
             id="mobile-navigation"
             data-lenis-prevent
-            className="fixed inset-0 z-95 flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-background px-6 pb-10 pt-24 md:hidden"
+            className="paper-grid fixed inset-0 z-95 flex flex-col justify-end overflow-x-hidden overflow-y-auto bg-background px-6 pb-10 pt-24 md:hidden"
           >
             <nav aria-label="Mobile">
-              <ul className="space-y-2">
+              <ul>
                 {NAV_LINKS.map((link, index) => (
                   <motion.li
                     key={link.href}
@@ -236,10 +241,10 @@ export function NavBar() {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline gap-4 border-b border-border py-4"
                     >
-                      <span className="shrink-0 font-mono text-xs text-phosphor">
-                        {link.id}
+                      <span className="shrink-0 font-mono text-xs text-accent">
+                        §{link.id}
                       </span>
-                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-phosphor">
+                      <span className="min-w-0 font-display text-[clamp(1.9rem,9vw,2.8rem)] leading-none text-foreground transition-colors group-hover:text-accent">
                         {link.label}
                       </span>
                     </Link>
@@ -247,12 +252,12 @@ export function NavBar() {
                 ))}
               </ul>
             </nav>
-            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+            <div className="mt-10 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
               <a
                 href={siteConfig.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-phosphor"
+                className="text-accent"
               >
                 Resume ↗
               </a>

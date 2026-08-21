@@ -24,24 +24,29 @@ export function BlogArticleHeader({
     >
       <Link
         href="/blog"
-        className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-foreground/55 no-underline transition-colors hover:text-phosphor"
+        className="mb-10 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground no-underline transition-colors hover:text-accent"
       >
-        ← /blog
+        ← Field log
       </Link>
 
       <header>
-        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-phosphor/80">
-          Log entry ·{" "}
-          <time dateTime={dateISO} className="text-foreground/50">
+        <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+          Entry —{" "}
+          <time dateTime={dateISO} className="text-muted-foreground">
             {dateLabel}
           </time>
         </p>
-        <h1 className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-foreground wrap-anywhere md:text-6xl">
+        <h1 className="font-display text-4xl leading-[1.05] text-foreground wrap-anywhere md:text-6xl">
           {title}
         </h1>
       </header>
 
-      <div className="mt-10 h-px w-full bg-border" />
+      <div className="relative mt-10 h-px w-full bg-border">
+        <span
+          aria-hidden
+          className="absolute left-0 top-0 h-px w-24 bg-accent"
+        />
+      </div>
     </motion.div>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Archivo, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "@/app/globals.css";
 
@@ -17,6 +17,12 @@ const archivo = Archivo({
   variable: "--font-archivo",
   axes: ["wdth"],
 });
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+});
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -26,7 +32,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Arian Izadi | Embedded & Systems Software Engineer",
+    default: "Arian Izadi | Embedded Systems Engineer & Researcher",
     template: "%s | Arian Izadi",
   },
   description: siteConfig.description,
@@ -34,6 +40,8 @@ export const metadata: Metadata = {
     "Arian Izadi",
     "embedded software engineer",
     "systems software engineer",
+    "systems engineer",
+    "researcher",
     "C",
     "C++",
     "Linux",
@@ -47,7 +55,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author, url: siteConfig.url }],
   creator: siteConfig.author,
   openGraph: {
-    title: "Arian Izadi | Embedded & Systems Software Engineer",
+    title: "Arian Izadi | Embedded Systems Engineer & Researcher",
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: "Arian Izadi",
@@ -56,7 +64,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Arian Izadi | Embedded & Systems Software Engineer",
+    title: "Arian Izadi | Embedded Systems Engineer & Researcher",
     description: siteConfig.description,
   },
 };
@@ -69,17 +77,25 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("dark", archivo.variable, jetbrainsMono.variable)}
+      className={cn(archivo.variable, instrument.variable, jetbrainsMono.variable)}
     >
       <body className="min-h-screen bg-background font-sans antialiased">
         <noscript>
           <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-200 focus:bg-foreground focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.18em] focus:text-background"
+        >
+          Skip to content
+        </a>
         <MotionProvider>
           <SmoothScroll>
             <div className="relative flex min-h-dvh flex-col bg-background">
               <NavBar />
-              <main className="flex-1">{children}</main>
+              <main id="main" className="flex-1">
+                {children}
+              </main>
             </div>
           </SmoothScroll>
         </MotionProvider>

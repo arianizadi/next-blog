@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { easeOutExpo } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 type SectionHeaderProps = {
   index: string;
@@ -10,6 +11,8 @@ type SectionHeaderProps = {
   description?: string;
   /** Heading level. Use "h1" for the page's primary title. */
   level?: "h1" | "h2";
+  /** Surface tone: paper document or dark instrument panel. */
+  tone?: "paper" | "panel";
 };
 
 const SectionHeader = ({
@@ -18,22 +21,42 @@ const SectionHeader = ({
   title,
   description,
   level = "h2",
+  tone = "paper",
 }: SectionHeaderProps) => {
   const TitleTag = level;
 
   return (
-    <div className="relative mb-16 md:mb-24">
-      <motion.p
+    <div
+      className={cn(
+        "mb-14 md:mb-20",
+        tone === "panel" && "text-panel-foreground"
+      )}
+    >
+      <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6, ease: easeOutExpo }}
-        className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+        className="flex items-center gap-3"
       >
-        {index} {"//"} {label}
-      </motion.p>
+        <span
+          aria-hidden
+          className={cn(
+            "inline-block h-1.5 w-1.5",
+            tone === "panel" ? "bg-panel-accent" : "bg-accent"
+          )}
+        />
+        <p
+          className={cn(
+            "font-mono text-[10px] uppercase tracking-[0.34em]",
+            tone === "panel" ? "text-panel-accent" : "text-accent"
+          )}
+        >
+          § {index} / {label}
+        </p>
+      </motion.div>
 
-      <TitleTag className="font-display text-[clamp(2rem,10vw,7rem)] font-black uppercase leading-[0.92] tracking-tight text-foreground">
+      <TitleTag className="mt-5 font-display text-display-lg font-normal text-balance text-current">
         {title}
       </TitleTag>
 
@@ -43,7 +66,10 @@ const SectionHeader = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: easeOutExpo }}
-          className="mt-6 max-w-xl text-base leading-7 text-muted-foreground md:text-lg"
+          className={cn(
+            "mt-5 max-w-xl text-sm leading-7 md:text-base md:leading-7",
+            tone === "panel" ? "text-panel-muted" : "text-muted-foreground"
+          )}
         >
           {description}
         </motion.p>

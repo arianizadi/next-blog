@@ -24,9 +24,9 @@ const TechnologyList = ({
       <li
         key={technology}
         className={cn(
-          "border border-border px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground/60",
+          "border border-border bg-card px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/60",
           isPrimaryTechnology(technology) &&
-            "border-phosphor/50 bg-phosphor/8 font-semibold text-phosphor"
+            "border-accent/50 bg-accent/8 font-semibold text-accent"
         )}
       >
         {technology}
@@ -36,22 +36,22 @@ const TechnologyList = ({
 );
 
 const ExperienceBullets = ({ points }: { points: string[] }) => (
-  <ul className="space-y-2.5">
-    {points.map((point) => (
-      <li
-        key={point}
-        className="flex gap-3 text-sm leading-6 text-foreground/70"
-      >
-        <span aria-hidden className="shrink-0 font-mono text-phosphor">
-          +
+  <ol className="space-y-3">
+    {points.map((point, index) => (
+      <li key={point} className="flex gap-4">
+        <span
+          aria-hidden
+          className="shrink-0 pt-px font-mono text-xs text-accent"
+        >
+          {String(index + 1).padStart(2, "0")}
         </span>
-        <span>{point}</span>
+        <span className="text-sm leading-6 text-foreground/70">{point}</span>
       </li>
     ))}
-  </ul>
+  </ol>
 );
 
-const PreviousExperienceCard = ({
+const PreviousRoleRow = ({
   job,
   index,
 }: {
@@ -71,31 +71,41 @@ const PreviousExperienceCard = ({
         ease: easeOutExpo,
       }}
       className={cn(
-        "flex h-full flex-col border border-border bg-card p-6 transition-colors hover:border-foreground/25 md:p-7",
-        systemsRole && "border-phosphor/25"
+        "grid gap-6 border-t border-border py-9 md:grid-cols-[150px_1fr] md:gap-10 lg:grid-cols-[170px_1fr_3rem]",
+        index === previousExperiences.length - 1 && "border-b"
       )}
     >
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="font-display text-2xl font-black uppercase leading-none tracking-tight text-foreground">
+      <p className="pt-1.5 font-mono text-[10px] uppercase leading-5 tracking-[0.18em] text-muted-foreground">
+        {job.dates}
+      </p>
+
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h3 className="font-display text-2xl leading-tight text-foreground md:text-3xl">
             {job.company}
           </h3>
-          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-phosphor/85">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
             {job.role}
           </p>
         </div>
-        <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-foreground/55">
-          {job.dates}
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+          {job.summary}
         </p>
+        <div className="mt-5">
+          <ExperienceBullets points={job.bulletPoints} />
+        </div>
+        <TechnologyList technologies={job.technologies} className="mt-6" />
       </div>
 
-      <p className="mt-5 text-sm leading-6 text-muted-foreground">
-        {job.summary}
+      <p
+        aria-hidden
+        className={cn(
+          "hidden pt-1.5 text-right font-mono text-[10px] tracking-[0.2em] text-foreground/35 lg:block",
+          systemsRole && "text-accent/60"
+        )}
+      >
+        0{index + 2}
       </p>
-      <div className="mt-5">
-        <ExperienceBullets points={job.bulletPoints} />
-      </div>
-      <TechnologyList technologies={job.technologies} className="mt-auto pt-6" />
     </motion.article>
   );
 };
@@ -103,44 +113,47 @@ const PreviousExperienceCard = ({
 const Experience = () => (
   <section
     id="experience"
-    className="relative scroll-mt-16 border-t border-border py-24 md:py-32"
+    className="relative scroll-mt-16 py-24 md:py-32"
   >
     <div className="px-6 md:px-12">
       <SectionHeader
         index="01"
-        label="Current Role"
+        label="Field Record"
         title="Experience"
         description="Production embedded C/C++ at Konami, preceded by robotics systems and event-driven backend engineering."
       />
 
+      {/* Current engagement */}
       <motion.article
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: easeOutExpo }}
-        className="relative overflow-hidden border border-phosphor/35 bg-card"
+        className="relative overflow-hidden border border-border bg-card"
       >
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(120deg,hsl(var(--phosphor)/0.08),transparent_45%)]"
-        />
-        <div className="relative grid gap-10 p-6 md:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div aria-hidden className="absolute inset-y-0 left-0 w-1 bg-accent" />
+        <div className="relative grid gap-10 p-6 pl-7 md:p-10 md:pl-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 border border-phosphor/40 bg-phosphor/8 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.22em] text-phosphor">
-                <span aria-hidden className="h-1.5 w-1.5 bg-phosphor" />
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="inline-flex -rotate-2 items-center border-2 border-accent/70 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-accent">
                 Current
               </span>
-              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/55">
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                 {currentExperience.dates}
               </span>
             </div>
 
-            <h3 className="mt-7 font-display text-[clamp(2.25rem,5vw,5rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
+            <h3 className="mt-7 font-display text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.02] text-foreground text-balance">
               {currentExperience.company}
             </h3>
-            <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-phosphor md:text-sm">
+            <p className="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-accent md:text-sm">
               {currentExperience.role}
+              {currentExperience.location && (
+                <span className="text-muted-foreground">
+                  {" "}
+                  — {currentExperience.location}
+                </span>
+              )}
             </p>
             <p className="mt-5 max-w-xl text-base leading-7 text-foreground/70">
               {currentExperience.summary}
@@ -152,7 +165,7 @@ const Experience = () => (
           </div>
 
           <div className="border-t border-border pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <p className="mb-5 font-mono text-[9px] uppercase tracking-[0.24em] text-foreground/55">
+            <p className="mb-5 font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
               Engineering scope
             </p>
             <ExperienceBullets points={currentExperience.bulletPoints} />
@@ -160,17 +173,14 @@ const Experience = () => (
         </div>
       </motion.article>
 
-      <div className="mt-16">
-        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.28em] text-phosphor/80">
-          {"//"} Previous experience
+      {/* Previous record */}
+      <div className="mt-20">
+        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.28em] text-accent">
+          § Previous record
         </p>
-        <div className="grid gap-px border border-border bg-border lg:grid-cols-3">
+        <div className="mt-8">
           {previousExperiences.map((job, index) => (
-            <PreviousExperienceCard
-              key={job.company}
-              job={job}
-              index={index}
-            />
+            <PreviousRoleRow key={job.company} job={job} index={index} />
           ))}
         </div>
       </div>

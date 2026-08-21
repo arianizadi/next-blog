@@ -3,5 +3,5 @@
  * tree is identical for every visitor and content stays visible without JS.
  */
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div className="template-rise">{children}</div>;
+  return <div className="animate-template-rise">{children}</div>;
 }

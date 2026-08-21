@@ -90,19 +90,19 @@ const LogEntry = ({
       className="relative pl-14 md:pl-24"
     >
       {/* Node */}
-      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-phosphor/60 bg-background md:left-4">
-        <span className="h-1.5 w-1.5 bg-phosphor" />
+      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-accent/60 bg-background md:left-4">
+        <span className="h-1.5 w-1.5 bg-accent" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
+      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
         [{milestone.stamp}]
       </p>
-      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
-          {String(index + 1).padStart(2, "0")}
+      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-accent/40 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
+        <span className="hidden pt-1.5 font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
+          E.{String(index + 1).padStart(2, "0")}
         </span>
         <div>
-          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
+          <h3 className="font-display text-2xl leading-tight text-foreground md:text-3xl">
             {milestone.title}
           </h3>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
@@ -122,21 +122,21 @@ const Timeline = () => {
   });
 
   return (
-    <div className="relative min-h-screen bg-background pb-32 pt-32 md:pt-40">
+    <div className="relative min-h-screen bg-background pb-32 pt-28 md:pt-36">
       <div className="px-6 md:px-12">
         <SectionHeader
-          index="02"
-          label="System Boot Log"
+          index="A·1"
+          label="2010 — Present"
           title="Journey"
           description="From a borrowed C# manual to robotics perception research. The log, unedited."
         />
 
         <div ref={traceRef} className="relative">
-          {/* Signal trace */}
+          {/* Red-ink trace */}
           <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
             <motion.div
               style={{ scaleY: scrollYProgress }}
-              className="absolute inset-0 origin-top bg-phosphor"
+              className="absolute inset-0 origin-top bg-accent"
             />
           </div>
 
@@ -149,7 +149,7 @@ const Timeline = () => {
               />
             ))}
 
-            {/* Still running */}
+            {/* Still running: a terminal panel closes the log */}
             <motion.li
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -157,17 +157,26 @@ const Timeline = () => {
               transition={{ duration: 0.7 }}
               className="relative pl-14 md:pl-24"
             >
-              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 bg-phosphor" />
+              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-accent bg-background md:left-4">
+                <span className="h-1.5 w-1.5 bg-accent" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
                 [NOW]
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
-                The same curiosity that started with a C# book still drives the
-                work: understand the system, respect the constraints, and build
-                something reliable enough to matter.
-              </p>
+              <div className="panel-grid mt-4 max-w-xl border border-panel-border bg-panel p-6 md:p-8">
+                <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.24em] text-panel-accent">
+                  <span
+                    aria-hidden
+                    className="h-1.5 w-1.5 bg-panel-accent motion-safe:animate-pulse"
+                  />
+                  $_ status — still running
+                </p>
+                <p className="mt-4 text-base leading-7 text-panel-muted">
+                  The same curiosity that started with a C# book still drives
+                  the work: understand the system, respect the constraints, and
+                  build something reliable enough to matter.
+                </p>
+              </div>
             </motion.li>
           </ul>
         </div>

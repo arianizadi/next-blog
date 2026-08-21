@@ -42,9 +42,11 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
   return (
     <div>
       {/* grep search */}
-      <div className="mb-10 flex items-center gap-3 border border-border bg-card px-4 py-3 focus-within:border-phosphor/50">
-        <span className="font-mono text-sm text-phosphor">&gt;</span>
-        <span className="font-mono text-sm text-foreground/55">grep</span>
+      <div className="mb-10 flex items-center gap-3 border border-border bg-card px-4 py-3 transition-colors focus-within:border-accent/60">
+        <span className="font-mono text-sm text-accent">&gt;</span>
+        <span className="hidden font-mono text-sm text-muted-foreground sm:inline">
+          grep
+        </span>
         <input
           type="text"
           value={query}
@@ -56,7 +58,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
         <span
           role="status"
           aria-live="polite"
-          className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-foreground/50"
+          className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-muted-foreground"
         >
           {visible.length}/{posts.length} RECORDS
         </span>
@@ -65,7 +67,7 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
       {visible.length === 0 ? (
         <p
           role="status"
-          className="border border-dashed border-border py-16 text-center font-mono text-sm text-foreground/55"
+          className="border border-dashed border-border py-16 text-center font-mono text-sm text-muted-foreground"
         >
           No matches. The log keeps its secrets.
         </p>
@@ -90,12 +92,12 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
               >
                 <time
                   dateTime={post.date}
-                  className="shrink-0 font-mono text-[11px] tracking-[0.18em] text-foreground/55"
+                  className="shrink-0 font-mono text-[11px] tracking-[0.18em] text-muted-foreground"
                 >
                   {formatDate(post.date)}
                 </time>
                 <span className="min-w-0 flex-1">
-                  <h2 className="font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground transition-colors group-hover:text-phosphor md:text-3xl">
+                  <h2 className="font-display text-xl leading-tight text-foreground transition-colors group-hover:text-accent md:text-3xl">
                     {post.title}
                   </h2>
                   <span className="mt-2 line-clamp-2 block max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -105,7 +107,10 @@ export function BlogPostGrid({ posts }: { posts: BlogPostSummary[] }) {
                 <span className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/50 lg:block">
                   {post.tags.map((t) => `#${t}`).join(" ")}
                 </span>
-                <span className="shrink-0 font-mono text-sm text-foreground/55 transition-all group-hover:translate-x-1 group-hover:text-phosphor">
+                <span
+                  aria-hidden
+                  className="shrink-0 font-mono text-sm text-foreground/55 transition-all group-hover:translate-x-1 group-hover:text-accent"
+                >
                   →
                 </span>
               </Link>
