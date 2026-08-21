@@ -46,8 +46,19 @@
   --color-foreground: hsl(var(--foreground));
 
   --color-ink: hsl(var(--ink));
+  --color-paper: hsl(var(--paper));
   --color-terracotta: hsl(var(--terracotta));
   --color-terracotta-dim: hsl(var(--terracotta-dim));
+
+  /* Poster system tokens */
+  --color-void: hsl(var(--void));
+  --color-panel: hsl(var(--panel));
+  --color-violet: hsl(var(--violet));
+  --color-cyan: hsl(var(--cyan));
+  --color-teal: hsl(var(--teal));
+  --color-magenta: hsl(var(--magenta));
+  --color-poster-fg: hsl(var(--poster-fg));
+  --color-poster-dim: hsl(var(--poster-dim));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
@@ -98,18 +109,6 @@
   }
 }
 
-@utility card-surface {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  transition:
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
-  &:hover {
-    border-color: hsl(var(--terracotta) / 0.35);
-    box-shadow: 0 12px 40px -12px hsl(24 10% 10% / 0.06);
-  }
-}
-
 @utility wrap-anywhere {
   overflow-wrap: anywhere;
 }
@@ -141,39 +140,50 @@
 
 @layer base {
   :root {
-    --background: 42 24% 95%;
-    --foreground: 24 10% 10%;
+    /* Iridescent systems poster: near-black deep violet space */
+    --background: 266 48% 5%;
+    --foreground: 0 0% 96%;
 
-    --card: 40 20% 93%;
-    --card-foreground: 24 10% 10%;
+    --card: 266 42% 8%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 40 20% 93%;
-    --popover-foreground: 24 10% 10%;
+    --popover: 266 42% 8%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 24 10% 10%;
-    --primary-foreground: 42 24% 95%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 266 48% 5%;
 
-    --secondary: 35 14% 88%;
-    --secondary-foreground: 24 10% 10%;
+    --secondary: 264 34% 13%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 35 14% 88%;
-    --muted-foreground: 25 8% 42%;
+    --muted: 264 34% 13%;
+    --muted-foreground: 262 16% 66%;
 
-    --accent: 12 55% 48%;
-    --accent-foreground: 42 24% 95%;
+    --accent: 187 100% 55%;
+    --accent-foreground: 266 48% 5%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 32 12% 80%;
-    --input: 32 12% 80%;
-    --ring: 12 55% 48%;
+    --border: 262 28% 20%;
+    --input: 262 28% 20%;
+    --ring: 187 100% 55%;
 
-    /* Editorial accent tokens */
-    --terracotta: 12 58% 43%;
-    --terracotta-dim: 12 45% 38%;
-    --ink: 24 10% 10%;
-    --paper: 42 24% 95%;
+    /* Legacy aliases (older components reference terracotta/ink/paper) */
+    --terracotta: 187 100% 55%;
+    --terracotta-dim: 187 80% 42%;
+    --ink: 0 0% 96%;
+    --paper: 266 48% 5%;
+
+    /* Poster system palette */
+    --void: 266 48% 4%;
+    --panel: 266 42% 8%;
+    --violet: 262 78% 58%;
+    --cyan: 187 100% 55%;
+    --teal: 163 100% 50%;
+    --magenta: 303 100% 62%;
+    --poster-fg: 0 0% 96%;
+    --poster-dim: 262 16% 66%;
 
     --radius: 0.125rem;
   }
@@ -186,7 +196,7 @@
 
   html {
     position: relative;
-    background: hsl(var(--background));
+    background: hsl(var(--void));
   }
 
   body {
@@ -207,8 +217,8 @@
   }
 
   ::selection {
-    background-color: hsl(var(--terracotta) / 0.18);
-    color: hsl(24 10% 8%);
+    background-color: hsl(var(--cyan) / 0.25);
+    color: hsl(0 0% 100%);
   }
 
   ::-webkit-scrollbar {
@@ -218,11 +228,11 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(32 10% 72%);
+    background: hsl(262 28% 26%);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--terracotta-dim));
+    background: hsl(var(--cyan) / 0.7);
   }
 
   /* Lenis smooth scroll */
@@ -274,138 +284,9 @@
     animation: template-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  @keyframes work-pin-pan {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(calc(-100% + 100vw), 0, 0);
-    }
-  }
-
-  @keyframes work-pin-progress {
-    from {
-      transform: scaleX(0.08);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-  @supports (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin) {
-    .work-pin-section {
-      view-timeline-axis: block;
-      view-timeline-name: --work-pin;
-    }
-
-    .work-pin-track {
-      animation: work-pin-pan 1ms linear both;
-      animation-timeline: --work-pin;
-      animation-range: contain 0% contain 100%;
-    }
-
-    .work-pin-progress-fill {
-      animation: work-pin-progress 1ms linear both;
-      animation-timeline: --work-pin;
-      animation-range: contain 0% contain 100%;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .template-rise {
       animation: none;
-    }
-  }
-
-  /*
-   * Work gallery static fallback: reduced-motion users, short viewports, and
-   * very narrow screens get a plain column/grid instead of the pinned scroll.
-   * CSS-driven so server and client markup stay identical.
-   */
-  @media (prefers-reduced-motion: reduce), (max-height: 720px),
-    (max-width: 359px) {
-    .work-pin-section {
-      height: auto !important;
-    }
-    .work-pin-sticky {
-      position: static !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 3rem;
-    }
-    .work-pin-track {
-      animation: none !important;
-      transform: none !important;
-      width: 100% !important;
-      max-width: 72rem;
-      margin-inline: auto;
-      flex-direction: column !important;
-      padding-inline: 1.5rem !important;
-      padding-right: 1.5rem !important;
-    }
-    .work-pin-card {
-      width: 100% !important;
-    }
-    .work-pin-progress {
-      display: none !important;
-    }
-    .work-pin-progress-fill {
-      animation: none !important;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) and (min-width: 768px),
-    (max-height: 720px) and (min-width: 768px) {
-    .work-pin-track {
-      display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      padding-inline: 3rem !important;
-      padding-right: 3rem !important;
-    }
-  }
-
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    .work-pin-section {
-      height: auto !important;
-    }
-    .work-pin-sticky {
-      position: static !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 3rem;
-    }
-    .work-pin-track {
-      width: 100% !important;
-      max-width: 72rem;
-      margin-inline: auto;
-      flex-direction: column !important;
-      padding-inline: 1.5rem !important;
-      padding-right: 1.5rem !important;
-    }
-    .work-pin-card {
-      width: 100% !important;
-    }
-    .work-pin-progress {
-      display: none !important;
-    }
-  }
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    @media (min-width: 768px) {
-      .work-pin-track {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        padding-inline: 3rem !important;
-        padding-right: 3rem !important;
-      }
     }
   }
 
@@ -415,6 +296,109 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* ---------------------------------------------------------------
+     Poster system primitives
+  --------------------------------------------------------------- */
+
+  /* Ambient deep-space illumination unique to each scene */
+  .poster-ambient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 90% at 85% -10%, hsl(var(--scene-a, var(--cyan)) / 0.22), transparent 55%),
+      radial-gradient(110% 80% at -15% 110%, hsl(var(--violet) / 0.28), transparent 60%),
+      radial-gradient(60% 45% at 50% 55%, hsl(var(--scene-b, var(--violet)) / 0.1), transparent 70%),
+      hsl(var(--void));
+  }
+
+  /* A single routed light field keeps the poster dimensional without a UI grid. */
+  .poster-grid {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background-image: linear-gradient(
+      115deg,
+      transparent 18%,
+      hsl(var(--poster-fg) / 0.045) 18.1%,
+      transparent 18.25%,
+      transparent 72%,
+      hsl(var(--cyan) / 0.045) 72.1%,
+      transparent 72.25%
+    );
+    border-radius: inherit;
+    mask-image: radial-gradient(120% 100% at 60% 40%, black 30%, transparent 90%);
+  }
+
+  /* Decorative outline type (always paired with accessible duplicate text) */
+  .type-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px hsl(var(--poster-fg) / 0.28);
+  }
+  .type-outline-cyan {
+    color: transparent;
+    -webkit-text-stroke: 1.5px hsl(var(--cyan) / 0.5);
+  }
+
+  /* Decorative pixel-text used as corner glyphs */
+  .type-pixel {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+
+  /* Slow ambient drifts (disabled under reduced motion below) */
+  @keyframes poster-drift {
+    from { transform: translate3d(0, 0, 0) rotate(0.001deg); }
+    to { transform: translate3d(0, -14px, 0) rotate(0.001deg); }
+  }
+  .poster-drift {
+    animation: poster-drift 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes poster-spin {
+    to { transform: rotate(1turn); }
+  }
+  .poster-spin-slow {
+    animation: poster-spin 46s linear infinite;
+  }
+
+  @keyframes poster-rise {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .poster-rise {
+    animation: poster-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Desktop: viewport-scale poster scenes */
+  @media (min-width: 768px) {
+    .poster-scene {
+      min-height: 100svh;
+    }
+  }
+
+  /* Mobile: vertically paged scenes */
+  @media (max-width: 767.98px) {
+    .poster-rail {
+      scroll-snap-type: y mandatory;
+    }
+    .poster-scene {
+      min-height: 100svh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

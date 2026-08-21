@@ -1,27 +1,15 @@
 import type { Metadata } from "next";
-import Hero from "@/components/Hero";
-import Experience from "@/components/Experience";
-import Work, { AdditionalWork } from "@/components/Work";
-import About from "@/components/About";
-import CapabilityMatrix from "@/components/CapabilityMatrix";
-import Contact from "@/components/Contact";
+import PosterHome from "@/components/poster/PosterHome";
 
 export const metadata: Metadata = {
+  title: "Arian Izadi | Embedded & Systems Software Engineer",
+  description:
+    "Arian Izadi — Embedded Software Engineer II at Konami Gaming. C/C++, Linux, real-time systems, robotics, and low-level software, presented as an iridescent systems poster.",
   alternates: {
     canonical: "/",
   },
 };
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <Experience />
-      <Work />
-      <CapabilityMatrix />
-      <AdditionalWork />
-      <About />
-      <Contact />
-    </>
-  );
+  return <PosterHome />;
 }

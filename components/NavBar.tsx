@@ -9,11 +9,10 @@ import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { href: "/#experience", label: "Experience", id: "01" },
-  { href: "/#work", label: "Work", id: "02" },
-  { href: "/#skills", label: "Skills", id: "03" },
-  { href: "/blog", label: "Blog", id: "04" },
-  { href: "/#contact", label: "Contact", id: "05" },
+  { href: "/#work", label: "Work", id: "01" },
+  { href: "/#systems", label: "Systems", id: "02" },
+  { href: "/blog", label: "Blog", id: "03" },
+  { href: "/#contact", label: "Contact", id: "04" },
 ];
 
 export function NavBar() {
@@ -117,15 +116,21 @@ export function NavBar() {
 
   return (
     <>
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-sm focus:bg-cyan focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:uppercase focus:tracking-[0.2em] focus:text-void"
+      >
+        Skip to content
+      </a>
       <header className="fixed inset-x-0 top-0 z-[100]">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/80 px-5 py-3 backdrop-blur-xl md:px-8">
+        <div className="flex items-center justify-between border-b border-border/60 bg-background/70 px-5 py-3 backdrop-blur-xl md:px-8">
           <Link
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
             className="group flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.26em] text-foreground"
           >
-            <span className="inline-block h-2 w-2 bg-terracotta" />
+            <span className="inline-block h-2 w-2 rounded-full bg-cyan shadow-[0_0_12px_hsl(187_100%_55%/0.9)]" />
             Arian Izadi
           </Link>
 
@@ -151,10 +156,10 @@ export function NavBar() {
                     : "text-foreground/70 hover:text-foreground"
                 )}
               >
-                <span className="text-xs text-terracotta">{link.id}</span>
+                <span className="text-xs text-cyan">{link.id}</span>
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-terracotta" />
+                  <span className="ml-0.5 inline-block h-1 w-1 translate-y-px rounded-full bg-cyan" />
                 )}
               </Link>
             ))}
@@ -165,7 +170,7 @@ export function NavBar() {
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden border border-foreground/20 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-terracotta hover:text-terracotta lg:inline-block"
+              className="hidden border border-foreground/25 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-cyan hover:text-cyan lg:inline-block"
             >
               Resume
             </a>
@@ -231,10 +236,10 @@ export function NavBar() {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline gap-4 border-b border-border py-4"
                     >
-                      <span className="shrink-0 font-mono text-xs text-terracotta">
+                      <span className="shrink-0 font-mono text-xs text-cyan">
                         {link.id}
                       </span>
-                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-terracotta">
+                      <span className="min-w-0 font-display text-[clamp(1.75rem,9vw,2.6rem)] font-black uppercase leading-none text-foreground transition-colors group-hover:text-cyan">
                         {link.label}
                       </span>
                     </Link>
@@ -247,7 +252,7 @@ export function NavBar() {
                 href={siteConfig.links.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-terracotta"
+                className="text-cyan"
               >
                 Resume ↗
               </a>
