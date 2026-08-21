@@ -13,7 +13,7 @@ const STATUS_STYLE: Record<Contribution["status"], string> = {
 };
 
 const ContributionList = () => (
-  <div className="border border-border">
+  <div className="border-2 border-border bg-background">
     {contributions.map((c, index) => (
       <motion.article
         key={c.id}
@@ -25,39 +25,41 @@ const ContributionList = () => (
           delay: index * 0.08,
           ease: easeOutExpo,
         }}
-        className="group relative border-b border-border p-5 last:border-b-0 hover:bg-foreground/3 md:p-7"
+        className="group relative border-b-2 border-border p-6 md:p-10 last:border-b-0 hover:bg-card transition-colors overflow-hidden"
       >
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="absolute inset-0 bg-signal-grid opacity-10 pointer-events-none group-hover:opacity-30 transition-opacity" />
+
+        <div className="relative z-10 flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <p className="font-mono text-[11px] tracking-[0.14em] text-foreground/60">
-              {c.project}
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60 bg-foreground/5 px-2 py-1 inline-block border border-border/50">
+              Target: {c.project}
             </p>
-            <h3 className="mt-3 font-display text-xl font-black uppercase leading-tight tracking-tight text-foreground wrap-anywhere transition-colors group-hover:text-phosphor md:text-2xl">
+            <h3 className="mt-4 font-display text-2xl font-black uppercase leading-[1.1] tracking-tight text-foreground wrap-anywhere transition-colors group-hover:text-phosphor md:text-3xl">
               + {c.feature}
             </h3>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground font-mono tracking-tight">
               {c.description}
             </p>
             {c.technologies && (
-              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/50">
+              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
                 {c.technologies.join(" · ")}
               </p>
             )}
           </div>
 
-          <div className="flex shrink-0 flex-col items-end gap-3">
+          <div className="flex shrink-0 flex-col items-end gap-3 pt-1">
             <span
-              className={`border px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.22em] ${STATUS_STYLE[c.status]}`}
+              className={`border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] ${STATUS_STYLE[c.status]}`}
             >
-              {c.status}
+              STATE: {c.status}
             </span>
-            <div className="flex gap-4 font-mono text-[10px] uppercase tracking-[0.2em]">
+            <div className="flex gap-4 mt-2 font-mono text-[10px] uppercase tracking-[0.2em]">
               {c.prUrl && (
                 <a
                   href={c.prUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground/55 transition-colors hover:text-phosphor"
+                  className="text-foreground/50 transition-colors hover:text-phosphor"
                 >
                   PR ↗
                 </a>
@@ -66,9 +68,9 @@ const ContributionList = () => (
                 href={c.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/55 transition-colors hover:text-phosphor"
+                className="text-foreground/50 transition-colors hover:text-phosphor"
               >
-                Repo ↗
+                REPO ↗
               </a>
             </div>
           </div>
@@ -76,14 +78,15 @@ const ContributionList = () => (
       </motion.article>
     ))}
 
-    <div className="flex items-center justify-between p-5 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/55 md:p-7">
+    <div className="flex items-center justify-between p-6 md:p-10 bg-muted/50 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+      <span>END OF LOG</span>
       <a
         href="https://github.com/arianizadi"
         target="_blank"
         rel="noopener noreferrer"
         className="text-phosphor transition-colors hover:text-foreground"
       >
-        Full history on GitHub ↗
+        FULL TRACE ↗
       </a>
     </div>
   </div>
@@ -92,14 +95,14 @@ const ContributionList = () => (
 const MergeLog = ({ embedded = false }: { embedded?: boolean }) => {
   if (embedded) {
     return (
-      <div className="mt-20 border-t border-border pt-12">
-        <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-phosphor/80">
-          {"//"} Open-source contributions
+      <div className="mt-24 border-t-2 border-border pt-12">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-6">
+          Open-Source Trace
         </p>
-        <h3 className="mt-5 font-display text-3xl font-black uppercase leading-none tracking-tight text-foreground md:text-5xl">
+        <h3 className="font-display text-4xl font-black uppercase leading-[1.1] tracking-tight text-foreground md:text-5xl mb-6">
           Merge Log
         </h3>
-        <p className="mb-8 mt-4 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+        <p className="mb-10 max-w-2xl text-sm leading-relaxed text-muted-foreground font-mono tracking-tight border-l border-phosphor/30 pl-4">
           C++ point-cloud mapping, mobile networking, and segmentation research
           contributions made within existing codebases.
         </p>
@@ -109,7 +112,7 @@ const MergeLog = ({ embedded = false }: { embedded?: boolean }) => {
   }
 
   return (
-    <section className="relative border-t border-border py-24 md:py-32">
+    <section className="relative border-t-2 border-border py-24 md:py-32 bg-background">
       <div className="px-6 md:px-12">
         <SectionHeader
           index="04"

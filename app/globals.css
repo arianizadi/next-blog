@@ -151,39 +151,39 @@
 
 @layer base {
   :root {
-    --background: 210 24% 3%;
-    --foreground: 200 14% 93%;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 98%;
 
-    --card: 210 20% 5%;
-    --card-foreground: 200 14% 93%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 210 20% 5%;
-    --popover-foreground: 200 14% 93%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 200 14% 93%;
-    --primary-foreground: 210 24% 3%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 2%;
 
-    --secondary: 210 16% 9%;
-    --secondary-foreground: 200 10% 68%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 80%;
 
-    --muted: 210 16% 9%;
-    --muted-foreground: 208 12% 64%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 210 16% 9%;
-    --accent-foreground: 200 14% 93%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 14% 13%;
-    --input: 210 14% 13%;
-    --ring: 183 85% 62%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 15 100% 50%; /* Signal Red/Orange */
 
-    /* Perception system accent */
-    --phosphor: 183 85% 62%;
-    --phosphor-dim: 183 60% 40%;
+    /* Signal Grid Perception Accent */
+    --phosphor: 15 100% 50%;
+    --phosphor-dim: 15 100% 30%;
 
-    --radius: 0.25rem;
+    --radius: 0rem; /* Sharp edges for Signal Grid */
   }
 }
 
@@ -202,9 +202,18 @@
     font-feature-settings: "ss01", "cv11";
   }
 
+  /* Architectural grid background */
+  .bg-signal-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+    background-position: center top;
+  }
+
   /* Archivo variable width axis: display type runs expanded */
   .font-display {
-    font-stretch: 122%;
+    font-stretch: 110%;
   }
 
   :where(a, button, input, textarea, select, [role="button"]):focus-visible {
@@ -213,22 +222,22 @@
   }
 
   ::selection {
-    background-color: hsl(var(--phosphor) / 0.28);
-    color: hsl(200 14% 97%);
+    background-color: hsl(var(--phosphor) / 0.99);
+    color: hsl(0 0% 0%);
   }
 
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: hsl(var(--background));
+    border-left: 1px solid hsl(var(--border));
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(210 12% 18%);
-    border-radius: 2px;
+    background: hsl(var(--border));
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--phosphor-dim));
+    background: hsl(var(--phosphor));
   }
 
   /* Lenis smooth scroll */
@@ -246,38 +255,45 @@
     overflow: hidden;
   }
 
-  @keyframes slide-down {
-    0% {
-      transform: translateY(-8px);
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(8px);
-      opacity: 0;
-    }
-  }
-
-  .animate-slide-down {
-    animation: slide-down 2s ease-in-out infinite;
-  }
-
-  /* Route transition (app/template.tsx): CSS-only and hydration-safe */
   @keyframes template-rise {
     from {
-      transform: translateY(14px);
+      transform: translateY(20px);
+      opacity: 0;
     }
     to {
       transform: translateY(0);
+      opacity: 1;
     }
   }
 
   .template-rise {
-    animation: template-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: template-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  /* Signal Pulse Animation */
+  @keyframes signal-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+  }
+
+  .animate-signal-pulse {
+    animation: signal-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Scanning Line */
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .animate-scan-line {
+    animation: scan-line 8s linear infinite;
+  }
+
+  /*
+   * Work gallery pinned fallback
+   */
   @keyframes work-pin-pan {
     from {
       transform: translate3d(0, 0, 0);
@@ -289,7 +305,7 @@
 
   @keyframes work-pin-progress {
     from {
-      transform: scaleX(0.08);
+      transform: scaleX(0);
     }
     to {
       transform: scaleX(1);
@@ -323,11 +339,6 @@
     }
   }
 
-  /*
-   * Work gallery static fallback: reduced-motion users, short viewports, and
-   * very narrow screens get a plain column/grid instead of the pinned scroll.
-   * CSS-driven so server and client markup stay identical.
-   */
   @media (prefers-reduced-motion: reduce), (max-height: 720px),
     (max-width: 359px) {
     .work-pin-section {
@@ -359,6 +370,7 @@
       animation: none !important;
     }
   }
+
   @media (prefers-reduced-motion: reduce) and (min-width: 768px),
     (max-height: 720px) and (min-width: 768px) {
     .work-pin-track {
@@ -396,20 +408,6 @@
     }
     .work-pin-progress {
       display: none !important;
-    }
-  }
-  @supports not (
-    (animation-timeline: view()) and
-    (animation-range: contain 0% contain 100%) and
-    (view-timeline-name: --work-pin)
-  ) {
-    @media (min-width: 768px) {
-      .work-pin-track {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        padding-inline: 3rem !important;
-        padding-right: 3rem !important;
-      }
     }
   }
 

@@ -71,13 +71,16 @@ export default function RootLayout({
       lang="en"
       className={cn("dark", archivo.variable, jetbrainsMono.variable)}
     >
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background font-sans antialiased bg-signal-grid">
         <noscript>
           <style>{`[style]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <MotionProvider>
           <SmoothScroll>
-            <div className="relative flex min-h-dvh flex-col bg-background">
+            <div className="relative flex min-h-dvh flex-col">
+              {/* Scanline effect for Signal Grid */}
+              <div className="pointer-events-none fixed inset-0 z-50 h-[10vh] w-full bg-gradient-to-b from-transparent to-phosphor/5 opacity-50 mix-blend-overlay animate-scan-line" aria-hidden />
+
               <NavBar />
               <main className="flex-1">{children}</main>
             </div>

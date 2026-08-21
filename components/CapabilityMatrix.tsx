@@ -18,11 +18,11 @@ const CapabilityMatrix = () => {
         <SectionHeader
           index="03"
           label="Engineering Toolkit"
-          title="Technical Skills"
+          title="Technical Parameters"
           description="Embedded and low-level capabilities first, followed by the languages, tooling, and adjacent systems used in production and research."
         />
 
-        <div className="grid gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid border-2 border-border bg-border gap-px lg:grid-cols-2">
           {techGroups.map((group, index) => (
             <motion.div
               key={group.id}
@@ -35,35 +35,48 @@ const CapabilityMatrix = () => {
                 ease: easeOutExpo,
               }}
               className={cn(
-                "group relative bg-card p-6 transition-colors hover:bg-background md:p-8",
-                group.id === "systems" &&
-                  "ring-1 ring-inset ring-phosphor/30 md:col-span-2 xl:col-span-2"
+                "group relative bg-card p-6 md:p-10 transition-colors hover:bg-background overflow-hidden",
+                group.id === "systems" && "lg:col-span-2 relative",
+                group.id === "low-level" && "bg-background",
               )}
             >
-              <h3 className="font-display text-xl font-black uppercase tracking-tight text-foreground md:text-2xl">
-                {group.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {group.description}
-              </p>
-              <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${group.title} skills`}>
-                {group.skills.map((skill) => {
-                  const primary = PRIMARY_SYSTEM_LANGUAGES.has(skill);
+              {group.id === "systems" && (
+                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none w-full h-full bg-signal-grid mix-blend-overlay" />
+              )}
 
-                  return (
-                    <li
-                      key={skill}
-                      className={cn(
-                        "border border-border px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-foreground/60",
-                        primary &&
-                          "border-phosphor/55 bg-phosphor/8 px-3 text-[11px] font-semibold text-phosphor"
-                      )}
-                    >
-                      {skill}
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className="flex items-center justify-between mb-8 border-b border-border pb-4 relative z-10">
+                <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
+                  {group.title}
+                </h3>
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+                  {group.id.substring(0, 3)} {"//"} {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 relative z-10">
+                <p className="text-sm leading-relaxed text-muted-foreground font-mono tracking-tight">
+                  {group.description}
+                </p>
+
+                <ul className="flex flex-wrap gap-2 content-start" aria-label={`${group.title} skills`}>
+                  {group.skills.map((skill) => {
+                    const primary = PRIMARY_SYSTEM_LANGUAGES.has(skill);
+
+                    return (
+                      <li
+                        key={skill}
+                        className={cn(
+                          "border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/70",
+                          primary &&
+                            "border-phosphor bg-phosphor/10 font-bold text-phosphor tracking-[0.2em] px-4"
+                        )}
+                      >
+                        {skill}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -123,15 +123,16 @@ export function NavBar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-100">
-        <div className="flex items-center justify-between border-b border-border/60 bg-background/72 px-5 py-3 backdrop-blur-xl md:px-8">
+        <div className="flex items-center justify-between border-b border-border bg-background px-5 py-3 md:px-8">
           <Link
             href="/"
             aria-hidden={open}
             tabIndex={open ? -1 : undefined}
             className="group flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground"
           >
-            <span className="inline-block h-2 w-2 bg-phosphor" />
-            Arian Izadi
+            <span className="inline-block h-2 w-2 bg-phosphor animate-signal-pulse" />
+            <span className="hidden md:inline">ARIAN IZADI</span>
+            <span className="md:hidden">AI</span>
           </Link>
 
           <nav
@@ -156,7 +157,7 @@ export function NavBar() {
                     : "text-foreground/55 hover:text-foreground"
                 )}
               >
-                <span className="text-[8px] text-phosphor/70">{link.id}</span>
+                <span className="text-[10px] text-phosphor/70">{link.id}</span>
                 {link.label}
                 {isActive(link.href) && (
                   <span className="ml-0.5 inline-block h-1 w-1 translate-y-px bg-phosphor" />

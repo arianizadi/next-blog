@@ -15,84 +15,106 @@ const SOCIALS = [
 
 const Contact = () => {
   return (
-    <footer id="contact" className="relative scroll-mt-16 border-t border-border">
-      <div className="px-6 py-24 md:px-12 md:py-32">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <footer id="contact" className="relative scroll-mt-16 border-t-2 border-border bg-background overflow-hidden">
+      <div className="absolute inset-0 bg-signal-grid opacity-10 pointer-events-none" />
+
+      <div className="relative z-10 px-6 py-24 md:px-12 md:py-32">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-phosphor/80"
+          className="flex items-center gap-4 mb-12"
         >
-          06 {"//"} Contact
-        </motion.p>
+          <span className="font-mono text-[10px] text-background bg-foreground px-2 py-1 tracking-[0.2em] font-bold">
+            SEQ 06
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+            Terminate Session
+          </span>
+          <div className="flex-1 h-px bg-border max-w-sm ml-4" />
+        </motion.div>
 
-        <h2 className="max-w-5xl font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground">
-          Open a channel.
+        <h2 className="max-w-5xl font-display text-[clamp(2.4rem,7vw,6rem)] font-black uppercase leading-[0.95] tracking-tight text-foreground border-l-4 border-phosphor pl-6">
+          Establish Link
         </h2>
 
-        <motion.a
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, delay: 0.15, ease: easeOutExpo }}
-          href={`mailto:${EMAIL}`}
-          className="group mt-10 inline-flex max-w-full flex-wrap items-baseline gap-x-4 gap-y-2"
+          className="mt-12 bg-card border border-border p-6 md:p-10 inline-block"
         >
-          <span className="font-display text-[clamp(1.15rem,4.5vw,3.75rem)] font-black uppercase leading-none tracking-tight text-foreground/50 wrap-anywhere transition-colors duration-300 group-hover:text-phosphor">
-            {EMAIL}
-          </span>
-          <span className="font-mono text-sm text-phosphor transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1">
-            ↗
-          </span>
-        </motion.a>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60 mb-4 border-b border-border/50 pb-2">
+            Primary Endpoint
+          </p>
+          <a
+            href={`mailto:${EMAIL}`}
+            className="group flex items-baseline gap-4"
+          >
+            <span className="font-display text-[clamp(1.5rem,4vw,3.5rem)] font-black uppercase leading-none tracking-tight text-foreground wrap-anywhere transition-colors duration-300 group-hover:text-phosphor">
+              {EMAIL}
+            </span>
+            <span className="font-mono text-xl text-phosphor opacity-0 group-hover:opacity-100 transition-opacity">
+              ↗
+            </span>
+          </a>
+        </motion.div>
 
-        <div className="mt-20 grid gap-10 border-t border-border pt-10 md:grid-cols-3">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
+        <div className="mt-24 grid gap-px bg-border border-2 border-border md:grid-cols-3">
+          <div className="bg-background p-6 md:p-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
               Coordinates
             </p>
-            <p className="mt-3 text-sm leading-6 text-foreground/70">
+            <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/80">
               Las Vegas, NV
             </p>
           </div>
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
-              Signals
+
+          <div className="bg-background p-6 md:p-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
+              Network
             </p>
-            <ul className="mt-3 space-y-1.5">
+            <ul className="space-y-3">
               {SOCIALS.map((social) => (
                 <li key={social.label}>
                   <a
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-foreground/70 transition-colors hover:text-phosphor"
+                    className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/80 transition-colors hover:text-phosphor flex items-center justify-between"
                   >
-                    {social.label} ↗
+                    <span>{social.label}</span>
+                    <span className="text-phosphor/50">↗</span>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-foreground/55">
-              Documents
+
+          <div className="bg-background p-6 md:p-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/50 border-b border-border/50 pb-2 mb-4">
+              Export
             </p>
             <a
               href={siteConfig.links.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block text-sm text-foreground/70 transition-colors hover:text-phosphor"
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/80 transition-colors hover:text-phosphor flex items-center justify-between"
             >
-              Resume (PDF) ↗
+              <span>Resume (PDF)</span>
+              <span className="text-phosphor/50">↗</span>
             </a>
           </div>
         </div>
 
-        <div className="mt-16 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-          <span>© 2026 Arian Izadi</span>
-          <span>Las Vegas, NV</span>
+        <div className="mt-8 flex items-center justify-between gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/60">
+          <span>Sys.Auth: 2026 Arian Izadi</span>
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-phosphor animate-signal-pulse" />
+            Active
+          </span>
         </div>
       </div>
     </footer>

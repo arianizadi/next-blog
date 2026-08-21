@@ -90,22 +90,28 @@ const LogEntry = ({
       className="relative pl-14 md:pl-24"
     >
       {/* Node */}
-      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-phosphor/60 bg-background md:left-4">
-        <span className="h-1.5 w-1.5 bg-phosphor" />
+      <span className="absolute left-0 top-2 flex h-6 w-6 items-center justify-center border border-border bg-background md:left-4 z-10">
+        <span className="h-1.5 w-1.5 bg-phosphor opacity-50" />
       </span>
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55">
-        [{milestone.stamp}]
-      </p>
-      <div className="mt-3 grid gap-4 border border-border bg-card p-6 transition-colors hover:border-phosphor/30 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
-        <span className="hidden font-mono text-[10px] tracking-[0.2em] text-foreground/40 md:block">
-          {String(index + 1).padStart(2, "0")}
-        </span>
+      <div className="flex items-center gap-4 mb-4">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 bg-border px-2 py-1">
+          {milestone.stamp}
+        </p>
+        <div className="h-px bg-border flex-1 max-w-[50px]" />
+      </div>
+
+      <div className="mt-2 grid gap-4 border-2 border-border bg-background p-6 md:p-10 relative overflow-hidden group hover:border-phosphor transition-colors duration-500">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-signal-grid opacity-10 pointer-events-none group-hover:opacity-30 transition-opacity" />
+
         <div>
-          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl">
+          <h3 className="font-display text-2xl font-black uppercase tracking-tight text-foreground md:text-3xl mb-4 border-b border-border/50 pb-4">
+            <span className="text-phosphor mr-4 font-mono text-[11px] opacity-70">
+              {String(index + 1).padStart(2, "0")}
+            </span>
             {milestone.title}
           </h3>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground md:text-base">
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base font-mono tracking-tight">
             {milestone.description}
           </p>
         </div>
@@ -131,16 +137,16 @@ const Timeline = () => {
           description="From a borrowed C# manual to robotics perception research. The log, unedited."
         />
 
-        <div ref={traceRef} className="relative">
+        <div ref={traceRef} className="relative mt-24">
           {/* Signal trace */}
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-border md:left-[27px]">
+          <div className="absolute bottom-0 left-3 top-0 w-[2px] bg-border md:left-[27px] border-x border-background">
             <motion.div
               style={{ scaleY: scrollYProgress }}
               className="absolute inset-0 origin-top bg-phosphor"
             />
           </div>
 
-          <ul className="space-y-10 md:space-y-14">
+          <ul className="space-y-16 md:space-y-24">
             {MILESTONES.map((milestone, index) => (
               <LogEntry
                 key={milestone.title}
@@ -157,13 +163,13 @@ const Timeline = () => {
               transition={{ duration: 0.7 }}
               className="relative pl-14 md:pl-24"
             >
-              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border border-phosphor bg-background md:left-4">
-                <span className="h-1.5 w-1.5 bg-phosphor" />
+              <span className="absolute left-0 top-1 flex h-6 w-6 items-center justify-center border-2 border-phosphor bg-background md:left-4 z-10">
+                <span className="h-2 w-2 bg-phosphor animate-signal-pulse" />
               </span>
-              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor">
-                [NOW]
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-phosphor bg-phosphor/10 px-2 py-1 inline-block border border-phosphor/20">
+                [PARAMETER: NOW]
               </p>
-              <p className="mt-4 max-w-xl text-base leading-7 text-foreground/60">
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/70 font-mono tracking-tight border-l border-phosphor/30 pl-4">
                 The same curiosity that started with a C# book still drives the
                 work: understand the system, respect the constraints, and build
                 something reliable enough to matter.
